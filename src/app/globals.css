@@ -2,3 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Footer.css */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background-color: #fff;
+  color: gray;
+}
+
+
+
+.footer-left {
+  flex-grow: 1;
+  display: flex;
+  align-items: center; 
+}
+
+.footer-left p {
+  margin-right: 30px; 
+}
+
+.footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icon {
+  color: gray;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #1877f2; /* Facebook blue color */
+}
+
