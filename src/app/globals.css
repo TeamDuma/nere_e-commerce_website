@@ -33,6 +33,7 @@
   color: gray;
   font-size: 24px;
   transition: color 0.3s ease;
+  margin-right: 15px;
 }
 
 .social-icon:hover {
