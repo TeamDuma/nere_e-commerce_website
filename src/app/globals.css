@@ -40,3 +40,78 @@
   color: #1877f2; /* Facebook blue color */
 }
 
+
+/* styles.css (or any styling solution you prefer) */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin: 4px; /* Add a small margin from all sides */
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 90%;
+  margin: 8px auto 0; 
+  border-bottom: 1px solid #ddd;
+}
+
+.card-content {
+  padding: 8px; /* Increase padding for better spacing */
+  text-align: center; /* Center the text */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #555;
+}
+/* styles.css (or any styling solution you prefer) */
+.three-section-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.section {
+  width: 48%;
+  margin: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.OngiongGroups {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+ }
+ 
+ .OngiongGroups img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+ }
+ 
+ .OngiongGroups-details {
+  flex: 1;
+  padding-left: 16px;
+ }
+ 
+ .OngiongGroups-countdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
