@@ -1,3 +1,4 @@
+import SliderComponent from "./component/SliderComponent";
 import Container from "./component/common/Container";
 import Hero from "./component/common/Hero";
 import ThreeSectionRow from "./component/common/ThreeSectionRow";
@@ -22,6 +23,7 @@ export default function Home() {
         },
       ]}/>
       <ThreeSectionRow/>
+<SliderComponent/>
     </Container>
   );
 }
