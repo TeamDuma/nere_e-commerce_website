@@ -116,3 +116,68 @@
   justify-content: space-between;
   align-items: center;
  }
+ .productcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+}
+.tagcontainer {
+  position: absolute;
+  top: 2px;
+  left: 14.5%;
+  background-color: #8cced7;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.tagText {
+  color: #fff;
+  font-size: 2.5vw;
+  font-weight: 900;
+}
+
+
+.image {
+  width: 100px; /* Set your desired width for the image */
+  height: 70px; /* Set your desired height for the image */
+  object-fit: contain; /* Adjust the image's aspect ratio to fit the container */
+}
+
+
+.infoRowList {
+  /* Add any additional styles for the main container if needed */
+}
+
+.groupName {
+  /* Style for group name */
+}
+
+.infoRow {
+  /* Style for the info row container */
+}
+
+.infoLeft {
+  /* Style for the left side of the info row */
+}
+
+.groupPrice {
+  /* Style for the group price */
+}
+
+.oldPrice {
+  /* Style for the old price */
+}
+
+.memberCount {
+  /* Add any additional styles for the member count text */
+}
+
+.progressBarContainer {
+  margin-bottom: 5px;
+}
+
+.progressBar {
+  height: 1px;
+  background-color: orange;
+}

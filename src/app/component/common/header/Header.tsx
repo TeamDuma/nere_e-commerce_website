@@ -8,13 +8,38 @@ import Container from "../Container";
 
 const Header = () => {
   return (
-    <div className="sticky top-0 w-full bg-white shadow-sm">
-      <Container>
+    <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
+        <div className="w-full">
+
+    <Container>
         <div className="py-4 flex items-center justify-between">
           {/* Logo */}
-          <div>
-      <img src={'./images/logo.png'} alt="Description of your image"  style={{ width: '100px', height: 'auto' }} />
+          <div className="inline-flex">
+      <a className="_o6689fn" href="/">
+        <div className="hidden md:block">
+          <img
+            width={102}
+            height={32}
+            fill="currentcolor"
+            style={{ display: "block" }}
+             src={'./images/logo.png'}>
+          </img>
+        </div>
+        <div className="block md:hidden">
+          <img
+            width={30}
+            height={32}
+            fill="currentcolor"
+            style={{ display: "block" }}
+            src={'./images/logo.png'}  
+          >
+        </img>
+        </div>
+      </a>
     </div>
+          {/* <div>
+      <img src={'./images/logo.png'} alt="Description of your image"  style={{ width: '100px', height: 'auto' }} />
+    </div> */}
 
           {/* Search Bar */}
           <div className="relative flex items-center space-x-2">
@@ -92,7 +117,8 @@ const Header = () => {
           </div>
         </div>
       </Container>
-    </div>
+      </div>
+    </nav>
   );
 };
 
