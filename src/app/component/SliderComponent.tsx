@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
 
 const SliderComponent = () => {
- 
+  const [Categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`https://nere-server.herokuapp.com/api/categories`);
+        setCategories(response.data);
+        console.log("response.data",data)
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
     return (
       <>
       {/* component */}
-      <div className="flex space-x-7">
+      <div className="container flex flex-col mx-auto bg-white">
+      <div className="w-full draggable">
+      <div className="container flex flex-col items-center gap-16 mx-auto my-10">
+      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+
   {data[0].categories.map((category) => (
-    <div key={category.id} className="relative flex flex-col w-56 h-64 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-12">
+    <div key={category.id} className="relative flex flex-col w-45 h-74 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-12">
       <div className="relative h-32 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
           src={category.image}
@@ -25,6 +49,9 @@ const SliderComponent = () => {
       </div>
     </div>
   ))}
+  </div>
+  </div>
+</div>
 </div>
 
 
@@ -46,7 +73,7 @@ const data=[
                 "uid": "dNmZiq9wNm3d6Wys6xSHAQ",
                 "name": "Foodstuffs",
                 "slug": "packaged-foods",
-                "details": "Convenient and preserved food products ready for consumption or preparation.",
+                "details": "Convenient and preserved food Categories ready for consumption or preparation.",
                 "type": "Packaged foods",
                 "image": "https://res.cloudinary.com/dshiwa02i/image/upload/v1691400151/nere%20category%20images/foodstuff_gmfsnw.png",
                 "isActive": true
@@ -56,7 +83,7 @@ const data=[
                 "uid": "bZg5Y5843L1D69bmX1TSCL",
                 "name": "Baby care",
                 "slug": "baby-care",
-                "details": "Essential products designed to support the well-being and development of infants and young children.",
+                "details": "Essential Categories designed to support the well-being and development of infants and young children.",
                 "type": "baby care",
                 "image": "https://res.cloudinary.com/dshiwa02i/image/upload/v1691400151/nere%20category%20images/babycare_ybfbgj.png",
                 "isActive": true
