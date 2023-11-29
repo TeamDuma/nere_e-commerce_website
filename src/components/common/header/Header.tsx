@@ -1,5 +1,14 @@
+"use client"
+import React, { useState } from 'react';
+import CartIcon from "../CartIcon";
+import Location from "../Location";
 import Logo from "../Logo";
+import UserIcon from "../User";
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+// import Cart from '@/app/cart/Page';
 const Header = () => {
+
   return (
     <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-16 h-20  ">
     <div className="inline-flex">
@@ -12,16 +21,13 @@ const Header = () => {
     <div className="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
       <div className="inline-block">
       <div className="flex rounded-full bg-[#F5F5F5] px-2 w-full max-w-[600px]">
-      <button className="self-center flex p-1 cursor-pointer bg-">
-        {" "}
     
-      </button>
       <input
         type="text"
-        className="w-full bg-[#F5F5F5] flex bg-transparent pl-2 text-[#cccccc] outline-0"
+        className="w-full bg-[#F5F5F5] flex bg-transparent pl-2 text-[#0c0c0c] outline-0"
         placeholder="Search for products"
       />
-      <button type="submit" className="relative p-2 bg-[#F5F5F5] rounded-full">
+      <a type="submit" className="relative p-2 bg-[#F5F5F5] rounded-full">
         <svg
           width="30px"
           height="30px"
@@ -46,65 +52,45 @@ const Header = () => {
             />{" "}
           </g>
         </svg>
-      </button>
+      </a>
     </div>
       </div>
     </div>
 
-    <div className="flex-initial">
+    <div className="flex-initial my-4">
       <div className="flex justify-end items-center relative">
         <div className="flex mr-4 items-center">
           <a className="inline-block py-2 px-3 hover:bg-gray-200 rounded-full" href="#">
           <div className="hidden md:flex items-center">
-      <a
-        href="https://www.facebook.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="./images/pin.png" // Adjust the path to your image
-          alt="Map Marker Icon"
-          className="social-icon"
-        />
-      </a>
+          <Location/>
       <div className="ml-2">
   <p style={{ color: '#298592', fontSize: '0.875rem' }}>Pick up from</p>
   <p style={{ color: '#298592', fontWeight: 'bold', fontSize: '0.875rem' }}>Location</p>
 </div>
     </div>
-            {/* <div className="flex items-center relative cursor-pointer whitespace-nowrap">Become a host</div> */}
           </a>
           <div className="block relative">
           <div className="hidden md:flex items-center">
-      <a
-        href="https://www.facebook.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="./images/userIcon.png" // Adjust the path to your image
-          alt="Map Marker Icon"
-          className="social-icon"
-        />
-      </a>
+          <a className="inline-block py-2 px-3 hover:bg-gray-200 rounded-full" href="#" >
+          <div className="hidden md:flex items-center">
+          <UserIcon/>
       <div className="ml-2">
   <p style={{ color: '#298592', fontSize: '0.875rem' }}>Login/Registeration</p>
 </div>
     </div>
+          </a>
+     
+     
+    </div>
           </div>
         </div>
-        <div>
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-<img
-          src="./images/cart.png" // Adjust the path to your image
-          alt="Map Marker Icon"
-          className="social-icon"
-        />            </a>
-          </div>
+        <Link href='/cart' className='bg-white p-2 block rounded-md'>
+                <div className='flex flex-row gap-2'>
+                <CartIcon/>   <span className='font-bold text-[#298592] inline-block'>
+                  </span></div>
+                  
+            </Link>
+     
       </div>
     </div>
   </nav>
