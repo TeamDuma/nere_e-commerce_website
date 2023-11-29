@@ -1,4 +1,4 @@
-import Container from "@/component/common/Container";
+import Container from "@/components/common/Container";
 import ProductDetails from "./ProductDetails";
 
 interface Iparams {
