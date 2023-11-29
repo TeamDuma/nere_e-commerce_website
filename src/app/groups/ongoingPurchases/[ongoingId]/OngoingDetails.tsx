@@ -47,64 +47,94 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
   }
 
   return (
-    <div></div>
-//     <>
-//     <div className="container mx-auto px-4">
-//   {/* component */}
-//   <div className="flex-col min-h-screen  bg-gradient-to-br m-4">
-//   <nav aria-label="breadcrumb">
-//           <ol className="flex space-x-2">
-//             <li>
-//               <a
-//                 href="#"
-//                 className="after:content-['/'] after:ml-2 text-gray-600 hover:text-purple-700"
-//               >
-//                 Home
-//               </a>
-//             </li>
-//             <li>
-//               <a
-//                 href="#"
-//                 className="after:content-['/'] after:ml-2 text-gray-600 hover:text-purple-700"
-//               >
-//                 Category
-//               </a>
-//             </li>
-//             <li className="text-purple-700" aria-current="page">
-//              Sub category
+    <>
+    <div className="container mx-auto px-4">
+  <div className="flex-col min-h-screen  bg-gradient-to-br m-4">
+  <nav aria-label="breadcrumb">
+          <ol className="flex space-x-2">
+            <li>
+              <a
+                href="#"
+                className="after:content-['/'] after:ml-2 text-gray-600 hover:text-purple-700"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="after:content-['/'] after:ml-2 text-gray-600 hover:text-purple-700"
+              >
+                Category
+              </a>
+            </li>
+            <li className="text-purple-700" aria-current="page">
+             Sub category
 
-//             </li>
-//           </ol>
-//           </nav>
+            </li>
+          </ol>
+          </nav>
    
 
-//   <section className="relative pt-12 bg-blueGray-50 mt-4">
-//     <div className="flex flex-wrap">
-//     <div className="w-full md:w-4/12 ml-auto h-70  mr-auto px-4">
-//         <img
-//           alt="..."
-//           className="max-w-full h-70 rounded-lg shadow-lg"
-//           src=
+  <section className="relative pt-12 bg-blueGray-50 mt-4">
+    <div className="flex flex-wrap">
+    <div className="w-full md:w-4/12 ml-auto h-70  mr-auto px-4">
+        <img
+          alt="..."
+          className="max-w-full h-70 rounded-lg shadow-lg"
+          src=
        
-//         {data.product.plain_image}
-//        />
-//       </div>
-//       <div className="w-full md:w-5/12 ml-auto mr-auto text-[#1A464C] ">
-//         <div className="md:pr-12">
+        {data.product.plain_image}
+       />
+      </div>
+      <div className="w-full md:w-5/12 ml-auto mr-auto text-[#1A464C] ">
+        <div className="md:pr-12">
         
-//           <h5 className="text-l font-semibold "> 
-//           Niche chocolate drink    
-//              {/* {data.product.name} */}
-// </h5>
-// <Rate/>
-// <PriceDisplay newPrice={10} oldPrice={20}/>
-// </div>
-// </div>
-// </div>
-// </section>
-// </div>
-//     </>
-  )
-};
+          <h5 className="text-l font-semibold "> 
+             {data.product.name}
+</h5>
+<Rate/>
+<PriceDisplay newPrice={10} oldPrice={20}/>
+      
+          <ul className="list-none mt-6">
+            <li className="py-2">
+              <div className="flex items-center">
+                <div>
+              
+                </div>
+                <div>
+                 
+                </div>
+              </div>
+            </li>
+            <li className="py-2">
+              <div className="flex items-center">
+              
+                <div>
+                <MemberCount minQuantity={data.product.minQuantity} totalQuantity={data.total_quantity} unit={data.product.unit} />
+                </div>
+              </div>
+            </li>
+            <li className="py-2">
+              <div className="flex items-center">
+              
+                <div>
+                <Range minQuantity={data.product.min_quantity} members={data.members.length} />
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+ 
+  </section>
 
+          </div>
+          </div>
+  </>
+   
+
+  )
+}
 export default OngoingDetails;
