@@ -4,6 +4,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -25,15 +26,14 @@ const Products = () => {
 
     fetchData();
   }, []);
-//    const featureProducts = products.filter((product) => product.isFeaturedProduct);
 
-//   const featureProducts = products.filter((product) => product.isFeaturedProduct);
 
   return (
     <>
       {isLoading && <div>Loading...</div>}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px', marginLeft: '10%',marginRight:'10%' }}>
         {products.map((product) => (
+          <Link href={`/product/${product.id}`} >
           <div key={product?.id} style={{ marginTop: '50px' }}>
             <div
               style={{
@@ -88,6 +88,7 @@ const Products = () => {
             </div>
         
           </div>
+          </Link>
         ))}
       </div>
     </>
@@ -96,10 +97,3 @@ const Products = () => {
 
 export default Products;
 
-// const Products = () => {
-//     return (  
-//         <div>Products</div>
-//     );
-// }
- 
-// export default Products;

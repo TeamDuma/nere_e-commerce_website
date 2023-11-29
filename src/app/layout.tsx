@@ -4,7 +4,8 @@ import "./globals.css";
 import Header from "@/components/common/header/Header";
 import Footer from "@/components/common/footer/Footer";
 import Container from "@/components/common/Container";
-
+import Layout from "@/components/Layout";
+ 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,19 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-
     <html lang="en">
-    <body className={inter.className}>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow">
-          <Container>{children}</Container>
-        </main>
+      <body className={inter.className}>
+        <Layout>
+          <Header />
+          <main className="flex-grow">
+            <Container>{children}</Container>
+          </main>
+        </Layout>
         {/* <Footer /> */}
-      </div>
-    </body>
-  </html>
-
-  
+      </body>
+    </html>
   );
 }

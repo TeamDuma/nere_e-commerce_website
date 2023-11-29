@@ -1,6 +1,6 @@
 "use client";
 
-import Categories from "@/app/categories/Page";
+import Categories from "@/app/categories/page";
 import CategoriesCards from "@/categories/components/CategoriesCards";
 import Banner from "@/components/Banner";
 import FeaturedProducts from "@/components/FeaturedProducts";

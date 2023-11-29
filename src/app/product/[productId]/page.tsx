@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetcher } from "@/app/_libs";
-import { AddCart, DecreaseQuantity } from "@/app/_redux/actions";
+import { addToCart } from "@/redux/shoppingSlice";
 
 export default function ProductDetailPage({
   params,
@@ -54,7 +53,7 @@ export default function ProductDetailPage({
           <p className="text-gray-500">Price: ${product?.price}</p>
           <button
             className="bg-yellow-400 px-4 py-2 text-white mt-1"
-            onClick={() => dispatch(AddCart(product))}
+            onClick={() => dispatch(addToCart(product))}
           >
             Add to Cart
           </button>

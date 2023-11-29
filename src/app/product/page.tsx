@@ -10,6 +10,8 @@ export default function ProductDetailPage({ params }: { params: { id: number } }
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log("params",params)
+
 
 
   useEffect(() => {
@@ -37,23 +39,22 @@ export default function ProductDetailPage({ params }: { params: { id: number } }
   if (!product) return null;
 
   return (
-    <div>hi</div>
-    // <div className='w-full max-w-[400px] m-auto flex flex-col justify-center'>
-    //   <div className="w-full mt-4">
-    //     <img src={product?.thumbnail} alt={product?.title} width={400} height={400} />
-    //     <div className='w-full mt-2'>
-    //       <h1 className='font-bold text-2xl text-red-500'>{product?.title}</h1>
-    //       <p className='text-gray-500'>{product?.description}</p>
-    //       <p className='text-gray-500'>Price: ${product?.price}</p>
-    //       <button className='bg-yellow-400 px-4 py-2 text-white mt-1' onClick={() => dispatch(AddCart(product))}>
-    //         Add to Cart
-    //       </button>
+    <div className='w-full max-w-[400px] m-auto flex flex-col justify-center'>
+      <div className="w-full mt-4">
+        <img src={product?.thumbnail} alt={product?.title} width={400} height={400} />
+        <div className='w-full mt-2'>
+          <h1 className='font-bold text-2xl text-red-500'>{product?.title}</h1>
+          <p className='text-gray-500'>{product?.description}</p>
+          <p className='text-gray-500'>Price: ${product?.price}</p>
+          <button className='bg-yellow-400 px-4 py-2 text-white mt-1' onClick={() => dispatch(AddCart(product))}>
+            Add to Cart
+          </button>
 
-    //     </div>
-    //     <button className='bg-yellow-400 px-4 py-2 text-white mt-1' onClick={() => dispatch(DecreaseQuantity(product))}>
-    //         Add to Cart
-    //       </button>
-    //   </div>
-    // </div>
+        </div>
+        <button className='bg-yellow-400 px-4 py-2 text-white mt-1' onClick={() => dispatch(DecreaseQuantity(product))}>
+            Add to Cart
+          </button>
+      </div>
+    </div>
   );
 }
