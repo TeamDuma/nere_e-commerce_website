@@ -8,8 +8,9 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux'
 // import Cart from '@/app/cart/Page';
 const Header = () => {
+  
   const  {cartItems}  = useSelector((state: any) => state.shopping);
-
+console.log('cartItems',cartItems)
 
   return (
     <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-16 h-20  ">

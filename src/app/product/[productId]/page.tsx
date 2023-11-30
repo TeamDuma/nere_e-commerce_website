@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/shoppingSlice";
+import { addToCart, resetCart } from "@/redux/shoppingSlice";
 
 export default function ProductDetailPage({
   params,
@@ -56,6 +56,14 @@ export default function ProductDetailPage({
             onClick={() => dispatch(addToCart(product))}
           >
             Add to Cart
+          </button>
+
+          <button
+            className="bg-yellow-400 px-4 py-2 text-white mt-1"
+            onClick={() => dispatch(resetCart(product)
+              )}
+          >
+          resetCart
           </button>
         </div>
       </div>

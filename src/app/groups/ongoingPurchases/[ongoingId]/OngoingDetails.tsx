@@ -5,12 +5,16 @@ import PriceDisplay from "../../components/PriceDisplay";
 import Rate from "../../components/Rate";
 import Range from "../../components/Range";
 import MemberCount from "../../components/MemberCount";
+import { addToCart } from "@/redux/shoppingSlice";
+import { useDispatch } from "react-redux";
 
 interface OngoingDetailsProps {
   OngoingUid: string; // Assuming OngoingUid is a string based on the API response
 }
 
 const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -121,6 +125,12 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
                 <div>
                 <Range minQuantity={data.product.min_quantity} members={data.members.length} />
                 </div>
+                <span
+     onClick={() => dispatch(addToCart(data.product))}
+    className="cursor-pointer"
+  >
+    +
+  </span>
               </div>
             </li>
           </ul>
