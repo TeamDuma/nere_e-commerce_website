@@ -13,7 +13,7 @@ const OngoingPurchases: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://nere-server.herokuapp.com/api/groups"
+          "https://nere-server.herokuapp.com/api/groups?type=Public&status=Open"
         );
         setData(response.data);
       } catch (error) {
@@ -26,26 +26,22 @@ const OngoingPurchases: React.FC = () => {
     fetchData();
   }, []);
 
-  const filteredData = data?.filter(
-    (item) =>
-      item.status === "Open" && item.isPaid === true && item.type === "Public"
-  );
-  console.log("filteredData", filteredData);
+  console.log("filteredData", data);
   return (
     <div>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {filteredData && (
-        <div className="overflow-x-auto">
-          <div className="flex flex-row flex-nowrap justify-center space-x-4">
-            {filteredData.map((item: any) => (
-              <div key={item.id} className="py-6 flex-shrink-0 w-full md:w-1/4">
-                <GroupRowRenderItem item={item} />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {data && (
+  <div className="overflow-x-auto">
+  <div className="flex flex-nowrap justify-start">
+    {data.map((item: any) => (
+      <div key={item.id} className="flex-shrink-0 mr-4">
+        <GroupRowRenderItem item={item} />
+      </div>
+    ))}
+  </div>
+</div>
+)}
     </div>
   );
 };

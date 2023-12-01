@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,10 @@ const FeaturedProducts = () => {
       {isLoading && <div>Loading...</div>}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px', marginLeft: '10%' }}>
         {featureProducts.map((product) => (
-          <div key={product?.id} style={{ marginTop: '50px' }}>
+                    <Link href={`/product/${product.id}`} >
+
+          <div key={product?.id} style={{ marginTop: '50px' }}
+          >
             <div
               style={{
                 width: '100px',
@@ -85,6 +89,7 @@ const FeaturedProducts = () => {
             </div>
         
           </div>
+          </Link>
         ))}
       </div>
     </>

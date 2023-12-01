@@ -38,9 +38,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
     };
 
     fetchData();
-
   }, [OngoingUid]); // Add OngoingUid as a dependency to re-fetch data when it changes
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,99 +50,93 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
 
   return (
     <>
-    <div className="container mx-auto px-4">
-  <div className="flex-col min-h-screen  bg-gradient-to-br m-4">
-  <nav aria-label="breadcrumb">
-          <ol className="flex space-x-2">
-            <li>
-              <a
-                href="#"
-                className="after:content-['/'] after:ml-2 text-gray-600 hover:text-purple-700"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="after:content-['/'] after:ml-2 text-gray-600 hover:text-purple-700"
-              >
-                Category
-              </a>
-            </li>
-            <li className="text-purple-700" aria-current="page">
-             Sub category
-
-            </li>
-          </ol>
-          </nav>
-   
-
-  <section className="relative pt-12 bg-blueGray-50 mt-4">
-    <div className="flex flex-wrap">
-    <div className="w-full md:w-4/12 ml-auto h-70  mr-auto px-4">
-        <img
-          alt="..."
-          className="max-w-full h-70 rounded-lg shadow-lg"
-          src=
-       
-        {data.product.plain_image}
-       />
-      </div>
-      <div className="w-full md:w-5/12 ml-auto mr-auto text-[#1A464C] ">
-        <div className="md:pr-12">
-        
-          <h5 className="text-l font-semibold "> 
-             {data.product.name}
-</h5>
-<Rate/>
-<PriceDisplay newPrice={10} oldPrice={20}/>
-      
-          <ul className="list-none mt-6">
-            <li className="py-2">
-              <div className="flex items-center">
-                <div>
-              
-                </div>
-                <div>
-                 
+      <main className="my-8">
+        <div className="container mx-auto px-6">
+          <div className="md:flex md:items-center">
+            <div className="w-full h-64 md:w-1/2 lg:h-96">
+              <img
+                className="h-full rounded-md object-cover max-w-lg mx-auto "
+                src={data.product.plain_image}
+                alt="plain_image"
+              />
+            </div>
+            <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
+              <h3 className="text-gray-700 uppercase text-lg">
+                {data.product.name}
+              </h3>
+              <span className="text-gray-500 mt-3">$125</span>
+              <hr className="my-3" />
+              <div className="mt-2">
+                <label className="text-gray-700 text-sm" htmlFor="count">
+                  Count:
+                </label>
+                <div className="flex items-center mt-1">
+                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
+                  <span className="text-gray-700 text-lg mx-2">20</span>
+                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
                 </div>
               </div>
-            </li>
-            <li className="py-2">
-              <div className="flex items-center">
-              
-                <div>
-                <MemberCount minQuantity={data.product.minQuantity} totalQuantity={data.total_quantity} unit={data.product.unit} />
-                </div>
-              </div>
-            </li>
-            <li className="py-2">
-              <div className="flex items-center">
-              
-                <div>
-                <Range minQuantity={data.product.min_quantity} members={data.members.length} />
-                </div>
-                <span
-     onClick={() => dispatch(addToCart(data.product))}
-    className="cursor-pointer"
-  >
-    +
-  </span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+              {data.product.variants !== null && (
+  <div className="mt-3">
+    <label className="text-gray-700 text-sm" htmlFor="count">
+      Variants:
+    </label>
+    <div className="flex items-center mt-1">
+      <button className="h-5 w-5 rounded-full bg-blue-600 border-2 border-blue-200 mr-2 focus:outline-none" />
+      <button className="h-5 w-5 rounded-full bg-teal-600 mr-2 focus:outline-none" />
+      <button className="h-5 w-5 rounded-full bg-pink-600 mr-2 focus:outline-none" />
     </div>
- 
-  </section>
-
+  </div>
+)}
+              <div className="flex items-center mt-6">
+                <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+                  Order Now
+                </button>
+                <button className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
-          </div>
-  </>
+        {/* Items related to your cart */}
+        </div>
+      </main>
    
-
-  )
-}
+    </>
+  );
+};
 export default OngoingDetails;

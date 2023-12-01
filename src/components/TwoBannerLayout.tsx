@@ -3,7 +3,7 @@ const TwoColumnLayout = () => {
 
 <>
 
-<div className="max-w-screen-full mx-auto grid gap-4 grid-cols-1 mt-48">
+<div className="max-w-screen-full mx-auto grid gap-4 grid-cols-1 mt-10">
 
     
   <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
