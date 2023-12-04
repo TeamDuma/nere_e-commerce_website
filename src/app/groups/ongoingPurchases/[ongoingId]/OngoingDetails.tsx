@@ -1,12 +1,13 @@
 "use client";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import PriceDisplay from "../../components/PriceDisplay";
-import Rate from "../../components/Rate";
-import Range from "../../components/Range";
-import MemberCount from "../../components/MemberCount";
-import { addToCart } from "@/redux/shoppingSlice";
-import { useDispatch } from "react-redux";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/redux/shoppingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 interface OngoingDetailsProps {
   OngoingUid: string; // Assuming OngoingUid is a string based on the API response
@@ -14,6 +15,7 @@ interface OngoingDetailsProps {
 
 const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
   const dispatch = useDispatch();
+  const { cartItems } = useSelector((state: RootState) => state.shopping);
 
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
     };
 
     fetchData();
-  }, [OngoingUid]); // Add OngoingUid as a dependency to re-fetch data when it changes
+  }, [OngoingUid]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -47,6 +49,9 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const cartProduct = cartItems.find((item) => item.id === data.product.id);
+  const cartQuantity = cartProduct ? cartProduct.quantity : 0;
 
   return (
     <>
@@ -64,28 +69,26 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
               <h3 className="text-gray-700 uppercase text-lg">
                 {data.product.name}
               </h3>
-              <span className="text-gray-500 mt-3">$125</span>
+              <span className="text-gray-500 mt-3">
+                {data.product.sale_price}¢
+              </span>
+              <span
+                className="text-gray-500 mt-3 ml-5"
+                style={{ textDecoration: "line-through" }}
+              >
+                {data.product.price}¢
+              </span>
+
               <hr className="my-3" />
               <div className="mt-2">
                 <label className="text-gray-700 text-sm" htmlFor="count">
                   Count:
                 </label>
                 <div className="flex items-center mt-1">
-                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                    <svg
-                      className="h-5 w-5"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </button>
-                  <span className="text-gray-700 text-lg mx-2">20</span>
-                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
+                  <button
+                    className="text-gray-500 focus:outline-none focus:text-gray-600"
+                    onClick={() => dispatch(decreaseQuantity(data.product))}
+                  >
                     <svg
                       className="h-5 w-5"
                       fill="none"
@@ -98,22 +101,59 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
                       <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </button>
+                  <span className="text-gray-700 text-lg mx-2">
+                    {cartQuantity}
+                  </span>
+
+                  <button
+                    className="text-gray-500 focus:outline-none focus:text-gray-600"
+                    onClick={() => dispatch(increaseQuantity(data.product))}
+                  >
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
                 </div>
               </div>
               {data.product.variants !== null && (
-  <div className="mt-3">
-    <label className="text-gray-700 text-sm" htmlFor="count">
-      Variants:
-    </label>
-    <div className="flex items-center mt-1">
-      <button className="h-5 w-5 rounded-full bg-blue-600 border-2 border-blue-200 mr-2 focus:outline-none" />
-      <button className="h-5 w-5 rounded-full bg-teal-600 mr-2 focus:outline-none" />
-      <button className="h-5 w-5 rounded-full bg-pink-600 mr-2 focus:outline-none" />
-    </div>
-  </div>
-)}
+                <div className="mt-3">
+                  <label className="text-gray-700 text-sm" htmlFor="count">
+                    Variants:
+                  </label>
+                  <div className="flex items-center mt-1">
+                    <button className="h-5 w-5 rounded-full bg-blue-600 border-2 border-blue-200 mr-2 focus:outline-none" />
+                    <button className="h-5 w-5 rounded-full bg-teal-600 mr-2 focus:outline-none" />
+                    <button className="h-5 w-5 rounded-full bg-pink-600 mr-2 focus:outline-none" />
+                  </div>
+                </div>
+              )}
               <div className="flex items-center mt-6">
-                <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+                <button
+                  className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+                 
+                
+                
+                
+                  onClick={() =>
+                    dispatch(
+                      addToCart({
+                        cartQuantity: data.total_quantity,
+                        productID: data.product.id,
+                        isGroupJoiner: true,
+                        groupID: data.id,
+                        type: "Public",
+                      })
+                    )
+                  }
+                >
                   Order Now
                 </button>
                 <button className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
@@ -132,10 +172,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ OngoingUid }) => {
               </div>
             </div>
           </div>
-        {/* Items related to your cart */}
         </div>
       </main>
-   
     </>
   );
 };

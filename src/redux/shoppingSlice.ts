@@ -1,10 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const initialState = {
+export interface CartItem {
+  
+  productID: number;
+  cartQuantity: number;
+  isGroupJoiner:boolean;
+  locationID?:number;
+  groupID?: number
+  type:string;
+
+
+ 
+}
+
+
+export interface StateProps {
+  cartItems: CartItem[],
+  userInfo: any,
+  orderData: any[],
+}
+
+
+
+const initialState:StateProps = {
   cartItems: [],
+  userInfo: null,
   orderData: [],
 };
+
+
+
+
 
 export const shoppingSlice = createSlice({
   name: "shopping",
@@ -12,7 +39,7 @@ export const shoppingSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const existingProduct = state.cartItems.find(
-        (item ) => item.id === action.payload.id
+        (item:CartItem) => item.id === action.payload.id
       );
       if (existingProduct) {
         existingProduct.quantity += action.payload.quantity;
@@ -22,18 +49,29 @@ export const shoppingSlice = createSlice({
     },
     increaseQuantity: (state, action) => {
       const existingProduct = state.cartItems.find(
-        (item) => item.id === action.payload.id
-      );
-      existingProduct && existingProduct.quantity++;
+        (item) => item.id === id);
+    
+      if (existingProduct) {
+        if (existingProduct.hasMinQuantity) {
+        existingProduct.min_quantity = Math.min(existingProduct.min_quantity + 1, existingProduct.minQuantity);
+         console.log(" hasMinQuantity IncreaseQuantity.quantity",existingProduct.min_quantity)
+
+        } else {
+          console.log("has No MinQuantity")
+          existingProduct.min_quantity = Math.max(existingProduct.min_quantity + 1);
+          console.log("has No MinQuantity",existingProduct.min_quantity)
+
+
+        }
+      }
     },
     decreaseQuantity: (state, action) => {
-      const existingProduct = state.cartItems.find(
-        (item) => item.id === action.payload.id
-      );
-      if (existingProduct?.quantity === 1) {
-        existingProduct.quantity = 1;
-      } else {
-        existingProduct && existingProduct.quantity--;
+      const { id } = action.payload;
+      const existingProduct = state.cartItems.find((item) => item.id === id);
+
+      if (existingProduct) {
+         existingProduct.min_quantity = Math.max(existingProduct.min_quantity - 1, 1);
+         console.log("decreaseQuantity.quantity",existingProduct.min_quantity)
       }
     },
     deleteProduct: (state, action) => {

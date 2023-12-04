@@ -1,6 +1,7 @@
 "use client"
 
-import { addToCart, deleteitem } from '@/redux/shoppingSlice';
+import { CheckOut, UpdateCart } from '@/api/cart';
+import { addToCart, decreaseQuantity, increaseQuantity, resetCart } from '@/redux/shoppingSlice';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,42 +11,7 @@ const Cart= () => {
   const  {cartItems}  = useSelector((state: any) => state.shopping);
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const handleClick = async () => {
-    try {
-      setLoading(true);
-  
-      // Replace the URL with your actual API endpoint
-      const response = await fetch('https://nere-server.herokuapp.com/api/cart/update', {
-        method: 'PATCH', // or 'PUT' or 'PATCH' depending on your API
-        headers: {
-          'Content-Type': 'application/json',
-          // Add any other headers your API requires
-        },
-        body: JSON.stringify({
-          customer_id: 1,
-          cart_object: JSON.stringify (cartItems),
-        }),
-      }
-
-      );
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const responseData = await response.json();
-      console.log('API Response:', responseData);
-  
-      // Set the data in state
-      setData(responseData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-    dispatch(addToCart(cartItems));
-  };
-  
+ 
 
 
 
@@ -70,9 +36,9 @@ const Cart= () => {
              <p className="mt-1 text-xs text-gray-700">{item.size}</p>
              <div className="mt-4 flex justify-between items-center md:block md:space-x-6">
                <div className="flex items-center border-gray-100">
-                 <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
+                 <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50" onClick={() => dispatch(decreaseQuantity(item.min_quantity))}> - </span>
                  <input className="h-8 w-8 border bg-white text-center text-xs outline-none" type="number" value={item.min_quantity} min="1" />
-                 <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
+                 <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50" onClick={() => dispatch(increaseQuantity(item.min_quantity))} > + </span>
                </div>
                <div className="flex items-center space-x-4">
                  <p className="text-sm">{item.price}</p>
@@ -109,7 +75,29 @@ const Cart= () => {
 
       {/* <!-- Sub total --> */}
       <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+      <button className="text-gray-500 focus:outline-none focus:text-gray-600"  onClick={async() =>
+    await UpdateCart(cartItems)
+    }
+            // dispatch(resetCart())}
+                >
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
         {/* <!-- ... your subtotal content ... --> */}
+
+        <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50" onClick={async() =>
+    await CheckOut(cartItems)
+    }> chekOut</span>
+
       </div>
     </div>
   </div>
