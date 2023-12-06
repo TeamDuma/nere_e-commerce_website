@@ -1,12 +1,15 @@
-// components/MemberCount.js
-import Icon from "react-native-vector-icons/FontAwesome";
+interface IMemberCount {
+  minQuantity: number;
+  totalQuantity: number;
+  unit: number;
+}
 
-const MemberCount = ({ minQuantity, totalQuantity, unit }) => {
+const MemberCount = ({ minQuantity, totalQuantity, unit }: IMemberCount) => {
   const remainingQuantity = minQuantity - totalQuantity;
 
   return (
     <div>
-      <h2 >
+      <h2>
         {remainingQuantity} left, out of {minQuantity} {unit}
       </h2>
     </div>

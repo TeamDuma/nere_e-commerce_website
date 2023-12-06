@@ -12,16 +12,14 @@
   color: gray;
 }
 
-
-
 .footer-left {
   flex-grow: 1;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .footer-left p {
-  margin-right: 30px; 
+  margin-right: 30px;
 }
 
 .footer-right {
@@ -34,13 +32,11 @@
   font-size: 24px;
   transition: color 0.3s ease;
   margin: 15px;
-
 }
 
 .social-icon:hover {
   color: #1877f2; /* Facebook blue color */
 }
-
 
 /* styles.css (or any styling solution you prefer) */
 .card {
@@ -58,7 +54,7 @@
 
 .card-image {
   width: 90%;
-  margin: 8px auto 0; 
+  margin: 8px auto 0;
   border-bottom: 1px solid #ddd;
 }
 
@@ -98,25 +94,25 @@
   border: 1px solid #ccc;
   padding: 16px;
   margin-bottom: 16px;
- }
- 
- .OngiongGroups img {
+}
+
+.OngiongGroups img {
   width: 200px;
   height: 200px;
   object-fit: cover;
- }
- 
- .OngiongGroups-details {
+}
+
+.OngiongGroups-details {
   flex: 1;
   padding-left: 16px;
- }
- 
- .OngiongGroups-countdown {
+}
+
+.OngiongGroups-countdown {
   display: flex;
   justify-content: space-between;
   align-items: center;
- }
- .productcontainer {
+}
+.productcontainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,13 +133,11 @@
   font-weight: 900;
 }
 
-
 .image {
   width: 100px; /* Set your desired width for the image */
   height: 70px; /* Set your desired height for the image */
   object-fit: contain; /* Adjust the image's aspect ratio to fit the container */
 }
-
 
 .infoRowList {
   /* Add any additional styles for the main container if needed */
