@@ -10,10 +10,12 @@ const PriceDisplay: React.FC<PriceDisplayProps> = ({ newPrice, oldPrice }) => {
   const savedPercentage = ((savedAmount / oldPrice) * 100).toFixed(2);
 
   return (
-    <div className="flex items-center mt-8 ">
-      <span className="text-[#1A464C] font-bold text-lg mr-4">¢{newPrice}</span>
-      <span className="text-red-500 line-through text-sm mr-4">¢{oldPrice}</span>
-      <div className="bg-[#8CCED7] text-white rounded-xl">
+    <div className='mt-8 flex items-center '>
+      <span className='mr-4 text-lg font-bold text-[#1A464C]'>¢{newPrice}</span>
+      <span className='mr-4 text-sm text-red-500 line-through'>
+        ¢{oldPrice}
+      </span>
+      <div className='rounded-xl bg-[#8CCED7] text-white'>
         Save {savedPercentage}%
       </div>
     </div>

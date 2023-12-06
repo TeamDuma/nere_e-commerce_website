@@ -1,36 +1,33 @@
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import PriceDisplay from "./PriceDisplay";
+import { useRouter } from 'next/navigation';
 
-const GroupRowRenderItem = ({ item }) => {
+const GroupRowRenderItem = ({ item }: { item: any }) => {
   const router = useRouter();
-
-  // console.log("GroupRowRenderItem", (item.product.price)-(item.product.sale_price))
 
   return (
     <div
-    key={item.id}
-    onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-    className="flex items-center p-4 bg-white shadow-md rounded-lg"
-    style={{ width: "450px" }} // Set the fixed width for the card
-  >
-  <div className="flex-shrink-0 w-1/3 relative">
-  <img
-    src={item.product.plain_image}
-    alt={item.name}
-    className="w-full h-32 object-cover rounded-lg"
-    style={{ width: "100px" }} // Set the fixed width for the image
-  />
-  <div className="absolute top-0 right-0 p-1 bg-orange-500 text-white font-bold">
-Save  % </div>
-</div>
-    {/* Product Details on the Right */}
-    <div className="ml-4 flex-1">
-      <h2 className="text-lg font-bold text-gray-900">{item.product.id}</h2>
-      <p className="mt-1 text-xs text-gray-700">{item.size}</p>
-      {/* ... other product details ... */}
+      key={item.id}
+      onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
+      className='flex items-center rounded-lg bg-white p-4 shadow-md'
+      style={{ width: '450px' }} // Set the fixed width for the card
+    >
+      <div className='relative w-1/3 flex-shrink-0'>
+        <img
+          src={item.product.plain_image}
+          alt={item.name}
+          className='h-32 w-full rounded-lg object-cover'
+          style={{ width: '100px' }} // Set the fixed width for the image
+        />
+        <div className='absolute right-0 top-0 bg-orange-500 p-1 font-bold text-white'>
+          Save %{' '}
+        </div>
+      </div>
+      {/* Product Details on the Right */}
+      <div className='ml-4 flex-1'>
+        <h2 className='text-lg font-bold text-gray-900'>{item.product.id}</h2>
+        <p className='mt-1 text-xs text-gray-700'>{item.size}</p>
+        {/* ... other product details ... */}
+      </div>
     </div>
-  </div>
     // <div
     //   key={item.id}
     //   onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
