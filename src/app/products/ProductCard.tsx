@@ -1,4 +1,4 @@
-import { Product } from '@/types/products';
+import { Product } from '@/types/product';
 import Image from 'next/image';
 import React from 'react';
 
@@ -18,7 +18,6 @@ const ProductCard = (props: Props) => {
       <div className='p-2'>
         <h6 className='text-center text-slate-600'>{props.product.name}</h6>
         <p className='text-center text-slate-600'>{props.product.price} $</p>
-        {/* <AddToCartBtn product={props.product} /> */}
       </div>
     </div>
   );

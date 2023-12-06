@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useGetActiveProductsQuery } from '@/lib/redux/services/products';
+import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();

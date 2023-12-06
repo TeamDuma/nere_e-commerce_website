@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { useGetActiveProductsQuery } from '@/lib/redux/services/products';
+import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 
 const Products = () => {
   const { data, isLoading } = useGetActiveProductsQuery();

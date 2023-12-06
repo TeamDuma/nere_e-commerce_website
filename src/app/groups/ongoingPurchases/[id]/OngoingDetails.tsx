@@ -7,7 +7,7 @@ import {
   increaseQuantity,
   selectShopping,
 } from '@/lib/redux';
-import { useLazyGetGroupQuery } from '@/lib/redux/services/groups';
+import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -18,6 +18,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const { cartItems } = useSelector(selectShopping);
 
   const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
+  const product = data?.data?.group.product;
 
   useEffect(() => {
     getGroup(ongoingUid);
@@ -31,32 +32,28 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     return <div>Error</div>;
   }
 
-  const cartProduct = cartItems.find((item) => item.id === data.product.id);
+  const cartProduct = cartItems.find((item) => item.id === product!.id);
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
 
   return (
-    <main className='my-8'>
+    <div className='my-8'>
       <div className='container mx-auto px-6'>
         <div className='md:flex md:items-center'>
           <div className='h-64 w-full md:w-1/2 lg:h-96'>
             <img
               className='mx-auto h-full max-w-lg rounded-md object-cover '
-              src={data.product.plain_image}
+              src={product?.plain_image}
               alt='plain_image'
             />
           </div>
           <div className='mx-auto mt-5 w-full max-w-lg md:ml-8 md:mt-0 md:w-1/2'>
-            <h3 className='text-lg uppercase text-gray-700'>
-              {data.product.name}
-            </h3>
-            <span className='mt-3 text-gray-500'>
-              {data.product.sale_price}¢
-            </span>
+            <h3 className='text-lg uppercase text-gray-700'>{product!.name}</h3>
+            <span className='mt-3 text-gray-500'>{product!.sale_price}¢</span>
             <span
               className='ml-5 mt-3 text-gray-500'
               style={{ textDecoration: 'line-through' }}
             >
-              {data.product.price}¢
+              {product!.price}¢
             </span>
 
             <hr className='my-3' />
@@ -67,7 +64,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <div className='mt-1 flex items-center'>
                 <button
                   className='text-gray-500 focus:text-gray-600 focus:outline-none'
-                  onClick={() => dispatch(decreaseQuantity(data.product))}
+                  onClick={() => dispatch(decreaseQuantity(product!.id))}
                 >
                   <svg
                     className='h-5 w-5'
@@ -87,7 +84,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
                 <button
                   className='text-gray-500 focus:text-gray-600 focus:outline-none'
-                  onClick={() => dispatch(increaseQuantity(data.product))}
+                  onClick={() => dispatch(increaseQuantity(product!.id))}
                 >
                   <svg
                     className='h-5 w-5'
@@ -103,7 +100,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 </button>
               </div>
             </div>
-            {data.product.variants !== null && (
+            {product!.variants !== null && (
               <div className='mt-3'>
                 <label className='text-sm text-gray-700' htmlFor='count'>
                   Variants:
@@ -127,7 +124,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     //   groupID: data.id,
                     //   type: "Public",
                     // })
-                    addToCart(data)
+                    addToCart(product!)
                   )
                 }
               >
@@ -150,7 +147,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 export default OngoingDetails;

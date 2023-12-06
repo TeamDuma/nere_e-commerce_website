@@ -1,10 +1,10 @@
 'use client';
 import React from 'react';
-import { useGetCategoriesQuery } from '@/lib/redux/services/categories';
+import { useGetCategoriesQuery } from '@/lib/redux/services/category';
 
 const Categories = () => {
   const { data, isLoading } = useGetCategoriesQuery();
-  const categories = data?.categories ?? [];
+  const categories = data?.data?.categories ?? [];
 
   return (
     <div className='flex flex-nowrap'>

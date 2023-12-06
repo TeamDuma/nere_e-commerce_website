@@ -1,13 +1,4 @@
-export interface Category {
-  id: number;
-  uid: string;
-  name: string;
-  slug: string;
-  details: string;
-  type: string;
-  image: string;
-  isActive: boolean;
-}
+import { Category } from './category';
 
 export interface Location {
   id: number;
@@ -46,9 +37,25 @@ export interface Product {
   locations: Location[];
 }
 
-export interface ProductsResponse {
+export interface GetProductsResponse {
   status: string;
   data: {
     products: Product[];
   };
 }
+
+// GET /products/active
+export type GetActiveProductsResponse = {
+  status: string;
+  data: {
+    products: Product[];
+  };
+};
+
+// GET /products/{id}
+export type GetProductResponse = {
+  status: string;
+  data: {
+    product: Product;
+  };
+};

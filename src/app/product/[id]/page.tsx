@@ -5,7 +5,7 @@ import {
   increaseQuantity,
   selectShopping,
 } from '@/lib/redux';
-import { useLazyGetProductQuery } from '@/lib/redux/services/products';
+import { useLazyGetProductQuery } from '@/lib/redux/services/product';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,7 +21,7 @@ export default function ProductDetailPage({ params }: Props) {
 
   const { cartItems } = useSelector(selectShopping);
   const [getProduct, { data, isLoading, isError }] = useLazyGetProductQuery();
-  const product = data.data ?? {};
+  const product = data?.data?.product;
 
   useEffect(() => {
     getProduct(productId);
@@ -35,7 +35,7 @@ export default function ProductDetailPage({ params }: Props) {
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
 
   return (
-    <main className='my-8'>
+    <div className='my-8'>
       <div className='container mx-auto px-6'>
         <div className='md:flex md:items-center'>
           <div className='h-64 w-full md:w-1/2 lg:h-96'>
@@ -63,7 +63,7 @@ export default function ProductDetailPage({ params }: Props) {
               <div className='mt-1 flex items-center'>
                 <button
                   className='text-gray-500 focus:text-gray-600 focus:outline-none'
-                  onClick={() => dispatch(decreaseQuantity(product))}
+                  onClick={() => dispatch(decreaseQuantity(product.id))}
                 >
                   <svg
                     className='h-5 w-5'
@@ -83,7 +83,7 @@ export default function ProductDetailPage({ params }: Props) {
                 </span>
                 <button
                   className='text-gray-500 focus:text-gray-600 focus:outline-none'
-                  onClick={() => dispatch(increaseQuantity(product))}
+                  onClick={() => dispatch(increaseQuantity(product.id))}
                 >
                   <svg
                     className='h-5 w-5'
@@ -114,7 +114,6 @@ export default function ProductDetailPage({ params }: Props) {
             <div className='mt-6 flex items-center'>
               <button
                 className='rounded bg-indigo-600 px-8 py-2 text-sm font-medium text-white hover:bg-indigo-500 focus:bg-indigo-500 focus:outline-none'
-                // onClick={() => console.log("product",product.locations) }
                 onClick={() =>
                   dispatch(
                     // TODO: Fix here
@@ -147,8 +146,7 @@ export default function ProductDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
-        {/* Items related to your cart */}
       </div>
-    </main>
+    </div>
   );
 }

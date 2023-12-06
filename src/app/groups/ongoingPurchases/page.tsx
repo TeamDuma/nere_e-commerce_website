@@ -2,10 +2,12 @@
 
 import React from 'react';
 import GroupRowRenderItem from '../components/GroupRowRenderItem';
-import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/groups';
+import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
+import { Group } from '@/types/group';
 
 const OngoingPurchases: React.FC = () => {
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
+  const groups = data?.data?.groups ?? [];
 
   return (
     <div>
@@ -14,7 +16,7 @@ const OngoingPurchases: React.FC = () => {
       {data && (
         <div className='overflow-x-auto'>
           <div className='flex flex-nowrap justify-start'>
-            {data.map((item: any) => (
+            {groups.map((item: Group) => (
               <div key={item.id} className='mr-4 flex-shrink-0'>
                 <GroupRowRenderItem item={item} />
               </div>

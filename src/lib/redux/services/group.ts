@@ -1,24 +1,30 @@
-import { ProductsResponse } from '@/types/products';
+import {
+  GetGroupResponse,
+  GetGroupsResponse,
+  GetPublicOngoingGroupsResponse,
+} from '@/types/group';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 
 const groupApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getGroup: builder.query<any, string>({
+    getGroup: builder.query<GetGroupResponse, string>({
       query: (id) => {
         return endpoints.getGroup(id);
       },
     }),
-    getGroups: builder.query<any, void>({
+    getGroups: builder.query<GetGroupsResponse, void>({
       query: () => {
         return endpoints.getGroups;
       },
     }),
-    getPublicOngoingGroups: builder.query<any, void>({
-      query: () => {
-        return endpoints.getPublicOngoingGroups;
-      },
-    }),
+    getPublicOngoingGroups: builder.query<GetPublicOngoingGroupsResponse, void>(
+      {
+        query: () => {
+          return endpoints.getPublicOngoingGroups;
+        },
+      }
+    ),
   }),
 });
 
