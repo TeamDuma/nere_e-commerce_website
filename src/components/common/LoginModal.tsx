@@ -1,9 +1,15 @@
-// LoginModal.jsx
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import axios from 'axios'; // Import Axios for making HTTP requests
 import Logo from './Logo';
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useSignInMutation } from '@/lib/redux/services/user';
 
 const LoginModal = ({ onClose, onRegistrationClick }) => {
   const modalRef = useRef();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [signIn, { error }] = useSignInMutation();
+
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -17,6 +23,38 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onClose]);
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('https://nere-server.herokuapp.com/api/customers/signIn', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+  
+      if (!response.ok) {
+        // Handle login error (e.g., display error message to the user)
+        const errorData = await response.json();
+        console.error('Login failed:', errorData);
+        return;
+      }
+  
+      // Handle the response accordingly (e.g., update state, show success message)
+      const responseData = await response.json();
+      console.log('Login successful:', responseData);
+  
+      // Close the modal
+      onClose();
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
+  
 
   return (
     <div className='modal' ref={modalRef}>
@@ -36,20 +74,26 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
                 Email{' '}
               </label>
               <input
-                id='name'
+                type='email' // Set input type to 'email'
+                id='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
                 placeholder='kojo@gmail.com'
               />
 
               <label
-                htmlFor='email2'
+                htmlFor='Password'
                 className='text-sm font-bold leading-tight tracking-normal text-gray-800'
               >
                 Password{' '}
               </label>
               <div className='relative mb-5 mt-2'>
                 <input
-                  id='Password'
+                  type='password' // Set input type to 'password'
+                  id='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
                   placeholder='Password'
                 />
@@ -58,15 +102,20 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
               <div className='space-y-4'>
                 <button
                   className='w-full rounded-full bg-black p-3 font-semibold text-white'
-                  onClick={onRegistrationClick} // Make sure this is correctly wired up
-                >
-                  Go to Registration
+                  onClick={() => signIn({ email, password })}
+                  >
+                  Login
                 </button>
+                
               </div>
+              
 
               <p>
                 Don't have an account?{' '}
-                <span onClick={onRegistrationClick} className='text-blue-500 cursor-pointer'>
+                <span
+                  onClick={onRegistrationClick}
+                  className='cursor-pointer text-blue-500'
+                >
                   Register
                 </span>
               </p>
