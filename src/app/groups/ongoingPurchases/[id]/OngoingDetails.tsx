@@ -17,12 +17,17 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectShopping);
 
-  const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
+  const [getGroup, {data, isLoading, isError }] = useLazyGetGroupQuery();
   const product = data?.data?.group.product;
 
   useEffect(() => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
+
+
+  
+  console.log("product in  OngoingDetails",data)
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -34,6 +39,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   const cartProduct = cartItems.find((item) => item.id === product!.id);
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
+
 
   return (
     <div className='my-8'>
@@ -47,13 +53,13 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             />
           </div>
           <div className='mx-auto mt-5 w-full max-w-lg md:ml-8 md:mt-0 md:w-1/2'>
-            <h3 className='text-lg uppercase text-gray-700'>{product!.name}</h3>
-            <span className='mt-3 text-gray-500'>{product!.sale_price}¢</span>
+            <h3 className='text-lg uppercase text-gray-700'>{product?.name}</h3>
+            <span className='mt-3 text-gray-500'>{product?.sale_price}¢</span>
             <span
               className='ml-5 mt-3 text-gray-500'
               style={{ textDecoration: 'line-through' }}
             >
-              {product!.price}¢
+              {product?.price}¢
             </span>
 
             <hr className='my-3' />
@@ -64,7 +70,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <div className='mt-1 flex items-center'>
                 <button
                   className='text-gray-500 focus:text-gray-600 focus:outline-none'
-                  onClick={() => dispatch(decreaseQuantity(product!.id))}
+                  onClick={() => dispatch(decreaseQuantity(product?.id!))}
                 >
                   <svg
                     className='h-5 w-5'
@@ -84,7 +90,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
                 <button
                   className='text-gray-500 focus:text-gray-600 focus:outline-none'
-                  onClick={() => dispatch(increaseQuantity(product!.id))}
+                  onClick={() => dispatch(increaseQuantity(product?.id!))}
                 >
                   <svg
                     className='h-5 w-5'
@@ -100,7 +106,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 </button>
               </div>
             </div>
-            {product!.variants !== null && (
+            {product?.variants !== null && (
               <div className='mt-3'>
                 <label className='text-sm text-gray-700' htmlFor='count'>
                   Variants:

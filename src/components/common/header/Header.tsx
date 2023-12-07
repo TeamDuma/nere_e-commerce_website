@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import CartIcon from '../CartIcon';
 import Location from '../Location';
 import Logo from '../Logo';
@@ -7,9 +7,29 @@ import UserIcon from '../User';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { selectShopping } from '@/lib/redux';
+import LoginModal from '../LoginModal';
+import RegistrationModal from '../RegisterModal';
 
 const Header = () => {
   const { cartItems } = useSelector(selectShopping);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [registrationModalVisible, setRegistrationModalVisible] = useState(false);
+
+  const handleLoginClick = () => {
+    setLoginModalVisible(true);
+  };
+
+  const handleRegistrationClick = () => {
+    setLoginModalVisible(false);
+    setRegistrationModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setLoginModalVisible(false);
+    setRegistrationModalVisible(false);
+  };
+
+
 
   return (
     <nav className=' relative mx-auto flex h-20 w-full items-center justify-between bg-white px-16  '>
@@ -85,7 +105,8 @@ const Header = () => {
               </div>
             </a>
             <div className='relative block'>
-              <div className='hidden items-center md:flex'>
+              <div className='hidden items-center md:flex'  
+onClick={handleLoginClick}                      >
                 <a
                   className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
                   href='#'
@@ -110,6 +131,12 @@ const Header = () => {
             </div>
           </Link>
         </div>
+        {loginModalVisible && (
+        <LoginModal onClose={closeModal} onRegistrationClick={handleRegistrationClick} />
+      )}
+
+      {registrationModalVisible && <RegistrationModal onClose={closeModal} />}
+    
       </div>
     </nav>
   );
