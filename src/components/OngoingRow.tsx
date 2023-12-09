@@ -1,4 +1,6 @@
 // OngoingRow.tsx
+import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
+import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import React from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 
@@ -7,6 +9,14 @@ interface OngoingRowProps {
 }
 
 const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
+  const { data: ongoingGroupsData, isLoading: ongoingGroupsLoading, error: ongoingGroupsError } = useGetPublicOngoingGroupsQuery();
+  const { data: productsData, isLoading: productsLoading } = useGetActiveProductsQuery();
+  const products = productsData?.data?.products ?? [];
+  const groups = ongoingGroupsData?.data?.groups ?? [];
+
+  console.log("Home ongoingGroupsData",groups)
+
+ console.log("Home",products)
   return (
     <div
       style={{
@@ -41,11 +51,11 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
             </div>
             <div className='ml-2'>
               <p>Groups</p>
-              <p>5</p>
+              <p>{groups.length}</p>
             </div>
             <div className='ml-2'>
               <p>Products</p>
-              <p>12+</p>
+              <p>{products?.length}+</p>
             </div>
           </div>
         }

@@ -1,15 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios for making HTTP requests
 import Logo from './Logo';
-import { useSession, signIn, signOut } from "next-auth/react";
-import { useSignInMutation } from '@/lib/redux/services/user';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const LoginModal = ({ onClose, onRegistrationClick }) => {
   const modalRef = useRef();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [signIn, { error }] = useSignInMutation();
-
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -26,35 +23,37 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://nere-server.herokuapp.com/api/customers/signIn', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-  
+      const response = await fetch(
+        'https://nere-server.herokuapp.com/api/customers/signIn',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+
       if (!response.ok) {
         // Handle login error (e.g., display error message to the user)
         const errorData = await response.json();
         console.error('Login failed:', errorData);
         return;
       }
-  
+
       // Handle the response accordingly (e.g., update state, show success message)
       const responseData = await response.json();
       console.log('Login successful:', responseData);
-  
+
       // Close the modal
       onClose();
     } catch (error) {
       console.error('Login error:', error);
     }
   };
-  
 
   return (
     <div className='modal' ref={modalRef}>
@@ -64,7 +63,9 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
             <div className='m-8 mx-auto my-20 max-w-[400px]'>
               <div className='mb-8'>
                 <Logo />
-                <p className='text-gray-600'>Login with your email & Password</p>
+                <p className='text-gray-600'>
+                  Login with your email & Password
+                </p>
               </div>
 
               <label
@@ -102,13 +103,11 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
               <div className='space-y-4'>
                 <button
                   className='w-full rounded-full bg-black p-3 font-semibold text-white'
-                  onClick={() => signIn({ email, password })}
-                  >
+                  onClick={() => handleLogin()}
+                >
                   Login
                 </button>
-                
               </div>
-              
 
               <p>
                 Don't have an account?{' '}

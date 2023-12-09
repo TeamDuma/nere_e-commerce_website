@@ -5,6 +5,7 @@ import {
   addToCart,
   decreaseQuantity,
   increaseQuantity,
+  saveCartToLocalStorage,
   selectShopping,
 } from '@/lib/redux';
 import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
@@ -25,6 +26,13 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   }, [ongoingUid]);
 
 
+
+  const handleAddToCart = (item) => {
+    // Dispatch the addToCart action to update the Redux state
+    dispatch(addToCart(item));
+    // Dispatch the saveCartToLocalStorage action to save the cart to local storage
+    dispatch(saveCartToLocalStorage());
+  };
   
   console.log("product in  OngoingDetails",data)
 
@@ -132,6 +140,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     // })
                     addToCart(product!)
                   )
+                  
                 }
               >
                 Order Now
