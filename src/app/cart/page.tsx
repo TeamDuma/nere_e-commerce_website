@@ -10,13 +10,38 @@ import {
 } from '@/lib/redux/slices/shopping';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation'
+
 
 const Cart = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [checkoutCart] = useCheckoutCartMutation();
   const [updateCart] = useUpdateCartMutation();
 
+
   const { cartItems } = useSelector(selectShopping);
+ const savedAddresses =[
+  {id:1,address:"where ever1"},
+ { id:2,address:"where ever2"},
+  {id:3,address:"where ever3"}
+
+ ]
+ 
+ const handleCheckout = async () => {
+  if (savedAddresses.length > 0) {
+    // Redirect to the delivery page with saved addresses
+    // You can use Next.js router for navigation
+    router.push('/delivery');
+  } else {
+    // Inform the user that there are no saved addresses
+    // and prompt them to add a new one
+    alert('No saved addresses. Please add a new address.');
+    // Optionally, you can redirect the user to the address adding page
+    // router.push('/add-address');
+  }
+};
+
 
   return (
     <div className='bg-[#000]-100 min-h-screen pt-20'>
@@ -122,9 +147,13 @@ const Cart = () => {
           </button>
           {/* <!-- ... your subtotal content ... --> */}
 
+         
           <span
             className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
-            onClick={async () => await checkoutCart(cartItems)}
+            onClick={
+              // async () => await checkoutCart(cartItems)
+              handleCheckout()
+            }
           >
             {' '}
             chekOut

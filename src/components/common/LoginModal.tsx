@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios for making HTTP requests
 import Logo from './Logo';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSignInMutation } from '@/lib/redux/services/customers';
 
 const LoginModal = ({ onClose, onRegistrationClick }) => {
   const modalRef = useRef();
@@ -21,38 +22,46 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
     };
   }, [onClose]);
 
+  const [signIn, {isLoading, isError, isSuccess, error}] = useSignInMutation()
+
   const handleLogin = async () => {
-    try {
-      const response = await fetch(
-        'https://nere-server.herokuapp.com/api/customers/signIn',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+    signIn({email, password}).then((data)=>{
+      console.log('Login successful:', data);
+    }).catch((e)=>{ 
+      console.log('Login Error:', e);
 
-      if (!response.ok) {
-        // Handle login error (e.g., display error message to the user)
-        const errorData = await response.json();
-        console.error('Login failed:', errorData);
-        return;
-      }
+    })
+    // try {
+    //   const response = await fetch(
+    //     'https://nere-server.herokuapp.com/api/customers/signIn',
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({
+    //         email,
+    //         password,
+    //       }),
+    //     }
+    //   );
 
-      // Handle the response accordingly (e.g., update state, show success message)
-      const responseData = await response.json();
-      console.log('Login successful:', responseData);
+    //   if (!response.ok) {
+    //     // Handle login error (e.g., display error message to the user)
+    //     const errorData = await response.json();
+    //     console.error('Login failed:', errorData);
+    //     return;
+    //   }
 
-      // Close the modal
-      onClose();
-    } catch (error) {
-      console.error('Login error:', error);
-    }
+    //   // Handle the response accordingly (e.g., update state, show success message)
+    //   const responseData = await response.json();
+    //   console.log('Login successful:', responseData);
+
+    //   // Close the modal
+    //   onClose();
+    // } catch (error) {
+    //   console.error('Login error:', error);
+    // }
   };
 
   return (

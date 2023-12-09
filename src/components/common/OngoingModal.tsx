@@ -48,38 +48,17 @@ const SideModal = ({ closeModal }) => {
         {isError && <p style={{ color: 'red' }}>Error</p>}
         {data && (
           <div className='overflow-x-auto'>
-            <div className='flex flex-nowrap justify-start'>
-              {groups.map((item: Group) => (
-                <div key={item.id} className='mr-4 flex-shrink-0'>
-                  <GroupRowRenderItem item={item} />
-                </div>
-              ))}
-            </div>
+            <div className='flex-col '>
+            {groups.map((item: Group) => (
+              <div key={item.id} className='mr-4 flex-shrink-0 mt-2 border rounded'>
+                <GroupRowRenderItem item={item} />
+              </div>
+            ))}
+          </div>
           </div>
         )}
       </div>
-      {/* <ul style={{ listStyle: "none", padding: 0 }}>
-        <div>
-          {loading && <p>Loading...</p>}
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          {filteredData && (
-            <div className="overflow-x-auto">
-              <div className=" justify-center space-x-4">
-                {filteredData.map((item: any) => (
-                  <Link href={`/product/${item.id}`}>
-                    <div
-                      key={item.id}
-                      className="py-6 flex-shrink-0 w-full md:w-1/4"
-                    >
-                      <GroupRowRenderItem item={item} />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </ul> */}
+  
     </div>
   );
 };

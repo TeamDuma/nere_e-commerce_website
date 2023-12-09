@@ -14,6 +14,15 @@ const endpoints = {
   getGroups: '/groups',
   getGroup: (id: string) => `/groups/${id}`,
   getPublicOngoingGroups: '/groups?type=Public&status=Open',
+
+// Customers 
+signup:'customers/signUp',
+signIn:'customers/signIn'
+
+
+
 };
+
+
 
 export default endpoints;
