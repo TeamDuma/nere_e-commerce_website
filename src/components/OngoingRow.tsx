@@ -9,14 +9,19 @@ interface OngoingRowProps {
 }
 
 const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
-  const { data: ongoingGroupsData, isLoading: ongoingGroupsLoading, error: ongoingGroupsError } = useGetPublicOngoingGroupsQuery();
-  const { data: productsData, isLoading: productsLoading } = useGetActiveProductsQuery();
+  const {
+    data: ongoingGroupsData,
+    isLoading: ongoingGroupsLoading,
+    error: ongoingGroupsError,
+  } = useGetPublicOngoingGroupsQuery();
+  const { data: productsData, isLoading: productsLoading } =
+    useGetActiveProductsQuery();
   const products = productsData?.data?.products ?? [];
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
-  console.log("Home ongoingGroupsData",groups)
+  console.log('Home ongoingGroupsData', groups);
 
- console.log("Home",products)
+  console.log('Home', products);
   return (
     <div
       style={{

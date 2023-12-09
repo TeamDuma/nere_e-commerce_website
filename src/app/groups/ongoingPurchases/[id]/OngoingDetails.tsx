@@ -18,14 +18,12 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectShopping);
 
-  const [getGroup, {data, isLoading, isError }] = useLazyGetGroupQuery();
+  const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
   const product = data?.data?.group.product;
 
   useEffect(() => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
-
-
 
   const handleAddToCart = (item) => {
     // Dispatch the addToCart action to update the Redux state
@@ -33,9 +31,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     // Dispatch the saveCartToLocalStorage action to save the cart to local storage
     dispatch(saveCartToLocalStorage());
   };
-  
-  console.log("product in  OngoingDetails",data)
 
+  console.log('product in  OngoingDetails', data);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -47,7 +44,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   const cartProduct = cartItems.find((item) => item.id === product!.id);
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
-
 
   return (
     <div className='my-8'>
@@ -140,7 +136,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     // })
                     addToCart(product!)
                   )
-                  
                 }
               >
                 Order Now

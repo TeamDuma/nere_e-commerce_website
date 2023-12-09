@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Categories from '@/app/categories/page';
 import Banner from '@/components/Banner';
 import FeaturedProducts from '@/components/FeaturedProducts';
@@ -9,14 +9,13 @@ import OngoingPurchases from '@/app/groups/ongoingPurchases/page';
 import Link from 'next/link';
 import Container from '@/components/common/Container';
 import EntertainmentSection from '@/components/common/EntertainmentSection';
-import { useState } from "react";
+import { useState } from 'react';
 import SideModal from '@/components/common/OngoingModal';
 import CartModal from '@/components/common/CartModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import OngoingModal from '@/components/common/OngoingModal';
 
 export default function Home() {
-
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isOngoingModalOpen, setIsOngoingModalOpen] = useState(false);
 
@@ -36,54 +35,51 @@ export default function Home() {
   };
 
   return (
-  
-    
-    <> 
+    <>
+      <Container>
+        <OngoingRow />
+        <Banner />
+        <EntertainmentSection />
+        <Categories />
+        <Title text={'Ongoing Groups'} />
+        <OngoingPurchases />
+        <TwoBannerLayout />
+        <FeaturedProducts />
 
-    <Container>
-      <OngoingRow />
-      <Banner />
-      <EntertainmentSection />
-      <Categories />
-      <Title text={'Ongoing Groups'} />
-      <OngoingPurchases />
-      <TwoBannerLayout />
-      <FeaturedProducts />
-     
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '10vh',
+          }}
+        >
+          <Link href='/products'>
+            <div
+              className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
+              style={{
+                background: '#298592',
+                width: '150px',
+                marginTop: '9px',
+              }}
+            >
+              View All Items
+            </div>
+          </Link>
+        </div>
+      </Container>
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '10vh',
-        }}
-      >
-        <Link href='/products'>
-          <div
-            className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
-            style={{
-              background: '#298592',
-              width: '150px',
-              marginTop: '9px',
-            }}
-          >
-            View All Items
-          </div>
-        </Link>
-      </div>
-    </Container>
-    <div
-        style={{
-          position: "fixed",
-          top: "80%",
-          transform: "translateY(-50%)",
+          position: 'fixed',
+          top: '80%',
+          transform: 'translateY(-50%)',
           right: 0,
           zIndex: 1000,
         }}
       >
         <div
           onClick={openCartModal}
-          className="rounded-lg shadow text-center text-white text-base font-semibold py-3"
+          className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
           style={{
             background: '#F58929',
             width: '150px',
@@ -98,22 +94,22 @@ export default function Home() {
 
       <div
         style={{
-          position: "fixed",
-          top: "80%",
-          transform: "translateY(-50%)",
+          position: 'fixed',
+          top: '80%',
+          transform: 'translateY(-50%)',
           left: 0,
           zIndex: 1000,
         }}
       >
         <div
           onClick={openOngoingModal}
-          className="rounded-lg shadow text-center text-white text-base font-semibold py-3"
+          className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
           style={{
-            background: "#F58929",
-            width: "150px",
-            marginTop: "9px",
-            cursor: "pointer",
-            height: "80px",
+            background: '#F58929',
+            width: '150px',
+            marginTop: '9px',
+            cursor: 'pointer',
+            height: '80px',
           }}
         >
           Open Ongoing
@@ -125,5 +121,3 @@ export default function Home() {
     </>
   );
 }
-
-
