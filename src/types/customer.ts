@@ -11,3 +11,31 @@ export interface Customer {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ILoginRequest {
+  email: string;
+  password: string;
+}
+
+
+export interface ILoginResponse {
+  status: string;
+  data: {
+    Customer: Customer[];
+  };
+}
+
+export interface IRegisterRequest {
+  email: string;
+  name: string;
+  phone: string
+ password: string;
+}
+
+
+export interface IRegisterResponse {
+  status: string;
+  data: {
+    Customer: Customer[];
+  };
+}

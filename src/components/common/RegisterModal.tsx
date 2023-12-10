@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useRegisterMutation } from '@/lib/redux/services/user';
 import LoginModal from './LoginModal';
 import Logo from './Logo';
+import { useSignUpMutation } from '@/lib/redux/services/customers';
 
 const RegistrationModal = ({ onClose }) => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -34,39 +34,17 @@ const RegistrationModal = ({ onClose }) => {
   const closeModal = () => {
     setLoginModalVisible(false);
   };
+  const [signUp, { isLoading, isError, isSuccess, error }] =
+    useSignUpMutation();
+
   const handleRegister = async () => {
-    try {
-      const response = await fetch(
-        'https://nere-server.herokuapp.com/api/customers/signUp',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-            phone,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Login failed:', errorData);
-        return;
-      }
-
-      // Handle the response accordingly (e.g., update state, show success message)
-      const responseData = await response.json();
-      console.log('Login successful:', responseData);
-
-      // Close the modal
-      onClose();
-    } catch (error) {
-      console.error('Login error:', error);
-    }
+    signUp({ email, name, phone, password })
+      .then((data) => {
+        console.log('Login successful:', data);
+      })
+      .catch((e) => {
+        console.log('Login Error:', e);
+      });
   };
 
   return (

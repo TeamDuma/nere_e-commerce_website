@@ -10,8 +10,7 @@ import {
 } from '@/lib/redux/slices/shopping';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from 'next/navigation';
 
 const Cart = () => {
   const router = useRouter();
@@ -19,29 +18,23 @@ const Cart = () => {
   const [checkoutCart] = useCheckoutCartMutation();
   const [updateCart] = useUpdateCartMutation();
 
-
   const { cartItems } = useSelector(selectShopping);
- const savedAddresses =[
-  {id:1,address:"where ever1"},
- { id:2,address:"where ever2"},
-  {id:3,address:"where ever3"}
+  const savedAddresses = [
+    { id: 1, address: 'where ever1' },
+    { id: 2, address: 'where ever2' },
+    { id: 3, address: 'where ever3' },
+  ];
 
- ]
- 
- const handleCheckout = async () => {
-  if (savedAddresses.length > 0) {
-    // Redirect to the delivery page with saved addresses
-    // You can use Next.js router for navigation
-    router.push('/delivery');
-  } else {
-    // Inform the user that there are no saved addresses
-    // and prompt them to add a new one
-    alert('No saved addresses. Please add a new address.');
-    // Optionally, you can redirect the user to the address adding page
-    // router.push('/add-address');
-  }
-};
+  const handleCheckout = async () => {
+    if (savedAddresses.length > 0) {
 
+      router.push('/delivery');
+    } else {
+  
+      alert('No saved addresses. Please add a new address.');
+
+    }
+  };
 
   return (
     <div className='bg-[#000]-100 min-h-screen pt-20'>
@@ -104,26 +97,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            // <div key={item.id} className="mb-6 rounded-lg bg-white p-6 shadow-md md:flex md:items-center">
-            //   <img src={item.plain_image} alt="item-image" className="w-full rounded-lg md:w-40 md:mr-4" />
-            //   <div className="flex-1">
-            //     <h2 className="text-lg font-bold text-gray-900">{item.name}</h2>
-            //     <p className="mt-1 text-xs text-gray-700">{item.size}</p>
-            //     <div className="mt-4 flex justify-between items-center md:block md:space-x-6">
-            //       <div className="flex items-center border-gray-100">
-            //         <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
-            //         <input className="h-8 w-8 border bg-white text-center text-xs outline-none" type="number" value={item.min_quantity} min="1" />
-            //         <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
-            //       </div>
-            //       <div className="flex items-center space-x-4">
-            //         <p className="text-sm">{item.price}</p>
-            //         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
-            //           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            //         </svg>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </div>
+  
           ))}
         </div>
 
@@ -147,7 +121,6 @@ const Cart = () => {
           </button>
           {/* <!-- ... your subtotal content ... --> */}
 
-         
           <span
             className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
             onClick={

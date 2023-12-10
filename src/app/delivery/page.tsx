@@ -1,15 +1,13 @@
-"use client"
+'use client';
 import { useState, useEffect } from 'react';
 import PickupLocation from './components/PickupLocation';
 import CustomAddress from './components/CustomAddress';
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from 'next/navigation';
 
 const DeliveryPage = () => {
   const [isPickupModalOpen, setPickupModalOpen] = useState(false);
   const [isCustomAddressModalOpen, setCustomAddressModalOpen] = useState(false);
   const router = useRouter();
-
 
   const openPickupModal = () => {
     setPickupModalOpen(true);
@@ -38,7 +36,6 @@ const DeliveryPage = () => {
       }
     };
 
-    // Add event listener for Escape key
     const handleEscapeKey = (event) => {
       if (event.key === 'Escape') {
         closePickupModal();
@@ -67,14 +64,10 @@ const DeliveryPage = () => {
     <>
       <div className='flex h-full w-screen flex-col px-14 py-7 md:flex-row'>
         <div className='flex h-fit w-full flex-col gap-4 p-4 '>
-        
-          <div 
-          className='flex flex-col rounded-sm border p-4 text-lg font-semibold shadow-md mt-5'
-          >
+          <div className='mt-5 flex flex-col rounded-sm border p-4 text-lg font-semibold shadow-md'>
             <div className='flex flex-col justify-between gap-3 md:flex-row'>
               <div className='mb-4'>
                 <h3 className='mb-2 text-lg font-bold'>DELIVERY DETAILS</h3>
-            
 
                 <div className='flex items-center'>
                   <input
@@ -84,17 +77,13 @@ const DeliveryPage = () => {
                     className='mr-2'
                     onChange={handlePickupLocationChange}
                   />
-                  <label htmlFor='pickupLocation'>
-                  Pick-up location
-
-                  </label>
+                  <label htmlFor='pickupLocation'>Pick-up location</label>
                 </div>
-              
+
                 <div className='pl-8 text-sm text-gray-500'>
                   Delivery between 05 December and 07 December
                 </div>
                 <div className='mb-4'>
-                
                   <div className='mb-2 flex items-center'>
                     <input
                       type='radio'
@@ -103,21 +92,17 @@ const DeliveryPage = () => {
                       className='mr-2'
                       onChange={handleCustomAddressChange}
                     />
-                    <label htmlFor='customAddress'>
-                      Select Custom Address
-                    </label>
-                    
+                    <label htmlFor='customAddress'>Select Custom Address</label>
                   </div>
                   <div className='pl-8 text-sm text-gray-500'>
-                  Delivery between 05 December and 07 December
-                </div>
+                    Delivery between 05 December and 07 December
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='flex h-fit w-full flex-col gap-3 p-4 md:w-2/3 mt-5 ml-3'>
-         
+        <div className='ml-3 mt-5 flex h-fit w-full flex-col gap-3 p-4 md:w-2/3'>
           <div className='flex flex-col gap-4 rounded-sm border p-4 text-lg font-semibold shadow-md'>
             <div className='flex flex-row justify-between'>
               <p className='text-gray-600'>Your order summary</p>
@@ -143,9 +128,9 @@ const DeliveryPage = () => {
             </div>
             <div className='flex gap-2'>
               <button
-                     onClick={() => router.push('/orderPreview')}
-
-                className='text-hover w-full rounded-sm bg-[#298592] p-2 text-sm text-white shadow-md transition-colors hover:bg-[#298592]' >
+                onClick={() => router.push('/orderPreview')}
+                className='text-hover w-full rounded-sm bg-[#298592] p-2 text-sm text-white shadow-md transition-colors hover:bg-[#298592]'
+              >
                 FINISH
               </button>
             </div>
@@ -153,9 +138,12 @@ const DeliveryPage = () => {
         </div>
       </div>
 
-      {isPickupModalOpen && <PickupLocation closePickupModal={closePickupModal} />}
-      {isCustomAddressModalOpen && <CustomAddress closeCustomAddressModal={closeCustomAddressModal} 
-       />}
+      {isPickupModalOpen && (
+        <PickupLocation closePickupModal={closePickupModal} />
+      )}
+      {isCustomAddressModalOpen && (
+        <CustomAddress closeCustomAddressModal={closeCustomAddressModal} />
+      )}
     </>
   );
 };

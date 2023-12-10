@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import axios from 'axios'; // Import Axios for making HTTP requests
 import Logo from './Logo';
-import { useSession, signIn, signOut } from 'next-auth/react';
 import { useSignInMutation } from '@/lib/redux/services/customers';
 
 const LoginModal = ({ onClose, onRegistrationClick }) => {
@@ -22,46 +20,18 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
     };
   }, [onClose]);
 
-  const [signIn, {isLoading, isError, isSuccess, error}] = useSignInMutation()
+  const [signIn, { isLoading, isError, isSuccess, error }] =
+    useSignInMutation();
 
   const handleLogin = async () => {
-    signIn({email, password}).then((data)=>{
-      console.log('Login successful:', data);
-    }).catch((e)=>{ 
-      console.log('Login Error:', e);
-
-    })
-    // try {
-    //   const response = await fetch(
-    //     'https://nere-server.herokuapp.com/api/customers/signIn',
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         email,
-    //         password,
-    //       }),
-    //     }
-    //   );
-
-    //   if (!response.ok) {
-    //     // Handle login error (e.g., display error message to the user)
-    //     const errorData = await response.json();
-    //     console.error('Login failed:', errorData);
-    //     return;
-    //   }
-
-    //   // Handle the response accordingly (e.g., update state, show success message)
-    //   const responseData = await response.json();
-    //   console.log('Login successful:', responseData);
-
-    //   // Close the modal
-    //   onClose();
-    // } catch (error) {
-    //   console.error('Login error:', error);
-    // }
+    signIn({ email, password })
+      .then((data) => {
+        console.log('Login successful:', data);
+      })
+      .catch((e) => {
+        console.log('Login Error:', e);
+      });
+  
   };
 
   return (

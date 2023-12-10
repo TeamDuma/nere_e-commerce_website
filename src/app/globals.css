@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.body{
-  background-color: #CFCFCF;
+.body {
+  background-color: #cfcfcf;
 }
 /* Footer.css */
 .footer-container {

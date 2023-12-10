@@ -49,16 +49,18 @@ const SideModal = ({ closeModal }) => {
         {data && (
           <div className='overflow-x-auto'>
             <div className='flex-col '>
-            {groups.map((item: Group) => (
-              <div key={item.id} className='mr-4 flex-shrink-0 mt-2 border rounded'>
-                <GroupRowRenderItem item={item} />
-              </div>
-            ))}
-          </div>
+              {groups.map((item: Group) => (
+                <div
+                  key={item.id}
+                  className='mr-4 mt-2 flex-shrink-0 rounded border'
+                >
+                  <GroupRowRenderItem item={item} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
-  
     </div>
   );
 };
