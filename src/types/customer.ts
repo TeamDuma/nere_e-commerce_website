@@ -17,7 +17,6 @@ export interface ILoginRequest {
   password: string;
 }
 
-
 export interface ILoginResponse {
   status: string;
   data: {
@@ -28,10 +27,9 @@ export interface ILoginResponse {
 export interface IRegisterRequest {
   email: string;
   name: string;
-  phone: string
- password: string;
+  phone: string;
+  password: string;
 }
-
 
 export interface IRegisterResponse {
   status: string;

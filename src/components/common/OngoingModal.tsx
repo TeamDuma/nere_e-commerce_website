@@ -49,7 +49,7 @@ const SideModal = ({ closeModal }) => {
         {data && (
           <div className='overflow-x-auto'>
             <div className='flex-col '>
-              {groups.map((item: Group) => (
+              {groups.map((item) => (
                 <div
                   key={item.id}
                   className='mr-4 mt-2 flex-shrink-0 rounded border'

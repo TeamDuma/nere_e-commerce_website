@@ -31,7 +31,6 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
       .catch((e) => {
         console.log('Login Error:', e);
       });
-  
   };
 
   return (

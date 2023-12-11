@@ -1,6 +1,6 @@
 'use client';
 import Categories from '@/app/categories/page';
-import Banner from '@/components/Banner';
+import Banner from '@/components/Slider';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import OngoingRow from '@/components/OngoingRow';
 import Title from '@/components/Title';
@@ -14,10 +14,14 @@ import SideModal from '@/components/common/OngoingModal';
 import CartModal from '@/components/common/CartModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import OngoingModal from '@/components/common/OngoingModal';
+import ViewMore from '@/components/common/ViewMore';
+import { useSelector } from 'react-redux';
+import { selectShopping } from '@/lib/redux/slices/shopping';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isOngoingModalOpen, setIsOngoingModalOpen] = useState(false);
+  const { cartItems } = useSelector(selectShopping);
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
@@ -46,32 +50,12 @@ export default function Home() {
         <TwoBannerLayout />
         <FeaturedProducts />
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '10vh',
-          }}
-        >
-          <Link href='/products'>
-            <div
-              className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
-              style={{
-                background: '#298592',
-                width: '150px',
-                marginTop: '9px',
-              }}
-            >
-              View All Items
-            </div>
-          </Link>
-        </div>
+        <ViewMore />
       </Container>
       <div
         style={{
           position: 'fixed',
-          top: '80%',
+          top: '75%',
           transform: 'translateY(-50%)',
           right: 0,
           zIndex: 1000,
@@ -82,8 +66,8 @@ export default function Home() {
           className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
           style={{
             background: '#F58929',
-            width: '150px',
-            height: '80px',
+            width: '110px',
+            height: '50px',
             marginTop: '9px',
             cursor: 'pointer',
           }}
@@ -95,7 +79,7 @@ export default function Home() {
       <div
         style={{
           position: 'fixed',
-          top: '80%',
+          top: '75%',
           transform: 'translateY(-50%)',
           left: 0,
           zIndex: 1000,
@@ -109,7 +93,7 @@ export default function Home() {
             width: '150px',
             marginTop: '9px',
             cursor: 'pointer',
-            height: '80px',
+            height: '50px',
           }}
         >
           Open Ongoing

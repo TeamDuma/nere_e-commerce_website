@@ -1,6 +1,7 @@
+import { Group } from '@/types/group';
 import { useRouter } from 'next/navigation';
 
-const GroupRowRenderItem = ({ item }: { item: any }) => {
+const GroupRowRenderItem = ({ item }: { item: Group }) => {
   const router = useRouter();
 
   return (
@@ -12,9 +13,9 @@ const GroupRowRenderItem = ({ item }: { item: any }) => {
       <div className='relative w-1/3 flex-shrink-0'>
         <img
           src={item.product.plain_image}
-          alt={item.name}
+          alt={item.product.name}
           className='h-32 w-full rounded-lg object-cover'
-          style={{ width: '100px' }} 
+          style={{ width: '100px' }}
         />
         <div className='absolute right-0 top-0 bg-orange-500 p-1 font-bold text-white'>
           Save %{' '}
@@ -24,7 +25,6 @@ const GroupRowRenderItem = ({ item }: { item: any }) => {
         <h2 className='text-lg font-bold text-gray-900'>{item.product.name}</h2>
 
         <h2 className='text-lg font-bold text-gray-900'>{item.product.id}</h2>
-        <p className='mt-1 text-xs text-gray-700'>{item.size}</p>
       </div>
     </div>
   );

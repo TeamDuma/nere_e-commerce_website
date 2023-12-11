@@ -26,4 +26,4 @@ const customerApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useSignInMutation,useSignUpMutation } = customerApi;
+export const { useSignInMutation, useSignUpMutation } = customerApi;

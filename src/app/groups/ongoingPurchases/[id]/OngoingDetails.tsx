@@ -5,10 +5,13 @@ import {
   addToCart,
   decreaseQuantity,
   increaseQuantity,
-  saveCartToLocalStorage,
   selectShopping,
 } from '@/lib/redux';
 import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
+import FeaturedProducts from '@/components/FeaturedProducts';
+import Banner from '@/components/Banner';
+import ViewMore from '@/components/common/ViewMore';
+import { Product } from '@/types/product';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -25,11 +28,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
 
-  const handleAddToCart = (item) => {
-    // Dispatch the addToCart action to update the Redux state
+  const handleAddToCart = (item: Product) => {
     dispatch(addToCart(item));
-    // Dispatch the saveCartToLocalStorage action to save the cart to local storage
-    dispatch(saveCartToLocalStorage());
   };
 
   console.log('product in  OngoingDetails', data);
@@ -42,12 +42,150 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     return <div>Error</div>;
   }
 
-  const cartProduct = cartItems.find((item) => item.id === product!.id);
+  const cartProduct = cartItems.find((item) => item.id);
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
 
   return (
     <div className='my-8'>
       <div className='container mx-auto px-6'>
+        <div className='mb-8 md:flex md:items-center'>
+          <div className='h-64 w-full bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
+            <img
+              className='mx-auto h-full max-w-lg rounded-md object-cover '
+              src={product?.plain_image}
+              alt='plain_image'
+            />
+          </div>
+          <div className='mx-auto mt-5 w-full max-w-lg md:ml-8 md:mt-0 md:w-1/2'>
+            <div className='flex items-center'>
+              {' '}
+              {/* Use flex to place items in the same row */}
+              <h3 className='text-lg uppercase text-gray-700'>
+                {product?.name}
+              </h3>
+              {/* {variantsArray.length > 0 && (
+    <div className='ml-12'> 
+  
+      <div className='mt-1'>
+        <select
+          id='variant'
+          value={selectedVariant}
+          onChange={(e) => handleVariantChange(e.target.value)}
+          className='w-full p-2 border border-gray-300 rounded'
+        >
+          <option value='' disabled>
+            Select a variant
+          </option>
+          {variantsArray.map((variant, index) => (
+            <option key={index} value={variant}>
+              {variant}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  )} */}
+            </div>
+
+            {/* <span className='mt-1 text-gray-500'>Rating: {product?.rating}</span> */}
+
+            <div className='mt-3 flex items-center'>
+              <span className='text-4xl font-extralight text-[#1A464C]'>
+                {product?.sale_price}¢
+              </span>
+              <span
+                className='ml-3 text-red-500'
+                style={{ textDecoration: 'line-through' }}
+              >
+                {product?.price}¢
+              </span>
+              {product?.price && product.sale_price && (
+                <span className='ml-3  rounded bg-[#8CCED7] text-white '>
+                  Save
+                  {/* {calculateSavingsPercentage(product.price, product.sale_price)}%  */}
+                </span>
+              )}
+            </div>
+
+            <table
+              className='... border-collapse border border-slate-400'
+              style={{ width: '100%' }}
+            >
+              <thead>
+                <tr>
+                  <th
+                    className='... border border-slate-300'
+                    style={{ width: '50%' }}
+                  >
+                    participants
+                  </th>
+                  <th
+                    className='... border border-slate-300'
+                    style={{ width: '50%' }}
+                  >
+                    Ends in
+                  </th>
+                </tr>
+              </thead>
+            </table>
+
+            {/* {product.min_quantity && (
+    <div className='mt-3 text-gray-700'>
+          {remainingToMeetMOQ} purchase required on this group 
+    </div>
+  )}
+
+
+  {product.min_quantity && (
+        <div className="my-4 w-256 h-1 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-[#F58929]"
+            style={{ width: `${progressPercentage}%` }}
+          />
+        </div>
+      )} */}
+
+            <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
+            <div className='flex items-center'>
+              {/* <div className="flex items-center border border-2">
+    <span
+      className="cursor-pointer rounded-l py-1 px-3.5 duration-100 hover:bg-[#F58929] hover:text-blue-50"
+      // onClick={decreaseQuantity}
+    >
+      {" "}
+      -{" "}
+    </span>
+    <input
+      className="h-8 w-8 bg-white text-center text-xs outline-none"
+      type="number"
+      value={quantity}
+      min={1}
+    />
+    <span
+      className="cursor-pointer rounded-r py-1 px-3 duration-100 hover:bg-[#F58929] hover:text-blue-50"
+      onClick={increaseQuantity}
+    >
+      {" "}
+      +{" "}
+    </span>
+  </div> */}
+
+              {/* "Add to Cart" button */}
+              <button
+                className='ml-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                onClick={() => dispatch(addToCart(product!))}
+              >
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <Banner />
+
+        <FeaturedProducts />
+        <ViewMore />
+      </div>
+      {/* <div className='container mx-auto px-6'>
         <div className='md:flex md:items-center'>
           <div className='h-64 w-full md:w-1/2 lg:h-96'>
             <img
@@ -156,7 +294,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
