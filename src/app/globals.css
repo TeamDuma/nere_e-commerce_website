@@ -142,32 +142,39 @@
   object-fit: contain; /* Adjust the image's aspect ratio to fit the container */
 }
 
-.infoRowList {
-  /* Add any additional styles for the main container if needed */
+.purchase-guide {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
 }
 
-.groupName {
-  /* Style for group name */
+.guide-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.infoRow {
-  /* Style for the info row container */
+.step-icon {
+  background-color: #f58929;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.infoLeft {
-  /* Style for the left side of the info row */
+.step-text {
+  text-align: center;
 }
 
-.groupPrice {
-  /* Style for the group price */
-}
-
-.oldPrice {
-  /* Style for the old price */
-}
-
-.memberCount {
-  /* Add any additional styles for the member count text */
+.guide-line {
+  border: 1px solid #f58929;
+  flex-grow: 1;
+  margin: 0 10px;
 }
 
 .progressBarContainer {

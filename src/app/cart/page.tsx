@@ -26,11 +26,12 @@ const Cart = () => {
   ];
 
   const handleCheckout = async () => {
-    if (savedAddresses.length > 0) {
-      router.push('/delivery');
-    } else {
-      alert('No saved addresses. Please add a new address.');
-    }
+    console.log('cartItem', cartItems);
+    // if (savedAddresses.length > 0) {
+    //   router.push('/delivery');
+    // } else {
+    //   alert('No saved addresses. Please add a new address.');
+    // }
   };
 
   return (

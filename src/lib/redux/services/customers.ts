@@ -1,12 +1,12 @@
-import { IRegisterRequest, IRegisterResponse } from '@/types/customer';
+import {
+  ILoginRequest,
+  ILoginResponse,
+  IRegisterRequest,
+  IRegisterResponse,
+} from '@/types/customer';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 
-interface ILoginRequest {
-  email: string;
-  password: string;
-}
-interface ILoginResponse {}
 const customerApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signIn: builder.mutation<ILoginResponse, ILoginRequest>({
