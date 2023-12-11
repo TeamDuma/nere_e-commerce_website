@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import { transformToCartCheckoutItem } from '@/types/cart';
 
 const Cart = () => {
   const router = useRouter();
@@ -81,13 +82,13 @@ const Cart = () => {
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'
                       viewBox='0 0 24 24'
-                      stroke-width='1.5'
+                      strokeWidth='1.5'
                       stroke='currentColor'
                       className='h-5 w-5 cursor-pointer duration-150 hover:text-red-500'
                     >
                       <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
                         d='M6 18L18 6M6 6l12 12'
                       />
                     </svg>
@@ -102,7 +103,7 @@ const Cart = () => {
         <div className='mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3'>
           <button
             className='text-gray-500 focus:text-gray-600 focus:outline-none'
-            onClick={async () => await updateCart(cartItems)}
+            // onClick={async () => await updateCart(cartItems)}
           >
             <svg
               className='h-5 w-5'
@@ -120,10 +121,25 @@ const Cart = () => {
 
           <span
             className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
-            onClick={
-              // async () => await checkoutCart(cartItems)
-              handleCheckout()
-            }
+            onClick={() => {
+              const locationID = 0;
+              const customerID = 1;
+              const totalAmount = 10;
+              const cartObject = cartItems.map((item) =>
+                transformToCartCheckoutItem(item, locationID)
+              );
+              checkoutCart({
+                customerID,
+                totalAmount,
+                cartObject,
+              })
+                .then((data) => {
+                  console.log('Successful!!!!', data);
+                })
+                .catch((e) => {
+                  console.log('Error', e);
+                });
+            }}
           >
             {' '}
             chekOut

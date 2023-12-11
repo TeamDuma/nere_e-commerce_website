@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { GroupType } from './group';
 
 export interface Location {
   id: number;

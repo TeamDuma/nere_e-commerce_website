@@ -12,6 +12,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import Banner from '@/components/Banner';
 import ViewMore from '@/components/common/ViewMore';
 import { Product } from '@/types/product';
+import { GroupType } from '@/types/group';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -22,15 +23,12 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const { cartItems } = useSelector(selectShopping);
 
   const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
-  const product = data?.data?.group.product;
+  const group = data?.data?.group;
+  const product = group?.product;
 
   useEffect(() => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
-
-  const handleAddToCart = (item: Product) => {
-    dispatch(addToCart(item));
-  };
 
   console.log('product in  OngoingDetails', data);
 
@@ -173,7 +171,21 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               {/* "Add to Cart" button */}
               <button
                 className='ml-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={() => dispatch(addToCart(product!))}
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      item: {
+                        ...product!,
+                        cartQuantity: 0,
+                        productID: product?.id!,
+                        isGroupJoiner: true,
+                        groupID: group?.id!,
+                        locationID: undefined,
+                        type: GroupType.PUBLIC,
+                      },
+                    })
+                  )
+                }
               >
                 Order Now
               </button>

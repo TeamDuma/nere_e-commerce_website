@@ -9,6 +9,7 @@ import {
   selectShopping,
 } from '@/lib/redux';
 import { useLazyGetProductQuery } from '@/lib/redux/services/product';
+import { GroupType } from '@/types/group';
 import Link from 'next/link';
 import { SetStateAction, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,8 +23,8 @@ type Props = {
 export default function ProductDetailPage({ params }: Props) {
   const dispatch = useDispatch();
   const { id: productId } = params;
-  const [quantity, setQuantity] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState('');
+  const [productQuantity, setProductQuantity] = useState(0);
 
   const { cartItems } = useSelector(selectShopping);
   const [getProduct, { data, isLoading, isError }] = useLazyGetProductQuery();
@@ -43,26 +44,26 @@ export default function ProductDetailPage({ params }: Props) {
   };
 
   const remainingToMeetMOQ = product.min_quantity
-    ? Math.max(product.min_quantity - quantity, 0)
+    ? Math.max(product.min_quantity - productQuantity, 0)
     : 0;
   const progressPercentage = product.min_quantity
     ? ((product.min_quantity - remainingToMeetMOQ) / product.min_quantity) * 100
     : 0;
 
   const increaseQuantity = () => {
-    if (product.hasMinQuantity && quantity + 1 > product.min_quantity!) {
+    if (product.hasMinQuantity && productQuantity + 1 > product.min_quantity!) {
       alert(`Cannot exceed the minimum quantity of ${product.min_quantity}.`);
       return;
     }
-    setQuantity(quantity + 1);
+    setProductQuantity((prev) => prev + 1);
   };
 
   const decreaseQuantity = () => {
-    if (quantity - 1 < 0) {
+    if (productQuantity - 1 < 0) {
       alert('Quantity cannot go below 0.');
       return;
     }
-    setQuantity(quantity - 1);
+    setProductQuantity((prev) => prev - 1);
   };
 
   const variantsArray = product?.variants
@@ -191,7 +192,7 @@ export default function ProductDetailPage({ params }: Props) {
                 <input
                   className='h-8 w-8 bg-white text-center text-xs outline-none'
                   type='number'
-                  value={quantity}
+                  value={productQuantity}
                   min={1}
                 />
                 <span
@@ -206,7 +207,20 @@ export default function ProductDetailPage({ params }: Props) {
               {/* "Add to Cart" button */}
               <button
                 className='ml-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={() => dispatch(addToCart(product))}
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      quantity: productQuantity,
+                      item: {
+                        ...product!,
+                        cartQuantity: 0,
+                        productID: product?.id!,
+                        isGroupJoiner: false,
+                        type: GroupType.PUBLIC,
+                      },
+                    })
+                  )
+                }
               >
                 Order Now
               </button>

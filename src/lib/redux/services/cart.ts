@@ -1,16 +1,18 @@
+import { CartCheckoutBody, CartUpdateBody } from '@/types/cart';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 
+// TODO: Type responses
 const cartApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    updateCart: builder.mutation({
+    updateCart: builder.mutation<any, CartUpdateBody>({
       query: (data) => ({
-        url: endpoints.checkoutCart,
+        url: endpoints.updateCart,
         method: 'PATCH',
         body: data,
       }),
     }),
-    checkoutCart: builder.mutation({
+    checkoutCart: builder.mutation<any, CartCheckoutBody>({
       query: (data) => ({
         url: endpoints.checkoutCart,
         method: 'POST',

@@ -1,23 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { ReduxState } from '@/lib/redux';
-import { Product } from '@/types/product';
-
-// export interface CartItem {
-//   id: string;
-//   type: string;
-//   productID: number;
-//   cartQuantity: number;
-//   isGroupJoiner: boolean;
-//   locationID?: number;
-//   groupID?: number;
-//   quantity: number;
-//   hasMinQuantity: number;
-//   min_quantity: number;
-//   minQuantity: number;
-// }
+import { CartItem } from '@/types/cart';
 
 export interface IShoppingState {
-  cartItems: Product[];
+  cartItems: CartItem[];
   userInfo: any;
   orderData: any[];
 }
@@ -32,14 +18,16 @@ export const shoppingSlice = createSlice({
   name: 'shopping',
   initialState,
   reducers: {
-    addToCart: (state, { payload }: PayloadAction<Product>) => {
-      const existingProduct = state.cartItems.find(
-        (item) => item.id === payload.id
-      );
-      if (existingProduct) {
-        existingProduct.quantity += payload.quantity;
+    addToCart: (
+      state,
+      { payload }: PayloadAction<{ item: CartItem; quantity?: number }>
+    ) => {
+      const { item, quantity = 1 } = payload;
+      const cartItem = state.cartItems.find((item) => item.id === item.id);
+      if (cartItem) {
+        cartItem.cartQuantity += quantity;
       } else {
-        state.cartItems.push(payload);
+        state.cartItems.push({ ...item, cartQuantity: 1 });
       }
     },
     increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {

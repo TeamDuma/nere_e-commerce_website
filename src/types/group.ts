@@ -1,6 +1,16 @@
 import { Customer } from './customer';
 import { Product } from './product';
 
+export enum GroupType {
+  PRIVATE = 'Private',
+  PUBLIC = 'Public',
+}
+
+export enum GroupStatus {
+  OPEN = 'Open',
+  CLOSED = 'Closed',
+}
+
 export interface Group {
   id: number;
   uid: string;
