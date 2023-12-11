@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { transformToCartCheckoutItem } from '@/types/cart';
+import { CartItem, transformToCartCheckoutItem } from '@/types/cart';
 
 const Cart = () => {
   const router = useRouter();
@@ -40,7 +40,7 @@ const Cart = () => {
       <h1 className='mb-10 text-center text-2xl font-bold'>Cart Items</h1>
       <div className='mx-auto flex max-w-5xl flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 xl:px-0'>
         <div className='rounded-lg md:w-2/3'>
-          {cartItems.map((item) => (
+          {cartItems.map((item: CartItem) => (
             <div className='mb-6 rounded-lg bg-white p-6 shadow-md md:flex md:items-center'>
               <div className='w-1/3 flex-shrink-0'>
                 <img
@@ -125,7 +125,7 @@ const Cart = () => {
               const locationID = 0;
               const customerID = 1;
               const totalAmount = 10;
-              const cartObject = cartItems.map((item) => {
+              const cartObject = cartItems.map((item: CartItem) => {
                 const isStartingGroup = !item.isGroupJoiner;
                 return transformToCartCheckoutItem(
                   item,
