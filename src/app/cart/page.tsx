@@ -125,9 +125,13 @@ const Cart = () => {
               const locationID = 0;
               const customerID = 1;
               const totalAmount = 10;
-              const cartObject = cartItems.map((item) =>
-                transformToCartCheckoutItem(item, locationID)
-              );
+              const cartObject = cartItems.map((item) => {
+                const isStartingGroup = !item.isGroupJoiner;
+                return transformToCartCheckoutItem(
+                  item,
+                  isStartingGroup ? locationID : undefined
+                );
+              });
               checkoutCart({
                 customerID,
                 totalAmount,
