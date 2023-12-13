@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LoginModal from './LoginModal';
-import Logo from './Logo';
 import { useSignUpMutation } from '@/lib/redux/services/customers';
+import Logo from './Logo';
 
 const RegistrationModal = ({ onClose }) => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -161,7 +161,11 @@ const RegistrationModal = ({ onClose }) => {
           </div>
 
           {loginModalVisible && (
-            <LoginModal onClose={closeModal} onRegistrationClick={closeModal} />
+            <LoginModal
+              onClose={closeModal}
+              onRegistrationClick={closeModal}
+              session={null}
+            />
           )}
         </div>
       </div>

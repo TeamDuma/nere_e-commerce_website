@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartIcon from '../CartIcon';
 import Location from '../Location';
 import Logo from '../Logo';
@@ -7,12 +7,39 @@ import UserIcon from '../User';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { selectShopping, useDispatch } from '@/lib/redux';
+import PickupLocation from '@/app/delivery/components/PickupLocation';
+import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
-import PickupLocation from '@/app/delivery/components/PickupLocation';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { data, isLoading } = useGetlocationsQuery();
+  const { selectedLocationId, locations } = useSelector(selectShopping);
+  console.log('useGetLocationsQuery', selectedLocationId);
+
+  const [selectedAddress, setSelectedAddress] = useState<Location | null>(
+    () => {
+      return data
+        ? data.find((location) => location.id === selectedLocationId) ||
+            selectedLocationId
+        : null;
+    }
+  );
+  // const selectedLocation = locations.find((location: Location) => location.id === selectedLocationId);
+  const selectedLocation = selectedAddress;
+
+  console.log('selectedAddress', selectedAddress);
+
+  useEffect(() => {
+    if (data && selectedLocationId) {
+      const newlySelectedAddress = data.find(
+        (location) => location.id === selectedLocationId
+      );
+      setSelectedAddress(newlySelectedAddress || null);
+    }
+  }, [selectedLocationId, data]);
+
   const { cartItems } = useSelector(selectShopping);
   const [locationModalVisible, setLocationModalVisible] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -110,7 +137,9 @@ const Header = () => {
                       fontSize: '0.875rem',
                     }}
                   >
-                    Location
+                    {selectedLocation
+                      ? selectedLocation.name
+                      : 'Select a location'}
                   </p>
                 </div>
               </div>
@@ -152,6 +181,7 @@ const Header = () => {
           <LoginModal
             onClose={closeModal}
             onRegistrationClick={handleRegistrationClick}
+            session={null}
           />
         )}
 

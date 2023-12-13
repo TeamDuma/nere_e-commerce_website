@@ -1,12 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { ReduxState } from '@/lib/redux';
 import { CartItem } from '@/types/cart';
+import { Location } from '@/types/product';
 
 export interface IShoppingState {
   cartItems: CartItem[];
   userInfo: any;
   orderData: any[];
   selectedLocationId?: number;
+  locations: Location[];
 }
 
 const initialState: IShoppingState = {
@@ -14,6 +16,7 @@ const initialState: IShoppingState = {
   userInfo: null,
   orderData: [],
   selectedLocationId: undefined,
+  locations: [],
 };
 
 export const shoppingSlice = createSlice({
@@ -71,8 +74,18 @@ export const shoppingSlice = createSlice({
     resetOrder: (state) => {
       state.orderData = [];
     },
+    addUser: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    deleteUser: (state) => {
+      state.userInfo = null;
+    },
     setSelectedLocationId: (state, action: PayloadAction<number | null>) => {
       state.selectedLocationId = action.payload;
+    },
+
+    setLocations: (state, action: PayloadAction<Location[]>) => {
+      state.locations = action.payload;
     },
   },
 });
@@ -85,7 +98,10 @@ export const {
   resetCart,
   saveOrder,
   resetOrder,
+  addUser,
+  deleteUser,
   setSelectedLocationId,
+  setLocations,
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;
 

@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import PickupLocation from './components/PickupLocation';
-import CustomAddress from './components/CustomAddress';
 import { useRouter } from 'next/navigation';
 
 const DeliveryPage = () => {
@@ -140,9 +139,6 @@ const DeliveryPage = () => {
 
       {isPickupModalOpen && (
         <PickupLocation closePickupModal={closePickupModal} />
-      )}
-      {isCustomAddressModalOpen && (
-        <CustomAddress closeCustomAddressModal={closeCustomAddressModal} />
       )}
     </>
   );

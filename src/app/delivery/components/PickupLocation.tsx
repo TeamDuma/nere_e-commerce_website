@@ -1,11 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import {
   selectShopping,
   setSelectedLocationId,
 } from '@/lib/redux/slices/shopping';
-
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 interface Location {
   id: number;
@@ -25,7 +24,22 @@ const PickupLocation: React.FC<PickupLocationProps> = ({
   const { data, isLoading } = useGetlocationsQuery();
   console.log('useGetLocationsQuery', selectedLocationId);
 
-  const [selectedAddress, setSelectedAddress] = useState<Location | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<Location | null>(
+    () => {
+      return data
+        ? data.find((location) => location.id === selectedLocationId) || null
+        : null;
+    }
+  );
+
+  useEffect(() => {
+    if (data && selectedLocationId) {
+      const newlySelectedAddress = data.find(
+        (location) => location.id === selectedLocationId
+      );
+      setSelectedAddress(newlySelectedAddress || null);
+    }
+  }, [selectedLocationId, data]);
 
   const renderAddresses = () => {
     if (isLoading) {
@@ -68,9 +82,8 @@ const PickupLocation: React.FC<PickupLocationProps> = ({
       closePickupModal();
     } else {
       console.log('No address selected.');
-      {
-        closePickupModal;
-      }
+      // Optionally provide user feedback for no available locations
+      closePickupModal(); // Close the modal even if no address is selected
     }
   };
 

@@ -24,7 +24,8 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
   const [checkoutCart] = useCheckoutCartMutation();
   const [updateCart] = useUpdateCartMutation();
 
-  const { cartItems, selectedLocationId } = useSelector(selectShopping);
+  const { cartItems, selectedLocationId, userInfo } =
+    useSelector(selectShopping);
 
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
@@ -118,35 +119,53 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
           Total: GH¢ {calculateTotal().toFixed(2)}
         </div>
 
-        <span
-          className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
-          onClick={() => {
-            const locationID = selectedLocationId;
-            const customerID = 1;
-            const totalAmount = calculateTotal();
-            const cartObject = cartItems.map((item: CartItem) => {
-              const isStartingGroup = !item.isGroupJoiner;
-              return transformToCartCheckoutItem(
-                item,
-                isStartingGroup ? locationID : undefined
-              );
-            });
-            checkoutCart({
-              customerID,
-              totalAmount,
-              cartObject,
-            })
-              .then((data) => {
-                console.log('Successful!!!!', data);
-              })
-              .catch((e) => {
-                console.log('Error', e);
+        {userInfo ? (
+          <span
+            className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
+            onClick={() => {
+              const locationID = selectedLocationId;
+              const customerID = 1;
+              const totalAmount = calculateTotal();
+              const cartObject = cartItems.map((item: CartItem) => {
+                const isStartingGroup = !item.isGroupJoiner;
+                return transformToCartCheckoutItem(
+                  item,
+                  isStartingGroup ? locationID : undefined
+                );
               });
-          }}
-        >
-          {' '}
-          Check Out
-        </span>
+              checkoutCart({
+                customerID,
+                totalAmount,
+                cartObject,
+              })
+                .then((data) => {
+                  if ('data' in data && 'authorization_url' in data.data) {
+                    const paymentAuthorizationUrl = data.data.authorization_url;
+
+                    // Navigate to the payment authorization page
+                    window.location.href = paymentAuthorizationUrl;
+                  } else {
+                    console.log('Error in data structure:', data);
+                  }
+                })
+                .catch((e) => {
+                  console.log('Error', e);
+                });
+            }}
+          >
+            {' '}
+            Check Out
+          </span>
+        ) : (
+          <div>
+            <button className='mt-4 cursor-not-allowed bg-black px-6 py-3 text-slate-100 duration-200 hover:bg-orange-950'>
+              Proceed to checkout
+            </button>
+            <p className='mt-1 animate-bounce text-base font-semibold text-red-500'>
+              Please login to continue
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

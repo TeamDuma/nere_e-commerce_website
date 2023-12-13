@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'; // Importing useDispatch
-import Logo from './Logo';
 import { useSignInMutation } from '@/lib/redux/services/customers';
 import { addUser, deleteUser } from '@/lib/redux';
+import Logo from '@/components/common/Logo';
 
 interface ISession {
   user?: {
@@ -20,7 +20,7 @@ const LoginModal: React.FC<{
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // Use useDispatch to get the dispatch function
 
   const handleClickOutside = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -132,6 +132,3 @@ const LoginModal: React.FC<{
 };
 
 export default LoginModal;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
