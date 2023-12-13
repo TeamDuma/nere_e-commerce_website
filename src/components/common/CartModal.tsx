@@ -145,7 +145,7 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
           }}
         >
           {' '}
-          chekOut
+          Check Out
         </span>
       </div>
     </div>

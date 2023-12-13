@@ -121,7 +121,7 @@ const Cart = () => {
             }}
           >
             {' '}
-            chekOut
+            Check Out
           </span>
         </div>
       </div>
