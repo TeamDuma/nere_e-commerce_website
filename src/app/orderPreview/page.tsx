@@ -8,7 +8,6 @@ import GroupRowRenderItem from '../groups/components/GroupRowRenderItem';
 const OrderPreview: React.FC = () => {
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
-  // const OrderPreview = () => {
 
   return (
     <>

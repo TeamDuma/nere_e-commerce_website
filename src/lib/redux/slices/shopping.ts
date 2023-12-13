@@ -6,12 +6,14 @@ export interface IShoppingState {
   cartItems: CartItem[];
   userInfo: any;
   orderData: any[];
+  selectedLocationId?: number;
 }
 
 const initialState: IShoppingState = {
   cartItems: [],
   userInfo: null,
   orderData: [],
+  selectedLocationId: undefined,
 };
 
 export const shoppingSlice = createSlice({
@@ -23,24 +25,27 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ item: CartItem; quantity?: number }>
     ) => {
       const { item, quantity = 1 } = payload;
-      const cartItem = state.cartItems.find((item) => item.id === item.id);
+      const cartItem = state.cartItems.find(
+        (existingItem) => existingItem.id === item.id
+      );
+
       if (cartItem) {
         cartItem.cartQuantity += quantity;
       } else {
-        state.cartItems.push({ ...item, cartQuantity: 1 });
+        state.cartItems.push({ ...item, cartQuantity: quantity });
       }
     },
     increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
       const existingProduct = state.cartItems.find((item) => item.id === id);
       if (existingProduct) {
         if (existingProduct.hasMinQuantity) {
-          existingProduct.min_quantity = Math.min(
-            existingProduct.min_quantity!! + 1,
-            existingProduct.min_quantity!!
+          existingProduct.cartQuantity = Math.min(
+            existingProduct.cartQuantity!! + 1,
+            existingProduct.cartQuantity!!
           );
         } else {
-          existingProduct.min_quantity = Math.max(
-            existingProduct.min_quantity!! + 1
+          existingProduct.cartQuantity = Math.max(
+            existingProduct.cartQuantity!! + 1
           );
         }
       }
@@ -48,8 +53,8 @@ export const shoppingSlice = createSlice({
     decreaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
       const existingProduct = state.cartItems.find((item) => item.id === id);
       if (existingProduct) {
-        existingProduct.min_quantity = Math.max(
-          existingProduct.min_quantity!! - 1,
+        existingProduct.cartQuantity = Math.max(
+          existingProduct.cartQuantity!! - 1,
           1
         );
       }
@@ -66,6 +71,9 @@ export const shoppingSlice = createSlice({
     resetOrder: (state) => {
       state.orderData = [];
     },
+    setSelectedLocationId: (state, action: PayloadAction<number | null>) => {
+      state.selectedLocationId = action.payload;
+    },
   },
 });
 
@@ -77,6 +85,7 @@ export const {
   resetCart,
   saveOrder,
   resetOrder,
+  setSelectedLocationId,
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;
 

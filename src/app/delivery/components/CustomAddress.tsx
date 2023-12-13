@@ -10,11 +10,10 @@ const CustomAddress = ({ closeCustomAddressModal }) => {
   const [selectedRegion, setSelectedRegion] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState<string>('');
 
-  const regions = ['Region 1', 'Region 2']; // Add more regions as needed
-  const cities = ['City 1', 'City 2']; // Add more cities as needed
+  const regions = ['Region 1', 'Region 2'];
+  const cities = ['City 1', 'City 2'];
 
   const handleSave = () => {
-    // Handle saving the address details
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
     console.log('Phone Number:', phoneNumber);
@@ -22,10 +21,6 @@ const CustomAddress = ({ closeCustomAddressModal }) => {
     console.log('Additional Information:', additionalInfo);
     console.log('Is Default:', isDefault);
 
-    // Add logic to save the address details
-    // ...
-
-    // Close the modal
     closeCustomAddressModal();
   };
 
@@ -151,7 +146,6 @@ const CustomAddress = ({ closeCustomAddressModal }) => {
             className=' rounded-md bg-[#298592] px-4 py-2 text-white'
             style={{ width: '100%' }}
             onClick={() => {
-              // Handle Save
               console.log('Selected Region:', selectedRegion);
               console.log('Selected City:', selectedCity);
               console.log('Selected Address:', address);

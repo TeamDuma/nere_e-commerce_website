@@ -9,15 +9,22 @@ import { useSelector } from 'react-redux';
 import { selectShopping, useDispatch } from '@/lib/redux';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
+import PickupLocation from '@/app/delivery/components/PickupLocation';
 
 const Header = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectShopping);
+  const [locationModalVisible, setLocationModalVisible] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
 
-  const handleLoginClick = () => {
+  const handLocation = () => {
+    setLocationModalVisible(true);
+  };
+
+  const openLoginModal = () => {
     setLoginModalVisible(true);
   };
 
@@ -29,6 +36,7 @@ const Header = () => {
   const closeModal = () => {
     setLoginModalVisible(false);
     setRegistrationModalVisible(false);
+    setLocationModalVisible(false);
   };
 
   return (
@@ -86,7 +94,10 @@ const Header = () => {
               className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
               href='#'
             >
-              <div className='hidden items-center md:flex'>
+              <div
+                className='hidden items-center md:flex'
+                onClick={handLocation}
+              >
                 <Location />
                 <div className='ml-2'>
                   <p style={{ color: '#298592', fontSize: '0.875rem' }}>
@@ -107,7 +118,7 @@ const Header = () => {
             <div className='relative block'>
               <div
                 className='hidden items-center md:flex'
-                onClick={handleLoginClick}
+                onClick={openLoginModal}
               >
                 <a
                   className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
@@ -133,6 +144,10 @@ const Header = () => {
             </div>
           </Link>
         </div>
+        {locationModalVisible && (
+          <PickupLocation closePickupModal={closeModal} />
+        )}
+
         {loginModalVisible && (
           <LoginModal
             onClose={closeModal}

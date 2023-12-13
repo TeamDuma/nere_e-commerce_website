@@ -18,6 +18,9 @@ const endpoints = {
   // Customers
   signup: 'customers/signUp',
   signIn: 'customers/signIn',
+
+  // Location
+  activeLocations: 'locations/active',
 };
 
 export default endpoints;

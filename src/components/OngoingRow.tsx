@@ -1,4 +1,3 @@
-// OngoingRow.tsx
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import React from 'react';

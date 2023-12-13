@@ -2,12 +2,12 @@ import React from 'react';
 
 interface TitleProps {
   text: string;
-  color?: string; // Optional color prop
+  color?: string;
 }
 
 const Title: React.FC<TitleProps> = ({ text, color }) => {
   const titleStyle = {
-    color: color || '#298592', // Use the provided color or default to '#298592'
+    color: color || '#298592',
   };
 
   return (

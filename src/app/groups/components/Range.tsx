@@ -6,10 +6,8 @@ interface IRange {
 }
 
 const Range = ({ minQuantity, members = [] }: IRange) => {
-  // Calculate the remaining quantity
   const remainingQuantity = minQuantity ? minQuantity - members.length : 0;
 
-  // Calculate the percentage
   const percentage = Array.isArray(members)
     ? (members.length / minQuantity) * 100
     : 0;

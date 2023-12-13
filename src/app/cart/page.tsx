@@ -19,15 +19,22 @@ const Cart = () => {
   const [checkoutCart] = useCheckoutCartMutation();
   const [updateCart] = useUpdateCartMutation();
 
-  const { cartItems } = useSelector(selectShopping);
+  const { cartItems, selectedLocationId } = useSelector(selectShopping);
   const savedAddresses = [
     { id: 1, address: 'where ever1' },
     { id: 2, address: 'where ever2' },
     { id: 3, address: 'where ever3' },
   ];
 
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + item.price * item.cartQuantity;
+    }, 0);
+  };
+
+  console.log('cartItem', calculateTotal);
+
   const handleCheckout = async () => {
-    console.log('cartItem', cartItems);
     // if (savedAddresses.length > 0) {
     //   router.push('/delivery');
     // } else {
@@ -47,12 +54,11 @@ const Cart = () => {
                   src={item.plain_image}
                   alt={item.name}
                   className='h-32 w-full rounded-lg object-cover'
-                  style={{ width: '50px' }} // Set the fixed width for the image
+                  style={{ width: '50px' }}
                 />
               </div>
               <div className='ml-4 flex-1'>
                 <h2 className='text-lg font-bold text-gray-900'>{item.name}</h2>
-                {/* <p className="mt-1 text-xs text-gray-700">{item.size}</p> */}
                 <div className='mt-4 flex items-center justify-between md:block md:space-x-6'>
                   <div className='flex items-center border-gray-100'>
                     <span
@@ -65,7 +71,7 @@ const Cart = () => {
                     <input
                       className='h-8 w-8 border bg-white text-center text-xs outline-none'
                       type='number'
-                      value={item.min_quantity!!}
+                      value={item.cartQuantity!!}
                       min='1'
                     />
                     <span
@@ -76,55 +82,24 @@ const Cart = () => {
                       +{' '}
                     </span>
                   </div>
-                  <div className='flex items-center space-x-4'>
-                    <p className='text-sm'>{item.price}</p>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth='1.5'
-                      stroke='currentColor'
-                      className='h-5 w-5 cursor-pointer duration-150 hover:text-red-500'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M6 18L18 6M6 6l12 12'
-                      />
-                    </svg>
-                  </div>
+                  <div className='flex items-center space-x-4'></div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* <!-- Sub total --> */}
         <div className='mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3'>
-          <button
-            className='text-gray-500 focus:text-gray-600 focus:outline-none'
-            // onClick={async () => await updateCart(cartItems)}
-          >
-            <svg
-              className='h-5 w-5'
-              fill='none'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path d='M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' />
-            </svg>
-          </button>
-          {/* <!-- ... your subtotal content ... --> */}
+          <div className='mb-4 text-xl font-bold'>
+            Total: GH¢ {calculateTotal().toFixed(2)}
+          </div>
 
           <span
             className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
             onClick={() => {
-              const locationID = 0;
+              const locationID = selectedLocationId;
               const customerID = 1;
-              const totalAmount = 10;
+              const totalAmount = calculateTotal();
               const cartObject = cartItems.map((item: CartItem) => {
                 const isStartingGroup = !item.isGroupJoiner;
                 return transformToCartCheckoutItem(

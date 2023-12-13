@@ -53,7 +53,7 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
                 Email{' '}
               </label>
               <input
-                type='email' // Set input type to 'email'
+                type='email'
                 id='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +80,7 @@ const LoginModal = ({ onClose, onRegistrationClick }) => {
 
               <div className='space-y-4'>
                 <button
-                  className='w-full rounded-full bg-black p-3 font-semibold text-white'
+                  className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
                   onClick={() => handleLogin()}
                 >
                   Login

@@ -46,3 +46,11 @@ export type GetGroupResponse = {
     group: Group;
   };
 };
+export type GetlocationsResponse = {
+  status: string;
+  data: {
+    location: {
+      id: number;
+    };
+  };
+};

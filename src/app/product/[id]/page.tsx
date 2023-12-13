@@ -2,12 +2,7 @@
 import Banner from '@/components/Banner';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import ViewMore from '@/components/common/ViewMore';
-import {
-  addToCart,
-  decreaseQuantity,
-  increaseQuantity,
-  selectShopping,
-} from '@/lib/redux';
+import { addToCart, selectShopping } from '@/lib/redux';
 import { useLazyGetProductQuery } from '@/lib/redux/services/product';
 import { GroupType } from '@/types/group';
 import Link from 'next/link';
@@ -75,7 +70,9 @@ export default function ProductDetailPage({ params }: Props) {
   };
 
   const cartProduct = cartItems.find((item) => item.id === productId);
+
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
+  console.log('cartQuantity');
 
   return (
     <div className='my-8'>
@@ -91,7 +88,6 @@ export default function ProductDetailPage({ params }: Props) {
           <div className='mx-auto mt-5 w-full max-w-lg md:ml-8 md:mt-0 md:w-1/2'>
             <div className='flex items-center'>
               {' '}
-              {/* Use flex to place items in the same row */}
               <h3 className='text-lg uppercase text-gray-700'>
                 {product?.name}
               </h3>
@@ -117,8 +113,6 @@ export default function ProductDetailPage({ params }: Props) {
                 </div>
               )}
             </div>
-
-            {/* <span className='mt-1 text-gray-500'>Rating: {product.rating}</span> */}
 
             <div className='mt-3 flex items-center'>
               <span className='text-4xl font-extralight text-[#1A464C]'>
@@ -181,36 +175,11 @@ export default function ProductDetailPage({ params }: Props) {
 
             <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
             <div className='flex items-center'>
-              <div className='flex items-center border border-2'>
-                <span
-                  className='cursor-pointer rounded-l px-3.5 py-1 duration-100 hover:bg-[#F58929] hover:text-blue-50'
-                  onClick={decreaseQuantity}
-                >
-                  {' '}
-                  -{' '}
-                </span>
-                <input
-                  className='h-8 w-8 bg-white text-center text-xs outline-none'
-                  type='number'
-                  value={productQuantity}
-                  min={1}
-                />
-                <span
-                  className='cursor-pointer rounded-r px-3 py-1 duration-100 hover:bg-[#F58929] hover:text-blue-50'
-                  onClick={increaseQuantity}
-                >
-                  {' '}
-                  +{' '}
-                </span>
-              </div>
-
-              {/* "Add to Cart" button */}
               <button
-                className='ml-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                className='m-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
                 onClick={() =>
                   dispatch(
                     addToCart({
-                      quantity: productQuantity,
                       item: {
                         ...product!,
                         cartQuantity: 0,
