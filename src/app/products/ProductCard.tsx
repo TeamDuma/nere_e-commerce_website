@@ -1,0 +1,26 @@
+import { Product } from '@/types/product';
+import Image from 'next/image';
+import React from 'react';
+
+interface Props {
+  product: Product;
+}
+
+const ProductCard = (props: Props) => {
+  return (
+    <div className='overflow-hidden rounded-md border shadow transition hover:shadow-lg '>
+      <Image
+        src={props.product.plain_image}
+        width={400}
+        height={300}
+        alt={props.product.name}
+      />
+      <div className='p-2'>
+        <h6 className='text-center text-slate-600'>{props.product.name}</h6>
+        <p className='text-center text-slate-600'>{props.product.price} $</p>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;

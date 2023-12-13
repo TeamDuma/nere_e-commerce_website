@@ -2,26 +2,212 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.body {
+  background-color: #cfcfcf;
+}
+/* Footer.css */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background-color: #fff;
+  color: gray;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.footer-left {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.footer-left p {
+  margin-right: 30px;
+}
+
+.footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icon {
+  color: gray;
+  font-size: 24px;
+  transition: color 0.3s ease;
+  margin: 15px;
+}
+
+.social-icon:hover {
+  color: #1877f2; /* Facebook blue color */
+}
+
+/* styles.css (or any styling solution you prefer) */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin: 4px; /* Add a small margin from all sides */
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 90%;
+  margin: 8px auto 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-content {
+  padding: 8px; /* Increase padding for better spacing */
+  text-align: center; /* Center the text */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #555;
+}
+/* styles.css (or any styling solution you prefer) */
+.three-section-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.section {
+  width: 48%;
+  margin: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.OngiongGroups {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.OngiongGroups img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.OngiongGroups-details {
+  flex: 1;
+  padding-left: 16px;
+}
+
+.OngiongGroups-countdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.productcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+}
+.tagcontainer {
+  position: absolute;
+  top: 2px;
+  left: 14.5%;
+  background-color: #8cced7;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.tagText {
+  color: #fff;
+  font-size: 2.5vw;
+  font-weight: 900;
+}
+
+.image {
+  width: 100px; /* Set your desired width for the image */
+  height: 70px; /* Set your desired height for the image */
+  object-fit: contain; /* Adjust the image's aspect ratio to fit the container */
+}
+
+.purchase-guide {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.guide-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-icon {
+  background-color: #f58929;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.step-text {
+  text-align: center;
+}
+
+.guide-line {
+  border: 1px solid #f58929;
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.progressBarContainer {
+  margin-bottom: 5px;
+}
+
+.progressBar {
+  height: 1px;
+  background-color: orange;
+}
+
+.sticky-buttons {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  /* padding: 10px; */
+  width: 100%;
+  z-index: 1000;
+}
+
+.ongoing-groups-button,
+.cart-button {
+  background-color: #298592;
+  color: white;
+  padding: 10px;
+  width: 150px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  cursor: pointer;
+}
+
+.ongoing-groups-button:hover,
+.cart-button:hover {
+  background-color: #1d5d70;
 }
