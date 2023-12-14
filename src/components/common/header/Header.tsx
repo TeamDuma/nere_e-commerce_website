@@ -15,7 +15,7 @@ import RegistrationModal from '../RegisterModal';
 const Header = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useGetlocationsQuery();
-  const { selectedLocationId, locations } = useSelector(selectShopping);
+  const { selectedLocationId, locations,userInfo } = useSelector(selectShopping);
   console.log('useGetLocationsQuery', selectedLocationId);
 
   const [selectedAddress, setSelectedAddress] = useState<Location | null>(
@@ -144,26 +144,39 @@ const Header = () => {
                 </div>
               </div>
             </a>
-            <div className='relative block'>
-              <div
-                className='hidden items-center md:flex'
-                onClick={openLoginModal}
-              >
-                <a
-                  className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                  href='#'
-                >
-                  <div className='hidden items-center md:flex'>
-                    <UserIcon />
-                    <div className='ml-2'>
-                      <p style={{ color: '#298592', fontSize: '0.875rem' }}>
-                        Login/Registeration
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </div>
+            {userInfo ? (   
+              
+              <div className='ml-2'>
+              <p style={{ color: '#298592', fontSize: '1.2rem' }}>
+               Welcome:
+               {userInfo.data.data.customer.name}
+             </p>
             </div>
+              
+           ):(
+            <div className='relative block'>
+            <div
+              className='hidden items-center md:flex'
+              onClick={openLoginModal}
+            >
+              <a
+                className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                href='#'
+              >
+                <div className='hidden items-center md:flex'>
+                  <UserIcon />
+                  <div className='ml-2'>
+                    <p style={{ color: '#298592', fontSize: '0.875rem' }}>
+                      Login/Registeration
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+            ) 
+
+            }
           </div>
           <Link href='/cart' className='block rounded-md bg-white p-2'>
             <div className='flex flex-row gap-2'>
