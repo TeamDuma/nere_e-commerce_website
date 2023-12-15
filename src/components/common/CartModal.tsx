@@ -42,6 +42,11 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
     }, 0);
   };
 
+  const calculateSavingsPercentage = (oldPrice: number, newPrice: number) => {
+    const savingsPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
+    return Math.round(savingsPercentage);
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -67,47 +72,81 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
         overflowY: 'auto',
       }}
     >
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>Cart</h2>
       <div className='mb-5 rounded-lg md:w-full'>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
           cartItems.map((item) => (
-            <div className='mb-6 rounded-lg bg-white p-6 shadow-md md:flex md:items-center'>
-              <div className='w-1/3 flex-shrink-0'>
+            <div
+              key={item.id}
+              className='my-4 flex items-center rounded-lg bg-[#FFF] p-4 shadow-md'
+              style={{ width: '450px', height: '190px' }}
+            >
+              <div className='bg-[#F8F8F8 ] relative w-1/4 flex-shrink-0'>
                 <img
                   src={item.plain_image}
                   alt={item.name}
                   className='h-32 w-full rounded-lg object-cover'
-                  style={{ width: '50px' }}
+                  style={{ width: '100px' }}
                 />
               </div>
+
               <div className='ml-4 flex-1'>
-                <h2 className='text-lg font-bold text-gray-900'>{item.name}</h2>
-                <div className='mt-4 flex items-center justify-between md:block md:space-x-6'>
-                  <div className='flex items-center '>
-                    <span
-                      className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
-                      onClick={() => dispatch(decreaseQuantity(item.id))}
-                    >
-                      {' '}
-                      -{' '}
-                    </span>
-                    <input
-                      className='h-8 w-8 border bg-white text-center text-xs outline-none'
-                      type='number'
-                      value={item.cartQuantity!!}
-                      min='1'
-                    />
-                    <span
-                      className='cursor-pointer rounded-r bg-gray-100 px-3 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
-                      onClick={() => dispatch(increaseQuantity(item.id))}
-                    >
-                      {' '}
-                      +{' '}
-                    </span>
+                <h2 className='overflow-hidden overflow-ellipsis whitespace-nowrap text-lg font-bold text-[#298592]'>
+                  {item.name}
+                </h2>
+
+                <div className='m-2'>
+                  <div className='flex flex-col items-start'>
+                    <div className='flex items-center'>
+                      <span className='text-4xl font-extralight text-[#F58929]'>
+                        {item?.sale_price}¢
+                      </span>
+                      <span
+                        className='ml-3 text-[#C1C2C2]'
+                        style={{ textDecoration: 'line-through' }}
+                      >
+                        {item?.price}¢
+                      </span>
+                    </div>
+
+                    <div className='mt-2 flex items-center'>
+                      <span className='rounded bg-[#8CCED7] p-1 text-xs font-bold text-white'>
+                        Save{' '}
+                        {calculateSavingsPercentage(
+                          item.price,
+                          item.sale_price
+                        )}
+                        %
+                      </span>
+                    </div>
+
+                    <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100'>
+                        <span
+                          className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                          onClick={() => dispatch(decreaseQuantity(item.id))}
+                        >
+                          {' '}
+                          -{' '}
+                        </span>
+                        <input
+                          id={`quantity-${item.id}`}
+                          className='h-8 w-8  bg-white text-center text-xs outline-none'
+                          type='number'
+                          value={item.cartQuantity}
+                          min='1'
+                        />
+                        <span
+                          className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                          onClick={() => dispatch(increaseQuantity(item.id))}
+                        >
+                          {' '}
+                          +{' '}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className='flex items-center space-x-4'></div>
                 </div>
               </div>
             </div>
@@ -115,13 +154,10 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
         )}
       </div>
       <div className='mt-6 w-full rounded-lg'>
-        <div className='mb-4 text-xl font-bold'>
-          Total: GH¢ {calculateTotal().toFixed(2)}
-        </div>
-
         {userInfo ? (
-          <span
-            className='cursor-pointer rounded-l bg-gray-100 px-3.5 py-1 duration-100 hover:bg-blue-500 hover:text-blue-50'
+          <button
+            type='button'
+            className='mb-2 inline-flex w-full cursor-not-allowed items-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
             onClick={() => {
               const locationID = selectedLocationId;
               const customerID = 1;
@@ -153,13 +189,23 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
                 });
             }}
           >
-            {' '}
-            Check Out
-          </span>
+            <span>Checkout</span>
+            <div className='h-5 flex-grow'></div>
+            <div className='text-l flex h-10 items-center justify-center rounded-lg bg-white text-[#0097B2]'>
+              GH¢ {calculateTotal().toFixed(2)}
+            </div>
+          </button>
         ) : (
           <div>
-            <button className='mt-4 cursor-not-allowed bg-black px-6 py-3 text-slate-100 duration-200 hover:bg-orange-950'>
-              Proceed to checkout
+            <button
+              type='button'
+              className='mb-2 inline-flex w-full cursor-not-allowed items-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
+            >
+              <span>Checkout</span>
+              <div className='h-5 flex-grow'></div>
+              <div className='text-l flex h-10 items-center justify-center rounded-lg bg-white text-[#0097B2]'>
+                GH¢ {calculateTotal().toFixed(2)}
+              </div>
             </button>
             <p className='mt-1 animate-bounce text-base font-semibold text-red-500'>
               Please login to continue
