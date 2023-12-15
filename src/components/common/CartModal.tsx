@@ -155,9 +155,67 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
       </div>
       <div className='mt-6 w-full rounded-lg'>
         {userInfo ? (
+          <Link href='/cart'>
+            <button
+              type='button'
+              className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
+
+              // onClick={() => {
+              //   const locationID = selectedLocationId;
+              //   const customerID = userInfo.data.data.customer.id;
+              //   const totalAmount = calculateTotal();
+              //   const cartObject = cartItems.map((item: CartItem) => {
+              //     const isStartingGroup = !item.isGroupJoiner;
+              //     return transformToCartCheckoutItem(
+              //       item,
+              //       isStartingGroup ? locationID : undefined
+              //     );
+              //   });
+              //   checkoutCart({
+              //     customerID,
+              //     totalAmount,
+              //     cartObject,
+              //   })
+              //     .then((data) => {
+              //       if ('data' in data && 'authorization_url' in data.data) {
+              //         const paymentAuthorizationUrl = data.data.authorization_url;
+
+              //         window.location.href = paymentAuthorizationUrl;
+              //       } else {
+              //         console.log('Error in data structure:', data);
+              //       }
+              //     })
+              //     .catch((e) => {
+              //       console.log('Error', e);
+              //     });
+              // } }
+            >
+              <span>Checkout</span>
+            </button>
+          </Link>
+        ) : (
+          <div>
+            <div className='flex items-center'>
+              <p className='mx-4 mt-1 font-semibold text-[#1A464C]'>
+                GH¢ {calculateTotal().toFixed(2)}
+              </p>
+              <button className='hover:bg-[#298592]-950 mx-4 mt-4 cursor-not-allowed rounded bg-[#298592] px-6 py-3 text-slate-100 duration-200'>
+                Checkout
+              </button>
+            </div>
+
+            <p className='ml-2 mt-1 animate-bounce text-base font-semibold text-red-500'>
+              Please login to continue
+            </p>
+            <p className='mt-1  text-base font-semibold text-[#1A464C]'>
+              Deliver fee is not included
+            </p>
+          </div>
+        )}
+        {/* {userInfo ? (
           <button
             type='button'
-            className='mb-2 inline-flex w-full cursor-not-allowed items-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
+            className='mb-2 inline-flex w-full  items-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
             onClick={() => {
               const locationID = selectedLocationId;
               const customerID = 1;
@@ -211,7 +269,7 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
               Please login to continue
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
