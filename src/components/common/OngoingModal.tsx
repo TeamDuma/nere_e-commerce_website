@@ -4,12 +4,16 @@ import { Group } from 'next/dist/shared/lib/router/utils/route-regex';
 import Link from 'next/link';
 import React, { useRef, useEffect, useState } from 'react';
 
-const SideModal = ({ closeModal }) => {
+interface SideModalProps {
+  closeModal: () => void;
+}
+
+const SideModal: React.FC<SideModalProps> = ({ closeModal }) => {
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
   const modalRef = useRef();
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: { target: any }) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       closeModal();
     }
@@ -50,10 +54,7 @@ const SideModal = ({ closeModal }) => {
           <div className='overflow-x-auto'>
             <div className='flex-col '>
               {groups.map((item) => (
-                <div
-                  key={item.id}
-                  className='mr-4 mt-2 flex-shrink-0 rounded border'
-                >
+                <div key={item.id} className='m-2 flex-shrink-0 rounded border'>
                   <GroupRowRenderItem item={item} />
                 </div>
               ))}

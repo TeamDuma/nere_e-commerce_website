@@ -17,10 +17,7 @@ const OngoingPurchases: React.FC = () => {
         <div className='overflow-x-auto'>
           <div className='flex flex-nowrap justify-start'>
             {groups.map((item: Group) => (
-              <div
-                key={item.id}
-                className='mr-4 mt-2 flex-shrink-0 rounded border'
-              >
+              <div key={item.id} className='m-4 flex-shrink-0 rounded border'>
                 <GroupRowRenderItem item={item} />
               </div>
             ))}

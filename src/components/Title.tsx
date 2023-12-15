@@ -11,7 +11,7 @@ const Title: React.FC<TitleProps> = ({ text, color }) => {
   };
 
   return (
-    <h1 style={titleStyle} className='my-5 text-2xl font-bold'>
+    <h1 style={titleStyle} className='my-6 text-4xl font-bold'>
       {text}
     </h1>
   );
