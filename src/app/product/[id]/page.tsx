@@ -10,6 +10,8 @@ import { GroupType } from '@/types/group';
 import Link from 'next/link';
 import { SetStateAction, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   params: {
@@ -71,6 +73,25 @@ export default function ProductDetailPage({ params }: Props) {
 
   const handleVariantChange = (variantName: string) => {
     setSelectedVariant(variantName);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        item: {
+          ...product!,
+          cartQuantity: 0,
+          productID: product?.id!,
+          isGroupJoiner: true,
+          groupID: group?.id!,
+          locationID: undefined,
+          type: GroupType.PUBLIC,
+        },
+      })
+    );
+
+    // Show toast notification
+    toast.success('Item added to cart!');
   };
 
   const cartProduct = cartItems.find((item) => item.id === productId);
@@ -158,31 +179,14 @@ export default function ProductDetailPage({ params }: Props) {
 
             {product?.hasMinQuantity && (
               <div className='progress-bar'>
-                {/* <div className="progress-text">{`${product?.min_quantity - group?.members.length} Left, out of ${product.min_quantity}`}</div> */}
-                <div className='progress-line'>
-                  {/* <div className="progress" style={{ width: `${(product?.min_quantity - group?.members.length) / product.min_quantity * 100}%` }}></div> */}
-                </div>
+                <div className='progress-line'></div>
               </div>
             )}
 
             <div className='flex items-center'>
               <button
                 className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={() =>
-                  dispatch(
-                    addToCart({
-                      item: {
-                        ...product!,
-                        cartQuantity: 0,
-                        productID: product?.id!,
-                        isGroupJoiner: true,
-                        groupID: group?.id!,
-                        locationID: undefined,
-                        type: GroupType.PUBLIC,
-                      },
-                    })
-                  )
-                }
+                onClick={handleAddToCart}
               >
                 Add to Cart
               </button>

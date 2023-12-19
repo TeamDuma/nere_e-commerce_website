@@ -8,7 +8,7 @@ import {
   increaseQuantity,
   selectShopping,
 } from '@/lib/redux/slices/shopping';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { CartItem, transformToCartCheckoutItem } from '@/types/cart';
@@ -16,12 +16,18 @@ import ProgressBar from '@/components/common/ProgressBar';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import ViewMore from '@/components/common/ViewMore';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { TextInput } from 'react-native';
+import { FaTags } from 'react-icons/fa';
 
 const Cart = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [checkoutCart] = useCheckoutCartMutation();
   const [updateCart] = useUpdateCartMutation();
+  const [promoCode, setPromoCode] = useState<string>('');
+  const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
 
   const { cartItems, selectedLocationId, userInfo } =
     useSelector(selectShopping);
@@ -48,6 +54,11 @@ const Cart = () => {
   const calculateSavingsPercentage = (oldPrice: number, newPrice: number) => {
     const savingsPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
     return Math.round(savingsPercentage);
+  };
+
+  const handleApplyPromoCode = () => {
+    console.log('Applied promo code:', promoCode);
+    setIsPromoCodeApplied(true);
   };
 
   const totalSavings = calculateSavings(cartItems);
@@ -85,7 +96,7 @@ const Cart = () => {
                   </div>
 
                   <div className='ml-4 flex-1'>
-                    <h2 className='overflow-hidden overflow-ellipsis whitespace-nowrap text-lg font-bold text-[#298592]'>
+                    <h2 className='text overflow-hidden  overflow-ellipsis font-bold text-[#298592]'>
                       {item.name}
                     </h2>
 
@@ -176,45 +187,75 @@ const Cart = () => {
                 </div>
               </div>
 
+              <div className='flex items-center'>
+                <div className='relative mt-4 flex items-center rounded-md border border-solid border-[#D0D5DD] p-2'>
+                  <input
+                    type='text'
+                    placeholder='Enter promo code'
+                    value={promoCode}
+                    onChange={(e) => setPromoCode(e.target.value)}
+                    className='w-full rounded-md border-none p-2 outline-none'
+                  />
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
+                    <FaTags size={20} color='#1A464C' />
+                  </div>
+                </div>
+                <button
+                  onClick={handleApplyPromoCode}
+                  className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
+                >
+                  {isPromoCodeApplied ? 'PromoCode Applied' : 'Apply'}
+                </button>
+              </div>
+
               {userInfo ? (
-                <Link href='/orderPreview'>
-                  <button
-                    type='button'
-                    className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-
-                    // onClick={() => {
-                    //   const locationID = selectedLocationId;
-                    //   const customerID = userInfo.data.data.customer.id;
-                    //   const totalAmount = calculateTotal();
-                    //   const cartObject = cartItems.map((item: CartItem) => {
-                    //     const isStartingGroup = !item.isGroupJoiner;
-                    //     return transformToCartCheckoutItem(
-                    //       item,
-                    //       isStartingGroup ? locationID : undefined
-                    //     );
-                    //   });
-                    //   checkoutCart({
-                    //     customerID,
-                    //     totalAmount,
-                    //     cartObject,
-                    //   })
-                    //     .then((data) => {
-                    //       if ('data' in data && 'authorization_url' in data.data) {
-                    //         const paymentAuthorizationUrl = data.data.authorization_url;
-
-                    //         window.location.href = paymentAuthorizationUrl;
-                    //       } else {
-                    //         console.log('Error in data structure:', data);
-                    //       }
-                    //     })
-                    //     .catch((e) => {
-                    //       console.log('Error', e);
-                    //     });
-                    // } }
-                  >
-                    <span>Checkout</span>
-                  </button>
-                </Link>
+                // <Link href='/orderPreview'>
+                <button
+                  type='button'
+                  className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
+                  onClick={() => {
+                    if (selectedLocationId) {
+                      const locationID = selectedLocationId;
+                      const customerID = userInfo.data.data.customer.id;
+                      const totalAmount = calculateTotal();
+                      const voucherCode = promoCode;
+                      const cartObject = cartItems.map((item: CartItem) => {
+                        const isStartingGroup = !item.isGroupJoiner;
+                        return transformToCartCheckoutItem(
+                          item,
+                          isStartingGroup ? locationID : undefined
+                        );
+                      });
+                      checkoutCart({
+                        customerID,
+                        totalAmount,
+                        cartObject,
+                        voucherCode,
+                      })
+                        .then((data) => {
+                          if (
+                            'data' in data &&
+                            'authorization_url' in data.data
+                          ) {
+                            const paymentAuthorizationUrl =
+                              data.data.authorization_url;
+                            window.location.href = paymentAuthorizationUrl;
+                          } else {
+                            console.log('Error in data structure:', data);
+                          }
+                        })
+                        .catch((e) => {
+                          console.log('Error', e);
+                        });
+                    } else {
+                      toast.warning(
+                        'Please select a delivery location before checkout.'
+                      );
+                    }
+                  }}
+                >
+                  <span>Checkout</span>
+                </button>
               ) : (
                 <div>
                   <div className='flex items-center'>

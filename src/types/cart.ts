@@ -7,6 +7,7 @@ export type CartCheckoutBody = {
   customerID: number;
   totalAmount: number;
   cartObject: CartCheckoutItem[];
+  voucherCode: string;
 };
 
 export interface CartCheckoutItem {

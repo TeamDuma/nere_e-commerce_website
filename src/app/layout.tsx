@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/common/header/Header';
 import Container from '@/components/common/Container';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +23,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
           <main className='flex-grow'>
             <Container>{props.children}</Container>
           </main>
+          <ToastContainer />
         </Providers>
       </body>
     </html>

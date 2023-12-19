@@ -16,6 +16,8 @@ import { GroupType } from '@/types/group';
 import UserIcon from '@/components/common/User';
 import ProgressBar from '@/components/common/ProgressBar';
 import PurchaseGuide from '@/components/common/PurchaseGuide';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -54,6 +56,25 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   const handleVariantChange = (variantName: string) => {
     setSelectedVariant(variantName);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        item: {
+          ...product!,
+          cartQuantity: 0,
+          productID: product?.id!,
+          isGroupJoiner: true,
+          groupID: group?.id!,
+          locationID: undefined,
+          type: GroupType.PUBLIC,
+        },
+      })
+    );
+
+    // Show toast notification
+    toast.success('Item added to cart!');
   };
 
   const cartProduct = cartItems.find((item) => item.id);
@@ -162,21 +183,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <div className='flex items-center'>
               <button
                 className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={() =>
-                  dispatch(
-                    addToCart({
-                      item: {
-                        ...product!,
-                        cartQuantity: 0,
-                        productID: product?.id!,
-                        isGroupJoiner: true,
-                        groupID: group?.id!,
-                        locationID: undefined,
-                        type: GroupType.PUBLIC,
-                      },
-                    })
-                  )
-                }
+                onClick={handleAddToCart}
               >
                 Add to Cart
               </button>
