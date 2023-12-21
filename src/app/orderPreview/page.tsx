@@ -61,7 +61,9 @@ const OrderPreview: React.FC = () => {
       {cartItems.length === 0 ? (
         <div className='text-center text-5xl text-black'>
           Your cart is empty
-          <h1 className='my-5 text-[#F58929]'>Go to the Shop</h1>
+          <Link href='/products'>
+            <h1 className='my-5 text-[#F58929]'>Go to the Shop</h1>
+          </Link>
         </div>
       ) : (
         <>

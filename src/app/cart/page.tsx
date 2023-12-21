@@ -5,6 +5,7 @@ import {
 } from '@/lib/redux/services/cart';
 import {
   decreaseQuantity,
+  deleteProduct,
   increaseQuantity,
   selectShopping,
 } from '@/lib/redux/slices/shopping';
@@ -21,11 +22,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TextInput } from 'react-native';
 import { FaTags } from 'react-icons/fa';
 import LoginModal from '@/components/common/LoginModal';
+import CartIcon from '@/components/common/CartIcon';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 const Cart = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [checkoutCart] = useCheckoutCartMutation();
+
   const [updateCart] = useUpdateCartMutation();
   const [promoCode, setPromoCode] = useState<string>('');
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
@@ -80,6 +84,11 @@ const Cart = () => {
   const closeModal = () => {
     setLoginModalVisible(false);
     setRegistrationModalVisible(false);
+  };
+
+  const handleRemoveItem = (productId: number) => {
+    dispatch(deleteProduct(productId));
+    console.log('handleRemoveItem');
   };
 
   return (
@@ -164,7 +173,7 @@ const Cart = () => {
                         </span>
                         <span
                           id={`quantity-${item.id}`}
-                          className='mt- h-8 w-8 bg-white text-center text-xs outline-none'
+                          className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
                         >
                           {item.cartQuantity}
                         </span>
@@ -175,6 +184,13 @@ const Cart = () => {
                         >
                           {' '}
                           +{' '}
+                        </span>
+
+                        <span
+                          className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
+                          onClick={() => handleRemoveItem(item.id)}
+                        >
+                          <FaRegTrashAlt />
                         </span>
                       </div>
                     </div>
@@ -210,7 +226,6 @@ const Cart = () => {
                   <h1>GH¢ {calculateTotal().toFixed(2)}</h1>
                 </div>
               </div>
-
               <div className='flex items-center'>
                 <div className='relative mt-4 flex items-center rounded-md border border-solid border-[#D0D5DD] p-2'>
                   <input
@@ -226,6 +241,7 @@ const Cart = () => {
                 </div>
                 <button
                   onClick={handleApplyPromoCode}
+                  disabled={!promoCode.trim()}
                   className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                 >
                   {isPromoCodeApplied ? 'PromoCode Applied' : 'Apply'}

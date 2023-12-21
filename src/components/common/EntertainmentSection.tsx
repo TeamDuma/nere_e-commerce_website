@@ -1,8 +1,8 @@
 const EntertainmentSection = () => {
   return (
-    <section className='m-3 rounded bg-white p-5'>
+    <section className='m-3 rounded '>
       <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
-        <div className='m-3 flex w-96 rounded lg:w-1/3'>
+        <div className='m-3 flex w-96 rounded-lg  border border-[#298592] lg:w-1/3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -11,20 +11,17 @@ const EntertainmentSection = () => {
             stroke='currentColor'
             className='h-20 w-20 text-green-400'
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z'
-            />
+            {/* SVG path */}
           </svg>
           <div className='text-center'>
             <h2 className='my-1'>Nere Coins</h2>
             <h4 className='text-md inline  font-bold text-[#298592]'>
-              Earn more{' '}
+              Earn more
             </h4>
           </div>
         </div>
-        <div className='m-3 flex w-96 rounded lg:w-1/3'>
+
+        <div className='m-3 flex w-96 rounded-lg  border border-[#298592] lg:w-1/3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -33,11 +30,7 @@ const EntertainmentSection = () => {
             stroke='currentColor'
             className='h-20 w-20 text-gray-400'
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M15.182 15.182a25.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z'
-            />
+            {/* SVG path */}
           </svg>
           <div className='text-center'>
             <h2 className='my-1 '>Game and win coins</h2>
@@ -46,7 +39,8 @@ const EntertainmentSection = () => {
             </h4>
           </div>
         </div>
-        <div className='m-3 flex w-96 rounded lg:w-1/3'>
+
+        <div className='m-3 flex w-96 rounded-lg  border border-[#298592] lg:w-1/3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -55,11 +49,7 @@ const EntertainmentSection = () => {
             stroke='currentColor'
             className='h-20 w-20 text-red-300'
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z'
-            />
+            {/* SVG path */}
           </svg>
           <div className='text-center'>
             <h2 className='my-1'>Loyalty offers?</h2>

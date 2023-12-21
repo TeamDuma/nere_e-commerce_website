@@ -142,7 +142,7 @@ export default function ProductDetailPage({ params }: Props) {
             </div>
 
             <div className='mt-3 flex flex-col items-center md:flex-row md:items-start'>
-              <span className='text-4xl font-extralight text-[#1A464C]'>
+              <span className='font-semibold text-[#1A464C]'>
                 {product?.sale_price}¢
               </span>
               <span

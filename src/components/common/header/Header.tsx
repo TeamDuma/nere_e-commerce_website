@@ -5,16 +5,17 @@ import Location from '../Location';
 import Logo from '../Logo';
 import UserIcon from '../User';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { selectShopping, useDispatch } from '@/lib/redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUser, resetCart, selectShopping } from '@/lib/redux';
 import PickupLocation from '@/app/delivery/components/PickupLocation';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
 
 const Header = () => {
-  const dispatch = useDispatch();
   const { data, isLoading } = useGetlocationsQuery();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const { selectedLocationId, locations, userInfo } =
     useSelector(selectShopping);
   console.log('useGetLocationsQuery', selectedLocationId);
@@ -44,6 +45,7 @@ const Header = () => {
   const { cartItems } = useSelector(selectShopping);
   const [locationModalVisible, setLocationModalVisible] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
@@ -65,6 +67,17 @@ const Header = () => {
     setLoginModalVisible(false);
     setRegistrationModalVisible(false);
     setLocationModalVisible(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      dispatch(deleteUser());
+      dispatch(resetCart());
+
+      console.log('Logout ');
+    } catch (error) {
+      console.error('Logout Error:', error);
+    }
   };
 
   return (
@@ -148,24 +161,69 @@ const Header = () => {
               </div>
             </a>
             {userInfo ? (
-              <div className='hidden items-center md:flex'>
-                <UserIcon />
-                <div className='ml-2'>
-                  <p style={{ color: '#298592', fontSize: 12 }}>
-                    Welcome:
-                    {userInfo.data.data.customer.name}
-                  </p>
+              <div className='relative inline-block'>
+                <div
+                  className='hidden items-center md:flex'
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  <a
+                    className='inline-block cursor-pointer rounded-full px-3 py-2 hover:bg-gray-200'
+                    href='#'
+                  >
+                    <div className='flex items-center'>
+                      <UserIcon />
+                      <div className='ml-2'>
+                        <p style={{ color: '#298592', fontSize: 12 }}>
+                          Welcome: {userInfo?.data?.data?.customer.name}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
                 </div>
+
+                {isDropdownOpen && (
+                  <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
+                    <a
+                      href='/profile'
+                      className='block px-4 py-2 text-[#298592]'
+                    >
+                      Profile
+                    </a>
+
+                    <a
+                      href='/orders'
+                      className='block px-4 py-2 text-[#298592]'
+                    >
+                      Orders
+                    </a>
+                    <a
+                      href='#'
+                      className='block px-4 py-2 text-[#298592]'
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </a>
+                  </div>
+                )}
               </div>
             ) : (
+              // <div className='hidden items-center md:flex'>
+              //   <UserIcon />
+              //   <div className='ml-2'>
+              //     <p style={{ color: '#298592', fontSize: 12 }}>
+              //       Welcome:
+              //       {userInfo.data.data.customer.name}
+              //     </p>
+              //   </div>
+              // </div>
               <div className='relative block'>
                 <div
                   className='hidden items-center md:flex'
-                  onClick={openLoginModal}
+                  // onClick={openLoginModal}
                 >
                   <a
                     className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                    href='#'
+                    href='/login'
                   >
                     <div className='hidden items-center md:flex'>
                       <UserIcon />
