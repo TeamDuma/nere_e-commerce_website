@@ -77,8 +77,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     toast.success('Item added to cart!');
   };
 
-  const cartProduct = cartItems.find((item) => item.id);
-  const cartQuantity = cartProduct ? cartProduct.quantity : 0;
+  const cartProduct = cartItems.find((item) => item.id === product?.id!);
+  const cartQuantity = cartProduct?.cartQuantity;
 
   return (
     <div className='my-8'>
@@ -157,27 +157,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
 
             {product?.hasMinQuantity && (
-              <div className='progress-bar'>
-                <div className='progress-text'>{`${
-                  product.min_quantity
-                    ? product.min_quantity - (group?.members.length ?? 0)
-                    : 0
-                } Left, out of ${product.min_quantity ?? 0}`}</div>
-                <div className='progress-line'>
-                  <div
-                    className='progress'
-                    style={{
-                      width: `${
-                        (product.min_quantity
-                          ? (product.min_quantity -
-                              (group?.members.length ?? 0)) /
-                            (product.min_quantity ?? 1)
-                          : 0) * 100
-                      }%`,
-                    }}
-                  ></div>
-                </div>
-              </div>
+              <ProgressBar
+                remaining={cartQuantity ?? 0}
+                total={product.min_quantity ?? 0}
+              />
             )}
 
             <div className='flex items-center'>

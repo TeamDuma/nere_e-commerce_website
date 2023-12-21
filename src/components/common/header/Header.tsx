@@ -175,9 +175,14 @@ const Header = () => {
               </div>
             )}
           </div>
-          <Link href='/cart' className='block rounded-md bg-white p-2'>
+          <Link
+            href='/cart'
+            className={`block rounded-md p-2 ${
+              cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+            }`}
+          >
             <div className='flex flex-row gap-2'>
-              <CartIcon />{' '}
+              <CartIcon />
               <span className='inline-block font-bold text-[#298592]'></span>
               {(cartItems ?? []).length}
             </div>

@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TextInput } from 'react-native';
 import { FaTags } from 'react-icons/fa';
+import LoginModal from '@/components/common/LoginModal';
 
 const Cart = () => {
   const router = useRouter();
@@ -28,18 +29,17 @@ const Cart = () => {
   const [updateCart] = useUpdateCartMutation();
   const [promoCode, setPromoCode] = useState<string>('');
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+
+  const [registrationModalVisible, setRegistrationModalVisible] =
+    useState(false);
 
   const { cartItems, selectedLocationId, userInfo } =
     useSelector(selectShopping);
-  const savedAddresses = [
-    { id: 1, address: 'where ever1' },
-    { id: 2, address: 'where ever2' },
-    { id: 3, address: 'where ever3' },
-  ];
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + item.price * item.cartQuantity;
+      return total + item.sale_price * item.cartQuantity;
     }, 0);
   };
   const calculateSavings = (cartItems: any[]) => {
@@ -63,8 +63,24 @@ const Cart = () => {
 
   const totalSavings = calculateSavings(cartItems);
 
-  console.log('cartItem', calculateTotal);
+  console.log('calculateTotal', calculateTotal);
+  console.log('cartItem', cartItems);
+
   console.log('userInfo', userInfo);
+
+  const openLoginModal = () => {
+    setLoginModalVisible(true);
+  };
+
+  const handleRegistrationClick = () => {
+    setLoginModalVisible(false);
+    setRegistrationModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setLoginModalVisible(false);
+    setRegistrationModalVisible(false);
+  };
 
   return (
     <div className='bg-[#000]-100 my-4 min-h-screen pt-20'>
@@ -124,6 +140,14 @@ const Cart = () => {
                             %
                           </span>
                         </div>
+                        <div className='flex items-center'>
+                          {item.hasMinQuantity && (
+                            <ProgressBar
+                              remaining={item.cartQuantity}
+                              total={item.min_quantity ?? 0}
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -138,13 +162,13 @@ const Cart = () => {
                           {' '}
                           -{' '}
                         </span>
-                        <input
+                        <span
                           id={`quantity-${item.id}`}
-                          className='h-8 w-8  bg-white text-center text-xs outline-none'
-                          type='number'
-                          value={item.cartQuantity}
-                          min='1'
-                        />
+                          className='mt- h-8 w-8 bg-white text-center text-xs outline-none'
+                        >
+                          {item.cartQuantity}
+                        </span>
+
                         <span
                           className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
                           onClick={() => dispatch(increaseQuantity(item.id))}
@@ -176,9 +200,9 @@ const Cart = () => {
                 </div>
               </div>
 
-              <hr className='mt-4 text-xl text-[#1A464C]' />
+              <hr className='my-4 text-xl text-[#1A464C] ' />
               <div className='flex  text-[#1A464C]'>
-                <div className='mr-4' style={{ marginRight: '256px' }}>
+                <div style={{ marginRight: '256px' }}>
                   <h1>Total </h1>
                 </div>
 
@@ -262,7 +286,10 @@ const Cart = () => {
                     <p className='mx-4 mt-1 font-semibold text-[#1A464C]'>
                       GH¢ {calculateTotal().toFixed(2)}
                     </p>
-                    <button className='hover:bg-[#298592]-950 mx-4 mt-4 cursor-not-allowed rounded bg-[#298592] px-6 py-3 text-slate-100 duration-200'>
+                    <button
+                      className='hover:bg-[#298592]-950 mx-4 mt-4 cursor-not-allowed rounded bg-[#298592] px-6 py-3 text-slate-100 duration-200'
+                      onClick={openLoginModal}
+                    >
                       Checkout
                     </button>
                   </div>
@@ -270,9 +297,17 @@ const Cart = () => {
                   <p className='ml-2 mt-1 animate-bounce text-base font-semibold text-red-500'>
                     Please login to continue
                   </p>
-                  <p className='mt-1  text-base font-semibold text-[#1A464C]'>
-                    Deliver fee is not included
+                  <p className='mt-1 text-base font-semibold text-[#1A464C]'>
+                    Delivery fee is not included
                   </p>
+
+                  {loginModalVisible && (
+                    <LoginModal
+                      onClose={closeModal}
+                      onRegistrationClick={handleRegistrationClick}
+                      session={null}
+                    />
+                  )}
                 </div>
               )}
             </div>

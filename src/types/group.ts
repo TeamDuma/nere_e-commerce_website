@@ -47,6 +47,7 @@ export type GetGroupResponse = {
   };
 };
 export type GetlocationsResponse = {
+  find(arg0: (location: { id: number }) => boolean): unknown;
   status: string;
   data: {
     location: {

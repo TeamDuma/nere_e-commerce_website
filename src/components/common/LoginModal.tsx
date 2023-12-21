@@ -132,6 +132,3 @@ const LoginModal: React.FC<{
 };
 
 export default LoginModal;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}

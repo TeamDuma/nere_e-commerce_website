@@ -33,11 +33,20 @@ export const shoppingSlice = createSlice({
       );
 
       if (cartItem) {
-        cartItem.cartQuantity += quantity;
+        if (cartItem.hasMinQuantity) {
+          const minQuantity = cartItem.min_quantity ?? 0;
+          cartItem.cartQuantity = Math.min(
+            cartItem.cartQuantity + quantity,
+            minQuantity
+          );
+        } else {
+          cartItem.cartQuantity += quantity;
+        }
       } else {
         state.cartItems.push({ ...item, cartQuantity: quantity });
       }
     },
+
     increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
       const existingProduct = state.cartItems.find((item) => item.id === id);
       if (existingProduct) {
