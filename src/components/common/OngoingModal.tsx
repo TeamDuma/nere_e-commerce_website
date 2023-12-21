@@ -1,4 +1,7 @@
+import GroupRowModalItem from '@/app/groups/components/GroupRowRenderItem';
+import GroupRowModaltem from '@/app/groups/components/GroupRowRenderItem';
 import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
+import GroupRowRenderModal from '@/app/groups/components/GroupRowRenderModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import { Group } from 'next/dist/shared/lib/router/utils/route-regex';
 import Link from 'next/link';
@@ -44,8 +47,10 @@ const SideModal: React.FC<SideModalProps> = ({ closeModal }) => {
         overflowY: 'auto',
       }}
     >
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>
-        Ongoing Groups
+      <h2
+        style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#298592' }}
+      >
+        Ongoing Purchases near me{' '}
       </h2>
       <div>
         {isLoading && <p>Loading...</p>}
@@ -55,7 +60,7 @@ const SideModal: React.FC<SideModalProps> = ({ closeModal }) => {
             <div className='flex-col '>
               {groups.map((item) => (
                 <div key={item.id} className='m-2 flex-shrink-0 rounded border'>
-                  <GroupRowRenderItem item={item} />
+                  <GroupRowRenderModal item={item} />
                 </div>
               ))}
             </div>

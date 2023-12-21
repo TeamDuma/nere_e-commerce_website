@@ -1,13 +1,14 @@
 import './globals.css';
 import { Providers } from '@/lib/providers';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Montserrat } from 'next/font/google';
 import Header from '@/components/common/header/Header';
 import Container from '@/components/common/Container';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Footer from '@/components/common/footer/Footer';
 
-const inter = Inter({ subsets: ['latin'] });
+const Mnontserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Nere',
@@ -17,13 +18,14 @@ export const metadata: Metadata = {
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={Mnontserrat.className}>
         <Providers>
           <Header />
           <main className='flex-grow'>
             <Container>{props.children}</Container>
           </main>
           <ToastContainer />
+          <Footer />
         </Providers>
       </body>
     </html>

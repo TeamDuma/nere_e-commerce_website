@@ -68,24 +68,28 @@ const Header = () => {
   };
 
   return (
-    <nav className=' relative mx-auto flex h-20 w-full items-center justify-between bg-white px-16  '>
-      <div className='inline-flex'>
-        <a className='_o6689fn' href='/'>
-          <div className='hidden md:block'>
-            <Logo />
-          </div>
-        </a>
+    <nav
+      className='mx-auto flex flex-col items-center justify-between bg-white md:flex-row 
+     md:px-16'
+    >
+      <div className='flex items-center md:mb-0'>
+        <Link href='/'>
+          <Logo />
+        </Link>
       </div>
 
-      <div className='hidden flex-shrink flex-grow-0 justify-start px-2 sm:block'>
+      <div className='hidden flex-shrink flex-grow-0 justify-start  sm:block'>
         <div className='inline-block'>
-          <div className='flex w-full max-w-[600px] rounded-full bg-[#F5F5F5] px-2'>
+          <div className='flex w-full max-w-[600px] bg-[#F5F5F5] sm:max-w-full md:rounded-full '>
             <input
               type='text'
               className='flex w-full bg-[#F5F5F5] bg-transparent pl-2 text-[#0c0c0c] outline-0'
               placeholder='Search for products'
             />
-            <a type='submit' className='relative rounded-full bg-[#F5F5F5] p-2'>
+            <button
+              type='submit'
+              className='relative rounded-full bg-[#F5F5F5] p-2'
+            >
               <svg
                 width='30px'
                 height='30px'
@@ -110,7 +114,7 @@ const Header = () => {
                   />{' '}
                 </g>
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -128,14 +132,12 @@ const Header = () => {
               >
                 <Location />
                 <div className='ml-2'>
-                  <p style={{ color: '#298592', fontSize: '0.875rem' }}>
-                    Pick up from
-                  </p>
+                  <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
                   <p
                     style={{
                       color: '#298592',
                       fontWeight: 'bold',
-                      fontSize: '0.875rem',
+                      fontSize: 12,
                     }}
                   >
                     {selectedLocation
@@ -146,11 +148,14 @@ const Header = () => {
               </div>
             </a>
             {userInfo ? (
-              <div className='ml-2'>
-                <p style={{ color: '#298592', fontSize: '1.2rem' }}>
-                  Welcome:
-                  {userInfo.data.data.customer.name}
-                </p>
+              <div className='hidden items-center md:flex'>
+                <UserIcon />
+                <div className='ml-2'>
+                  <p style={{ color: '#298592', fontSize: 12 }}>
+                    Welcome:
+                    {userInfo.data.data.customer.name}
+                  </p>
+                </div>
               </div>
             ) : (
               <div className='relative block'>
@@ -165,8 +170,8 @@ const Header = () => {
                     <div className='hidden items-center md:flex'>
                       <UserIcon />
                       <div className='ml-2'>
-                        <p style={{ color: '#298592', fontSize: '0.875rem' }}>
-                          Login/Registeration
+                        <p style={{ color: '#298592', fontSize: 12 }}>
+                          Login & Register
                         </p>
                       </div>
                     </div>
@@ -183,8 +188,9 @@ const Header = () => {
           >
             <div className='flex flex-row gap-2'>
               <CartIcon />
-              <span className='inline-block font-bold text-[#298592]'></span>
-              {(cartItems ?? []).length}
+              <p style={{ color: '#298592', fontSize: 12 }}>
+                {(cartItems ?? []).length}
+              </p>
             </div>
           </Link>
         </div>

@@ -1,8 +1,8 @@
 const EntertainmentSection = () => {
   return (
     <section className='m-3 rounded bg-white p-5'>
-      <div className='mt-5 flex flex-col items-center gap-5 lg:flex-row'>
-        <div className='m-3 flex w-96 items-center justify-evenly rounded border border-gray-300 p-3 lg:w-1/3'>
+      <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
+        <div className='m-3 flex w-96 rounded lg:w-1/3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -18,11 +18,13 @@ const EntertainmentSection = () => {
             />
           </svg>
           <div className='text-center'>
-            <h2 className='pb-2 text-4xl font-bold'>0%</h2>
-            <h4 className='text-md inline text-gray-500'>Very Satisfied</h4>
+            <h2 className='my-1'>Nere Coins</h2>
+            <h4 className='text-md inline  font-bold text-[#298592]'>
+              Earn more{' '}
+            </h4>
           </div>
         </div>
-        <div className='m-3 flex w-96 items-center justify-evenly rounded border border-gray-300 p-3 lg:w-1/3'>
+        <div className='m-3 flex w-96 rounded lg:w-1/3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -38,11 +40,13 @@ const EntertainmentSection = () => {
             />
           </svg>
           <div className='text-center'>
-            <h2 className='pb-2 text-4xl font-bold'>0%</h2>
-            <h4 className='text-md inline text-gray-500'>Neutral</h4>
+            <h2 className='my-1 '>Game and win coins</h2>
+            <h4 className='text-md inline  font-bold text-[#298592]'>
+              Play Now
+            </h4>
           </div>
         </div>
-        <div className='m-3 flex w-96 items-center justify-evenly rounded border border-gray-300 p-3 lg:w-1/3'>
+        <div className='m-3 flex w-96 rounded lg:w-1/3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -58,8 +62,10 @@ const EntertainmentSection = () => {
             />
           </svg>
           <div className='text-center'>
-            <h2 className='pb-2 text-4xl font-bold'>0%</h2>
-            <h4 className='text-md inline text-gray-500'>Very Unsatisfied</h4>
+            <h2 className='my-1'>Loyalty offers?</h2>
+            <h4 className='text-md inline  font-bold text-[#298592]'>
+              Buy Again
+            </h4>
           </div>
         </div>
       </div>
