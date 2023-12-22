@@ -96,7 +96,9 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <div className='text-center text-5xl text-black'>
           Your cart is empty
-          <h1 className='my-5 text-[#F58929]'>Go to the Shop</h1>
+          <Link href='/products'>
+            <h1 className='my-5 text-[#F58929]'>Go to the Shop</h1>
+          </Link>
         </div>
       ) : (
         <>
@@ -128,7 +130,7 @@ const Cart = () => {
                     <div className='m-2'>
                       <div className='flex flex-col items-start'>
                         <div className='flex items-center'>
-                          <span className='text-4xl font-extralight text-[#F58929]'>
+                          <span className='font-extralight text-[#F58929]'>
                             {item?.sale_price}¢
                           </span>
                           <span

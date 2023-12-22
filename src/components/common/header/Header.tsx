@@ -72,7 +72,6 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       dispatch(deleteUser());
-      dispatch(resetCart());
 
       console.log('Logout ');
     } catch (error) {
@@ -82,8 +81,8 @@ const Header = () => {
 
   return (
     <nav
-      className='mx-auto flex flex-col items-center justify-between bg-white md:flex-row 
-     md:px-16'
+      className='mx-auto flex h-16 flex-col items-center justify-between bg-white 
+     md:flex-row md:px-16'
     >
       <div className='flex items-center md:mb-0'>
         <Link href='/'>
