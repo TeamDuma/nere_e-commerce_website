@@ -159,7 +159,7 @@ const Header = () => {
                 </div>
               </div>
             </a>
-            {userInfo ? (
+            {userInfo && userInfo.data ? (
               <div className='relative inline-block'>
                 <div
                   className='hidden items-center md:flex'
@@ -173,7 +173,7 @@ const Header = () => {
                       <UserIcon />
                       <div className='ml-2'>
                         <p style={{ color: '#298592', fontSize: 12 }}>
-                          Welcome: {userInfo?.data?.data?.customer.name}
+                          Welcome: {userInfo?.data?.customer.name}
                         </p>
                       </div>
                     </div>
@@ -183,7 +183,7 @@ const Header = () => {
                 {isDropdownOpen && (
                   <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
                     <a
-                      href='/profile'
+                      // href='/profile'
                       className='block px-4 py-2 text-[#298592]'
                     >
                       Profile
@@ -206,23 +206,12 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              // <div className='hidden items-center md:flex'>
-              //   <UserIcon />
-              //   <div className='ml-2'>
-              //     <p style={{ color: '#298592', fontSize: 12 }}>
-              //       Welcome:
-              //       {userInfo.data.data.customer.name}
-              //     </p>
-              //   </div>
-              // </div>
               <div className='relative block'>
-                <div
-                  className='hidden items-center md:flex'
-                  // onClick={openLoginModal}
-                >
+                <div className='hidden items-center md:flex'>
                   <a
                     className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                    href='/login'
+                    // href='/login'
+                    onClick={openLoginModal}
                   >
                     <div className='hidden items-center md:flex'>
                       <UserIcon />
@@ -260,6 +249,7 @@ const Header = () => {
             onClose={closeModal}
             onRegistrationClick={handleRegistrationClick}
             session={null}
+            isOpen={loginModalVisible}
           />
         )}
 

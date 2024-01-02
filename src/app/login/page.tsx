@@ -1,11 +1,14 @@
-// pages/login.tsx
 'use client';
 import Logo from '@/components/common/Logo';
 import { useSignInMutation } from '@/lib/redux/services/customers';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
+import { useRouter } from 'next/router';
+
 import { addUser } from '@/lib/redux/slices/shopping';
-import router from 'next/router';
+import { ILoginResponse } from '@/types/customer';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 interface ISession {
   user?: {
@@ -29,14 +32,29 @@ const Login: React.FC<{
 
   const handleLogin = async () => {
     try {
-      const data = await signIn({ email, password });
-      dispatch(addUser({ data }));
-      router.push('/');
+      const response = await signIn({ email, password });
 
-      console.log('Login successful:', data);
+      if ('data' in response) {
+        const data = response.data;
+        if (data.message === 'success') dispatch(addUser({ data }));
+        toast.success('Loged In.');
+
+        if (typeof window !== 'undefined') {
+        }
+
+        console.log('Login successful:', data);
+      } else {
+        handleLoginError(response.error);
+      }
     } catch (e) {
-      console.log('Login Error:', e);
+      handleLoginError(e);
     }
+  };
+
+  const handleLoginError = (error: any) => {
+    console.log('Login Error:', error);
+
+    toast.error('Login failed. Please check your credentials.');
   };
 
   useEffect(() => {
@@ -45,14 +63,11 @@ const Login: React.FC<{
       console.log('add user');
     } else {
       console.log('deleteUser');
-      // dispatch(deleteUser());
     }
   }, [session, dispatch]);
-  // Your login page content
   return (
     <div className='flex min-h-screen items-center justify-center'>
       <div className='w-full max-w-md  rounded-lg bg-white shadow-md'>
-        {/* <div className='fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50'> */}
         <div className='max-h-full w-full max-w-xl overflow-y-auto bg-white sm:rounded-2xl'>
           <div className='w-full'>
             <div className='m-8 mx-auto  max-w-[400px]'>
@@ -86,7 +101,7 @@ const Login: React.FC<{
               </label>
               <div className='relative mb-5 mt-2'>
                 <input
-                  type='password' // Set input type to 'password'
+                  type='password'
                   id='password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

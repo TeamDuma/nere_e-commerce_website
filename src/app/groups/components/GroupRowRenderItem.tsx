@@ -44,7 +44,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
         </h2>{' '}
         <div className='m-2'>
           <div className='flex items-center'>
-            <span className='text-4xl font-extralight text-[#F58929]'>
+            <span className='font-bold  text-[#F58929]'>
               {item.product?.sale_price}¢
             </span>
             <span

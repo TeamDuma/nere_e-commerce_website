@@ -70,8 +70,6 @@ const Cart = () => {
   console.log('calculateTotal', calculateTotal);
   console.log('cartItem', cartItems);
 
-  console.log('userInfo', userInfo);
-
   const openLoginModal = () => {
     setLoginModalVisible(true);
   };
@@ -182,7 +180,10 @@ const Cart = () => {
 
                         <span
                           className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                          onClick={() => dispatch(increaseQuantity(item.id))}
+                          onClick={() => {
+                            console.log('item.id', item.id);
+                            dispatch(increaseQuantity(item.id));
+                          }}
                         >
                           {' '}
                           +{' '}
@@ -319,13 +320,12 @@ const Cart = () => {
                     Delivery fee is not included
                   </p>
 
-                  {loginModalVisible && (
-                    <LoginModal
-                      onClose={closeModal}
-                      onRegistrationClick={handleRegistrationClick}
-                      session={null}
-                    />
-                  )}
+                  <LoginModal
+                    onClose={closeModal}
+                    onRegistrationClick={handleRegistrationClick}
+                    session={null}
+                    isOpen={loginModalVisible}
+                  />
                 </div>
               )}
             </div>

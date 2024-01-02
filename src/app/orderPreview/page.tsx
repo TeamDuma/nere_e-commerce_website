@@ -95,7 +95,7 @@ const OrderPreview: React.FC = () => {
                     <div className='m-2'>
                       <div className='flex flex-col items-start'>
                         <div className='flex items-center'>
-                          <span className='text-4xl font-extralight text-[#F58929]'>
+                          <span className='font-extralight text-[#F58929]'>
                             {item?.sale_price}¢
                           </span>
                           <span

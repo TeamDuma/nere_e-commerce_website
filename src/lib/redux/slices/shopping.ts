@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
 import type { ReduxState } from '@/lib/redux';
 import { CartItem } from '@/types/cart';
 import { Location } from '@/types/product';
@@ -49,11 +49,12 @@ export const shoppingSlice = createSlice({
 
     increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
       const existingProduct = state.cartItems.find((item) => item.id === id);
+      console.log('existingProduct', current(existingProduct));
       if (existingProduct) {
         if (existingProduct.hasMinQuantity) {
           existingProduct.cartQuantity = Math.min(
             existingProduct.cartQuantity!! + 1,
-            existingProduct.cartQuantity!!
+            existingProduct.min_quantity!!
           );
         } else {
           existingProduct.cartQuantity = Math.max(
@@ -90,7 +91,8 @@ export const shoppingSlice = createSlice({
       state.userInfo = null;
     },
     setSelectedLocationId: (state, action: PayloadAction<number | null>) => {
-      state.selectedLocationId = action.payload;
+      state.selectedLocationId =
+        action.payload !== null ? action.payload : undefined;
     },
 
     setLocations: (state, action: PayloadAction<Location[]>) => {
