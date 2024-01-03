@@ -252,14 +252,13 @@ const Cart = () => {
               </div>
 
               {userInfo ? (
-                // <Link href='/orderPreview'>
                 <button
                   type='button'
                   className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
                   onClick={() => {
                     if (selectedLocationId) {
                       const locationID = selectedLocationId;
-                      const customerID = userInfo.data.data.customer.id;
+                      const customerID = userInfo.data.customer.id;
                       const totalAmount = calculateTotal();
                       const voucherCode = promoCode;
                       const cartObject = cartItems.map((item: CartItem) => {

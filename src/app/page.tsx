@@ -58,18 +58,16 @@ export default function Home() {
 
   return (
     <>
-      <Container>
-        <OngoingRow />
-        <Banner />
-        <EntertainmentSection />
-        <Categories />
-        <Title text={'Ongoing Groups'} />
-        <OngoingPurchases />
-        <TwoBannerLayout />
-        <FeaturedProducts />
+      {/* <OngoingRow /> */}
+      <Banner />
+      <EntertainmentSection />
+      <Categories />
+      <Title text={'Ongoing Groups'} />
+      <OngoingPurchases />
+      <TwoBannerLayout />
+      <FeaturedProducts />
 
-        <ViewMore />
-      </Container>
+      <ViewMore />
       <div
         style={{
           position: 'fixed',

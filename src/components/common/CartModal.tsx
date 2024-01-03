@@ -159,36 +159,6 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
             <button
               type='button'
               className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-
-              // onClick={() => {
-              //   const locationID = selectedLocationId;
-              //   const customerID = userInfo.data.data.customer.id;
-              //   const totalAmount = calculateTotal();
-              //   const cartObject = cartItems.map((item: CartItem) => {
-              //     const isStartingGroup = !item.isGroupJoiner;
-              //     return transformToCartCheckoutItem(
-              //       item,
-              //       isStartingGroup ? locationID : undefined
-              //     );
-              //   });
-              //   checkoutCart({
-              //     customerID,
-              //     totalAmount,
-              //     cartObject,
-              //   })
-              //     .then((data) => {
-              //       if ('data' in data && 'authorization_url' in data.data) {
-              //         const paymentAuthorizationUrl = data.data.authorization_url;
-
-              //         window.location.href = paymentAuthorizationUrl;
-              //       } else {
-              //         console.log('Error in data structure:', data);
-              //       }
-              //     })
-              //     .catch((e) => {
-              //       console.log('Error', e);
-              //     });
-              // } }
             >
               <span>Checkout</span>
             </button>
@@ -212,64 +182,6 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
             </p>
           </div>
         )}
-        {/* {userInfo ? (
-          <button
-            type='button'
-            className='mb-2 inline-flex w-full  items-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-            onClick={() => {
-              const locationID = selectedLocationId;
-              const customerID = 1;
-              const totalAmount = calculateTotal();
-              const cartObject = cartItems.map((item: CartItem) => {
-                const isStartingGroup = !item.isGroupJoiner;
-                return transformToCartCheckoutItem(
-                  item,
-                  isStartingGroup ? locationID : undefined
-                );
-              });
-              checkoutCart({
-                customerID,
-                totalAmount,
-                cartObject,
-              })
-                .then((data) => {
-                  if ('data' in data && 'authorization_url' in data.data) {
-                    const paymentAuthorizationUrl = data.data.authorization_url;
-
-                    // Navigate to the payment authorization page
-                    window.location.href = paymentAuthorizationUrl;
-                  } else {
-                    console.log('Error in data structure:', data);
-                  }
-                })
-                .catch((e) => {
-                  console.log('Error', e);
-                });
-            }}
-          >
-            <span>Checkout</span>
-            <div className='h-5 flex-grow'></div>
-            <div className='text-l flex h-10 items-center justify-center rounded-lg bg-white text-[#0097B2]'>
-              GH¢ {calculateTotal().toFixed(2)}
-            </div>
-          </button>
-        ) : (
-          <div>
-            <button
-              type='button'
-              className='mb-2 inline-flex w-full cursor-not-allowed items-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-            >
-              <span>Checkout</span>
-              <div className='h-5 flex-grow'></div>
-              <div className='text-l flex h-10 items-center justify-center rounded-lg bg-white text-[#0097B2]'>
-                GH¢ {calculateTotal().toFixed(2)}
-              </div>
-            </button>
-            <p className='mt-1 animate-bounce text-base font-semibold text-red-500'>
-              Please login to continue
-            </p>
-          </div>
-        )} */}
       </div>
     </div>
   );

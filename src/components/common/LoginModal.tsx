@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux'; // Importing useDispatch
+import { useDispatch } from 'react-redux';
 import Logo from './Logo';
 import { useSignInMutation } from '@/lib/redux/services/customers';
 import { addUser, deleteUser } from '@/lib/redux';

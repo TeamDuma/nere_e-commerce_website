@@ -76,12 +76,10 @@ const RegistrationModal = ({ onClose }) => {
   };
 
   const isValidEmail = (email) => {
-    // Add your email validation logic here
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   const isValidPhoneNumber = (phone) => {
-    // Add your phone number validation logic here
     return /^\d{10}$/.test(phone);
   };
 

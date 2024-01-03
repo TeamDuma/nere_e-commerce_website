@@ -90,7 +90,6 @@ export default function ProductDetailPage({ params }: Props) {
       })
     );
 
-    // Show toast notification
     toast.success('Item added to cart!');
   };
 

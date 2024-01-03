@@ -28,6 +28,7 @@ const Header = () => {
         : null;
     }
   );
+  // const selectedLocation = locations.find((location: Location) => location.id === selectedLocationId);
   const selectedLocation = selectedAddress;
 
   console.log('selectedAddress', selectedAddress);
@@ -209,6 +210,7 @@ const Header = () => {
                 <div className='hidden items-center md:flex'>
                   <a
                     className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                    // href='/login'
                     onClick={openLoginModal}
                   >
                     <div className='hidden items-center md:flex'>

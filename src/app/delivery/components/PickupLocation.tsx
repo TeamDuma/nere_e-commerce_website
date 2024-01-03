@@ -82,8 +82,7 @@ const PickupLocation: React.FC<PickupLocationProps> = ({
       closePickupModal();
     } else {
       console.log('No address selected.');
-      // Optionally provide user feedback for no available locations
-      closePickupModal(); // Close the modal even if no address is selected
+      closePickupModal();
     }
   };
 

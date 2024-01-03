@@ -73,7 +73,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
       })
     );
 
-    // Show toast notification
     toast.success('Item added to cart!');
   };
 
