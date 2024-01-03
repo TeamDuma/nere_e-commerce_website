@@ -79,6 +79,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const cartProduct = cartItems.find((item) => item.id === product?.id!);
   const cartQuantity = cartProduct?.cartQuantity;
 
+  const remaining = (cartQuantity ?? 0) + (group?.members.length ?? 0);
+
   return (
     <div className='my-8'>
       <div className='container mx-auto px-6'>
@@ -156,20 +158,25 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
 
             {product?.hasMinQuantity && (
-              <ProgressBar
-                remaining={cartQuantity ?? 0}
-                total={product.min_quantity ?? 0}
-              />
-            )}
+              <>
+                <ProgressBar
+                  remaining={remaining ?? 0}
+                  total={product.min_quantity ?? 0}
+                />
 
-            <div className='flex items-center'>
-              <button
-                className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={handleAddToCart}
-              >
-                Add to Cart
-              </button>
-            </div>
+                <div className='flex items-center'>
+                  <button
+                    className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none ${
+                      remaining >= (product.min_quantity ?? 0) ? 'disabled' : ''
+                    }`}
+                    onClick={handleAddToCart}
+                    disabled={remaining >= (product.min_quantity ?? 0)}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <PurchaseGuide />
