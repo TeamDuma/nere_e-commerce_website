@@ -28,7 +28,10 @@ const customStyles: Styles = {
   },
 };
 
-const RegistrationModal = ({ onClose }) => {
+const RegistrationModal: React.FC<{
+  onClose: () => void;
+  isOpen: boolean;
+}> = ({ onClose, isOpen }) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -75,11 +78,11 @@ const RegistrationModal = ({ onClose }) => {
       });
   };
 
-  const isValidEmail = (email) => {
+  const isValidEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const isValidPhoneNumber = (phone) => {
+  const isValidPhoneNumber = (phone: string): boolean => {
     return /^\d{10}$/.test(phone);
   };
 

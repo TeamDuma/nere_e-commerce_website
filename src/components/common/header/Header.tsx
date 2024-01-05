@@ -11,20 +11,22 @@ import PickupLocation from '@/app/delivery/components/PickupLocation';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
+import { ILocation } from '@/types/location';
 
 const Header = () => {
   const { data, isLoading } = useGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const { selectedLocationId, locations, userInfo } =
-    useSelector(selectShopping);
+  const { selectedLocationId, userInfo } = useSelector(selectShopping);
   console.log('useGetLocationsQuery', selectedLocationId);
 
-  const [selectedAddress, setSelectedAddress] = useState<Location | null>(
+  const locations = data?.data?.location || [];
+
+  const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {
       return data
-        ? data.find((location) => location.id === selectedLocationId) ||
-            selectedLocationId
+        ? locations.find((location) => location.id === selectedLocationId) ||
+            null
         : null;
     }
   );
@@ -34,7 +36,7 @@ const Header = () => {
 
   useEffect(() => {
     if (data && selectedLocationId) {
-      const newlySelectedAddress = data.find(
+      const newlySelectedAddress = locations.find(
         (location) => location.id === selectedLocationId
       );
       setSelectedAddress(newlySelectedAddress || null);
@@ -58,7 +60,6 @@ const Header = () => {
   };
 
   const handleRegistrationClick = () => {
-    setLoginModalVisible(false);
     setRegistrationModalVisible(true);
   };
 
@@ -251,7 +252,12 @@ const Header = () => {
           />
         )}
 
-        {registrationModalVisible && <RegistrationModal onClose={closeModal} />}
+        {registrationModalVisible && (
+          <RegistrationModal
+            onClose={closeModal}
+            isOpen={registrationModalVisible}
+          />
+        )}
       </div>
     </nav>
   );
