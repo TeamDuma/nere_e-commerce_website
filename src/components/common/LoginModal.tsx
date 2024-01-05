@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import Logo from './Logo';
 import { useSignInMutation } from '@/lib/redux/services/customers';
 import { addUser, deleteUser } from '@/lib/redux';
-import Modal from 'react-modal';
+import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 
-const customStyles = {
+const customStyles: Styles = {
   overlay: {
     position: 'fixed',
     top: 0,

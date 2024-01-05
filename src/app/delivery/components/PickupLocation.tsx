@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from 'react-modal';
+import Modal, { Styles } from 'react-modal';
 import {
   selectShopping,
   setSelectedLocationId,
@@ -8,7 +8,7 @@ import {
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
 
-const customStyles = {
+const customStyles: Styles = {
   overlay: {
     position: 'fixed',
     top: 0,

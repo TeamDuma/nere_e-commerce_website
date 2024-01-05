@@ -1,11 +1,11 @@
 import React from 'react';
-import Modal from 'react-modal';
+import Modal, { Styles } from 'react-modal';
 import LoginModal from './LoginModal';
 import { useSignUpMutation } from '@/lib/redux/services/customers';
 import Logo from './Logo';
 import { toast } from 'react-toastify';
 
-const customStyles = {
+const customStyles: Styles = {
   overlay: {
     position: 'fixed',
     top: 0,
