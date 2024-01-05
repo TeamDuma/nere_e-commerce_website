@@ -3,6 +3,8 @@ import {
   useCheckoutCartMutation,
   useUpdateCartMutation,
 } from '@/lib/redux/services/cart';
+import Modal, { Styles } from 'react-modal';
+
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import {
   decreaseQuantity,
@@ -15,11 +17,33 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, transformToCartCheckoutItem } from '@/types/cart';
 
-interface CartModalProps {
-  closeModal: () => void;
-}
+const customStyles: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba( 190,192,193, 0.7)',
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '50%',
+    left: '90%',
+    transform: 'translate(-50%, -50%)',
+    width: '500px',
+    height: '800px',
+    borderRadius: '15px',
+  },
+};
 
-const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
+const CartModal : React.FC<{
+  onClose: () => void;
+  isOpen: boolean;
+}> = ({ onClose, isOpen }) => {
   const dispatch = useDispatch();
   const [checkoutCart] = useCheckoutCartMutation();
   const [updateCart] = useUpdateCartMutation();
@@ -29,13 +53,8 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
 
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
-  const modalRef = useRef();
 
-  const handleClickOutside = (event: { target: any }) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      closeModal();
-    }
-  };
+
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
       return total + item.price * item.cartQuantity;
@@ -47,31 +66,15 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
     return Math.round(savingsPercentage);
   };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [modalRef, closeModal]);
 
   return (
-    <div
-      ref={modalRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        height: '100%',
-        width: '30%',
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '20px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        zIndex: 1001,
-        overflowY: 'auto',
-      }}
-    >
+    <Modal
+    isOpen={isOpen}
+    style={customStyles}
+    onRequestClose={onClose}
+
+  >
       <div className='mb-5 rounded-lg md:w-full'>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
@@ -183,7 +186,7 @@ const CartModal: React.FC<CartModalProps> = ({ closeModal }) => {
           </div>
         )}
       </div>
-    </div>
+    </Modal>
   );
 };
 

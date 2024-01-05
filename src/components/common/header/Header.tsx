@@ -239,7 +239,7 @@ const Header = () => {
           </Link>
         </div>
         {locationModalVisible && (
-          <PickupLocation closePickupModal={closeModal} />
+          <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
         )}
 
         {loginModalVisible && (

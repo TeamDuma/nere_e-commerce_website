@@ -42,15 +42,13 @@ export default function Home() {
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
-    setIsOngoingModalOpen(false);
   };
 
   const openOngoingModal = () => {
     setIsOngoingModalOpen(true);
-    setIsCartModalOpen(false);
   };
 
-  const closeModals = () => {
+  const closeModal = () => {
     setIsOngoingModalOpen(false);
     setIsCartModalOpen(false);
   };
@@ -143,8 +141,9 @@ export default function Home() {
         </div>
       </div>
 
-      {isCartModalOpen && <CartModal closeModal={closeModals} />}
-      {isOngoingModalOpen && <OngoingModal closeModal={closeModals} />}
+     <CartModal onClose={closeModal} isOpen={isCartModalOpen}
+      />
+     <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
     </>
   );
 }
