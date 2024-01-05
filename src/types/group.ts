@@ -46,12 +46,3 @@ export type GetGroupResponse = {
     group: Group;
   };
 };
-export type GetlocationsResponse = {
-  find(arg0: (location: { id: number }) => boolean): unknown;
-  status: string;
-  data: {
-    location: {
-      id: number;
-    };
-  };
-};

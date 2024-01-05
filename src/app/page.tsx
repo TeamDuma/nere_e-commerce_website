@@ -10,7 +10,6 @@ import Link from 'next/link';
 import Container from '@/components/common/Container';
 import EntertainmentSection from '@/components/common/EntertainmentSection';
 import { useState } from 'react';
-import SideModal from '@/components/common/OngoingModal';
 import CartModal from '@/components/common/CartModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import OngoingModal from '@/components/common/OngoingModal';
