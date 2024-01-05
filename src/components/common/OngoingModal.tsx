@@ -9,7 +9,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Modal, { Styles } from 'react-modal';
 
-
 const customStyles: Styles = {
   overlay: {
     position: 'fixed',
@@ -30,7 +29,7 @@ const customStyles: Styles = {
     borderRadius: '20px',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
     zIndex: 1001,
-    overflowY: 'auto'
+    overflowY: 'auto',
   },
 };
 
@@ -43,15 +42,8 @@ const OngoingModal: React.FC<{
   const groups = data?.data?.groups ?? [];
   const modalRef = useRef();
 
-
   return (
-    <Modal
-    isOpen={isOpen}
-     style={customStyles}
-    onRequestClose={onClose}
-
-  >
- 
+    <Modal isOpen={isOpen} style={customStyles} onRequestClose={onClose}>
       <h2
         style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#298592' }}
       >
@@ -64,7 +56,10 @@ const OngoingModal: React.FC<{
           <div className='overflow-x-auto'>
             <div className='flex-col '>
               {groups.map((item) => (
-                <div key={item.id} className='my-2 ml-7 flex-shrink-0 rounded border'>
+                <div
+                  key={item.id}
+                  className='my-2 ml-7 flex-shrink-0 rounded border'
+                >
                   <GroupRowRenderModal item={item} />
                 </div>
               ))}

@@ -141,9 +141,8 @@ export default function Home() {
         </div>
       </div>
 
-     <CartModal onClose={closeModal} isOpen={isCartModalOpen}
-      />
-     <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
+      <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
+      <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
     </>
   );
 }

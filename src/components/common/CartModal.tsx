@@ -40,7 +40,7 @@ const customStyles: Styles = {
   },
 };
 
-const CartModal : React.FC<{
+const CartModal: React.FC<{
   onClose: () => void;
   isOpen: boolean;
 }> = ({ onClose, isOpen }) => {
@@ -54,7 +54,6 @@ const CartModal : React.FC<{
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
 
-
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
       return total + item.price * item.cartQuantity;
@@ -66,15 +65,8 @@ const CartModal : React.FC<{
     return Math.round(savingsPercentage);
   };
 
-
-
   return (
-    <Modal
-    isOpen={isOpen}
-    style={customStyles}
-    onRequestClose={onClose}
-
-  >
+    <Modal isOpen={isOpen} style={customStyles} onRequestClose={onClose}>
       <div className='mb-5 rounded-lg md:w-full'>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
