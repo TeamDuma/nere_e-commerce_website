@@ -173,7 +173,7 @@ const Header = () => {
                       <UserIcon />
                       <div className='ml-2'>
                         <p style={{ color: '#298592', fontSize: 12 }}>
-                          Welcome: {userInfo?.data?.customer.name}
+                          Welcome: {userInfo?.data?.customer?.name}
                         </p>
                       </div>
                     </div>
