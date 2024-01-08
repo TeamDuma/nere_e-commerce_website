@@ -1,4 +1,4 @@
-import { GetlocationsResponse } from '@/types/group';
+import { GetlocationsResponse } from '@/types/location';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 

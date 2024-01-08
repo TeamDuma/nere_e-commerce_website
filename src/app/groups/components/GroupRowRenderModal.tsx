@@ -4,7 +4,7 @@ import { Group } from '@/types/group';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const GroupRowRenderItem = ({ item }: { item: Group }) => {
+const GroupRowRenderModal = ({ item }: { item: Group }) => {
   const router = useRouter();
 
   const calculateSavingsPercentage = (oldPrice: number, newPrice: number) => {
@@ -16,10 +16,10 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
     <div
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-      className='flex items-center rounded-lg bg-[#F5F5F5] p-4 shadow-md'
-      style={{ width: '700px', height: '190px' }}
+      className='flex items-center  p-4 '
+      style={{ width: '400px', height: '180px' }}
     >
-      <div className='relative w-1/4 flex-shrink-0 bg-[#FFF]'>
+      <div className='relative w-1/4 flex-shrink-0 '>
         <img
           src={item.product.plain_image}
           alt={item.product.name}
@@ -27,7 +27,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
           style={{ width: '100px' }}
         />
         {item.product?.price && item.product.sale_price && (
-          <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs font-bold text-white'>
+          <span className='absolute right-0 top-0 rounded  p-1 text-xs font-bold text-white'>
             Save{' '}
             {calculateSavingsPercentage(
               item.product.price,
@@ -39,12 +39,13 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
       </div>
 
       <div className='ml-4 flex-1'>
-        <h2 className='overflow-hidden overflow-ellipsis whitespace-nowrap text-lg font-bold text-[#298592]'>
+        <h2 className='text overflow-hidden  overflow-ellipsis font-bold text-[#298592]'>
           {item.product.name}
-        </h2>{' '}
+        </h2>
+
         <div className='m-2'>
           <div className='flex items-center'>
-            <span className='font-bold  text-[#F58929]'>
+            <span className='text-lg font-extralight text-[#F58929]'>
               {item.product?.sale_price}¢
             </span>
             <span
@@ -74,4 +75,4 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
   );
 };
 
-export default GroupRowRenderItem;
+export default GroupRowRenderModal;

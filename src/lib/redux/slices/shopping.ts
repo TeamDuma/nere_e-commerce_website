@@ -1,12 +1,14 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
 import type { ReduxState } from '@/lib/redux';
 import { CartItem } from '@/types/cart';
+import { Location } from '@/types/product';
 
 export interface IShoppingState {
   cartItems: CartItem[];
   userInfo: any;
   orderData: any[];
   selectedLocationId?: number;
+  locations: Location[];
 }
 
 const initialState: IShoppingState = {
@@ -14,6 +16,7 @@ const initialState: IShoppingState = {
   userInfo: null,
   orderData: [],
   selectedLocationId: undefined,
+  locations: [],
 };
 
 export const shoppingSlice = createSlice({
@@ -30,18 +33,28 @@ export const shoppingSlice = createSlice({
       );
 
       if (cartItem) {
-        cartItem.cartQuantity += quantity;
+        if (cartItem.hasMinQuantity) {
+          const minQuantity = cartItem.min_quantity ?? 0;
+          cartItem.cartQuantity = Math.min(
+            cartItem.cartQuantity + quantity,
+            minQuantity
+          );
+        } else {
+          cartItem.cartQuantity += quantity;
+        }
       } else {
         state.cartItems.push({ ...item, cartQuantity: quantity });
       }
     },
+
     increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
       const existingProduct = state.cartItems.find((item) => item.id === id);
+      console.log('existingProduct', current(existingProduct));
       if (existingProduct) {
         if (existingProduct.hasMinQuantity) {
           existingProduct.cartQuantity = Math.min(
             existingProduct.cartQuantity!! + 1,
-            existingProduct.cartQuantity!!
+            existingProduct.min_quantity!!
           );
         } else {
           existingProduct.cartQuantity = Math.max(
@@ -71,8 +84,19 @@ export const shoppingSlice = createSlice({
     resetOrder: (state) => {
       state.orderData = [];
     },
+    addUser: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    deleteUser: (state) => {
+      state.userInfo = null;
+    },
     setSelectedLocationId: (state, action: PayloadAction<number | null>) => {
-      state.selectedLocationId = action.payload;
+      state.selectedLocationId =
+        action.payload !== null ? action.payload : undefined;
+    },
+
+    setLocations: (state, action: PayloadAction<Location[]>) => {
+      state.locations = action.payload;
     },
   },
 });
@@ -85,7 +109,10 @@ export const {
   resetCart,
   saveOrder,
   resetOrder,
+  addUser,
+  deleteUser,
   setSelectedLocationId,
+  setLocations,
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;
 

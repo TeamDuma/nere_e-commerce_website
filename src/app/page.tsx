@@ -10,69 +10,99 @@ import Link from 'next/link';
 import Container from '@/components/common/Container';
 import EntertainmentSection from '@/components/common/EntertainmentSection';
 import { useState } from 'react';
-import SideModal from '@/components/common/OngoingModal';
 import CartModal from '@/components/common/CartModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import OngoingModal from '@/components/common/OngoingModal';
 import ViewMore from '@/components/common/ViewMore';
 import { useSelector } from 'react-redux';
 import { selectShopping } from '@/lib/redux/slices/shopping';
+import CartIcon from '@/components/common/CartIcon';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isOngoingModalOpen, setIsOngoingModalOpen] = useState(false);
   const { cartItems } = useSelector(selectShopping);
+  const {
+    data: ongoingGroupsData,
+    isLoading: ongoingGroupsLoading,
+    error: ongoingGroupsError,
+  } = useGetPublicOngoingGroupsQuery();
+  const { data: productsData, isLoading: productsLoading } =
+    useGetActiveProductsQuery();
+  const products = productsData?.data?.products ?? [];
+  const groups = ongoingGroupsData?.data?.groups ?? [];
+
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + item.sale_price * item.cartQuantity;
+    }, 0);
+  };
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
-    setIsOngoingModalOpen(false);
   };
 
   const openOngoingModal = () => {
     setIsOngoingModalOpen(true);
-    setIsCartModalOpen(false);
   };
 
-  const closeModals = () => {
+  const closeModal = () => {
     setIsOngoingModalOpen(false);
     setIsCartModalOpen(false);
   };
 
   return (
     <>
-      <Container>
-        <OngoingRow />
-        <Banner />
-        <EntertainmentSection />
-        <Categories />
-        <Title text={'Ongoing Groups'} />
-        <OngoingPurchases />
-        <TwoBannerLayout />
-        <FeaturedProducts />
+      {/* <OngoingRow /> */}
+      <Banner />
+      <EntertainmentSection />
+      <Categories />
+      <Title text={'Ongoing Groups'} />
+      <OngoingPurchases />
+      <TwoBannerLayout />
+      <FeaturedProducts />
 
-        <ViewMore />
-      </Container>
+      <ViewMore />
       <div
         style={{
           position: 'fixed',
           top: '75%',
           transform: 'translateY(-50%)',
           right: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
           zIndex: 1000,
         }}
       >
         <div
           onClick={openCartModal}
-          className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
+          className=' py-4 text-center text-base font-semibold text-white'
           style={{
             background: '#F58929',
             width: '110px',
-            height: '50px',
-            marginTop: '9px',
+            height: '110px',
+            marginTop: '35px',
             cursor: 'pointer',
+            borderTopLeftRadius: '10px',
+            borderBottomLeftRadius: '10px',
           }}
         >
-          Open Cart
+          <div className='flex flex-col items-center justify-center'>
+            <div className='ml-2 flex flex-row gap-2'>
+              <CartIcon />
+              <p style={{ color: '#FFF', fontSize: 12 }}>
+                {(cartItems ?? []).length} Items
+              </p>{' '}
+            </div>
+
+            <div className='m-2 flex flex-row rounded bg-white'>
+              <p style={{ color: '#F58929', fontSize: 12, marginLeft: '4px' }}>
+                GH¢ {calculateTotal().toFixed(2)}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -87,21 +117,32 @@ export default function Home() {
       >
         <div
           onClick={openOngoingModal}
-          className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
+          className='pt-2 text-center text-base font-semibold text-white shadow'
           style={{
             background: '#F58929',
-            width: '150px',
-            marginTop: '9px',
+            width: '110px',
+            height: '110px',
+            marginTop: '35px',
             cursor: 'pointer',
-            height: '50px',
+            borderTopRightRadius: '10px',
+            borderBottomRightRadius: '10px',
           }}
         >
-          Open Ongoing
+          <div className='flex flex-col items-center justify-center'>
+            <div className='ml-2 flex flex-row gap-2'>
+              <FaRegUserCircle />
+            </div>
+            <div className='m-2 flex  flex-row rounded'>
+              <p style={{ color: '#fff', fontSize: 12, marginBottom: 2 }}>
+                {groups.length} Ongoing Purchases near me
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      {isCartModalOpen && <CartModal closeModal={closeModals} />}
-      {isOngoingModalOpen && <OngoingModal closeModal={closeModals} />}
+      <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
+      <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
     </>
   );
 }

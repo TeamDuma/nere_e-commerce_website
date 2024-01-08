@@ -20,27 +20,27 @@ const Products = () => {
         }}
       >
         {products.map((product) => (
-          <Link href={`/product/${product.id}`}>
-            <div key={product?.id} style={{ marginTop: '50px' }}>
-              <div
-                style={{
-                  width: '100px',
-                  height: '40px',
-                  backgroundColor: '#F58929',
-                  position: 'relative',
-                  display: 'flex',
-                  fontSize: '14px',
-                  left: '146px',
-                  top: '43px',
-                  borderRadius: '8px',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  alignItems: 'center',
-                  color: 'white',
-                }}
-              >
-                {`Save GHC ${product.price - product.sale_price}`}
-              </div>
+          <div key={product?.id}>
+            <div
+              style={{
+                width: '100px',
+                height: '40px',
+                backgroundColor: '#F58929',
+                position: 'relative',
+                display: 'flex',
+                fontSize: '14px',
+                left: '146px',
+                top: '43px',
+                borderRadius: '8px',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                alignItems: 'center',
+                color: 'white',
+              }}
+            >
+              {`Save GHC ${product.price - product.sale_price}`}
+            </div>
+            <Link href={`/product/${product.id}`}>
               <div
                 style={{
                   backgroundColor: '#F5F5F5',
@@ -65,30 +65,31 @@ const Products = () => {
                   alt='cerelac image'
                 />
               </div>
+            </Link>
+            <div
+              style={{
+                fontSize: '18px',
+                fontWeight: 'bold',
+                color: '#298592',
+                marginTop: '2px',
+              }}
+            >
+              {product?.name}
+            </div>
+
+            <div style={{ display: 'flex', marginTop: '2px' }}>
               <div
                 style={{
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                  color: '#298592',
-                  marginTop: '2px',
+                  marginLeft: '4px',
+                  color: '#C1C2C2',
+                  textDecoration: 'line-through',
                 }}
-              >
-                {product?.name}
-              </div>
-              <div style={{ display: 'flex', marginTop: '2px' }}>
-                <div
-                  style={{
-                    marginLeft: '4px',
-                    color: '#C1C2C2',
-                    textDecoration: 'line-through',
-                  }}
-                >{`GHC ${product?.price}`}</div>
-                <div
-                  style={{ color: '#F58929', marginLeft: '5px' }}
-                >{`GHC ${product?.sale_price}`}</div>
-              </div>
+              >{`GHC ${product?.price}`}</div>
+              <div
+                style={{ color: '#F58929', marginLeft: '5px' }}
+              >{`GHC ${product?.sale_price}`}</div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </>

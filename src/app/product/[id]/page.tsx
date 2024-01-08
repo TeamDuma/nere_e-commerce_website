@@ -1,13 +1,17 @@
 'use client';
 import Banner from '@/components/Banner';
 import FeaturedProducts from '@/components/FeaturedProducts';
+import PurchaseGuide from '@/components/common/PurchaseGuide';
 import ViewMore from '@/components/common/ViewMore';
 import { addToCart, selectShopping } from '@/lib/redux';
+import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
 import { useLazyGetProductQuery } from '@/lib/redux/services/product';
 import { GroupType } from '@/types/group';
 import Link from 'next/link';
 import { SetStateAction, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   params: {
@@ -24,6 +28,8 @@ export default function ProductDetailPage({ params }: Props) {
   const { cartItems } = useSelector(selectShopping);
   const [getProduct, { data, isLoading, isError }] = useLazyGetProductQuery();
   const product = data?.data?.product;
+  const [getGroup, { data: groupData }] = useLazyGetGroupQuery();
+  const group = groupData?.data?.group;
 
   useEffect(() => {
     getProduct(productId);
@@ -69,10 +75,30 @@ export default function ProductDetailPage({ params }: Props) {
     setSelectedVariant(variantName);
   };
 
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        item: {
+          ...product!,
+          cartQuantity: 0,
+          productID: product?.id!,
+          isGroupJoiner: true,
+          groupID: group?.id!,
+          locationID: undefined,
+          type: GroupType.PUBLIC,
+        },
+      })
+    );
+
+    toast.success('Item added to cart!');
+  };
+
   const cartProduct = cartItems.find((item) => item.id === productId);
 
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
   console.log('cartQuantity');
+
+  console.log('group:', group);
 
   return (
     <div className='my-8'>
@@ -81,7 +107,7 @@ export default function ProductDetailPage({ params }: Props) {
           <div className='h-64 w-full bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
             <img
               className='mx-auto h-full max-w-lg rounded-md object-cover '
-              src={product.plain_image}
+              src={product?.plain_image}
               alt='plain_image'
             />
           </div>
@@ -114,17 +140,17 @@ export default function ProductDetailPage({ params }: Props) {
               )}
             </div>
 
-            <div className='mt-3 flex items-center'>
-              <span className='text-4xl font-extralight text-[#1A464C]'>
-                {product.sale_price}¢
+            <div className='mt-3 flex flex-col items-center md:flex-row md:items-start'>
+              <span className='font-semibold text-[#1A464C]'>
+                {product?.sale_price}¢
               </span>
               <span
                 className='ml-3 text-red-500'
                 style={{ textDecoration: 'line-through' }}
               >
-                {product.price}¢
+                {product?.price}¢
               </span>
-              {product.price && product.sale_price && (
+              {product?.price && product.sale_price && (
                 <span className='ml-3  rounded bg-[#8CCED7] text-white '>
                   Save{' '}
                   {calculateSavingsPercentage(
@@ -136,68 +162,41 @@ export default function ProductDetailPage({ params }: Props) {
               )}
             </div>
 
-            <table
-              className='... border-collapse border border-slate-400'
-              style={{ width: '100%' }}
-            >
+            <table className='my-3 w-full border-collapse border border-slate-400 md:my-5'>
               <thead>
                 <tr>
-                  <th
-                    className='... border border-slate-300'
-                    style={{ width: '50%' }}
-                  >
-                    participants
+                  <th className='border border-slate-300 md:w-1/2'>
+                    {' '}
+                    0 participants
                   </th>
-                  <th
-                    className='... border border-slate-300'
-                    style={{ width: '50%' }}
-                  >
-                    Ends in
-                  </th>
+                  <th className='border border-slate-300 md:w-1/2'> Ends in</th>
                 </tr>
               </thead>
             </table>
 
-            {product.min_quantity && (
-              <div className='mt-3 text-gray-700'>
-                {remainingToMeetMOQ} purchase required on this group
-              </div>
-            )}
-
-            {product.min_quantity && (
-              <div className='w-256 my-4 h-1 overflow-hidden rounded-full bg-gray-200'>
-                <div
-                  className='h-full bg-[#F58929]'
-                  style={{ width: `${progressPercentage}%` }}
-                />
-              </div>
-            )}
-
             <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
+
+            {product?.hasMinQuantity && (
+              <div className='progress-bar'>
+                <div className='progress-line'></div>
+              </div>
+            )}
+
             <div className='flex items-center'>
               <button
-                className='m-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={() =>
-                  dispatch(
-                    addToCart({
-                      item: {
-                        ...product!,
-                        cartQuantity: 0,
-                        productID: product?.id!,
-                        isGroupJoiner: false,
-                        type: GroupType.PUBLIC,
-                      },
-                    })
-                  )
-                }
+                className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                onClick={handleAddToCart}
               >
-                Order Now
+                Add to Cart
               </button>
             </div>
           </div>
         </div>
+        <PurchaseGuide />
         <Banner />
-
+        <div className='mt-12 flex items-center justify-center '>
+          <h1>You might like</h1>
+        </div>{' '}
         <FeaturedProducts />
         <ViewMore />
       </div>

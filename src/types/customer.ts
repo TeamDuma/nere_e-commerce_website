@@ -18,6 +18,7 @@ export interface ILoginRequest {
 }
 
 export interface ILoginResponse {
+  message: string;
   status: string;
   data: {
     Customer: Customer[];

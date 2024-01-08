@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addToCart,
@@ -13,6 +13,11 @@ import Banner from '@/components/Banner';
 import ViewMore from '@/components/common/ViewMore';
 import { Product } from '@/types/product';
 import { GroupType } from '@/types/group';
+import UserIcon from '@/components/common/User';
+import ProgressBar from '@/components/common/ProgressBar';
+import PurchaseGuide from '@/components/common/PurchaseGuide';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -21,6 +26,7 @@ interface OngoingDetailsProps {
 const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectShopping);
+  const [selectedVariant, setSelectedVariant] = useState('');
 
   const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
   const group = data?.data?.group;
@@ -39,9 +45,41 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   if (isError) {
     return <div>Error</div>;
   }
+  const calculateSavingsPercentage = (oldPrice: number, newPrice: number) => {
+    const savingsPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
+    return Math.round(savingsPercentage);
+  };
 
-  const cartProduct = cartItems.find((item) => item.id);
-  const cartQuantity = cartProduct ? cartProduct.quantity : 0;
+  const variantsArray = product?.variants
+    ? product.variants.split(',').map((variant) => variant.trim())
+    : [];
+
+  const handleVariantChange = (variantName: string) => {
+    setSelectedVariant(variantName);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        item: {
+          ...product!,
+          cartQuantity: 0,
+          productID: product?.id!,
+          isGroupJoiner: true,
+          groupID: group?.id!,
+          locationID: undefined,
+          type: GroupType.PUBLIC,
+        },
+      })
+    );
+
+    toast.success('Item added to cart!');
+  };
+
+  const cartProduct = cartItems.find((item) => item.id === product?.id!);
+  const cartQuantity = cartProduct?.cartQuantity;
+
+  const remaining = (cartQuantity ?? 0) + (group?.members.length ?? 0);
 
   return (
     <div className='my-8'>
@@ -60,10 +98,31 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <h3 className='text-lg uppercase text-gray-700'>
                 {product?.name}
               </h3>
+              {variantsArray.length > 0 && (
+                <div className='ml-12'>
+                  <div className='mt-1'>
+                    <select
+                      id='variant'
+                      value={selectedVariant}
+                      onChange={(e) => handleVariantChange(e.target.value)}
+                      className='w-full rounded border border-gray-300 p-2'
+                    >
+                      <option value='' disabled>
+                        Select a variant
+                      </option>
+                      {variantsArray.map((variant, index) => (
+                        <option key={index} value={variant}>
+                          {variant}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className='mt-3 flex items-center'>
-              <span className='text-4xl font-extralight text-[#1A464C]'>
+            <div className='mt-3 flex flex-col items-center md:flex-row md:items-start'>
+              <span className='font-extralight text-[#1A464C]'>
                 {product?.sale_price}¢
               </span>
               <span
@@ -74,60 +133,57 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               </span>
               {product?.price && product.sale_price && (
                 <span className='ml-3  rounded bg-[#8CCED7] text-white '>
-                  Save
+                  Save{' '}
+                  {calculateSavingsPercentage(
+                    product.price,
+                    product.sale_price
+                  )}
+                  %
                 </span>
               )}
             </div>
 
-            <table
-              className='... border-collapse border border-slate-400'
-              style={{ width: '100%' }}
-            >
+            <table className='my-3 w-full border-collapse border border-slate-400 md:my-5'>
               <thead>
                 <tr>
-                  <th
-                    className='... border border-slate-300'
-                    style={{ width: '50%' }}
-                  >
-                    participants
+                  <th className='border border-slate-300 md:w-1/2'>
+                    {' '}
+                    {group?.members.length} participants
                   </th>
-                  <th
-                    className='... border border-slate-300'
-                    style={{ width: '50%' }}
-                  >
-                    Ends in
-                  </th>
+                  <th className='border border-slate-300 md:w-1/2'> Ends in</th>
                 </tr>
               </thead>
             </table>
 
             <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
-            <div className='flex items-center'>
-              <button
-                className='ml-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={() =>
-                  dispatch(
-                    addToCart({
-                      item: {
-                        ...product!,
-                        cartQuantity: 0,
-                        productID: product?.id!,
-                        isGroupJoiner: true,
-                        groupID: group?.id!,
-                        locationID: undefined,
-                        type: GroupType.PUBLIC,
-                      },
-                    })
-                  )
-                }
-              >
-                Order Now
-              </button>
-            </div>
+
+            {product?.hasMinQuantity && (
+              <>
+                <ProgressBar
+                  remaining={remaining ?? 0}
+                  total={product.min_quantity ?? 0}
+                />
+
+                <div className='flex items-center'>
+                  <button
+                    className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none ${
+                      remaining >= (product.min_quantity ?? 0) ? 'disabled' : ''
+                    }`}
+                    onClick={handleAddToCart}
+                    disabled={remaining >= (product.min_quantity ?? 0)}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
+        <PurchaseGuide />
         <Banner />
-
+        <div className='mt-12 flex items-center justify-center '>
+          <h1>You might like</h1>
+        </div>{' '}
         <FeaturedProducts />
         <ViewMore />
       </div>

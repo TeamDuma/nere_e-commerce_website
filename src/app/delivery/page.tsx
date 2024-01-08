@@ -1,63 +1,25 @@
 'use client';
 import { useState, useEffect } from 'react';
 import PickupLocation from './components/PickupLocation';
-import CustomAddress from './components/CustomAddress';
 import { useRouter } from 'next/navigation';
+import AddAddressModal from './components/AddAddressModal';
 
 const DeliveryPage = () => {
   const [isPickupModalOpen, setPickupModalOpen] = useState(false);
   const [isCustomAddressModalOpen, setCustomAddressModalOpen] = useState(false);
+
   const router = useRouter();
 
   const openPickupModal = () => {
     setPickupModalOpen(true);
   };
-
-  const closePickupModal = () => {
-    setPickupModalOpen(false);
-  };
-
   const openCustomAddressModal = () => {
     setCustomAddressModalOpen(true);
   };
 
-  const closeCustomAddressModal = () => {
+  const closeModal = () => {
+    setPickupModalOpen(false);
     setCustomAddressModalOpen(false);
-  };
-
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (isPickupModalOpen || isCustomAddressModalOpen) {
-        const modalOverlay = document.getElementById('modal-overlay');
-        if (modalOverlay && !modalOverlay.contains(event.target)) {
-          closePickupModal();
-          closeCustomAddressModal();
-        }
-      }
-    };
-
-    const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
-        closePickupModal();
-        closeCustomAddressModal();
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutsideClick);
-    document.addEventListener('keydown', handleEscapeKey);
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, [isPickupModalOpen, isCustomAddressModalOpen]);
-
-  const handlePickupLocationChange = () => {
-    openPickupModal();
-  };
-
-  const handleCustomAddressChange = () => {
-    openCustomAddressModal();
   };
 
   return (
@@ -75,7 +37,7 @@ const DeliveryPage = () => {
                     id='pickupLocation'
                     name='deliveryOption'
                     className='mr-2'
-                    onChange={handlePickupLocationChange}
+                    onChange={openPickupModal}
                   />
                   <label htmlFor='pickupLocation'>Pick-up location</label>
                 </div>
@@ -90,7 +52,7 @@ const DeliveryPage = () => {
                       id='customAddress'
                       name='deliveryOption'
                       className='mr-2'
-                      onChange={handleCustomAddressChange}
+                      onChange={openCustomAddressModal}
                     />
                     <label htmlFor='customAddress'>Select Custom Address</label>
                   </div>
@@ -138,12 +100,8 @@ const DeliveryPage = () => {
         </div>
       </div>
 
-      {isPickupModalOpen && (
-        <PickupLocation closePickupModal={closePickupModal} />
-      )}
-      {isCustomAddressModalOpen && (
-        <CustomAddress closeCustomAddressModal={closeCustomAddressModal} />
-      )}
+      <PickupLocation onClose={closeModal} isOpen={isPickupModalOpen} />
+      <AddAddressModal onClose={closeModal} isOpen={isCustomAddressModalOpen} />
     </>
   );
 };

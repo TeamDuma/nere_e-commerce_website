@@ -38,17 +38,16 @@
 }
 
 .social-icon:hover {
-  color: #1877f2; /* Facebook blue color */
+  color: #1877f2;
 }
 
-/* styles.css (or any styling solution you prefer) */
 .card {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  margin: 4px; /* Add a small margin from all sides */
+  margin: 4px;
 }
 
 .card:hover {
@@ -62,8 +61,8 @@
 }
 
 .card-content {
-  padding: 8px; /* Increase padding for better spacing */
-  text-align: center; /* Center the text */
+  padding: 8px;
+  text-align: center;
 }
 
 .card-title {
@@ -74,7 +73,6 @@
 .card-description {
   color: #555;
 }
-/* styles.css (or any styling solution you prefer) */
 .three-section-row {
   display: flex;
   justify-content: space-between;
@@ -137,21 +135,21 @@
 }
 
 .image {
-  width: 100px; /* Set your desired width for the image */
-  height: 70px; /* Set your desired height for the image */
-  object-fit: contain; /* Adjust the image's aspect ratio to fit the container */
+  width: 100px;
+  height: 70px;
+  object-fit: contain;
 }
-
 .purchase-guide {
   display: flex;
-  align-items: center;
-  margin: 20px 0;
+  margin: 150px 0;
+  width: 100%;
 }
 
 .guide-step {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
 }
 
 .step-icon {
@@ -164,35 +162,52 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .step-text {
   text-align: center;
+  font-size: 14px;
+  color: #1a464c;
+  margin-top: 14px;
 }
 
 .guide-line {
   border: 1px solid #f58929;
-  flex-grow: 1;
-  margin: 0 10px;
+  width: 100%;
+  margin: 8px 0;
 }
 
-.progressBarContainer {
-  margin-bottom: 5px;
+.progress-bar {
+  flex-direction: column;
+  align-items: center;
 }
 
-.progressBar {
-  height: 1px;
+.progress-text {
+  color: #828282;
+
+  margin-bottom: 8px;
+}
+
+.progress-line {
+  width: 100%;
+  border-radius: 10%;
+  height: 5px;
+  background-color: #ddd;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
   background-color: orange;
 }
 
 .sticky-buttons {
   position: fixed;
-  top: 50%; /* Center vertically */
+  top: 50%;
   transform: translateY(-50%);
   display: flex;
   justify-content: space-between;
-  /* padding: 10px; */
   width: 100%;
   z-index: 1000;
 }
@@ -202,8 +217,8 @@
   background-color: #298592;
   color: white;
   padding: 10px;
-  width: 150px; /* Fixed width */
-  height: 40px; /* Fixed height */
+  width: 150px;
+  height: 40px;
   cursor: pointer;
 }
 

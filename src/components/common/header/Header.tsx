@@ -1,21 +1,52 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartIcon from '../CartIcon';
 import Location from '../Location';
 import Logo from '../Logo';
 import UserIcon from '../User';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { selectShopping, useDispatch } from '@/lib/redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUser, resetCart, selectShopping } from '@/lib/redux';
+import PickupLocation from '@/app/delivery/components/PickupLocation';
+import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
-import PickupLocation from '@/app/delivery/components/PickupLocation';
+import { ILocation } from '@/types/location';
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const { data, isLoading } = useGetlocationsQuery();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const { selectedLocationId, userInfo } = useSelector(selectShopping);
+  console.log('useGetLocationsQuery', selectedLocationId);
+
+  const locations = data?.data?.location || [];
+
+  const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
+    () => {
+      return data
+        ? locations.find((location) => location.id === selectedLocationId) ||
+            null
+        : null;
+    }
+  );
+  const selectedLocation = selectedAddress;
+
+  console.log('selectedAddress', selectedAddress);
+
+  useEffect(() => {
+    if (data && selectedLocationId) {
+      const newlySelectedAddress = locations.find(
+        (location) => location.id === selectedLocationId
+      );
+      setSelectedAddress(newlySelectedAddress || null);
+    }
+  }, [selectedLocationId, data]);
+
   const { cartItems } = useSelector(selectShopping);
   const [locationModalVisible, setLocationModalVisible] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
@@ -29,7 +60,6 @@ const Header = () => {
   };
 
   const handleRegistrationClick = () => {
-    setLoginModalVisible(false);
     setRegistrationModalVisible(true);
   };
 
@@ -39,25 +69,39 @@ const Header = () => {
     setLocationModalVisible(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      dispatch(deleteUser());
+
+      console.log('Logout ');
+    } catch (error) {
+      console.error('Logout Error:', error);
+    }
+  };
+
   return (
-    <nav className=' relative mx-auto flex h-20 w-full items-center justify-between bg-white px-16  '>
-      <div className='inline-flex'>
-        <a className='_o6689fn' href='/'>
-          <div className='hidden md:block'>
-            <Logo />
-          </div>
-        </a>
+    <nav
+      className='mx-auto flex h-16 flex-col items-center justify-between bg-white 
+     md:flex-row md:px-16'
+    >
+      <div className='flex items-center md:mb-0'>
+        <Link href='/'>
+          <Logo />
+        </Link>
       </div>
 
-      <div className='hidden flex-shrink flex-grow-0 justify-start px-2 sm:block'>
+      <div className='hidden flex-shrink flex-grow-0 justify-start  sm:block'>
         <div className='inline-block'>
-          <div className='flex w-full max-w-[600px] rounded-full bg-[#F5F5F5] px-2'>
+          <div className='flex w-full max-w-[600px] bg-[#F5F5F5] sm:max-w-full md:rounded-full '>
             <input
               type='text'
               className='flex w-full bg-[#F5F5F5] bg-transparent pl-2 text-[#0c0c0c] outline-0'
               placeholder='Search for products'
             />
-            <a type='submit' className='relative rounded-full bg-[#F5F5F5] p-2'>
+            <button
+              type='submit'
+              className='relative rounded-full bg-[#F5F5F5] p-2'
+            >
               <svg
                 width='30px'
                 height='30px'
@@ -82,7 +126,7 @@ const Header = () => {
                   />{' '}
                 </g>
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -100,62 +144,120 @@ const Header = () => {
               >
                 <Location />
                 <div className='ml-2'>
-                  <p style={{ color: '#298592', fontSize: '0.875rem' }}>
-                    Pick up from
-                  </p>
+                  <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
                   <p
                     style={{
                       color: '#298592',
                       fontWeight: 'bold',
-                      fontSize: '0.875rem',
+                      fontSize: 12,
                     }}
                   >
-                    Location
+                    {selectedLocation
+                      ? selectedLocation.name
+                      : 'Select a location'}
                   </p>
                 </div>
               </div>
             </a>
-            <div className='relative block'>
-              <div
-                className='hidden items-center md:flex'
-                onClick={openLoginModal}
-              >
-                <a
-                  className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                  href='#'
+            {userInfo && userInfo.data ? (
+              <div className='relative inline-block'>
+                <div
+                  className='hidden items-center md:flex'
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
-                  <div className='hidden items-center md:flex'>
-                    <UserIcon />
-                    <div className='ml-2'>
-                      <p style={{ color: '#298592', fontSize: '0.875rem' }}>
-                        Login/Registeration
-                      </p>
+                  <a
+                    className='inline-block cursor-pointer rounded-full px-3 py-2 hover:bg-gray-200'
+                    href='#'
+                  >
+                    <div className='flex items-center'>
+                      <UserIcon />
+                      <div className='ml-2'>
+                        <p style={{ color: '#298592', fontSize: 12 }}>
+                          Welcome: {userInfo?.data?.customer?.name}
+                        </p>
+                      </div>
                     </div>
+                  </a>
+                </div>
+
+                {isDropdownOpen && (
+                  <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
+                    <a
+                      // href='/profile'
+                      className='block px-4 py-2 text-[#298592]'
+                    >
+                      Profile
+                    </a>
+
+                    <a
+                      href='/orders'
+                      className='block px-4 py-2 text-[#298592]'
+                    >
+                      Orders
+                    </a>
+                    <a
+                      href='#'
+                      className='block px-4 py-2 text-[#298592]'
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </a>
                   </div>
-                </a>
+                )}
               </div>
-            </div>
+            ) : (
+              <div className='relative block'>
+                <div className='hidden items-center md:flex'>
+                  <a
+                    className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                    onClick={openLoginModal}
+                  >
+                    <div className='hidden items-center md:flex'>
+                      <UserIcon />
+                      <div className='ml-2'>
+                        <p style={{ color: '#298592', fontSize: 12 }}>
+                          Login & Register
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
-          <Link href='/cart' className='block rounded-md bg-white p-2'>
+          <Link
+            href='/cart'
+            className={`block rounded-md p-2 ${
+              cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+            }`}
+          >
             <div className='flex flex-row gap-2'>
-              <CartIcon />{' '}
-              <span className='inline-block font-bold text-[#298592]'></span>
-              {(cartItems ?? []).length}
+              <CartIcon />
+              <p style={{ color: '#298592', fontSize: 12 }}>
+                {(cartItems ?? []).length}
+              </p>
             </div>
           </Link>
         </div>
         {locationModalVisible && (
-          <PickupLocation closePickupModal={closeModal} />
+          <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
         )}
 
         {loginModalVisible && (
           <LoginModal
             onClose={closeModal}
             onRegistrationClick={handleRegistrationClick}
+            session={null}
+            isOpen={loginModalVisible}
           />
         )}
 
-        {registrationModalVisible && <RegistrationModal onClose={closeModal} />}
+        {registrationModalVisible && (
+          <RegistrationModal
+            onClose={closeModal}
+            isOpen={registrationModalVisible}
+          />
+        )}
       </div>
     </nav>
   );

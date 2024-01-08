@@ -1,56 +1,97 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import Modal, { Styles } from 'react-modal';
 import LoginModal from './LoginModal';
-import Logo from './Logo';
 import { useSignUpMutation } from '@/lib/redux/services/customers';
+import Logo from './Logo';
+import { toast } from 'react-toastify';
 
-const RegistrationModal = ({ onClose }) => {
-  const [loginModalVisible, setLoginModalVisible] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
+const customStyles: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba( 190,192,193, 0.7)',
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '500px',
+    height: '800px',
+    borderRadius: '15px',
+  },
+};
 
-  const [confirmPassword, setConfirmPassword] = useState('');
+const RegistrationModal: React.FC<{
+  onClose: () => void;
+  isOpen: boolean;
+}> = ({ onClose, isOpen }) => {
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
 
-  const modalRef = useRef();
-
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [onClose]);
-
-  const handleLoginClick = () => {
-    setLoginModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setLoginModalVisible(false);
-  };
   const [signUp, { isLoading, isError, isSuccess, error }] =
     useSignUpMutation();
 
   const handleRegister = async () => {
+    if (!name) {
+      alert('Name should not be empty');
+      return;
+    }
+
+    if (!email || !isValidEmail(email)) {
+      alert('Email must be a valid email address');
+      return;
+    }
+
+    if (!phone || !isValidPhoneNumber(phone)) {
+      alert('Phone must be a valid phone number');
+      return;
+    }
+    if (!password || password.length < 6) {
+      alert('Password should be at least 6 characters long');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('Password and Confirm Password do not match');
+      return;
+    }
+
     signUp({ email, name, phone, password })
       .then((data) => {
         console.log('Login successful:', data);
+        toast.success('signUp successfully');
+        onClose();
       })
       .catch((e) => {
         console.log('Login Error:', e);
+        toast.error(e);
       });
   };
 
+  const isValidEmail = (email: string): boolean => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const isValidPhoneNumber = (phone: string): boolean => {
+    return /^\d{10}$/.test(phone);
+  };
+
   return (
-    <div
-      className='fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50'
-      ref={modalRef}
+    <Modal
+      isOpen={true}
+      onRequestClose={onClose}
+      contentLabel='Registration Modal'
+      style={customStyles}
     >
       <div className='max-h-full w-full max-w-xl overflow-y-auto bg-white sm:rounded-2xl'>
         <div className='w-full'>
@@ -152,20 +193,16 @@ const RegistrationModal = ({ onClose }) => {
             <p>
               Already have an account?{' '}
               <span
-                onClick={handleLoginClick}
+                // onClick={handleLoginClick}
                 className='cursor-pointer text-blue-500'
               >
                 Login{' '}
               </span>
             </p>
           </div>
-
-          {loginModalVisible && (
-            <LoginModal onClose={closeModal} onRegistrationClick={closeModal} />
-          )}
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 

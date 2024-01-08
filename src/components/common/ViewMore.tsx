@@ -16,7 +16,8 @@ const ViewMore = () => {
           style={{
             background: '#298592',
             width: '150px',
-            marginTop: '9px',
+            marginTop: '10px',
+            marginBottom: '10px',
           }}
         >
           View All Items

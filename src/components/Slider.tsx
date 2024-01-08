@@ -30,7 +30,7 @@ const Slider = () => {
 
   return (
     <div
-      className='flex h-96 w-full flex-nowrap overflow-hidden rounded-xl text-center'
+      className='space-4 flex h-96 w-full flex-nowrap overflow-hidden rounded-xl text-center'
       id='slider'
     >
       <div className='flex w-full flex-none flex-col items-center justify-center space-y-4 bg-blue-600 text-white'>
