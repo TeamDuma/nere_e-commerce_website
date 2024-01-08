@@ -19,7 +19,6 @@ import ViewMore from '@/components/common/ViewMore';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { TextInput } from 'react-native';
 import { FaTags } from 'react-icons/fa';
 import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
