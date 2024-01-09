@@ -13,11 +13,11 @@ import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
 
-import { BsSearch } from "react-icons/bs";
-import { BiUser } from "react-icons/bi";
-import { FiHeart } from "react-icons/fi";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { SlLocationPin } from "react-icons/sl";
+import { BsSearch } from 'react-icons/bs';
+import { BiUser } from 'react-icons/bi';
+import { FiHeart } from 'react-icons/fi';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
+import { SlLocationPin } from 'react-icons/sl';
 
 const Header = () => {
   const { data, isLoading } = useGetlocationsQuery();
@@ -86,166 +86,167 @@ const Header = () => {
   };
 
   return (
-    
-
-    <div className="py-4">
-      <div className="container sm:flex justify-between items-center">
-        <div className="font-bold text-4xl text-center pb-4 sm:pb-0 text-blackish">
-            <Link href='/'>
-          <Logo />
-        </Link>
-        </div>
-
-        <div className="w-full sm:w-[300px] md:w-[40%] relative rounded ">
-          <input
-            className="border-gray-200 border p-2 px-4 rounded-lg w-full bg-[#F5F5F5]"
-            type="text"
-            placeholder="Search for products"
-          />
-
-       <BsSearch
-           className="absolute right-0 top-0 mr-3 mt-3 text-gray-400"
-            size={20}
-          /> 
-        </div>
-        <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
-        <div className='relative flex items-center justify-end'>
-          <div className='mr-4 flex items-center'>
-            <a
-              className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-              href='#'
-            >
-              <div
-                className='hidden items-center md:flex'
-                onClick={handLocation}
-              >
-                <Location />
-                <div className='ml-2'>
-                  <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
-                  <p
-                    style={{
-                      color: '#298592',
-                      fontWeight: 'bold',
-                      fontSize: 12,
-                    }}
-                  >
-                    {selectedLocation
-                      ? selectedLocation.name
-                      : 'Select a location'}
-                  </p>
-                </div>
-              </div>
-            </a>
-            {userInfo && userInfo.data ? (
-              <div className='relative inline-block'>
-                <div
-                  className='hidden items-center md:flex'
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
-                  <a
-                    className='inline-block cursor-pointer rounded-full px-3 py-2 hover:bg-gray-200'
-                    href='#'
-                  >
-                    <div className='flex items-center'>
-                      <UserIcon />
-                      <div className='ml-2'>
-                        <p style={{ color: '#298592', fontSize: 12 }}>
-                          Welcome: {userInfo?.data?.customer.name}
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-
-                {isDropdownOpen && (
-                  <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
-                    <a
-                      // href='/profile'
-                      className='block px-4 py-2 text-[#298592]'
-                    >
-                      Profile
-                    </a>
-
-                    <a
-                      href='/orders'
-                      className='block px-4 py-2 text-[#298592]'
-                    >
-                      Orders
-                    </a>
-                    <a
-                      href='#'
-                      className='block px-4 py-2 text-[#298592]'
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </a>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className='relative block'>
-                <div className='hidden items-center md:flex'>
-                  <a
-                    className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                    onClick={openLoginModal}
-                  >
-                    <div className='hidden items-center md:flex'>
-                      <UserIcon />
-                      <div className='ml-2'>
-                        <p style={{ color: '#298592', fontSize: 12 }}>
-                          Login & Register
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
-          <Link
-            href='/cart'
-            className={`block rounded-md p-2 ${
-              cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-            }`}
-          >
-            <div className='flex flex-row gap-2'>
-              <CartIcon />
-              <p style={{ color: '#298592', fontSize: 12 }}>
-                {(cartItems ?? []).length}
-              </p>
-            </div>
+    <div className='py-4'>
+      <div className='container items-center justify-between sm:flex'>
+        <div className='text-blackish pb-4 text-center text-4xl font-bold sm:pb-0'>
+          <Link href='/'>
+            <Logo />
           </Link>
         </div>
-        {locationModalVisible && (
-          <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
-        )}
-                {locationModalVisible && (
-          <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
-        )}
 
-        {loginModalVisible && (
-          <LoginModal
-            onClose={closeModal}
-            onRegistrationClick={handleRegistrationClick}
-            session={null}
-            isOpen={loginModalVisible}
+        <div className='relative w-full rounded sm:w-[300px] md:w-[40%] '>
+          <input
+            className='w-full rounded-lg border border-gray-200 bg-[#F5F5F5] p-2 px-4'
+            type='text'
+            placeholder='Search for products'
           />
-        )}
 
-        {registrationModalVisible && (
-          <RegistrationModal
-            onClose={closeModal}
-            isOpen={registrationModalVisible}
+          <BsSearch
+            className='absolute right-0 top-0 mr-3 mt-3 text-gray-400'
+            size={20}
           />
-        )}
+        </div>
+        <div className='hidden gap-4 text-[30px] text-gray-500 lg:flex'>
+          <div className='relative flex items-center justify-end'>
+            <div className='mr-4 flex items-center'>
+              <a
+                className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                href='#'
+              >
+                <div
+                  className='hidden items-center md:flex'
+                  onClick={handLocation}
+                >
+                  <Location />
+                  <div className='ml-2'>
+                    <p style={{ color: '#298592', fontSize: 12 }}>
+                      Pick up from
+                    </p>
+                    <p
+                      style={{
+                        color: '#298592',
+                        fontWeight: 'bold',
+                        fontSize: 12,
+                      }}
+                    >
+                      {selectedLocation
+                        ? selectedLocation.name
+                        : 'Select a location'}
+                    </p>
+                  </div>
+                </div>
+              </a>
+              {userInfo && userInfo.data ? (
+                <div className='relative inline-block'>
+                  <div
+                    className='hidden items-center md:flex'
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                    <a
+                      className='inline-block cursor-pointer rounded-full px-3 py-2 hover:bg-gray-200'
+                      href='#'
+                    >
+                      <div className='flex items-center'>
+                        <UserIcon />
+                        <div className='ml-2'>
+                          <p style={{ color: '#298592', fontSize: 12 }}>
+                            Welcome: {userInfo?.data?.customer.name}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  {isDropdownOpen && (
+                    <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
+                      <a
+                        // href='/profile'
+                        className='block px-4 py-2 text-[#298592]'
+                      >
+                        Profile
+                      </a>
+
+                      <a
+                        href='/orders'
+                        className='block px-4 py-2 text-[#298592]'
+                      >
+                        Orders
+                      </a>
+                      <a
+                        href='#'
+                        className='block px-4 py-2 text-[#298592]'
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </a>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className='relative block'>
+                  <div className='hidden items-center md:flex'>
+                    <a
+                      className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                      onClick={openLoginModal}
+                    >
+                      <div className='hidden items-center md:flex'>
+                        <UserIcon />
+                        <div className='ml-2'>
+                          <p style={{ color: '#298592', fontSize: 12 }}>
+                            Login & Register
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
+            <Link
+              href='/cart'
+              className={`block rounded-md p-2 ${
+                cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+              }`}
+            >
+              <div className='flex flex-row gap-2'>
+                <CartIcon />
+                <p style={{ color: '#298592', fontSize: 12 }}>
+                  {(cartItems ?? []).length}
+                </p>
+              </div>
+            </Link>
           </div>
+          {locationModalVisible && (
+            <PickupLocation
+              onClose={closeModal}
+              isOpen={locationModalVisible}
+            />
+          )}
+          {locationModalVisible && (
+            <PickupLocation
+              onClose={closeModal}
+              isOpen={locationModalVisible}
+            />
+          )}
 
-  
-     
+          {loginModalVisible && (
+            <LoginModal
+              onClose={closeModal}
+              onRegistrationClick={handleRegistrationClick}
+              session={null}
+              isOpen={loginModalVisible}
+            />
+          )}
+
+          {registrationModalVisible && (
+            <RegistrationModal
+              onClose={closeModal}
+              isOpen={registrationModalVisible}
+            />
+          )}
+        </div>
       </div>
     </div>
-
-
   );
 };
 
