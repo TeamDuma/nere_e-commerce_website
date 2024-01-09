@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <OngoingRow /> */}
+      <OngoingRow />
       <Banner />
       <EntertainmentSection />
       <Categories />

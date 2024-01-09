@@ -13,6 +13,12 @@ import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
 
+import { BsSearch } from "react-icons/bs";
+import { BiUser } from "react-icons/bi";
+import { FiHeart } from "react-icons/fi";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { SlLocationPin } from "react-icons/sl";
+
 const Header = () => {
   const { data, isLoading } = useGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -80,58 +86,29 @@ const Header = () => {
   };
 
   return (
-    <nav
-      className='mx-auto flex h-16 flex-col items-center justify-between bg-white 
-     md:flex-row md:px-16'
-    >
-      <div className='flex items-center md:mb-0'>
-        <Link href='/'>
+    
+
+    <div className="py-4">
+      <div className="container sm:flex justify-between items-center">
+        <div className="font-bold text-4xl text-center pb-4 sm:pb-0 text-blackish">
+            <Link href='/'>
           <Logo />
         </Link>
-      </div>
-
-      <div className='hidden flex-shrink flex-grow-0 justify-start  sm:block'>
-        <div className='inline-block'>
-          <div className='flex w-full max-w-[600px] bg-[#F5F5F5] sm:max-w-full md:rounded-full '>
-            <input
-              type='text'
-              className='flex w-full bg-[#F5F5F5] bg-transparent pl-2 text-[#0c0c0c] outline-0'
-              placeholder='Search for products'
-            />
-            <button
-              type='submit'
-              className='relative rounded-full bg-[#F5F5F5] p-2'
-            >
-              <svg
-                width='30px'
-                height='30px'
-                viewBox='0 0 24 24'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <g id='SVGRepo_bgCarrier' strokeWidth={0} />
-                <g
-                  id='SVGRepo_tracerCarrier'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-                <g id='SVGRepo_iconCarrier'>
-                  {' '}
-                  <path
-                    d='M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z'
-                    stroke='#999'
-                    strokeWidth={2}
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />{' '}
-                </g>
-              </svg>
-            </button>
-          </div>
         </div>
-      </div>
 
-      <div className='my-4 flex-initial'>
+        <div className="w-full sm:w-[300px] md:w-[40%] relative rounded ">
+          <input
+            className="border-gray-200 border p-2 px-4 rounded-lg w-full bg-[#F5F5F5]"
+            type="text"
+            placeholder="Search for products"
+          />
+
+       <BsSearch
+           className="absolute right-0 top-0 mr-3 mt-3 text-gray-400"
+            size={20}
+          /> 
+        </div>
+        <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
         <div className='relative flex items-center justify-end'>
           <div className='mr-4 flex items-center'>
             <a
@@ -242,6 +219,9 @@ const Header = () => {
         {locationModalVisible && (
           <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
         )}
+                {locationModalVisible && (
+          <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
+        )}
 
         {loginModalVisible && (
           <LoginModal
@@ -258,8 +238,14 @@ const Header = () => {
             isOpen={registrationModalVisible}
           />
         )}
+          </div>
+
+  
+     
       </div>
-    </nav>
+    </div>
+
+
   );
 };
 

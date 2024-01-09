@@ -18,15 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <html lang='en'>
-      <body
-        className={Mnontserrat.className}
-        style={{ backgroundColor: '#F8F8F8' }}
-      >
+      <body className={Mnontserrat.className}>
         <Providers>
           <Header />
-          <main className='flex-grow'>
-            <Container>{props.children}</Container>
-          </main>
+          {props.children}
           <ToastContainer />
           <Footer />
         </Providers>
