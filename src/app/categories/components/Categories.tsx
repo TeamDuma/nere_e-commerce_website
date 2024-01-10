@@ -7,7 +7,7 @@ const Categories = () => {
   const categories = data?.data?.categories ?? [];
 
   return (
-    <div className='flex'>
+    <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
       {categories.length > 0 ? (
         categories.map((category: any) => (
           <div

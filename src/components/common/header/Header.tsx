@@ -88,7 +88,7 @@ const Header = () => {
   return (
     <div className='py-4'>
       <div className='container items-center justify-between sm:flex'>
-        <div className='text-blackish pb-4 text-center text-4xl font-bold sm:pb-0'>
+        <div className='pb-4 text-center text-4xl font-bold text-blackish sm:pb-0'>
           <Link href='/'>
             <Logo />
           </Link>

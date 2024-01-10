@@ -34,8 +34,8 @@ const customStyles: Styles = {
     top: '50%',
     left: '90%',
     transform: 'translate(-50%, -50%)',
-    width: '500px',
-    height: '800px',
+    height: '100%',
+    width: '30%',
     borderRadius: '15px',
   },
 };

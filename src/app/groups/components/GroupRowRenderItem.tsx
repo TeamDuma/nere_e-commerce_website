@@ -16,7 +16,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
     <div
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-      className='flex items-center rounded-lg bg-[#F5F5F5] p-4 shadow-md'
+      className='flex items-center rounded-lg bg-[#FAFAFA] p-4 shadow-md'
       style={{ width: '700px', height: '190px' }}
     >
       <div className='relative w-1/4 flex-shrink-0 bg-[#FFF]'>

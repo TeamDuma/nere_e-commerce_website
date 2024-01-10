@@ -20,90 +20,55 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
 
   console.log('Home', products);
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        backgroundColor: '#F0F4F5',
-        padding: '5px',
-        borderRadius: '15px',
-        marginTop: '10px',
-        marginBottom: '30px',
-      }}
-    >
-      <div style={{ width: '48%', padding: '8px', boxSizing: 'border-box' }}>
-        {
-          <div
-            className='flex 
-             items-center
-             justify-between
-             gap-3
-             md:gap-0
-             '
-          >
-            <div className='flex items-center gap-2 md:gap-2'>
-              <a
-                href='https://www.facebook.com'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <FaRegUserCircle className='social-icon' />
-              </a>
-              <p>Ongoing Purchases near me</p>
-            </div>
-            <div className='ml-2'>
-              <p>Groups</p>
-              <p>{groups.length}</p>
-            </div>
-            <div className='ml-2'>
-              <p>Products</p>
-              <p>{products?.length}+</p>
-            </div>
+    <div className='mb-10 mt-10 flex flex-col justify-between rounded-md bg-[#F0F4F5] p-5 md:flex-row md:p-3'>
+      <div className='box-border w-full rounded-lg bg-white p-3 md:w-1/2'>
+        <div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
+          <div className='flex items-center gap-2 md:gap-2'>
+            <a
+              href='https://www.facebook.com'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FaRegUserCircle className='social-icon' />
+            </a>
+            <p>Ongoing Purchases near me</p>
           </div>
-        }
+          <div className='md:ml-2'>
+            <p>Groups</p>
+            <p>{groups.length}</p>
+          </div>
+          <div className='md:ml-2'>
+            <p>Products</p>
+            <p>{products?.length}+</p>
+          </div>
+        </div>
       </div>
-      <div
-        style={{
-          width: '48%',
-          padding: '8px',
-          boxSizing: 'border-box',
-          backgroundColor: '#fff',
-          borderRadius: '15px',
-        }}
-      >
-        {
-          <div
-            className='flex 
-             items-center
-             justify-between
-             gap-3
-             md:gap-0
-            '
-          >
-            <div className='flex items-center gap-2 md:gap-2'>
-              <a
-                href='https://www.facebook.com'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <FaRegUserCircle className='social-icon' />
-              </a>
-              <p>Launch a purchase</p>
-            </div>
-            <div className='ml-2'>
-              <p>Delivery Time</p>
-              <p>2 : 00 : 00</p>
-            </div>
-            <div className='ml-2'>
-              <p>Discounts</p>
-              <p>20% off</p>
-            </div>
-            <div className='ml-2'>
-              <p> Delivery Fee</p>
-              <p>GHS 99</p>
-            </div>
+
+      <div className="box-border w-full rounded-lg bg-['#fff'] p-3 md:w-1/2">
+        <div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
+          <div className='flex items-center gap-2 md:gap-2'>
+            <a
+              href='https://www.facebook.com'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FaRegUserCircle className='social-icon' />
+            </a>
+            <p>Launch a purchase</p>
           </div>
-        }
+          <div className='md:ml-2'>
+            <p>Delivery Time</p>
+            <p>2 : 00 : 00</p>
+          </div>
+          <div className='md:ml-2'>
+            <p>Discounts</p>
+            <p>20% off</p>
+          </div>
+          <div className='md:ml-2'>
+            <p>Delivery Fee</p>
+            <p>GHS 99</p>
+          </div>
+        </div>
       </div>
     </div>
   );

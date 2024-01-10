@@ -54,95 +54,98 @@ export default function Home() {
   };
 
   return (
-    <>
-      <OngoingRow />
-      <Banner />
-      <EntertainmentSection />
-      <Categories />
-      <Title text={'Ongoing Groups'} />
-      <OngoingPurchases />
-      <TwoBannerLayout />
-      <FeaturedProducts />
-
-      <ViewMore />
-      <div
-        style={{
-          position: 'fixed',
-          top: '75%',
-          transform: 'translateY(-50%)',
-          right: 0,
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 1000,
-        }}
-      >
+    <main>
+      <div className='container pt-6 lg:pt-0'>
+        <OngoingRow />
+        <Banner />
+        <EntertainmentSection />
+        <Categories />
+        <Title text={'Ongoing Groups'} />
+        <OngoingPurchases />
+        <TwoBannerLayout />
+        <FeaturedProducts />
+        <ViewMore />
         <div
-          onClick={openCartModal}
-          className=' py-4 text-center text-base font-semibold text-white'
           style={{
-            background: '#F58929',
-            width: '110px',
-            height: '110px',
-            marginTop: '35px',
-            cursor: 'pointer',
-            borderTopLeftRadius: '10px',
-            borderBottomLeftRadius: '10px',
+            position: 'fixed',
+            top: '75%',
+            transform: 'translateY(-50%)',
+            right: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
           }}
         >
-          <div className='flex flex-col items-center justify-center'>
-            <div className='ml-2 flex flex-row gap-2'>
-              <CartIcon />
-              <p style={{ color: '#FFF', fontSize: 12 }}>
-                {(cartItems ?? []).length} Items
-              </p>{' '}
-            </div>
+          <div
+            onClick={openCartModal}
+            className=' py-4 text-center text-base font-semibold text-white'
+            style={{
+              background: '#F58929',
+              width: '110px',
+              height: '110px',
+              marginTop: '35px',
+              cursor: 'pointer',
+              borderTopLeftRadius: '10px',
+              borderBottomLeftRadius: '10px',
+            }}
+          >
+            <div className='flex flex-col items-center justify-center'>
+              <div className='ml-2 flex flex-row gap-2'>
+                <CartIcon />
+                <p style={{ color: '#FFF', fontSize: 12 }}>
+                  {(cartItems ?? []).length} Items
+                </p>{' '}
+              </div>
 
-            <div className='m-2 flex flex-row rounded bg-white'>
-              <p style={{ color: '#F58929', fontSize: 12, marginLeft: '4px' }}>
-                GH¢ {calculateTotal().toFixed(2)}
-              </p>
+              <div className='m-2 flex flex-row rounded bg-white'>
+                <p
+                  style={{ color: '#F58929', fontSize: 12, marginLeft: '4px' }}
+                >
+                  GH¢ {calculateTotal().toFixed(2)}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div
-        style={{
-          position: 'fixed',
-          top: '75%',
-          transform: 'translateY(-50%)',
-          left: 0,
-          zIndex: 1000,
-        }}
-      >
         <div
-          onClick={openOngoingModal}
-          className='pt-2 text-center text-base font-semibold text-white shadow'
           style={{
-            background: '#F58929',
-            width: '110px',
-            height: '110px',
-            marginTop: '35px',
-            cursor: 'pointer',
-            borderTopRightRadius: '10px',
-            borderBottomRightRadius: '10px',
+            position: 'fixed',
+            top: '75%',
+            transform: 'translateY(-50%)',
+            left: 0,
+            zIndex: 1000,
           }}
         >
-          <div className='flex flex-col items-center justify-center'>
-            <div className='ml-2 flex flex-row gap-2'>
-              <FaRegUserCircle />
-            </div>
-            <div className='m-2 flex  flex-row rounded'>
-              <p style={{ color: '#fff', fontSize: 12, marginBottom: 2 }}>
-                {groups.length} Ongoing Purchases near me
-              </p>
+          <div
+            onClick={openOngoingModal}
+            className='pt-2 text-center text-base font-semibold text-white shadow'
+            style={{
+              background: '#F58929',
+              width: '110px',
+              height: '110px',
+              marginTop: '35px',
+              cursor: 'pointer',
+              borderTopRightRadius: '10px',
+              borderBottomRightRadius: '10px',
+            }}
+          >
+            <div className='flex flex-col items-center justify-center'>
+              <div className='ml-2 flex flex-row gap-2'>
+                <FaRegUserCircle />
+              </div>
+              <div className='m-2 flex  flex-row rounded'>
+                <p style={{ color: '#fff', fontSize: 12, marginBottom: 2 }}>
+                  {groups.length} Ongoing Purchases near me
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
-      <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
-    </>
+        <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
+        <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
+      </div>
+    </main>
   );
 }
