@@ -133,7 +133,7 @@ export default function Home() {
           >
             <div className='flex flex-col items-center justify-center'>
               <div className='ml-2 flex flex-row gap-2'>
-                <MdGroups />
+                <FaRegUserCircle />
               </div>
               <div className='m-2 flex  flex-row rounded'>
                 <p style={{ color: '#fff', fontSize: 12, marginBottom: 2 }}>
