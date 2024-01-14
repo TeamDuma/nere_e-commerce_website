@@ -16,10 +16,10 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
     <div
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-      className='flex items-center  p-4 '
-      style={{ width: '400px', height: '180px' }}
+      className='flex items-center p-4'
+      style={{ width: '100%', maxWidth: '400px', height: '180px' }}
     >
-      <div className='relative w-1/4 flex-shrink-0 '>
+      <div className='relative w-1/4 flex-shrink-0'>
         <img
           src={item.product.plain_image}
           alt={item.product.name}
@@ -27,7 +27,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
           style={{ width: '100px' }}
         />
         {item.product?.price && item.product.sale_price && (
-          <span className='absolute right-0 top-0 rounded  p-1 text-xs font-bold text-white'>
+          <span className='absolute right-0 top-0 rounded p-1 text-xs font-bold text-white'>
             Save{' '}
             {calculateSavingsPercentage(
               item.product.price,
@@ -39,7 +39,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
       </div>
 
       <div className='ml-4 flex-1'>
-        <h2 className='text overflow-hidden  overflow-ellipsis font-bold text-[#298592]'>
+        <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
           {item.product.name}
         </h2>
 

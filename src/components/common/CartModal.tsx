@@ -24,19 +24,22 @@ const customStyles: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(190, 192, 193, 0.7)',
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    top: '50%',
-    left: '90%',
-    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    top: 0,
+    left: 'auto',
+    right: 0,
     height: '100%',
-    width: '30%',
-    borderRadius: '15px',
+    width: '95%',
+    maxWidth: '400px',
+    backgroundColor: 'white',
+    padding: '20px',
+    borderRadius: '20px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    zIndex: 1001,
+    overflowY: 'auto',
   },
 };
 
@@ -75,7 +78,7 @@ const CartModal: React.FC<{
             <div
               key={item.id}
               className='my-4 flex items-center rounded-lg bg-[#FFF] p-4 shadow-md'
-              style={{ width: '450px', height: '190px' }}
+              style={{ width: '100%', maxWidth: '450px', height: '190px' }}
             >
               <div className='bg-[#F8F8F8 ] relative w-1/4 flex-shrink-0'>
                 <img
@@ -173,7 +176,7 @@ const CartModal: React.FC<{
               Please login to continue
             </p>
             <p className='mt-1  text-base font-semibold text-[#1A464C]'>
-              Deliver fee is not included
+              Delivery fee is not included
             </p>
           </div>
         )}
