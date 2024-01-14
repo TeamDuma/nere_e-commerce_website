@@ -25,18 +25,22 @@ const customStyles: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(190, 192, 193, 0.7)',
+    backgroundColor: 'rgba(190, 192, 193, 0.7)',
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    top: '50%',
-    left: '90%',
-    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    top: 0,
+    left: 'auto',
+    right: 0,
     height: '100%',
-    width: '30%',
-    borderRadius: '15px',
+    width: '95%',
+    maxWidth: '400px',
+    backgroundColor: 'white',
+    padding: '20px',
+    borderRadius: '20px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    zIndex: 1001,
+    overflowY: 'auto',
   },
 };
 
@@ -74,8 +78,8 @@ const CartModal: React.FC<{
           cartItems.map((item) => (
             <div
               key={item.id}
-              className='mt-5 flex items-center rounded-lg bg-[#fff] p-4 shadow-md'
-              style={{ width: '405px', height: '128px' }}
+              className='my-4 flex items-center rounded-lg bg-[#FFF] p-4 shadow-md'
+              style={{ width: '100%', maxWidth: '450px', height: '190px' }}
             >
               <div className='relative w-1/4 flex-shrink-0 bg-[#F5F5F5]'>
                 <img
