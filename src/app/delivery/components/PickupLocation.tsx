@@ -50,15 +50,13 @@ const PickupLocation: React.FC<{
 
   const { data, isLoading } = useGetlocationsQuery();
 
-  const locations = data?.data?.location || [];
+  const locations = data || [];
+
+  console.log('data', locations);
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
-    () => {
-      return data
-        ? locations.find((location) => location.id === selectedLocationId) ||
-            null
-        : null;
-    }
+    () =>
+      locations.find((location) => location.id === selectedLocationId) || null
   );
 
   useEffect(() => {
@@ -134,7 +132,7 @@ const PickupLocation: React.FC<{
             <button
               className='rounded-md bg-[#298592] px-4 py-2 text-white'
               style={{ width: '100%' }}
-              // onClick={handleSelectLocation}
+              //  onClick={handleSelectLocation}
             >
               Select Pickup Location
             </button>
