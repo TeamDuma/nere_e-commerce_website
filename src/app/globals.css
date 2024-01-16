@@ -31,14 +31,38 @@
 }
 
 .social-icon {
-  color: gray;
+  color: #298592;
   font-size: 24px;
   transition: color 0.3s ease;
   margin: 15px;
 }
+.p-text {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+.p-text2 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+}
+.p-text3 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+  margin-left: 30%;
+}
+.p-text4 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
 
 .social-icon:hover {
-  color: #1877f2;
+  color: #36e8ff94;
 }
 
 .card {
