@@ -14,8 +14,8 @@ const EntertainmentSection = () => {
             {/* SVG path */}
           </svg>
           <div className='text-center'>
-            <h2 className='my-1'>Nere Coins</h2>
-            <h4 className='text-md inline  font-bold text-[#298592]'>
+          <h2 className='my-1' style={{ fontSize: '12px' }}>Nere Coins</h2>
+          <h4 className='text-md inline font-semibold text-[#298592]' style={{ fontSize: '14px' }}>
               Earn more
             </h4>
           </div>
@@ -33,8 +33,8 @@ const EntertainmentSection = () => {
             {/* SVG path */}
           </svg>
           <div className='text-center'>
-            <h2 className='my-1 '>Game and win coins</h2>
-            <h4 className='text-md inline  font-bold text-[#298592]'>
+          <h2 className='my-1' style={{ fontSize: '12px' }}>Game and win coins</h2>
+          <h4 className='text-md inline font-semibold text-[#298592]' style={{ fontSize: '14px' }}>
               Play Now
             </h4>
           </div>
@@ -52,8 +52,8 @@ const EntertainmentSection = () => {
             {/* SVG path */}
           </svg>
           <div className='text-center'>
-            <h2 className='my-1'>Loyalty offers?</h2>
-            <h4 className='text-md inline  font-bold text-[#298592]'>
+          <h2 className='my-1' style={{ fontSize: '12px' }}>Loyalty offers?</h2>
+          <h4 className='text-md inline font-semibold text-[#298592]' style={{ fontSize: '14px' }}>
               Buy Again
             </h4>
           </div>
