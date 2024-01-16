@@ -5,6 +5,7 @@ import { useSignInMutation } from '@/lib/redux/services/customers';
 import { addUser, deleteUser } from '@/lib/redux';
 import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
+import Spinner from './Spinner';
 
 const customStyles: Styles = {
   overlay: {
@@ -53,6 +54,10 @@ const LoginModal: React.FC<{
 
   const handleLogin = async () => {
     try {
+      if (isLoading) {
+        return;
+      }
+
       const response = await signIn({ email, password });
 
       if ('data' in response) {
@@ -130,19 +135,22 @@ const LoginModal: React.FC<{
                 </div>
 
                 <div className='space-y-4'>
-                  <button
-                    className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
-                    onClick={() => handleLogin()}
-                  >
-                    Login
-                  </button>
+                  <div className='space-y-4'>
+                    <button
+                      className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
+                      onClick={handleLogin}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? <Spinner /> : 'Login'}
+                    </button>
+                  </div>
                 </div>
 
                 <p>
                   Don't have an account?{' '}
                   <span
                     onClick={onRegistrationClick}
-                    className='cursor-pointer text-blue-500'
+                    className='cursor-pointer text-[#298592]'
                   >
                     Register
                   </span>

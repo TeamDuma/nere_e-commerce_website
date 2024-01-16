@@ -31,7 +31,8 @@ const customStyles: Styles = {
 const RegistrationModal: React.FC<{
   onClose: () => void;
   isOpen: boolean;
-}> = ({ onClose, isOpen }) => {
+  onLoginClick: () => void;
+}> = ({ onClose, isOpen, onLoginClick }) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -88,7 +89,7 @@ const RegistrationModal: React.FC<{
 
   return (
     <Modal
-      isOpen={true}
+      isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel='Registration Modal'
       style={customStyles}
@@ -122,7 +123,7 @@ const RegistrationModal: React.FC<{
               htmlFor='Email'
               className='text-sm font-bold leading-tight tracking-normal text-gray-800'
             >
-              Email
+              Email{' '}
             </label>
             <input
               type='email'
@@ -193,7 +194,7 @@ const RegistrationModal: React.FC<{
             <p>
               Already have an account?{' '}
               <span
-                // onClick={handleLoginClick}
+                onClick={onLoginClick}
                 className='cursor-pointer text-blue-500'
               >
                 Login{' '}

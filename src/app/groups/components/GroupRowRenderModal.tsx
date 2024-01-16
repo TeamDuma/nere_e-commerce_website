@@ -57,7 +57,8 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
           </div>
           <div className='flex items-center'>
             <Location />
-            <span className='my-2 text-gray-500'>
+
+            <span className='my-2  text-gray-500'>
               {(item.location as any)?.name}
             </span>
           </div>

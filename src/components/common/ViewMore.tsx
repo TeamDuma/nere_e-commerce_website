@@ -8,6 +8,8 @@ const ViewMore = () => {
         justifyContent: 'center',
         alignItems: 'center',
         height: '10vh',
+        marginTop: '10px',
+        marginBottom: '10px',
       }}
     >
       <Link href='/products'>
