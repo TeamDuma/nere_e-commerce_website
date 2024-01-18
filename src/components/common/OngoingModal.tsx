@@ -48,7 +48,12 @@ const OngoingModal: React.FC<{
   return (
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={onClose}>
       <h2
-        style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#298592' }}
+        style={{
+          fontSize: '24px',
+          marginBottom: '20px',
+          color: '#298592',
+          fontWeight: 'bold',
+        }}
       >
         Ongoing Purchases near me{' '}
       </h2>
