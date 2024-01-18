@@ -10,7 +10,8 @@ const MemberCount = ({ minQuantity, totalQuantity, unit }: IMemberCount) => {
   return (
     <div>
       <h2>
-        {remainingQuantity} left, out of {minQuantity} {unit}
+        {remainingQuantity} people required for this group buy, out of{' '}
+        {minQuantity} {unit}
       </h2>
     </div>
   );

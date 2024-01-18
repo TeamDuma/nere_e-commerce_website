@@ -12,6 +12,8 @@ import { SetStateAction, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaStar } from 'react-icons/fa';
+import Stepper from '@/components/common/PurchaseGuide';
 
 type Props = {
   params: {
@@ -104,7 +106,7 @@ export default function ProductDetailPage({ params }: Props) {
     <div className='my-8'>
       <div className='container mx-auto px-6'>
         <div className='mb-8 md:flex md:items-center'>
-          <div className='h-64 w-full bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
+          <div className='h-387 w-387 bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
             <img
               className='mx-auto h-full max-w-lg rounded-md object-cover '
               src={product?.plain_image}
@@ -114,8 +116,8 @@ export default function ProductDetailPage({ params }: Props) {
           <div className='mx-auto mt-5 w-full max-w-lg md:ml-8 md:mt-0 md:w-1/2'>
             <div className='flex items-center'>
               {' '}
-              <h3 className='text-lg uppercase text-gray-700'>
-                {product?.name}
+              <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
+                {product?.slug}
               </h3>
               {variantsArray.length > 0 && (
                 <div className='ml-12'>
@@ -139,33 +141,43 @@ export default function ProductDetailPage({ params }: Props) {
                 </div>
               )}
             </div>
-
-            <div className='mt-3 flex flex-col items-center md:flex-row md:items-start'>
-              <span className='font-semibold text-[#1A464C]'>
-                {product?.sale_price}¢
-              </span>
-              <span
-                className='ml-3 text-red-500'
-                style={{ textDecoration: 'line-through' }}
-              >
-                {product?.price}¢
-              </span>
-              {product?.price && product.sale_price && (
-                <span className='ml-3  rounded bg-[#8CCED7] text-white '>
-                  Save{' '}
-                  {calculateSavingsPercentage(
-                    product.price,
-                    product.sale_price
-                  )}
-                  %
-                </span>
-              )}
+            <div className='star-icon my-4 flex  items-center'>
+              {' '}
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
             </div>
 
-            <table className='my-3 w-full border-collapse border border-slate-400 md:my-5'>
+            <div className='mt-3 flex flex-col items-center md:flex-row md:items-start'>
+              <span className='text-lg font-medium text-[#1A464C]	'>
+                ¢ {product?.sale_price}
+              </span>
+              <span
+                className='ml-3 text-base font-medium text-red-500'
+                style={{ textDecoration: 'line-through' }}
+              >
+                ¢{product?.price}
+              </span>
+              <div className='w-85 h-21 ml-3 flex items-center justify-center rounded bg-[#8CCED7]'>
+                {product?.price && product.sale_price && (
+                  <span className=' text-sm text-white '>
+                    Save{' '}
+                    {calculateSavingsPercentage(
+                      product.price,
+                      product.sale_price
+                    )}
+                    %
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <table className='my-3 w-full  border-b border-t  md:my-5'>
               <thead>
                 <tr>
-                  <th className='border border-slate-300 md:w-1/2'>
+                  <th className='border border-slate-300 text-sm md:w-1/2 '>
                     {' '}
                     0 participants
                   </th>
@@ -173,8 +185,9 @@ export default function ProductDetailPage({ params }: Props) {
                 </tr>
               </thead>
             </table>
-
-            <h1 className='my-5 text-[#F58929]'>Continue Shopping</h1>
+            <Link href='/products'>
+              <h1 className='ml-5 text-[#F58929]'>Continue Shopping</h1>
+            </Link>
 
             {product?.hasMinQuantity && (
               <div className='progress-bar'>
@@ -192,7 +205,7 @@ export default function ProductDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
-        <PurchaseGuide />
+        <Stepper />
         <Banner />
         <div className='mt-12 flex items-center justify-center '>
           <h1>You might like</h1>
