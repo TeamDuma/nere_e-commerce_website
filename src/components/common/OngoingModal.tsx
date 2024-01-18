@@ -50,9 +50,9 @@ const OngoingModal: React.FC<{
       <h2
         style={{
           fontSize: '24px',
+          marginBottom: '20px',
           color: '#298592',
           fontWeight: 'bold',
-          marginTop: '20px',
         }}
       >
         Ongoing Purchases near me{' '}
