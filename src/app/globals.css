@@ -36,6 +36,13 @@
   transition: color 0.3s ease;
   margin: 15px;
 }
+
+.star-icon {
+  color: #ffca49;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
 .p-text {
   color: #298592;
   font-size: 20;
