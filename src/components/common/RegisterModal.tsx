@@ -44,26 +44,26 @@ const RegistrationModal: React.FC<{
 
   const handleRegister = async () => {
     if (!name) {
-      alert('Name should not be empty');
+      toast.error('Name should not be empty');
       return;
     }
 
     if (!email || !isValidEmail(email)) {
-      alert('Email must be a valid email address');
+      toast.error('Email must be a valid email address');
       return;
     }
 
     if (!phone || !isValidPhoneNumber(phone)) {
-      alert('Phone must be a valid phone number');
+      toast.error('Phone must be a valid phone number');
       return;
     }
     if (!password || password.length < 6) {
-      alert('Password should be at least 6 characters long');
+      toast.error('Password should be at least 6 characters long');
       return;
     }
 
     if (password !== confirmPassword) {
-      alert('Password and Confirm Password do not match');
+      toast.error('Password and Confirm Password do not match');
       return;
     }
 
@@ -94,112 +94,121 @@ const RegistrationModal: React.FC<{
       contentLabel='Registration Modal'
       style={customStyles}
     >
-      <div className='max-h-full w-full max-w-xl overflow-y-auto bg-white sm:rounded-2xl'>
-        <div className='w-full'>
-          <div className='m-8 mx-auto my-20 max-w-[400px]'>
-            <div className='mb-8'>
-              <Logo />
-              <p className='text-gray-600'>
-                Register with your email & password
+      <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center  justify-center bg-opacity-50'>
+        <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white'>
+          <div className='flex w-full items-center justify-center'>
+            {' '}
+            {/* Add these classes */}
+            <div className='m-8 mx-auto  max-w-[400px]'>
+              <div className='mb-8'>
+                <Logo />
+                <p className='text-gray-600'>
+                  Register with your email & password
+                </p>
+              </div>
+
+              <label
+                htmlFor='Name'
+                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+              >
+                Name
+              </label>
+              <input
+                type='text'
+                id='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
+                placeholder='kojo'
+              />
+
+              <label
+                htmlFor='Email'
+                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+              >
+                Email{' '}
+              </label>
+              <input
+                type='email'
+                id='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
+                placeholder='kojo@gmail.com'
+              />
+              <label
+                htmlFor='Phone'
+                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+              >
+                Phone
+              </label>
+              <input
+                type='number'
+                id='phone'
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
+                placeholder='kojo@gmail.com'
+              />
+
+              <label
+                htmlFor='Password'
+                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+              >
+                Password
+              </label>
+              <div className='relative mb-5 mt-2'>
+                <input
+                  type='password'
+                  id='Password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
+                  placeholder='Hint'
+                />
+              </div>
+
+              <label
+                htmlFor='ConfirmPassword'
+                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+              >
+                Confirm password
+              </label>
+              <div className='relative mb-5 mt-2'>
+                <input
+                  type='password'
+                  id='ConfirmPassword'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
+                  placeholder='Hint'
+                />
+              </div>
+
+              <div className='space-y-4'>
+                <button
+                  className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
+                  onClick={handleRegister}
+                >
+                  Register
+                </button>
+              </div>
+              <div className='inline-flex w-full items-center justify-center'>
+                <hr className='my-8 h-px w-64 border-0 bg-gray-200 dark:bg-gray-700' />
+                <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                  or
+                </span>
+              </div>
+              <p>
+                Already have an account?{' '}
+                <span
+                  onClick={onLoginClick}
+                  className='cursor-pointer text-[#298592]'
+                >
+                  Login
+                </span>
               </p>
             </div>
-
-            <label
-              htmlFor='Name'
-              className='text-sm font-bold leading-tight tracking-normal text-gray-800'
-            >
-              Name
-            </label>
-            <input
-              type='text'
-              id='name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-              placeholder='kojo'
-            />
-
-            <label
-              htmlFor='Email'
-              className='text-sm font-bold leading-tight tracking-normal text-gray-800'
-            >
-              Email{' '}
-            </label>
-            <input
-              type='email'
-              id='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-              placeholder='kojo@gmail.com'
-            />
-            <label
-              htmlFor='Phone'
-              className='text-sm font-bold leading-tight tracking-normal text-gray-800'
-            >
-              Phone
-            </label>
-            <input
-              type='number'
-              id='phone'
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-              placeholder='kojo@gmail.com'
-            />
-
-            <label
-              htmlFor='Password'
-              className='text-sm font-bold leading-tight tracking-normal text-gray-800'
-            >
-              Password
-            </label>
-            <div className='relative mb-5 mt-2'>
-              <input
-                type='password'
-                id='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='Hint'
-              />
-            </div>
-
-            <label
-              htmlFor='ConfirmPassword'
-              className='text-sm font-bold leading-tight tracking-normal text-gray-800'
-            >
-              Confirm password
-            </label>
-            <div className='relative mb-5 mt-2'>
-              <input
-                type='password'
-                id='ConfirmPassword'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='Hint'
-              />
-            </div>
-
-            <div className='space-y-4'>
-              <button
-                className='w-full rounded-full bg-black p-3 font-semibold text-white'
-                onClick={handleRegister}
-              >
-                Register
-              </button>
-            </div>
-
-            <p>
-              Already have an account?{' '}
-              <span
-                onClick={onLoginClick}
-                className='cursor-pointer text-blue-500'
-              >
-                Login{' '}
-              </span>
-            </p>
           </div>
         </div>
       </div>

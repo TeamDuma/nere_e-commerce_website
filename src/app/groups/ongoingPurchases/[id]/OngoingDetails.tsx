@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
 import { MdOutlineAccessAlarms } from 'react-icons/md';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -43,7 +44,12 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   console.log('product in  OngoingDetails', data);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        {' '}
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   if (isError) {
@@ -180,7 +186,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <h1 className=' my-2 text-[#F58929]'>Continue Shopping</h1>
             </Link>
 
-            {product?.hasMinQuantity && (
+            {product?.hasMinQuantity ? (
               <>
                 <ProgressBar
                   remaining={remaining ?? 0}
@@ -199,6 +205,15 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   </button>
                 </div>
               </>
+            ) : (
+              <div className='flex items-center'>
+                <button
+                  className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none`}
+                  onClick={handleAddToCart}
+                >
+                  Add to Cart
+                </button>
+              </div>
             )}
           </div>
         </div>

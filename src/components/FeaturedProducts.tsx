@@ -24,12 +24,12 @@ const FeaturedProducts = () => {
                 <div key={product?.id} style={{ marginTop: '50px' }}>
                   <div
                     style={{
-                      width: '100px',
-                      height: '40px',
+                      width: '28px',
+                      height: '15px',
                       backgroundColor: '#F58929',
                       position: 'relative',
                       display: 'flex',
-                      fontSize: '14px',
+                      fontSize: '12px',
                       left: '146px',
                       top: '43px',
                       borderRadius: '8px',
@@ -39,14 +39,16 @@ const FeaturedProducts = () => {
                       color: 'white',
                     }}
                   >
-                    {`Save GHC ${product.price - product.sale_price}`}
+                    {` ${Math.round(
+                      ((product.price - product.sale_price) / product.price) *
+                        100
+                    )}%`}
                   </div>
                   <div
                     style={{
-                      backgroundColor: '#F5F5F5',
                       backgroundSize: 'cover',
-                      width: '250px',
-                      height: '250px',
+                      width: '200px',
+                      height: '200px',
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
@@ -67,25 +69,28 @@ const FeaturedProducts = () => {
                   </div>
                   <div
                     style={{
-                      fontSize: '18px',
-                      fontWeight: 'bold',
-                      color: '#298592',
-                      marginTop: '2px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
                     }}
                   >
-                    {product?.name}
-                  </div>
-                  <div style={{ display: 'flex', marginTop: '2px' }}>
-                    <div
-                      style={{
-                        marginLeft: '4px',
-                        color: '#C1C2C2',
-                        textDecoration: 'line-through',
-                      }}
-                    >{`GHC ${product?.price}`}</div>
-                    <div
-                      style={{ color: '#F58929', marginLeft: '5px' }}
-                    >{`GHC ${product?.sale_price}`}</div>
+                    <div style={{ fontSize: '14px', marginTop: '2px' }}>
+                      {product?.name}
+                    </div>
+                    <div style={{ display: 'flex', marginTop: '2px' }}>
+                      <div style={{ color: '#F31748', marginLeft: '5px' }}>
+                        {`¢ ${product?.sale_price}`}
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: '14px',
+                          color: '#B3B3B3',
+                          textDecoration: 'line-through',
+                        }}
+                      >
+                        {`¢ ${product?.price}`}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Link>

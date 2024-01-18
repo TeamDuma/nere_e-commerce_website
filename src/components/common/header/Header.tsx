@@ -14,10 +14,6 @@ import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
 
 import { BsSearch } from 'react-icons/bs';
-import { BiUser } from 'react-icons/bi';
-import { FiHeart } from 'react-icons/fi';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { SlLocationPin } from 'react-icons/sl';
 
 const Header = () => {
   const { data, isLoading } = useGetlocationsQuery();
@@ -63,6 +59,11 @@ const Header = () => {
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
+  };
+  const handleLoginClick = () => {
+    setLoginModalVisible(true);
+    setRegistrationModalVisible(false);
+    setLocationModalVisible(false);
   };
 
   const handleRegistrationClick = () => {
@@ -242,6 +243,7 @@ const Header = () => {
             <RegistrationModal
               onClose={closeModal}
               isOpen={registrationModalVisible}
+              onLoginClick={handleLoginClick}
             />
           )}
         </div>

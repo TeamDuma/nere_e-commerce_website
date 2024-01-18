@@ -39,6 +39,11 @@ interface ISession {
   };
 }
 
+// const handleSelectLocation= () => {
+//   console.log('handleSelectLocation',);
+//   // Logic to open the login modal
+// };
+
 const PickupLocation: React.FC<{
   onClose: () => void;
   isOpen: boolean;
@@ -47,6 +52,15 @@ const PickupLocation: React.FC<{
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { selectedLocationId } = useSelector(selectShopping);
+
+  const handleSelectLocation = () => {
+    if (selectedAddress) {
+      dispatch(setSelectedLocationId(selectedAddress.id));
+    }
+
+    // Close the modal
+    onClose();
+  };
 
   const { data, isLoading } = useGetlocationsQuery();
 
@@ -132,7 +146,7 @@ const PickupLocation: React.FC<{
             <button
               className='rounded-md bg-[#298592] px-4 py-2 text-white'
               style={{ width: '100%' }}
-              //  onClick={handleSelectLocation}
+              onClick={handleSelectLocation}
             >
               Select Pickup Location
             </button>
