@@ -78,8 +78,8 @@ const CartModal: React.FC<{
           cartItems.map((item) => (
             <div
               key={item.id}
-              className='my-4 flex items-center rounded-lg bg-[#FFF] p-4 shadow-md'
-              style={{ width: '100%', maxWidth: '450px', height: '190px' }}
+              className='mt-5 flex items-center rounded-lg bg-[#fff] p-4 shadow-md'
+              style={{ width: '405px', height: '128px' }}
             >
               <div className='relative w-1/4 flex-shrink-0 bg-[#F5F5F5]'>
                 <img
