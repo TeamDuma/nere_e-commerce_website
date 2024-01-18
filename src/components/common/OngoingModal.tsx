@@ -23,9 +23,9 @@ const customStyles: Styles = {
     top: 0,
     left: 0,
     right: 'auto',
-    height: '100%',
+    height: '105%',
     width: '95%',
-    maxWidth: '400px',
+    maxWidth: '450px',
     margin: 'auto',
     backgroundColor: 'white',
     padding: '20px',
@@ -50,9 +50,9 @@ const OngoingModal: React.FC<{
       <h2
         style={{
           fontSize: '24px',
-          marginBottom: '20px',
           color: '#298592',
           fontWeight: 'bold',
+          marginTop: '20px',
         }}
       >
         Ongoing Purchases near me{' '}
@@ -66,7 +66,7 @@ const OngoingModal: React.FC<{
               {groups.map((item) => (
                 <div
                   key={item.id}
-                  className='my-2 ml-7 flex-shrink-0 rounded border'
+                  className='my-8 flex-shrink-0 rounded border'
                 >
                   <GroupRowRenderModal item={item} />
                 </div>
