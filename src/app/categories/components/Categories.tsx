@@ -7,8 +7,9 @@ const Categories = () => {
   const categories = data?.data?.categories ?? [];
 
   return (
-    <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
-      {categories.length > 0 ? (
+    <div className='overflow-x-auto'>
+    <div className='flex flex-nowrap justify-start'>  
+        {categories.length > 0 ? (
         categories.map((category: any) => (
           <div
             key={category.id}
@@ -31,6 +32,7 @@ const Categories = () => {
       ) : (
         <p>Loading...</p>
       )}
+    </div>
     </div>
   );
 };
