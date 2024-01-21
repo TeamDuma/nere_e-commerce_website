@@ -51,7 +51,7 @@ const AddAddressModal: React.FC<{
 
   const { data, isLoading } = useGetlocationsQuery();
 
-  const locations = data?.data?.location || [];
+  const locations = data?.data || [];
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {
