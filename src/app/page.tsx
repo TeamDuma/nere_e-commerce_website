@@ -19,6 +19,7 @@ import { selectShopping } from '@/lib/redux/slices/shopping';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
+import { MdGroups } from 'react-icons/md';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -132,7 +133,7 @@ export default function Home() {
           >
             <div className='flex flex-col items-center justify-center'>
               <div className='ml-2 flex flex-row gap-2'>
-                <FaRegUserCircle />
+                <MdGroups />
               </div>
               <div className='m-2 flex  flex-row rounded'>
                 <p style={{ color: '#fff', fontSize: 12, marginBottom: 2 }}>

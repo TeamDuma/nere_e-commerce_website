@@ -87,7 +87,7 @@ const Header = () => {
   };
 
   return (
-    <div className='py-4'>
+    <div className='my-4 bg-white'>
       <div className='container items-center justify-between sm:flex'>
         <div className='pb-4 text-center text-4xl font-bold text-blackish sm:pb-0'>
           <Link href='/'>
