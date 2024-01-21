@@ -22,7 +22,7 @@ const Header = () => {
   const { selectedLocationId, userInfo } = useSelector(selectShopping);
   console.log('useGetLocationsQuery', selectedLocationId);
 
-  const locations = data?.data?.location || [];
+  const locations = data?.data || [];
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {

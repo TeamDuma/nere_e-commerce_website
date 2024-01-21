@@ -7,7 +7,7 @@ export interface ILocation {
   name: string;
 }
 
-// export type GetlocationsResponse = {
-//   // status: string;
-//   data: ILocation[];
-// };
+export type GetlocationsResponse = {
+  status: string;
+  data: ILocation[];
+};

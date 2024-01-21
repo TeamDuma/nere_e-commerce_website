@@ -39,11 +39,6 @@ interface ISession {
   };
 }
 
-// const handleSelectLocation= () => {
-//   console.log('handleSelectLocation',);
-//   // Logic to open the login modal
-// };
-
 const PickupLocation: React.FC<{
   onClose: () => void;
   isOpen: boolean;
@@ -53,25 +48,39 @@ const PickupLocation: React.FC<{
   const dispatch = useDispatch();
   const { selectedLocationId } = useSelector(selectShopping);
 
+  const { data, isLoading } = useGetlocationsQuery();
+
+  const locations = data?.data || [];
+
+  console.log('data?.data', locations);
+
+  const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
+    () => {
+      return (
+        locations.find((location) => location.id === selectedLocationId) || null
+      );
+    }
+  );
+
   const handleSelectLocation = () => {
     if (selectedAddress) {
       dispatch(setSelectedLocationId(selectedAddress.id));
+      onClose();
+    } else {
+      console.log('No address selected.');
+      // Optionally provide user feedback for no available locations
+      onClose(); // Close the modal even if no address is selected
     }
-
-    // Close the modal
-    onClose();
   };
 
-  const { data, isLoading } = useGetlocationsQuery();
-
-  const locations = data || [];
-
-  console.log('data', locations);
-
-  const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
-    () =>
-      locations.find((location) => location.id === selectedLocationId) || null
-  );
+  // const handleSelectLocation = () => {
+  //   console.log("Selected Address:", selectedAddress);
+  //   if (selectedAddress) {
+  //     dispatch(setSelectedLocationId(selectedAddress.id));
+  //     console.log("Selected Location ID Dispatched:", selectedAddress.id);
+  //   }
+  //   onClose();
+  // };
 
   useEffect(() => {
     if (data && selectedLocationId) {
@@ -113,6 +122,26 @@ const PickupLocation: React.FC<{
             <hr className='my-2' />
           </div>
         ))}
+        {/* {locations.map((location: ILocation) => (
+          <div key={location.id}>
+            <input
+  type='radio'
+  id={`address${location.id}`}
+  name='address' 
+  value={location.name}
+  checked={selectedAddress?.id === location.id}
+  onChange={() => console.log('selectedAddress?.id ',location.id)}
+    // onChange={() => setSelectedAddress(location)}
+/>
+            <label
+              htmlFor={`address${location.id}`}
+              className='m-4 text-gray-400'
+            >
+              {location.name}
+            </label>
+            <hr className='my-2' />
+          </div>
+        ))} */}
       </div>
     );
   };
