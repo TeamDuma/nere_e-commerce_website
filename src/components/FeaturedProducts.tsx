@@ -74,9 +74,7 @@ const FeaturedProducts = () => {
                       alignItems: 'center',
                     }}
                   >
-<div className='product-name'>
-                      {product?.name}
-                    </div>
+                    <div className='product-name'>{product?.name}</div>
                     <div style={{ display: 'flex', marginTop: '2px' }}>
                       <div style={{ color: '#F31748', marginLeft: '5px' }}>
                         {`¢ ${product?.sale_price}`}
