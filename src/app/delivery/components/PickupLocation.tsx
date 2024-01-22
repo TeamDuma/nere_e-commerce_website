@@ -110,7 +110,7 @@ const PickupLocation: React.FC<{
               id={`address${location.id}`}
               name='address'
               value={location.name}
-              checked={selectedAddress?.id === location.id}
+              defaultChecked={selectedAddress?.id === location.id}
               onChange={() => setSelectedAddress(location)}
             />
             <label
