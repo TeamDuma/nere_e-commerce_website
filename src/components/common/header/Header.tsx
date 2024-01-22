@@ -14,6 +14,7 @@ import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
 
 import { BsSearch } from 'react-icons/bs';
+import CartIconHeader from '../CartIconHeader';
 
 const Header = () => {
   const { data, isLoading } = useGetlocationsQuery();
@@ -210,7 +211,7 @@ const Header = () => {
               }`}
             >
               <div className='flex flex-row gap-2'>
-                <CartIcon />
+                <CartIconHeader />
                 <p style={{ color: '#298592', fontSize: 12 }}>
                   {(cartItems ?? []).length}
                 </p>
