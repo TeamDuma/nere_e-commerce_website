@@ -18,7 +18,7 @@ const FeaturedProducts = () => {
         <div className='container pt-16'>
           {isLoading && <div>Loading...</div>}
 
-          <div className='lg:grid-col-3 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
+          <div className='lg:grid-col-3 grid grid-cols-2 place-items-center gap-10 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.id}`}>
                 <div key={product?.id} style={{ marginTop: '50px' }}>
@@ -74,7 +74,7 @@ const FeaturedProducts = () => {
                       alignItems: 'center',
                     }}
                   >
-                    <div style={{ fontSize: '14px', marginTop: '2px' }}>
+<div className='product-name'>
                       {product?.name}
                     </div>
                     <div style={{ display: 'flex', marginTop: '2px' }}>

@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className='container pt-6 lg:pt-0'>
+      <div className='container lg:pt-0'>
         <OngoingRow />
         <Banner />
         <EntertainmentSection />
