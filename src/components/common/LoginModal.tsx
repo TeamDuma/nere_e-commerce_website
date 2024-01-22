@@ -5,6 +5,7 @@ import { useSignInMutation } from '@/lib/redux/services/customers';
 import { addUser, deleteUser } from '@/lib/redux';
 import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
+import Spinner from './Spinner';
 
 const customStyles: Styles = {
   overlay: {
@@ -53,6 +54,10 @@ const LoginModal: React.FC<{
 
   const handleLogin = async () => {
     try {
+      if (isLoading) {
+        return;
+      }
+
       const response = await signIn({ email, password });
 
       if ('data' in response) {
@@ -87,19 +92,19 @@ const LoginModal: React.FC<{
         contentLabel='Example Modal'
       >
         <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center  justify-center bg-opacity-50'>
-          <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white'>
-            <div className='w-full'>
-              <div className='m-8 mx-auto  max-w-[400px]'>
+          <div className='sm:rounded-4xl  w-full max-w-xl overflow-y-auto bg-white'>
+            <div className='flex w-full items-center justify-center'>
+              {' '}
+              {/* Add these classes */}
+              <div className='m-8 mx-auto  max-w-[300px]'>
                 <div className='mb-8'>
                   <Logo />
-                  <p className='text-gray-600'>
-                    Login with your email & Password
-                  </p>
+                  <p>Login with your email & Password</p>
                 </div>
 
                 <label
                   htmlFor='Email'
-                  className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+                  className='text-sm  leading-tight tracking-normal text-gray-800'
                 >
                   Email{' '}
                 </label>
@@ -114,13 +119,13 @@ const LoginModal: React.FC<{
 
                 <label
                   htmlFor='Password'
-                  className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+                  className='text-sm  leading-tight tracking-normal text-gray-800'
                 >
                   Password{' '}
                 </label>
                 <div className='relative mb-5 mt-2'>
                   <input
-                    type='password' // Set input type to 'password'
+                    type='password'
                     id='password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -130,19 +135,28 @@ const LoginModal: React.FC<{
                 </div>
 
                 <div className='space-y-4'>
-                  <button
-                    className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
-                    onClick={() => handleLogin()}
-                  >
-                    Login
-                  </button>
+                  <div className='space-y-4'>
+                    <button
+                      className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
+                      onClick={handleLogin}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? <Spinner /> : 'Login'}
+                    </button>
+                  </div>
                 </div>
 
+                <div className='inline-flex w-full items-center justify-center'>
+                  <hr className='my-8 h-px w-64 border-0 bg-gray-200 dark:bg-gray-700' />
+                  <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                    or
+                  </span>
+                </div>
                 <p>
                   Don't have an account?{' '}
                   <span
                     onClick={onRegistrationClick}
-                    className='cursor-pointer text-blue-500'
+                    className='cursor-pointer text-[#298592]'
                   >
                     Register
                   </span>

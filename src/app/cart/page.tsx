@@ -89,7 +89,7 @@ const Cart = () => {
   };
 
   return (
-    <div className='bg-[#000]-100 my-4 min-h-screen pt-20'>
+    <div className='bg-[#000]-100 my-4 ml-20 min-h-screen pt-20 '>
       {cartItems.length === 0 ? (
         <div className='text-center text-5xl text-black'>
           Your cart is empty
@@ -99,15 +99,19 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <h1 className='text-l  m-10 text-[#1A464C]'>
-            You have saved {totalSavings} GHS on this purchase!
-          </h1>
+          <div className='flex h-20 w-1/3 items-center justify-center rounded-lg bg-[#F8F8F8]'>
+            <h1 className='text-lg font-bold text-[#1A464C]'>
+              You have saved GHS {totalSavings} on this purchase!
+            </h1>
+          </div>
+
+          <h1 className='my-5 text-lg font-bold text-[#1A464C]'>Your Order</h1>
           <div className='mx-auto flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 xl:px-0'>
             <div className='rounded-lg md:w-1/2'>
               {cartItems.map((item: CartItem) => (
                 <div
                   key={item.id}
-                  className='my-4 flex items-center rounded-lg bg-[#FFF] p-4 shadow-md'
+                  className='my-4 flex items-center rounded-lg bg-[#FFF] shadow-md'
                   style={{ width: '700px', height: '190px' }}
                 >
                   <div className='bg-[#F8F8F8 ] relative w-1/4 flex-shrink-0'>
@@ -120,21 +124,21 @@ const Cart = () => {
                   </div>
 
                   <div className='ml-4 flex-1'>
-                    <h2 className='text overflow-hidden  overflow-ellipsis font-bold text-[#298592]'>
+                    <h2 className='text overflow-hidden  overflow-ellipsis'>
                       {item.name}
                     </h2>
 
                     <div className='m-2'>
                       <div className='flex flex-col items-start'>
                         <div className='flex items-center'>
-                          <span className='font-extralight text-[#F58929]'>
-                            {item?.sale_price}¢
+                          <span className='font-bold text-[#1A464C]'>
+                            ¢{item?.sale_price}
                           </span>
                           <span
-                            className='ml-3 text-[#C1C2C2]'
+                            className='ml-3 text-[#F31748] '
                             style={{ textDecoration: 'line-through' }}
                           >
-                            {item?.price}¢
+                            ¢{item?.price}
                           </span>
                         </div>
 
@@ -328,8 +332,9 @@ const Cart = () => {
               )}
             </div>
           </div>
-          <h1 className='text-l  mt-5 text-[#1A464C]'>
-            Items related to your cart
+
+          <h1 className='my-5 text-lg font-bold text-[#1A464C]'>
+            Items related to your cart{' '}
           </h1>
           <FeaturedProducts />
         </>

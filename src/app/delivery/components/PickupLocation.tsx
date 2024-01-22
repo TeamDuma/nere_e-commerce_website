@@ -50,16 +50,37 @@ const PickupLocation: React.FC<{
 
   const { data, isLoading } = useGetlocationsQuery();
 
-  const locations = data?.data?.location || [];
+  const locations = data?.data || [];
+
+  console.log('data?.data', locations);
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {
-      return data
-        ? locations.find((location) => location.id === selectedLocationId) ||
-            null
-        : null;
+      return (
+        locations.find((location) => location.id === selectedLocationId) || null
+      );
     }
   );
+
+  const handleSelectLocation = () => {
+    if (selectedAddress) {
+      dispatch(setSelectedLocationId(selectedAddress.id));
+      onClose();
+    } else {
+      console.log('No address selected.');
+      // Optionally provide user feedback for no available locations
+      onClose(); // Close the modal even if no address is selected
+    }
+  };
+
+  // const handleSelectLocation = () => {
+  //   console.log("Selected Address:", selectedAddress);
+  //   if (selectedAddress) {
+  //     dispatch(setSelectedLocationId(selectedAddress.id));
+  //     console.log("Selected Location ID Dispatched:", selectedAddress.id);
+  //   }
+  //   onClose();
+  // };
 
   useEffect(() => {
     if (data && selectedLocationId) {
@@ -89,7 +110,7 @@ const PickupLocation: React.FC<{
               id={`address${location.id}`}
               name='address'
               value={location.name}
-              checked={selectedAddress?.id === location.id}
+              defaultChecked={selectedAddress?.id === location.id}
               onChange={() => setSelectedAddress(location)}
             />
             <label
@@ -101,6 +122,26 @@ const PickupLocation: React.FC<{
             <hr className='my-2' />
           </div>
         ))}
+        {/* {locations.map((location: ILocation) => (
+          <div key={location.id}>
+            <input
+  type='radio'
+  id={`address${location.id}`}
+  name='address' 
+  value={location.name}
+  checked={selectedAddress?.id === location.id}
+  onChange={() => console.log('selectedAddress?.id ',location.id)}
+    // onChange={() => setSelectedAddress(location)}
+/>
+            <label
+              htmlFor={`address${location.id}`}
+              className='m-4 text-gray-400'
+            >
+              {location.name}
+            </label>
+            <hr className='my-2' />
+          </div>
+        ))} */}
       </div>
     );
   };
@@ -134,7 +175,7 @@ const PickupLocation: React.FC<{
             <button
               className='rounded-md bg-[#298592] px-4 py-2 text-white'
               style={{ width: '100%' }}
-              // onClick={handleSelectLocation}
+              onClick={handleSelectLocation}
             >
               Select Pickup Location
             </button>

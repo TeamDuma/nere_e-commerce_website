@@ -15,7 +15,6 @@ const customStyles: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    // backgroundColor: 'rgba( 190,192,193, 0.7)',
   },
   content: {
     display: 'flex',
@@ -52,7 +51,7 @@ const AddAddressModal: React.FC<{
 
   const { data, isLoading } = useGetlocationsQuery();
 
-  const locations = data?.data?.location || [];
+  const locations = data?.data || [];
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {

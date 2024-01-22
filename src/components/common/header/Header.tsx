@@ -13,6 +13,9 @@ import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
 
+import { BsSearch } from 'react-icons/bs';
+import CartIconHeader from '../CartIconHeader';
+
 const Header = () => {
   const { data, isLoading } = useGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -20,7 +23,7 @@ const Header = () => {
   const { selectedLocationId, userInfo } = useSelector(selectShopping);
   console.log('useGetLocationsQuery', selectedLocationId);
 
-  const locations = data?.data?.location || [];
+  const locations = data?.data || [];
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {
@@ -58,6 +61,11 @@ const Header = () => {
   const openLoginModal = () => {
     setLoginModalVisible(true);
   };
+  const handleLoginClick = () => {
+    setLoginModalVisible(true);
+    setRegistrationModalVisible(false);
+    setLocationModalVisible(false);
+  };
 
   const handleRegistrationClick = () => {
     setRegistrationModalVisible(true);
@@ -80,59 +88,29 @@ const Header = () => {
   };
 
   return (
-    <nav
-      className='mx-auto flex h-16 flex-col items-center justify-between bg-white 
-     md:flex-row md:px-16'
-    >
-      <div className='flex items-center md:mb-0'>
-        <Link href='/'>
-          <Logo />
-        </Link>
-      </div>
+    <div className='my-4 bg-white'>
+      <div className='container flex flex-col items-center justify-between sm:flex-row'>
+        <div className='pb-4 text-center text-4xl font-bold text-blackish sm:pb-0'>
+          <Link href='/'>
+            <Logo />
+          </Link>
+        </div>
 
-      <div className='hidden flex-shrink flex-grow-0 justify-start  sm:block'>
-        <div className='inline-block'>
-          <div className='flex w-full max-w-[600px] bg-[#F5F5F5] sm:max-w-full md:rounded-full '>
+        <div className='flex w-full flex-col items-center gap-4 sm:w-[300px] sm:flex-row md:w-[40%]'>
+          <div className='relative w-full rounded'>
             <input
+              className='w-full rounded-lg border border-gray-200 bg-[#F5F5F5] p-2 px-4'
               type='text'
-              className='flex w-full bg-[#F5F5F5] bg-transparent pl-2 text-[#0c0c0c] outline-0'
               placeholder='Search for products'
             />
-            <button
-              type='submit'
-              className='relative rounded-full bg-[#F5F5F5] p-2'
-            >
-              <svg
-                width='30px'
-                height='30px'
-                viewBox='0 0 24 24'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <g id='SVGRepo_bgCarrier' strokeWidth={0} />
-                <g
-                  id='SVGRepo_tracerCarrier'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-                <g id='SVGRepo_iconCarrier'>
-                  {' '}
-                  <path
-                    d='M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z'
-                    stroke='#999'
-                    strokeWidth={2}
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />{' '}
-                </g>
-              </svg>
-            </button>
+
+            <BsSearch
+              className='absolute right-0 top-0 mr-3 mt-3 text-gray-400'
+              size={20}
+            />
           </div>
         </div>
-      </div>
-
-      <div className='my-4 flex-initial'>
-        <div className='relative flex items-center justify-end'>
+        <div className='hidden gap-4 text-[30px] text-gray-500 lg:flex'>
           <div className='mr-4 flex items-center'>
             <a
               className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
@@ -173,7 +151,7 @@ const Header = () => {
                       <UserIcon />
                       <div className='ml-2'>
                         <p style={{ color: '#298592', fontSize: 12 }}>
-                          Welcome: {userInfo?.data?.customer?.name}
+                          Welcome: {userInfo?.data?.customer.name}
                         </p>
                       </div>
                     </div>
@@ -225,6 +203,7 @@ const Header = () => {
               </div>
             )}
           </div>
+
           <Link
             href='/cart'
             className={`block rounded-md p-2 ${
@@ -232,34 +211,37 @@ const Header = () => {
             }`}
           >
             <div className='flex flex-row gap-2'>
-              <CartIcon />
+              <CartIconHeader />
               <p style={{ color: '#298592', fontSize: 12 }}>
                 {(cartItems ?? []).length}
               </p>
             </div>
           </Link>
+
+          {locationModalVisible && (
+            <PickupLocation
+              onClose={closeModal}
+              isOpen={locationModalVisible}
+            />
+          )}
+          {loginModalVisible && (
+            <LoginModal
+              onClose={closeModal}
+              onRegistrationClick={handleRegistrationClick}
+              session={null}
+              isOpen={loginModalVisible}
+            />
+          )}
+          {registrationModalVisible && (
+            <RegistrationModal
+              onClose={closeModal}
+              isOpen={registrationModalVisible}
+              onLoginClick={handleLoginClick}
+            />
+          )}
         </div>
-        {locationModalVisible && (
-          <PickupLocation onClose={closeModal} isOpen={locationModalVisible} />
-        )}
-
-        {loginModalVisible && (
-          <LoginModal
-            onClose={closeModal}
-            onRegistrationClick={handleRegistrationClick}
-            session={null}
-            isOpen={loginModalVisible}
-          />
-        )}
-
-        {registrationModalVisible && (
-          <RegistrationModal
-            onClose={closeModal}
-            isOpen={registrationModalVisible}
-          />
-        )}
       </div>
-    </nav>
+    </div>
   );
 };
 

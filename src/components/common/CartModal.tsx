@@ -24,19 +24,22 @@ const customStyles: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(190, 192, 193, 0.7)',
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    top: '50%',
-    left: '90%',
-    transform: 'translate(-50%, -50%)',
-    width: '500px',
-    height: '800px',
-    borderRadius: '15px',
+    position: 'fixed',
+    top: 0,
+    left: 'auto',
+    right: 0,
+    height: '100%',
+    width: '95%',
+    maxWidth: '400px',
+    backgroundColor: 'white',
+    padding: '20px',
+    borderRadius: '20px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    zIndex: 1001,
+    overflowY: 'auto',
   },
 };
 
@@ -74,73 +77,67 @@ const CartModal: React.FC<{
           cartItems.map((item) => (
             <div
               key={item.id}
-              className='my-4 flex items-center rounded-lg bg-[#FFF] p-4 shadow-md'
-              style={{ width: '450px', height: '190px' }}
+              className='mt-5 flex items-center rounded-lg bg-[#fff] p-4 shadow-md'
+              style={{ width: '405px', height: '128px' }}
             >
-              <div className='bg-[#F8F8F8 ] relative w-1/4 flex-shrink-0'>
+              <div className='relative w-1/4 flex-shrink-0 bg-[#F5F5F5]'>
                 <img
                   src={item.plain_image}
                   alt={item.name}
-                  className='h-32 w-full rounded-lg object-cover'
-                  style={{ width: '100px' }}
+                  className='h-140 w-full rounded-lg object-cover'
+                  style={{ width: '103px', height: '105px' }}
                 />
+                {item?.price && item.sale_price && (
+                  <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white'>
+                    Save{' '}
+                    {calculateSavingsPercentage(item.price, item.sale_price)}%
+                  </span>
+                )}
               </div>
 
               <div className='ml-4 flex-1'>
-                <h2 className='overflow-hidden overflow-ellipsis whitespace-nowrap text-lg font-bold text-[#298592]'>
+                <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
                   {item.name}
                 </h2>
-
                 <div className='m-2'>
-                  <div className='flex flex-col items-start'>
-                    <div className='flex items-center'>
-                      <span className=' font-extralight text-[#F58929]'>
-                        {item?.sale_price}¢
-                      </span>
-                      <span
-                        className='ml-3 text-[#C1C2C2]'
-                        style={{ textDecoration: 'line-through' }}
-                      >
-                        {item?.price}¢
-                      </span>
-                    </div>
+                  <div className='flex items-center'>
+                    <span className='text-xs  text-[#F58929]'>GH¢</span>
+                    <span className='ml-1  font-bold text-[#F58929]'>
+                      {item?.sale_price}
+                    </span>
 
-                    <div className='mt-2 flex items-center'>
-                      <span className='rounded bg-[#8CCED7] p-1 text-xs font-bold text-white'>
-                        Save{' '}
-                        {calculateSavingsPercentage(
-                          item.price,
-                          item.sale_price
-                        )}
-                        %
-                      </span>
-                    </div>
+                    <span
+                      className='ml-3 text-xs font-bold text-[#C1C2C2]'
+                      style={{ textDecoration: 'line-through' }}
+                    >
+                      {item?.price}GH¢
+                    </span>
+                  </div>
+                </div>
 
-                    <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
-                      <div className='flex items-center space-x-2 border-gray-100'>
-                        <span
-                          className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                          onClick={() => dispatch(decreaseQuantity(item.id))}
-                        >
-                          {' '}
-                          -{' '}
-                        </span>
-                        <input
-                          id={`quantity-${item.id}`}
-                          className='h-8 w-8  bg-white text-center text-xs outline-none'
-                          type='number'
-                          value={item.cartQuantity}
-                          min='1'
-                        />
-                        <span
-                          className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                          onClick={() => dispatch(increaseQuantity(item.id))}
-                        >
-                          {' '}
-                          +{' '}
-                        </span>
-                      </div>
-                    </div>
+                <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
+                  <div className='flex items-center space-x-2 border-gray-100'>
+                    <span
+                      className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                      onClick={() => dispatch(decreaseQuantity(item.id))}
+                    >
+                      {' '}
+                      -{' '}
+                    </span>
+                    <input
+                      id={`quantity-${item.id}`}
+                      className='h-8 w-8  bg-white text-center text-xs outline-none'
+                      type='number'
+                      value={item.cartQuantity}
+                      min='1'
+                    />
+                    <span
+                      className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                      onClick={() => dispatch(increaseQuantity(item.id))}
+                    >
+                      {' '}
+                      +{' '}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -173,7 +170,7 @@ const CartModal: React.FC<{
               Please login to continue
             </p>
             <p className='mt-1  text-base font-semibold text-[#1A464C]'>
-              Deliver fee is not included
+              Delivery fee is not included
             </p>
           </div>
         )}

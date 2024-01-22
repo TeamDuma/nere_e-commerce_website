@@ -9,7 +9,5 @@ export interface ILocation {
 
 export type GetlocationsResponse = {
   status: string;
-  data: {
-    location: ILocation[];
-  };
+  data: ILocation[];
 };

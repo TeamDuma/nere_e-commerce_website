@@ -31,14 +31,90 @@
 }
 
 .social-icon {
-  color: gray;
+  color: #298592;
   font-size: 24px;
   transition: color 0.3s ease;
   margin: 15px;
 }
 
+.ongoing-icon {
+  color: #298592;
+  font-size: 24px;
+  transition: color 0.3s ease;
+  margin: 15px;
+}
+
+.star-icon {
+  color: #ffca49;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.p-text {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+.p-text2 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+}
+.p-text3 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+  margin-left: 30%;
+}
+.p-text4 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.ongoing-icon {
+  color: #298592;
+  font-size: 24px;
+  transition: color 0.3s ease;
+  margin: 15px;
+}
+
+.star-icon {
+  color: #ffca49;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.p-text {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+.p-text2 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+}
+.p-text3 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+  margin-left: 30%;
+}
+.p-text4 {
+  color: #298592;
+  font-size: 20;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
 .social-icon:hover {
-  color: #1877f2;
+  color: #36e8ff94;
 }
 
 .card {
@@ -141,7 +217,7 @@
 }
 .purchase-guide {
   display: flex;
-  margin: 150px 0;
+  margin: 30px 0;
   width: 100%;
 }
 
@@ -153,29 +229,23 @@
 }
 
 .step-icon {
-  background-color: #f58929;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 15px;
+  color: #f58929;
+  font-size: 24px;
+  transition: color 0.3s ease;
+  margin: 15px;
 }
 
 .step-text {
   text-align: center;
   font-size: 14px;
-  color: #1a464c;
+  color: #b3b3b3;
   margin-top: 14px;
 }
 
 .guide-line {
   border: 1px solid #f58929;
   width: 100%;
-  margin: 8px 0;
+  margin-top: 16px;
 }
 
 .progress-bar {
@@ -185,14 +255,14 @@
 
 .progress-text {
   color: #828282;
-
+  font-size: 14px;
   margin-bottom: 8px;
 }
 
 .progress-line {
   width: 100%;
   border-radius: 10%;
-  height: 5px;
+  height: 3px;
   background-color: #ddd;
   position: relative;
 }
@@ -225,4 +295,12 @@
 .ongoing-groups-button:hover,
 .cart-button:hover {
   background-color: #1d5d70;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.color1-text {
+  color: orange;
 }
