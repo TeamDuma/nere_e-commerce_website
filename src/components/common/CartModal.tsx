@@ -25,7 +25,6 @@ const customStyles: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(190, 192, 193, 0.7)',
-    backgroundColor: 'rgba(190, 192, 193, 0.7)',
   },
   content: {
     position: 'fixed',
