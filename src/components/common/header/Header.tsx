@@ -266,7 +266,6 @@ const Header = () => {
             </div>
           </Link>
 
-
           {locationModalVisible && (
             <PickupLocation
               onClose={closeModal}
