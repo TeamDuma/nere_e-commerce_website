@@ -98,11 +98,7 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Responsive Navigation Icons */}
           <div className='flex items-center gap-4 lg:hidden'>
-            <button onClick={handLocation}>
-              <Location />
-            </button>
             {userInfo && userInfo.data ? (
               <div className='relative inline-block'>
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
@@ -164,6 +160,37 @@ const Header = () => {
               className='absolute right-0 top-0 mr-3 mt-3 text-gray-400'
               size={20}
             />
+          </div>
+        </div>
+
+        {/* Your new row content for small screens */}
+        <div className='sm:hidden'>
+          <div className='my-4 flex'>
+            <div className='flex lg:hidden'>
+              <button>
+                <Location />
+              </button>
+            </div>
+
+            {/* Responsive Navigation Icons */}
+            <div className='flex  gap-4 lg:hidden'>
+              <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
+              <p
+                style={{
+                  color: '#298592',
+                  fontWeight: 'bold',
+                  fontSize: 12,
+                }}
+              >
+                {selectedLocation ? selectedLocation.name : 'Select a location'}
+              </p>
+              <p
+                style={{ color: '#298592', fontSize: 14, fontWeight: 'bold' }}
+                onClick={handLocation}
+              >
+                Change
+              </p>
+            </div>
           </div>
         </div>
 

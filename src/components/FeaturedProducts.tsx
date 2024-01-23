@@ -24,7 +24,7 @@ const FeaturedProducts = () => {
                 <div key={product?.id} style={{ marginTop: '50px' }}>
                   <div
                     style={{
-                      width: '28px',
+                      width: '40px',
                       height: '15px',
                       backgroundColor: '#F58929',
                       position: 'relative',
@@ -35,7 +35,7 @@ const FeaturedProducts = () => {
                       borderRadius: '8px',
                       justifyContent: 'center',
                       fontWeight: 'bold',
-                      alignItems: 'center',
+                      // alignItems: 'center',
                       color: 'white',
                     }}
                   >
@@ -71,7 +71,7 @@ const FeaturedProducts = () => {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      alignItems: 'center',
+                      // alignItems: 'center',
                     }}
                   >
                     <div className='product-name'>{product?.name}</div>

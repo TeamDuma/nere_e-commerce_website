@@ -18,9 +18,9 @@ const Products = () => {
                 <div key={product?.id} style={{ marginTop: '50px' }}>
                   <div
                     style={{
-                      width: '28px',
+                      width: '40px',
                       height: '15px',
-                      backgroundColor: '#F58929',
+                      backgroundColor: '#F8F8F8',
                       position: 'relative',
                       display: 'flex',
                       fontSize: '12px',
@@ -29,7 +29,7 @@ const Products = () => {
                       borderRadius: '8px',
                       justifyContent: 'center',
                       fontWeight: 'bold',
-                      alignItems: 'center',
+                      // alignItems: 'center',
                       color: 'white',
                     }}
                   >
@@ -65,7 +65,6 @@ const Products = () => {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      alignItems: 'center',
                     }}
                   >
                     <div className='product-name'>{product?.name}</div>
