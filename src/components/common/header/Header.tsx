@@ -265,6 +265,37 @@ const Header = () => {
               </p>
             </div>
           </Link>
+
+
+          {locationModalVisible && (
+            <PickupLocation
+              onClose={closeModal}
+              isOpen={locationModalVisible}
+            />
+          )}
+          {locationModalVisible && (
+            <PickupLocation
+              onClose={closeModal}
+              isOpen={locationModalVisible}
+            />
+          )}
+
+          {loginModalVisible && (
+            <LoginModal
+              onClose={closeModal}
+              onRegistrationClick={handleRegistrationClick}
+              session={null}
+              isOpen={loginModalVisible}
+            />
+          )}
+
+          {registrationModalVisible && (
+            <RegistrationModal
+              onClose={closeModal}
+              isOpen={registrationModalVisible}
+              onLoginClick={handleLoginClick}
+            />
+          )}
         </div>
       </div>
     </div>
