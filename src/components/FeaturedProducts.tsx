@@ -21,7 +21,7 @@ const FeaturedProducts = () => {
           <div className='lg:grid-col-3 grid grid-cols-2 place-items-center gap-10 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.id}`}>
-                <div key={product?.id} style={{ marginTop: '50px' }}>
+                <div key={product?.id}>
                   <div
                     style={{
                       width: '40px',
@@ -31,11 +31,10 @@ const FeaturedProducts = () => {
                       display: 'flex',
                       fontSize: '12px',
                       left: '146px',
-                      top: '43px',
+                      top: '20px',
                       borderRadius: '8px',
                       justifyContent: 'center',
                       fontWeight: 'bold',
-                      // alignItems: 'center',
                       color: 'white',
                     }}
                   >
@@ -47,6 +46,8 @@ const FeaturedProducts = () => {
                   <div
                     style={{
                       backgroundSize: 'cover',
+                      backgroundColor: '#F8F8F8',
+
                       width: '200px',
                       height: '200px',
                       display: 'flex',
@@ -71,7 +72,6 @@ const FeaturedProducts = () => {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      // alignItems: 'center',
                     }}
                   >
                     <div className='product-name'>{product?.name}</div>

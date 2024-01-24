@@ -89,10 +89,10 @@ const Header = () => {
 
   return (
     <div className='my-4 bg-white'>
-      <div className='container flex flex-col items-center justify-between sm:flex-row'>
+      <div className='container flex flex-col  justify-between sm:flex-row sm:justify-between'>
         {/* Logo and Icons in the same row */}
-        <div className='flex items-center'>
-          <div className='pb-4 text-center text-4xl font-bold text-blackish sm:pb-0'>
+        <div className='flex items-center '>
+          <div className='pb-4  text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
               <Logo />
             </Link>
@@ -100,7 +100,7 @@ const Header = () => {
 
           <div className='flex items-center gap-4 lg:hidden'>
             {userInfo && userInfo.data ? (
-              <div className='relative inline-block'>
+              <div className='relative mr-4 inline-block'>
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <UserIcon />
                 </button>
