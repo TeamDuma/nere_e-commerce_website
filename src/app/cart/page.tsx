@@ -89,7 +89,7 @@ const Cart = () => {
   };
 
   return (
-    <div className='bg-[#000]-100 my-4 ml-20 min-h-screen pt-20 '>
+    <div className='bg-[#000]-100 my-4 ml-5 min-h-screen pt-20'>
       {cartItems.length === 0 ? (
         <div className='text-center text-5xl text-black'>
           Your cart is empty
@@ -99,106 +99,105 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <div className='flex h-20 w-1/3 items-center justify-center rounded-lg bg-[#F8F8F8]'>
-            <h1 className='text-lg font-bold text-[#1A464C]'>
-              You have saved GHS {totalSavings} on this purchase!
-            </h1>
+          <div className='ml-5 flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-between'>
+            <div className='lg:mr-6 lg:w-1/3'>
+              <div className='flex h-20 items-center justify-center rounded-lg bg-[#F8F8F8] '>
+                <h1 className='text-lg font-bold text-[#1A464C]'>
+                  You have saved GHS {totalSavings} on this purchase!
+                </h1>
+              </div>
+            </div>
           </div>
-
-          <h1 className='my-5 text-lg font-bold text-[#1A464C]'>Your Order</h1>
+          <h1 className='my-5 text-lg font-bold text-[#1A464C] '>Your Order</h1>
           <div className='mx-auto flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 xl:px-0'>
-            <div className='rounded-lg md:w-1/2'>
+            <div className='rounded-lg md:w-1/3'>
               {cartItems.map((item: CartItem) => (
                 <div
                   key={item.id}
-                  className='my-4 flex items-center rounded-lg bg-[#FFF] shadow-md'
-                  style={{ width: '700px', height: '190px' }}
+                  className='my-4 flex flex-col  bg-[#F8F8F8] shadow-md sm:flex-row sm:items-center sm:rounded-lg'
+                  style={{ width: '100%' }}
                 >
-                  <div className='bg-[#F8F8F8 ] relative w-1/4 flex-shrink-0'>
+                  <div className='mx-auto h-full rounded-md object-cover md:max-w-lg '>
                     <img
                       src={item.plain_image}
                       alt={item.name}
-                      className='h-32 w-full rounded-lg object-cover'
-                      style={{ width: '100px' }}
+                      className='h-32 w-full rounded-lg object-cover sm:w-32'
                     />
                   </div>
 
-                  <div className='ml-4 flex-1'>
-                    <h2 className='text overflow-hidden  overflow-ellipsis'>
+                  <div className='mt-4 sm:ml-4 sm:mt-0 sm:flex-1'>
+                    <h2 className='text overflow-hidden overflow-ellipsis'>
                       {item.name}
                     </h2>
 
-                    <div className='m-2'>
-                      <div className='flex flex-col items-start'>
-                        <div className='flex items-center'>
-                          <span className='font-bold text-[#1A464C]'>
-                            ¢{item?.sale_price}
-                          </span>
-                          <span
-                            className='ml-3 text-[#F31748] '
-                            style={{ textDecoration: 'line-through' }}
-                          >
-                            ¢{item?.price}
-                          </span>
-                        </div>
+                    <div className='mt-2 flex flex-col items-start'>
+                      <div className='flex items-center'>
+                        <span className='font-bold text-[#1A464C]'>
+                          ¢{item?.sale_price}
+                        </span>
+                        <span
+                          className='ml-3 text-[#F31748]'
+                          style={{ textDecoration: 'line-through' }}
+                        >
+                          ¢{item?.price}
+                        </span>
+                      </div>
 
-                        <div className='mt-2 flex items-center'>
-                          <span className='rounded bg-[#8CCED7] p-1 text-xs font-bold text-white'>
-                            Save{' '}
-                            {calculateSavingsPercentage(
-                              item.price,
-                              item.sale_price
-                            )}
-                            %
-                          </span>
-                        </div>
-                        <div className='flex items-center'>
-                          {item.hasMinQuantity && (
-                            <ProgressBar
-                              remaining={item.cartQuantity}
-                              total={item.min_quantity ?? 0}
-                            />
+                      <div className='mt-2 flex items-center'>
+                        <span className='rounded bg-[#8CCED7] p-1 text-xs font-bold text-white'>
+                          Save{' '}
+                          {calculateSavingsPercentage(
+                            item.price,
+                            item.sale_price
                           )}
-                        </div>
+                          %
+                        </span>
+                      </div>
+
+                      <div className='flex items-center'>
+                        {item.hasMinQuantity && (
+                          <ProgressBar
+                            remaining={item.cartQuantity}
+                            total={item.min_quantity ?? 0}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
 
-                  <div className='ml-2 flex-1'>
-                    <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
-                      <div className='flex items-center space-x-2 border-gray-100'>
-                        <span
-                          className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                          onClick={() => dispatch(decreaseQuantity(item.id))}
-                        >
-                          {' '}
-                          -{' '}
-                        </span>
-                        <span
-                          id={`quantity-${item.id}`}
-                          className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
-                        >
-                          {item.cartQuantity}
-                        </span>
+                  <div className='mt-2 sm:ml-2 sm:flex-1'>
+                    <div className='mt-2 flex items-center space-x-2 border-gray-100'>
+                      <span
+                        className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                        onClick={() => dispatch(decreaseQuantity(item.id))}
+                      >
+                        {' '}
+                        -{' '}
+                      </span>
+                      <span
+                        id={`quantity-${item.id}`}
+                        className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
+                      >
+                        {item.cartQuantity}
+                      </span>
 
-                        <span
-                          className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                          onClick={() => {
-                            console.log('item.id', item.id);
-                            dispatch(increaseQuantity(item.id));
-                          }}
-                        >
-                          {' '}
-                          +{' '}
-                        </span>
+                      <span
+                        className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                        onClick={() => {
+                          console.log('item.id', item.id);
+                          dispatch(increaseQuantity(item.id));
+                        }}
+                      >
+                        {' '}
+                        +{' '}
+                      </span>
 
-                        <span
-                          className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
-                          onClick={() => handleRemoveItem(item.id)}
-                        >
-                          <FaRegTrashAlt />
-                        </span>
-                      </div>
+                      <span
+                        className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
+                        onClick={() => handleRemoveItem(item.id)}
+                      >
+                        <FaRegTrashAlt />
+                      </span>
                     </div>
                   </div>
                 </div>

@@ -97,7 +97,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
         <div className='mb-8 md:flex md:items-center'>
           <div className='h-387 w-387 bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
             <img
-              className='mx-auto h-full max-w-lg rounded-md object-cover '
+              className='mx-auto h-full rounded-md object-cover md:max-w-lg '
               src={product?.plain_image}
               alt='plain_image'
             />

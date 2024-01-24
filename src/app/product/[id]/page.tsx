@@ -106,9 +106,9 @@ export default function ProductDetailPage({ params }: Props) {
     <div className='my-8'>
       <div className='container mx-auto px-6'>
         <div className='mb-8 md:flex md:items-center'>
-          <div className='h-387 w-387 bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
+          <div className='h-387 md:w-387 w-full bg-[#F8F8F8] lg:h-96'>
             <img
-              className='mx-auto h-full max-w-lg rounded-md object-cover '
+              className='mx-auto h-full rounded-md object-cover md:max-w-lg '
               src={product?.plain_image}
               alt='plain_image'
             />
@@ -150,7 +150,7 @@ export default function ProductDetailPage({ params }: Props) {
               <FaStar />
             </div>
 
-            <div className='mt-3 flex flex-col items-center md:flex-row md:items-start'>
+            <div className='mt-3 flex items-center md:flex-row md:items-start'>
               <span className='text-lg font-medium text-[#1A464C]	'>
                 ¢ {product?.sale_price}
               </span>
@@ -186,14 +186,14 @@ export default function ProductDetailPage({ params }: Props) {
               </thead>
             </table>
             <Link href='/products'>
-              <h1 className='ml-5 text-[#F58929]'>Continue Shopping</h1>
+              <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
             </Link>
 
-            {product?.hasMinQuantity && (
+            {/* {product?.hasMinQuantity && (
               <div className='progress-bar'>
                 <div className='progress-line'></div>
               </div>
-            )}
+            )} */}
 
             <div className='flex items-center'>
               <button

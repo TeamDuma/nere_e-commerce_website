@@ -23,7 +23,8 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
   console.log('Home', products);
   return (
     <div className='my-10 flex flex-col justify-between rounded-md bg-[#F0F4F5] p-2 md:flex-row md:p-3'>
-      <div className="box-border w-full rounded-lg bg-['#b4c8ca'] p-3 md:w-1/2">
+      {/* Show this content on larger screens */}
+      <div className="box-border hidden w-full rounded-lg bg-['#b4c8ca'] p-3 md:block md:w-1/2">
         <div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
           <div className='flex items-center gap-2 md:gap-2'>
             <MdGroups className='social-icon' />
@@ -40,11 +41,11 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
         </div>
       </div>
 
-      <div className='box-border w-full rounded-lg bg-white p-3 md:w-1/2'>
+      {/* Show this content on larger screens */}
+      <div className='box-border hidden w-full rounded-lg bg-white p-3 md:block md:w-1/2'>
         <div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
           <div className='flex items-center gap-2 md:gap-2'>
             <HiOutlineRocketLaunch className='social-icon' />
-
             <p className='p-text'>Launch a purchase</p>
           </div>
           <div className='md:ml-2'>
@@ -60,6 +61,16 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
             <p className='p-text4'>GHS 99</p>
           </div>
         </div>
+      </div>
+
+      <div className='flex items-center gap-2 md:hidden'>
+        <MdGroups className='social-icon' />
+        <p className='p-text'>Ongoing Purchases near me</p>
+      </div>
+
+      <div className='flex items-center gap-2 md:hidden'>
+        <HiOutlineRocketLaunch className='social-icon' />
+        <p className='p-text'>Launch a purchase</p>
       </div>
     </div>
   );

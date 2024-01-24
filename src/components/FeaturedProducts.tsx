@@ -18,13 +18,13 @@ const FeaturedProducts = () => {
         <div className='container pt-16'>
           {isLoading && <div>Loading...</div>}
 
-          <div className='lg:grid-col-3 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
+          <div className='lg:grid-col-3 grid grid-cols-2 place-items-center gap-10 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.id}`}>
                 <div key={product?.id} style={{ marginTop: '50px' }}>
                   <div
                     style={{
-                      width: '28px',
+                      width: '40px',
                       height: '15px',
                       backgroundColor: '#F58929',
                       position: 'relative',
@@ -35,7 +35,7 @@ const FeaturedProducts = () => {
                       borderRadius: '8px',
                       justifyContent: 'center',
                       fontWeight: 'bold',
-                      alignItems: 'center',
+                      // alignItems: 'center',
                       color: 'white',
                     }}
                   >
@@ -71,12 +71,10 @@ const FeaturedProducts = () => {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      alignItems: 'center',
+                      // alignItems: 'center',
                     }}
                   >
-                    <div style={{ fontSize: '14px', marginTop: '2px' }}>
-                      {product?.name}
-                    </div>
+                    <div className='product-name'>{product?.name}</div>
                     <div style={{ display: 'flex', marginTop: '2px' }}>
                       <div style={{ color: '#F31748', marginLeft: '5px' }}>
                         {`¢ ${product?.sale_price}`}
