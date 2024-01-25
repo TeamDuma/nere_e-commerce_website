@@ -319,3 +319,28 @@
   -webkit-line-clamp: 2;
   white-space: normal;
 }
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.pagination-item {
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.pagination-item:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination-item.active {
+  background-color: #298592;
+  color: white;
+}

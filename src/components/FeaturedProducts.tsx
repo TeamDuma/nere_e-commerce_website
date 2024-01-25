@@ -15,10 +15,10 @@ const FeaturedProducts = () => {
   return (
     <>
       <div>
-        <div className='container pt-16'>
+        <div className='container'>
           {isLoading && <div>Loading...</div>}
 
-          <div className='lg:grid-col-3 grid grid-cols-2 place-items-center gap-10 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
+          <div className='lg:grid-col-3 grid grid-cols-2  gap-5 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.id}`}>
                 <div key={product?.id}>

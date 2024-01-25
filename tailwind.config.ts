@@ -9,7 +9,6 @@ module.exports = {
     extend: {
       container: {
         center: true,
-        padding: '15px',
       },
 
       colors: {
