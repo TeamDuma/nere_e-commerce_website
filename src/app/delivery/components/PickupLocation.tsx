@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal, { Styles } from 'react-modal';
 import {
@@ -8,14 +8,13 @@ import {
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
 
-const customStyles: Styles = {
+const customStylesLarge: Styles = {
   overlay: {
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    // backgroundColor: 'rgba( 190,192,193, 0.7)',
   },
   content: {
     display: 'flex',
@@ -31,13 +30,26 @@ const customStyles: Styles = {
   },
 };
 
-interface ISession {
-  user?: {
-    name?: string;
-    email?: string;
-    image?: string;
-  };
-}
+const customStylesSmall: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%', // Adjusted for responsiveness
+    maxWidth: '400px', // Set a maximum width for larger screens
+    margin: 'auto', // Center the modal horizontally
+    borderRadius: '15px',
+  },
+};
 
 const PickupLocation: React.FC<{
   onClose: () => void;
@@ -49,10 +61,7 @@ const PickupLocation: React.FC<{
   const { selectedLocationId } = useSelector(selectShopping);
 
   const { data, isLoading } = useGetlocationsQuery();
-
   const locations = data?.data || [];
-
-  console.log('data?.data', locations);
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {
@@ -68,19 +77,9 @@ const PickupLocation: React.FC<{
       onClose();
     } else {
       console.log('No address selected.');
-      // Optionally provide user feedback for no available locations
       onClose(); // Close the modal even if no address is selected
     }
   };
-
-  // const handleSelectLocation = () => {
-  //   console.log("Selected Address:", selectedAddress);
-  //   if (selectedAddress) {
-  //     dispatch(setSelectedLocationId(selectedAddress.id));
-  //     console.log("Selected Location ID Dispatched:", selectedAddress.id);
-  //   }
-  //   onClose();
-  // };
 
   useEffect(() => {
     if (data && selectedLocationId) {
@@ -122,26 +121,6 @@ const PickupLocation: React.FC<{
             <hr className='my-2' />
           </div>
         ))}
-        {/* {locations.map((location: ILocation) => (
-          <div key={location.id}>
-            <input
-  type='radio'
-  id={`address${location.id}`}
-  name='address' 
-  value={location.name}
-  checked={selectedAddress?.id === location.id}
-  onChange={() => console.log('selectedAddress?.id ',location.id)}
-    // onChange={() => setSelectedAddress(location)}
-/>
-            <label
-              htmlFor={`address${location.id}`}
-              className='m-4 text-gray-400'
-            >
-              {location.name}
-            </label>
-            <hr className='my-2' />
-          </div>
-        ))} */}
       </div>
     );
   };
@@ -151,7 +130,7 @@ const PickupLocation: React.FC<{
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
-        style={customStyles}
+        style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
         contentLabel='Example Modal'
       >
         <div className='rounded-md bg-white p-8' style={{ width: '100%' }}>
@@ -161,12 +140,9 @@ const PickupLocation: React.FC<{
 
           {renderAddresses()}
 
-          <div
-            className='m-5 flex rounded-md bg-white p-8'
-            style={{ width: '100%' }}
-          >
+          <div className='m-5 flex flex-col sm:flex-row'>
             <button
-              className='[#298592] mr-5 rounded-md border-2 border-solid border-[#298592] px-4 py-2 text-[#298592]'
+              className='mb-2 rounded-md border-2 border-solid border-[#298592] px-4 py-2 text-[#298592] sm:mb-0 sm:mr-2'
               style={{ width: '100%' }}
               onClick={onClose}
             >

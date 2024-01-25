@@ -60,3 +60,10 @@ export type GetProductResponse = {
     product: Product;
   };
 };
+
+export type getCategoryProductResponse = {
+  status: string;
+  data: {
+    products: Product[];
+  };
+};

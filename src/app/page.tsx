@@ -66,42 +66,20 @@ export default function Home() {
         <TwoBannerLayout />
         <FeaturedProducts />
         <ViewMore />
-        <div
-          style={{
-            position: 'fixed',
-            top: '75%',
-            transform: 'translateY(-50%)',
-            right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1000,
-          }}
-        >
+        <div className='fixed right-0 top-3/4 z-50 flex -translate-y-1/2 transform items-center justify-center'>
           <div
             onClick={openCartModal}
-            className=' py-4 text-center text-base font-semibold text-white'
-            style={{
-              background: '#F58929',
-              width: '110px',
-              height: '110px',
-              marginTop: '35px',
-              cursor: 'pointer',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-            }}
+            className='sm:w-110 sm:mt-35 mt-8 h-16 w-28 cursor-pointer rounded-bl-2xl rounded-tl-2xl bg-orange-500 py-2 text-center text-sm font-semibold text-white sm:h-20 sm:py-4 sm:text-base'
           >
             <div className='flex flex-col items-center justify-center'>
               <div className='ml-2 flex flex-row gap-2'>
                 <CartIcon />
-                <p style={{ color: '#FFF', fontSize: 12 }}>
+                <p className='text-xs text-white sm:text-sm'>
                   {(cartItems ?? []).length} Items
-                </p>{' '}
+                </p>
               </div>
-
               <div className='m-2 flex flex-row rounded bg-white'>
-                <p
-                  style={{ color: '#F58929', fontSize: 12, marginLeft: '4px' }}
-                >
+                <p className='ml-4 text-xs text-orange-500 sm:text-sm'>
                   GH¢ {calculateTotal().toFixed(2)}
                 </p>
               </div>
@@ -109,35 +87,21 @@ export default function Home() {
           </div>
         </div>
 
-        <div
-          style={{
-            position: 'fixed',
-            top: '75%',
-            transform: 'translateY(-50%)',
-            left: 0,
-            zIndex: 1000,
-          }}
-        >
+        <div className='fixed left-0 top-3/4 z-50 -translate-y-1/2 transform'>
           <div
             onClick={openOngoingModal}
-            className='pt-2 text-center text-base font-semibold text-white shadow'
-            style={{
-              background: '#F58929',
-              width: '110px',
-              height: '110px',
-              marginTop: '35px',
-              cursor: 'pointer',
-              borderTopRightRadius: '10px',
-              borderBottomRightRadius: '10px',
-            }}
+            className='h-15 mt-8 w-28 cursor-pointer rounded-br-2xl rounded-tr-2xl bg-orange-500 pt-2 text-center text-sm font-semibold text-white shadow'
           >
             <div className='flex flex-col items-center justify-center'>
               <div className='ml-2 flex flex-row gap-2'>
                 <MdGroups />
               </div>
-              <div className='m-2 flex  flex-row rounded'>
-                <p style={{ color: '#fff', fontSize: 12, marginBottom: 2 }}>
+              <div className='m-2 flex flex-row rounded'>
+                <p className='mb-1 hidden text-xs text-white sm:block'>
                   {groups.length} Ongoing Purchases near me
+                </p>
+                <p className='mb-1 text-xs text-white sm:block lg:hidden'>
+                  {groups.length} groups
                 </p>
               </div>
             </div>

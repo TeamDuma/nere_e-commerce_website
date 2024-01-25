@@ -88,11 +88,11 @@ const Header = () => {
   };
 
   return (
-    <div className='my-4 bg-white'>
-      <div className='container flex flex-col items-center justify-between sm:flex-row'>
+    <div className='m-4 bg-white'>
+      <div className='container flex flex-col  justify-between sm:flex-row '>
         {/* Logo and Icons in the same row */}
-        <div className='flex items-center'>
-          <div className='pb-4 text-center text-4xl font-bold text-blackish sm:pb-0'>
+        <div className='flex flex  items-center justify-between '>
+          <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
               <Logo />
             </Link>
@@ -100,7 +100,7 @@ const Header = () => {
 
           <div className='flex items-center gap-4 lg:hidden'>
             {userInfo && userInfo.data ? (
-              <div className='relative inline-block'>
+              <div className='relative mr-4 inline-block'>
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <UserIcon />
                 </button>
@@ -281,7 +281,7 @@ const Header = () => {
           </div>
           <Link
             href='/cart'
-            className={`block rounded-md p-2 ${
+            className={`mt-4 block rounded-md p-2 ${
               cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
             }`}
           >

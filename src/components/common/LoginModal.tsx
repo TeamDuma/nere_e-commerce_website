@@ -27,6 +27,7 @@ const customStyles: Styles = {
     width: '500px',
     height: '500px',
     borderRadius: '15px',
+    overflow: 'hidden',
   },
 };
 

@@ -1,25 +1,37 @@
 'use client';
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 
-const FeaturedProducts = () => {
-  const { data, isLoading } = useGetActiveProductsQuery();
+import { useLazyGetCategoryProductQuery } from '@/lib/redux/services/product';
+
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+const Category = ({ params }: Props) => {
+  const { slug } = params;
+
+  const [getCategoryProduct, { data, isLoading }] =
+    useLazyGetCategoryProductQuery();
+
   const products = data?.data?.products ?? [];
 
-  const featureProducts = products.filter(
-    (product) => product.isFeaturedProduct
-  );
+  useEffect(() => {
+    getCategoryProduct(slug)
+      .then(() => {})
+      .catch(() => {});
+  }, [slug]);
 
+  console.log('data', products);
   return (
     <>
       <div>
         <div className='container'>
           {isLoading && <div>Loading...</div>}
-
-          <div className='lg:grid-col-3 grid grid-cols-2  gap-5 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
-            {featureProducts.map((product) => (
+          <div className='lg:grid-col-3 grid grid-cols-2  gap-10 sm:grid-cols-2  xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
+            {products.map((product) => (
               <Link href={`/product/${product.id}`}>
                 <div key={product?.id}>
                   <div
@@ -100,4 +112,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default Category;

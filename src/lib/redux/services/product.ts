@@ -1,4 +1,7 @@
-import { GetActiveProductsResponse } from '@/types/product';
+import {
+  GetActiveProductsResponse,
+  getCategoryProductResponse,
+} from '@/types/product';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 import { GetProductResponse } from '@/types/product';
@@ -15,7 +18,16 @@ const productApi = apiSlice.injectEndpoints({
         return endpoints.getProduct(id);
       },
     }),
+    getCategoryProduct: builder.query<getCategoryProductResponse, string>({
+      query: (slug) => {
+        return endpoints.getCategoryProduct(slug);
+      },
+    }),
   }),
 });
 
-export const { useGetActiveProductsQuery, useLazyGetProductQuery } = productApi;
+export const {
+  useGetActiveProductsQuery,
+  useLazyGetProductQuery,
+  useLazyGetCategoryProductQuery,
+} = productApi;
