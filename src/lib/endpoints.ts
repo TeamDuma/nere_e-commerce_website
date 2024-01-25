@@ -6,6 +6,7 @@ const endpoints = {
   // Products
   getActiveProducts: '/products/active',
   getProduct: (id: number) => `/products/${id}`,
+  getCategoryProduct: (slug: string) => `/products/category/${slug}`,
 
   // Category
   getCategories: '/categories',
