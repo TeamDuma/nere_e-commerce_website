@@ -88,11 +88,11 @@ const Header = () => {
   };
 
   return (
-    <div className='my-4 bg-white'>
+    <div className='m-4 bg-white'>
       <div className='container flex flex-col  justify-between sm:flex-row '>
         {/* Logo and Icons in the same row */}
         <div className='flex flex  items-center justify-between '>
-          <div className='pb-4  text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
+          <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
               <Logo />
             </Link>
