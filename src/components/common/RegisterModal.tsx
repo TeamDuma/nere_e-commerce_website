@@ -95,7 +95,7 @@ const RegistrationModal: React.FC<{
       style={customStyles}
     >
       <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center  justify-center bg-opacity-50'>
-        <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white'>
+        <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white sm:max-h-screen'>
           <div className='flex w-full items-center justify-center'>
             {' '}
             {/* Add these classes */}

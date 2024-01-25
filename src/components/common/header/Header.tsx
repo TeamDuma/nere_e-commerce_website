@@ -89,9 +89,9 @@ const Header = () => {
 
   return (
     <div className='my-4 bg-white'>
-      <div className='container flex flex-col  justify-between sm:flex-row sm:justify-between'>
+      <div className='container flex flex-col  justify-between sm:flex-row '>
         {/* Logo and Icons in the same row */}
-        <div className='flex items-center '>
+        <div className='flex flex  items-center justify-between '>
           <div className='pb-4  text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
               <Logo />
@@ -281,7 +281,7 @@ const Header = () => {
           </div>
           <Link
             href='/cart'
-            className={`block rounded-md p-2 ${
+            className={`mt-4 block rounded-md p-2 ${
               cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
             }`}
           >
