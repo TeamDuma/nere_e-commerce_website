@@ -26,7 +26,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
           <Header />
           {props.children}
           <ToastContainer />
-          <Footer />
+          {/* <Footer /> */}
         </Providers>
       </body>
     </html>

@@ -88,6 +88,7 @@ export default function ProductDetailPage({ params }: Props) {
           groupID: group?.id!,
           locationID: undefined,
           type: GroupType.PUBLIC,
+          totalGroupMembers: 0,
         },
       })
     );
@@ -145,45 +146,40 @@ export default function ProductDetailPage({ params }: Props) {
                       />
                     </div>
                   </div>
+
                   <div className='-mx-2 mb-4 flex'>
                     <template x-for='i in 4' />
                   </div>
                 </div>
               </div>
               <div className='px-4 md:flex-1'>
-                <h2 className='mb-2 text-2xl font-bold leading-tight tracking-tight text-[#1A464C] md:text-3xl'>
-                  {/* {product?.slug} */}
-
-                  <div className='flex items-center'>
-                    {' '}
-                    <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
-                      {product?.slug}
-                    </h3>
-                    {variantsArray.length > 0 && (
-                      <div className='ml-12'>
-                        <div className='mt-1'>
-                          <select
-                            id='variant'
-                            value={selectedVariant}
-                            onChange={(e) =>
-                              handleVariantChange(e.target.value)
-                            }
-                            className='w-full rounded border border-gray-300 p-2'
-                          >
-                            <option value='' disabled>
-                              Select a variant
+                <div className='flex items-center'>
+                  {' '}
+                  <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
+                    {product?.slug}
+                  </h3>
+                  {variantsArray.length > 0 && (
+                    <div className='ml-12'>
+                      <div className='mt-1'>
+                        <select
+                          id='variant'
+                          value={selectedVariant}
+                          onChange={(e) => handleVariantChange(e.target.value)}
+                          className='w-full rounded border border-gray-300 p-2'
+                        >
+                          <option value='' disabled>
+                            Select a variant
+                          </option>
+                          {variantsArray.map((variant, index) => (
+                            <option key={index} value={variant}>
+                              {variant}
                             </option>
-                            {variantsArray.map((variant, index) => (
-                              <option key={index} value={variant}>
-                                {variant}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
+                          ))}
+                        </select>
                       </div>
-                    )}
-                  </div>
-                </h2>
+                    </div>
+                  )}
+                </div>
                 <div className='star-icon my-4 flex  items-center'>
                   {' '}
                   <FaStar />
@@ -228,25 +224,32 @@ export default function ProductDetailPage({ params }: Props) {
                   <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
                 </Link>
                 <div className='flex space-x-4 py-4'>
-                  <div className='flex items-center'>
-                    <button
-                      className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                      onClick={handleAddToCart}
-                    >
-                      Add to Cart
-                    </button>
+                  <div className='flex items-center justify-center sm:justify-start'>
+                    <div className='flex flex-col items-center justify-center sm:justify-start'>
+                      <div className='mt-4 sm:mt-0 sm:flex'>
+                        <button
+                          className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                          onClick={handleAddToCart}
+                        >
+                          <span className='hidden sm:inline'>Add to Cart</span>
+                          <span className='sm:hidden'>Launch Purchase</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <Stepper />
-          <Banner />
-          <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
-            <h1>You might like</h1>
-          </div>{' '}
-          <FeaturedProducts />
-          <ViewMore />
+          <div className='hidden sm:block'>
+            <Banner />
+            <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
+              <h1>You might like</h1>
+            </div>{' '}
+            <FeaturedProducts />
+            <ViewMore />
+          </div>
         </div>
       </div>
     </>

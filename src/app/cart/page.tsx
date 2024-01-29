@@ -84,7 +84,7 @@ const Cart = () => {
   };
 
   return (
-    <div className='bg-[#000]-100 my-4 ml-5 min-h-screen pt-20'>
+    <div className='bg-[#FAFAFA]-100 my-4 ml-5 min-h-screen '>
       {cartItems.length === 0 ? (
         <div className='text-center text-5xl text-black'>
           Your cart is empty
@@ -94,241 +94,250 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <div className='ml-5 flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-between'>
-            <div className='lg:mr-6 lg:w-1/3'>
-              <div className='flex h-20 items-center justify-center rounded-lg bg-[#F8F8F8] '>
-                <h1 className='text-lg font-bold text-[#1A464C]'>
-                  You have saved GHS {totalSavings} on this purchase!
-                </h1>
+          <div className='flex h-full w-full flex-col px-4 py-4 sm:flex-row'>
+            <div className='flex h-fit w-full flex-col gap-4 sm:w-2/3 '>
+              <div className='lg:mr-6 lg:w-1/2'>
+                <div className='flex h-20 items-center rounded-lg bg-[#F8F8F8] '>
+                  <h1 className='ml-1 text-2xl text-lg	 text-[#1A464C]'>
+                    You have saved GHS {totalSavings} on this purchase!
+                  </h1>
+                </div>
               </div>
-            </div>
-          </div>
-          <h1 className='my-5 text-lg font-bold text-[#1A464C] '>Your Order</h1>
-          <div className='mx-auto flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 xl:px-0'>
-            <div className='rounded-lg md:w-1/3'>
+              <p className='text-xl font-bold text-[#1A464C]'>Your Order</p>
               {cartItems.map((item: CartItem) => (
                 <div
                   key={item.id}
-                  className='my-4 flex flex-col  bg-[#F8F8F8] shadow-md sm:flex-row sm:items-center sm:rounded-lg'
-                  style={{ width: '100%' }}
+                  className='flex h-full w-full flex-col rounded-lg border px-4 py-4 sm:flex-row sm:justify-between'
                 >
-                  <div className='mx-auto h-full rounded-md object-cover md:max-w-lg '>
-                    <img
-                      src={item.plain_image}
-                      alt={item.name}
-                      className='h-32 w-full rounded-lg object-cover sm:w-32'
-                    />
-                  </div>
-
-                  <div className='mt-4 sm:ml-4 sm:mt-0 sm:flex-1'>
-                    <h2 className='text overflow-hidden overflow-ellipsis'>
-                      {item.name}
-                    </h2>
-
-                    <div className='mt-2 flex flex-col items-start'>
-                      <div className='flex items-center'>
-                        <span className='font-bold text-[#1A464C]'>
-                          ¢{item?.sale_price}
-                        </span>
-                        <span
-                          className='ml-3 text-[#F31748]'
-                          style={{ textDecoration: 'line-through' }}
-                        >
-                          ¢{item?.price}
-                        </span>
-                      </div>
-
-                      <div className='mt-2 flex items-center'>
-                        <span className='rounded bg-[#8CCED7] p-1 text-xs font-bold text-white'>
-                          Save{' '}
-                          {calculateSavingsPercentage(
-                            item.price,
-                            item.sale_price
-                          )}
-                          %
-                        </span>
-                      </div>
-
-                      <div className='flex items-center'>
-                        {item.hasMinQuantity && (
-                          <ProgressBar
-                            remaining={
-                              item.cartQuantity + item.totalGroupMembers
-                            }
-                            total={item.min_quantity ?? 0}
+                  <div className='flex flex-col gap-3 sm:flex-row'>
+                    <div className='flex flex-row items-center gap-6'>
+                      <div className='h-24 w-20'>
+                        <div className='mx-auto h-12 rounded-md object-cover md:max-w-lg'>
+                          <img
+                            src={item.plain_image}
+                            alt={item.name}
+                            className='h-24 w-full rounded-lg object-cover sm:w-24'
                           />
-                        )}
+                        </div>
+                      </div>
+
+                      <div className='flex flex-col gap-1'>
+                        <p className='text-lg font-semibold text-[#1A464C]'>
+                          {item.name}
+                        </p>
+                        <div className='flex items-center space-x-1'>
+                          <span className='text-sm font-bold text-[#1A464C] sm:text-base'>
+                            ¢{item?.sale_price}
+                          </span>
+                          <span className='text-sm text-[#F31748] line-through sm:text-base'>
+                            ¢{item?.price}
+                          </span>
+                          <span className='rounded-xl bg-[#8CCED7] p-1 text-xs font-bold text-white sm:text-sm'>
+                            Save{' '}
+                            {calculateSavingsPercentage(
+                              item.price,
+                              item.sale_price
+                            )}
+                            %
+                          </span>
+                        </div>
+                        <div className='flex items-center'>
+                          {item.hasMinQuantity && (
+                            <ProgressBar
+                              remaining={
+                                item.cartQuantity + item.totalGroupMembers
+                              }
+                              total={item.min_quantity ?? 0}
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className='mt-2 sm:ml-2 sm:flex-1'>
-                    <div className='mt-2 flex items-center space-x-2 border-gray-100'>
-                      <span
-                        className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                        onClick={() => dispatch(decreaseQuantity(item.id))}
-                      >
-                        {' '}
-                        -{' '}
-                      </span>
-                      <span
-                        id={`quantity-${item.id}`}
-                        className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
-                      >
-                        {item.cartQuantity}
-                      </span>
+                    <div className='mt-2 sm:mt-0'>
+                      <div className='mt-2 sm:ml-2 sm:flex-1'>
+                        <div className='mt-2 flex items-center space-x-2 border-gray-100'>
+                          <span
+                            className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                            onClick={() => dispatch(decreaseQuantity(item.id))}
+                          >
+                            {' '}
+                            -{' '}
+                          </span>
+                          <span
+                            id={`quantity-${item.id}`}
+                            className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
+                          >
+                            {item.cartQuantity}
+                          </span>
+                          {item.hasMinQuantity && (
+                            <span
+                              className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                              onClick={() => {
+                                if (
+                                  item.cartQuantity + item.totalGroupMembers <
+                                  (item?.min_quantity ?? 0)
+                                ) {
+                                  console.log(
+                                    'item.cartQuantity + item.totalGroupMembers ',
+                                    item.cartQuantity +
+                                      item.totalGroupMembers +
+                                      1
+                                  );
+                                  dispatch(increaseQuantity(item.id));
+                                }
+                              }}
+                            >
+                              {' '}
+                              +{' '}
+                            </span>
+                          )}
 
-                      <span
-                        className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                        onClick={() => {
-                          dispatch(increaseQuantity(item.id));
-                        }}
-                      >
-                        {' '}
-                        +{' '}
-                      </span>
-
-                      <span
-                        className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
-                        onClick={() => handleRemoveItem(item.id)}
-                      >
-                        <FaRegTrashAlt />
-                      </span>
+                          <span
+                            className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
+                            onClick={() => handleRemoveItem(item.id)}
+                          >
+                            <FaRegTrashAlt />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className='mt-6 h-1/2 rounded-lg border bg-[#F8F8F8] p-4 shadow-md md:mt-0 md:w-1/3'>
-              <div className='mb-4  text-[#1A464C] '>
-                Your order summary
-                <hr className='mt-4 text-[#1A464C]' />
-              </div>
-              <div className='flex  text-[#1A464C]'>
-                <div className='mr-4' style={{ marginRight: '200px' }}>
-                  <h1>Total items ({cartItems.length})</h1>
-                  <h1>Delivery fee</h1>
-                </div>
+            <div className='mt-4 flex h-fit w-full flex-col gap-4 p-2 sm:mt-0 sm:w-1/3'>
+              <div className='flex flex-col gap-4 rounded-lg border p-2 text-lg font-semibold shadow-md'>
+                <p className='text-xl font-bold text-[#1A464C]'>
+                  Your order summary
+                </p>
+                <hr className='h-0.5 bg-gray-200' />
 
-                <div>
-                  <h1> GH¢ {calculateTotal().toFixed(2)}</h1>
-                  <h1>0.00</h1>
+                <div className='flex flex-row justify-between'>
+                  <p className='text-sm font-normal text-[#979797] '>
+                    Total items ({cartItems.length})
+                  </p>
+                  <p className='text-sm font-normal text-[#979797] '>
+                    {' '}
+                    GH¢ {calculateTotal().toFixed(2)}
+                  </p>
                 </div>
-              </div>
-
-              <hr className='my-4 text-xl text-[#1A464C] ' />
-              <div className='flex  text-[#1A464C]'>
-                <div style={{ marginRight: '256px' }}>
-                  <h1>Total </h1>
+                <div className='flex flex-row justify-between'>
+                  <p className='text-sm font-normal text-[#979797] '>
+                    Delivery fee
+                  </p>
+                  <p className='text-sm font-normal text-[#979797] '>
+                    {' '}
+                    GH¢ 0.00
+                  </p>
                 </div>
-
-                <div>
-                  <h1>GH¢ {calculateTotal().toFixed(2)}</h1>
-                </div>
-              </div>
-              <div className='flex items-center'>
-                <div className='relative mt-4 flex items-center rounded-md border border-solid border-[#D0D5DD] p-2'>
-                  <input
-                    type='text'
-                    placeholder='Enter promo code'
-                    value={promoCode}
-                    onChange={(e) => setPromoCode(e.target.value)}
-                    className='w-full rounded-md border-none p-2 outline-none'
-                  />
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
-                    <FaTags size={20} color='#1A464C' />
-                  </div>
-                </div>
-                <button
-                  onClick={handleApplyPromoCode}
-                  disabled={!promoCode.trim()}
-                  className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
-                >
-                  {isPromoCodeApplied ? 'PromoCode Applied' : 'Apply'}
-                </button>
-              </div>
-
-              {userInfo ? (
-                <button
-                  type='button'
-                  className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-                  onClick={() => {
-                    if (selectedLocationId) {
-                      const locationID = selectedLocationId;
-                      const customerID = userInfo.data.customer.id;
-                      const totalAmount = calculateTotal();
-                      const voucherCode = promoCode;
-                      const cartObject = cartItems.map((item: CartItem) => {
-                        const isStartingGroup = !item.isGroupJoiner;
-                        return transformToCartCheckoutItem(
-                          item,
-                          isStartingGroup ? locationID : undefined
-                        );
-                      });
-                      checkoutCart({
-                        customerID,
-                        totalAmount,
-                        cartObject,
-                        voucherCode,
-                      })
-                        .then((data) => {
-                          if (
-                            'data' in data &&
-                            'authorization_url' in data.data
-                          ) {
-                            const paymentAuthorizationUrl =
-                              data.data.authorization_url;
-                            window.location.href = paymentAuthorizationUrl;
-                          } else {
-                          }
-                        })
-                        .catch((e) => {});
-                    } else {
-                      toast.warning(
-                        'Please select a delivery location before checkout.'
-                      );
-                    }
-                  }}
-                >
-                  <span>Checkout</span>
-                </button>
-              ) : (
-                <div>
-                  <div className='flex items-center'>
-                    <p className='mx-4 mt-1 font-semibold text-[#1A464C]'>
+                <div className='flex flex-row justify-between'>
+                  <p className='text-gray-600'>Total</p>
+                  <div>
+                    <p className='text-end font-bold'>
+                      {' '}
                       GH¢ {calculateTotal().toFixed(2)}
                     </p>
+                  </div>
+                </div>
+                <hr className='h-0.5 bg-gray-200' />
+                <div className='flex flex-row justify-between'>
+                  <div className='flex items-center'>
+                    <div className='relative mt-4 flex items-center rounded-md border border-solid border-[#D0D5DD] p-2'>
+                      <input
+                        type='text'
+                        placeholder='Enter promo code'
+                        value={promoCode}
+                        onChange={(e) => setPromoCode(e.target.value)}
+                        className='w-full rounded-md border-none p-2 outline-none'
+                      />
+                      <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
+                        <FaTags size={20} color='#1A464C' />
+                      </div>
+                    </div>
                     <button
-                      className='hover:bg-[#298592]-950 mx-4 mt-4 cursor-not-allowed rounded bg-[#298592] px-6 py-3 text-slate-100 duration-200'
-                      onClick={openLoginModal}
+                      onClick={handleApplyPromoCode}
+                      disabled={!promoCode.trim()}
+                      className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                     >
-                      Checkout
+                      {isPromoCodeApplied ? 'PromoCode Applied' : 'Apply'}
                     </button>
                   </div>
-
-                  <p className='ml-2 mt-1 animate-bounce text-base font-semibold text-red-500'>
-                    Please login to continue
-                  </p>
-                  <p className='mt-1 text-base font-semibold text-[#1A464C]'>
-                    Delivery fee is not included
-                  </p>
-
-                  <LoginModal
-                    onClose={closeModal}
-                    onRegistrationClick={handleRegistrationClick}
-                    session={null}
-                    isOpen={loginModalVisible}
-                  />
                 </div>
-              )}
+
+                {userInfo ? (
+                  <button
+                    type='button'
+                    className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
+                    onClick={() => {
+                      if (selectedLocationId) {
+                        const locationID = selectedLocationId;
+                        const customerID = userInfo.data.customer.id;
+                        const totalAmount = calculateTotal();
+                        const voucherCode = promoCode;
+                        const cartObject = cartItems.map((item: CartItem) => {
+                          const isStartingGroup = !item.isGroupJoiner;
+                          return transformToCartCheckoutItem(
+                            item,
+                            isStartingGroup ? locationID : undefined
+                          );
+                        });
+                        checkoutCart({
+                          customerID,
+                          totalAmount,
+                          cartObject,
+                          voucherCode,
+                        })
+                          .then((data) => {
+                            if (
+                              'data' in data &&
+                              'authorization_url' in data.data
+                            ) {
+                              const paymentAuthorizationUrl =
+                                data.data.authorization_url;
+                              window.location.href = paymentAuthorizationUrl;
+                            } else {
+                            }
+                          })
+                          .catch((e) => {});
+                      } else {
+                        toast.warning(
+                          'Please select a delivery location before checkout.'
+                        );
+                      }
+                    }}
+                  >
+                    <span>Checkout</span>
+                  </button>
+                ) : (
+                  <div>
+                    <div className='flex gap-2'>
+                      <button
+                        className='text-hover w-full rounded-md bg-[#298592] p-2 text-sm text-white shadow-md transition-colors hover:bg-[#8CCED7]'
+                        onClick={openLoginModal}
+                      >
+                        Check out
+                      </button>
+                    </div>
+                    <p className='ml-2 mt-1 animate-bounce text-base font-semibold text-red-500'>
+                      Please login to continue
+                    </p>
+                    <p className='mt-1 text-base font-semibold text-[#1A464C]'>
+                      Delivery fee is not included
+                    </p>
+
+                    <LoginModal
+                      onClose={closeModal}
+                      onRegistrationClick={handleRegistrationClick}
+                      session={null}
+                      isOpen={loginModalVisible}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-
-          <h1 className='my-5 text-lg font-bold text-[#1A464C]'>
-            Items related to your cart{' '}
-          </h1>
-          <FeaturedProducts />
         </>
       )}
     </div>

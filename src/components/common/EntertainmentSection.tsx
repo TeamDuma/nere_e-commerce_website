@@ -10,9 +10,7 @@ const EntertainmentSection = () => {
             strokeWidth='1.5'
             stroke='currentColor'
             className='h-20 w-20 text-green-400'
-          >
-            {/* SVG path */}
-          </svg>
+          ></svg>
           <div className='text-center'>
             <h2 className='my-1' style={{ fontSize: '12px' }}>
               Nere Coins
@@ -34,9 +32,7 @@ const EntertainmentSection = () => {
             strokeWidth='1.5'
             stroke='currentColor'
             className='h-20 w-20 text-gray-400'
-          >
-            {/* SVG path */}
-          </svg>
+          ></svg>
           <div className='text-center'>
             <h2 className='my-1' style={{ fontSize: '12px' }}>
               Game and win coins
@@ -58,9 +54,7 @@ const EntertainmentSection = () => {
             strokeWidth='1.5'
             stroke='currentColor'
             className='h-20 w-20 text-red-300'
-          >
-            {/* SVG path */}
-          </svg>
+          ></svg>
           <div className='text-center'>
             <h2 className='my-1' style={{ fontSize: '12px' }}>
               Loyalty offers?

@@ -217,12 +217,14 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
           </div>
         </div>
         <PurchaseGuide />
-        <Banner />
-        <div className='mt-12 flex items-center justify-center '>
-          <h1>You might like</h1>
-        </div>{' '}
-        <FeaturedProducts />
-        <ViewMore />
+        <div className='hidden sm:block'>
+          <Banner />
+          <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
+            <h1>You might like</h1>
+          </div>{' '}
+          <FeaturedProducts />
+          <ViewMore />
+        </div>
       </div>
     </div>
   );

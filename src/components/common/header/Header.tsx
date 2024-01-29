@@ -83,7 +83,6 @@ const Header = () => {
   return (
     <div className='m-4 bg-white'>
       <div className='container flex flex-col  justify-between sm:flex-row '>
-        {/* Logo and Icons in the same row */}
         <div className='flex flex  items-center justify-between '>
           <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
@@ -141,7 +140,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Search Input */}
         <div className='flex w-full flex-col items-center gap-4 sm:w-[300px] sm:flex-row md:w-[40%]'>
           <div className='relative w-full rounded'>
             <input
@@ -156,7 +154,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Your new row content for small screens */}
         <div className='sm:hidden'>
           <div className='my-4 flex'>
             <div className='flex lg:hidden'>
@@ -165,7 +162,6 @@ const Header = () => {
               </button>
             </div>
 
-            {/* Responsive Navigation Icons */}
             <div className='flex  gap-4 lg:hidden'>
               <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
               <p
@@ -187,7 +183,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Expanded Navigation for Larger Screens */}
         <div className='hidden gap-4 text-[30px] text-gray-500 lg:flex'>
           <div className='mr-4 flex items-center'>
             <a
