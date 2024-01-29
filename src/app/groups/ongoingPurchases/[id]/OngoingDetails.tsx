@@ -36,6 +36,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
   const group = data?.data?.group;
   const product = group?.product;
+  const totalGroupMembers = group?.members.length || 0;
 
   useEffect(() => {
     getGroup(ongoingUid);
@@ -79,6 +80,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
           groupID: group?.id!,
           locationID: undefined,
           type: GroupType.PUBLIC,
+          totalGroupMembers,
         },
       })
     );
@@ -88,8 +90,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   const cartProduct = cartItems.find((item) => item.id === product?.id!);
   const cartQuantity = cartProduct?.cartQuantity;
-
-  const remaining = (cartQuantity ?? 0) + (group?.members.length ?? 0);
+  const remaining = (cartQuantity ?? 0) + totalGroupMembers;
 
   return (
     <div className='my-8'>

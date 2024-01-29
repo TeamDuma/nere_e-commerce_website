@@ -157,7 +157,9 @@ const Cart = () => {
                       <div className='flex items-center'>
                         {item.hasMinQuantity && (
                           <ProgressBar
-                            remaining={item.cartQuantity}
+                            remaining={
+                              item.cartQuantity + item.totalGroupMembers
+                            }
                             total={item.min_quantity ?? 0}
                           />
                         )}

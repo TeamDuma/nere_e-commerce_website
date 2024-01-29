@@ -1,7 +1,9 @@
 import { GroupType } from './group';
 import { Product } from './product';
 
-export interface CartItem extends Product, CartCheckoutItem {}
+export interface CartItem extends Product, CartCheckoutItem {
+  totalGroupMembers: number;
+}
 
 export type CartCheckoutBody = {
   customerID: number;
