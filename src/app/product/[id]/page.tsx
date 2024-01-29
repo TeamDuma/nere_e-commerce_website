@@ -88,7 +88,7 @@ export default function ProductDetailPage({ params }: Props) {
           groupID: group?.id!,
           locationID: undefined,
           type: GroupType.PUBLIC,
-          totalGroupMembers: 0,
+          totalQuantity: group?.total_quantity!,
         },
       })
     );
@@ -156,7 +156,7 @@ export default function ProductDetailPage({ params }: Props) {
                 <div className='flex items-center'>
                   {' '}
                   <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
-                    {product?.slug}
+                    {product?.name}
                   </h3>
                   {variantsArray.length > 0 && (
                     <div className='ml-12'>

@@ -107,7 +107,7 @@ const Cart = () => {
               {cartItems.map((item: CartItem) => (
                 <div
                   key={item.id}
-                  className='flex h-full w-full flex-col rounded-lg border px-4 py-4 sm:flex-row sm:justify-between'
+                  className='py-sm:flex-row flex h-full w-full flex-col rounded-lg border px-2 sm:justify-between'
                 >
                   <div className='flex flex-col gap-3 sm:flex-row'>
                     <div className='flex flex-row items-center gap-6'>
@@ -122,9 +122,9 @@ const Cart = () => {
                       </div>
 
                       <div className='flex flex-col gap-1'>
-                        <p className='text-lg font-semibold text-[#1A464C]'>
-                          {item.name}
-                        </p>
+                        <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
+                          {item?.name}
+                        </h3>
                         <div className='flex items-center space-x-1'>
                           <span className='text-sm font-bold text-[#1A464C] sm:text-base'>
                             ¢{item?.sale_price}
@@ -144,9 +144,7 @@ const Cart = () => {
                         <div className='flex items-center'>
                           {item.hasMinQuantity && (
                             <ProgressBar
-                              remaining={
-                                item.cartQuantity + item.totalGroupMembers
-                              }
+                              remaining={item.cartQuantity + item.totalQuantity}
                               total={item.min_quantity ?? 0}
                             />
                           )}
@@ -170,28 +168,28 @@ const Cart = () => {
                           >
                             {item.cartQuantity}
                           </span>
-                          {item.hasMinQuantity && (
-                            <span
-                              className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                              onClick={() => {
-                                if (
-                                  item.cartQuantity + item.totalGroupMembers <
-                                  (item?.min_quantity ?? 0)
-                                ) {
-                                  console.log(
-                                    'item.cartQuantity + item.totalGroupMembers ',
-                                    item.cartQuantity +
-                                      item.totalGroupMembers +
-                                      1
-                                  );
-                                  dispatch(increaseQuantity(item.id));
-                                }
-                              }}
-                            >
-                              {' '}
-                              +{' '}
-                            </span>
-                          )}
+
+                          <span
+                            className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                              item.min_quantity! -
+                                (item.cartQuantity + item.totalQuantity) >
+                              0
+                                ? ''
+                                : 'disabled'
+                            }`}
+                            onClick={() => {
+                              if (
+                                item.min_quantity! -
+                                  (item.cartQuantity + item.totalQuantity) >
+                                0
+                              ) {
+                                dispatch(increaseQuantity(item.id));
+                              }
+                            }}
+                          >
+                            {' '}
+                            +
+                          </span>
 
                           <span
                             className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'

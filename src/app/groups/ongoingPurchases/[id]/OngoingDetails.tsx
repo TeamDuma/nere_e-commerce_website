@@ -36,7 +36,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
   const group = data?.data?.group;
   const product = group?.product;
-  const totalGroupMembers = group?.members.length || 0;
+  const totalQuantity = group?.total_quantity || 0;
 
   useEffect(() => {
     getGroup(ongoingUid);
@@ -78,7 +78,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
           groupID: group?.id!,
           locationID: undefined,
           type: GroupType.PUBLIC,
-          totalGroupMembers,
+          totalQuantity: group?.total_quantity!,
         },
       })
     );
@@ -88,7 +88,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   const cartProduct = cartItems.find((item) => item.id === product?.id!);
   const cartQuantity = cartProduct?.cartQuantity;
-  const remaining = (cartQuantity ?? 0) + totalGroupMembers;
+  const remaining = (cartQuantity ?? 0) + totalQuantity;
 
   return (
     <div className='my-8'>
@@ -105,7 +105,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <div className='flex items-center'>
               {' '}
               <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
-                {product?.slug}
+                {product?.name}
               </h3>
               {variantsArray.length > 0 && (
                 <div className='ml-12'>

@@ -65,7 +65,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
           <div className='flex items-center'>
             {item.product.hasMinQuantity && (
               <ProgressBar
-                remaining={item.members.length}
+                remaining={item.total_quantity}
                 total={item.product.min_quantity ?? 0}
               />
             )}
