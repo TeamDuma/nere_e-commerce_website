@@ -42,8 +42,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
 
-  console.log('product in  OngoingDetails', data);
-
   if (isLoading) {
     return (
       <div>

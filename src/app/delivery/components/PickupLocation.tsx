@@ -76,8 +76,7 @@ const PickupLocation: React.FC<{
       dispatch(setSelectedLocationId(selectedAddress.id));
       onClose();
     } else {
-      console.log('No address selected.');
-      onClose(); // Close the modal even if no address is selected
+      onClose();
     }
   };
 

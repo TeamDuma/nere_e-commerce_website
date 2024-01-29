@@ -98,9 +98,6 @@ export default function ProductDetailPage({ params }: Props) {
   const cartProduct = cartItems.find((item) => item.id === productId);
 
   const cartQuantity = cartProduct ? cartProduct.quantity : 0;
-  console.log('cartQuantity');
-
-  console.log('group:', group);
 
   return (
     <>

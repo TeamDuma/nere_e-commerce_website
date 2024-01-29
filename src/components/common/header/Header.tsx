@@ -21,7 +21,6 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { selectedLocationId, userInfo } = useSelector(selectShopping);
-  console.log('useGetLocationsQuery', selectedLocationId);
 
   const locations = data?.data || [];
 
@@ -34,8 +33,6 @@ const Header = () => {
     }
   );
   const selectedLocation = selectedAddress;
-
-  console.log('selectedAddress', selectedAddress);
 
   useEffect(() => {
     if (data && selectedLocationId) {
@@ -80,11 +77,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       dispatch(deleteUser());
-
-      console.log('Logout ');
-    } catch (error) {
-      console.error('Logout Error:', error);
-    }
+    } catch (error) {}
   };
 
   return (

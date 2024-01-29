@@ -53,9 +53,6 @@ const OrderPreview: React.FC = () => {
 
   const totalSavings = calculateSavings(cartItems);
 
-  console.log('cartItem', calculateTotal);
-  console.log('userInfo', userInfo);
-
   return (
     <div className='bg-[#000]-100 my-4 min-h-screen pt-20'>
       {cartItems.length === 0 ? (

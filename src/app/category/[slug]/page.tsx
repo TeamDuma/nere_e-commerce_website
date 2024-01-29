@@ -24,7 +24,6 @@ const Category = ({ params }: Props) => {
       .catch(() => {});
   }, [slug]);
 
-  console.log('data', products);
   return (
     <>
       <div>

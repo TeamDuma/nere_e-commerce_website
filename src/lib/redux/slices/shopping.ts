@@ -49,7 +49,6 @@ export const shoppingSlice = createSlice({
 
     increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
       const existingProduct = state.cartItems.find((item) => item.id === id);
-      console.log('existingProduct', current(existingProduct));
       if (existingProduct) {
         if (existingProduct.hasMinQuantity) {
           existingProduct.cartQuantity = Math.min(

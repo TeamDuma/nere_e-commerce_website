@@ -60,14 +60,10 @@ const Cart = () => {
   };
 
   const handleApplyPromoCode = () => {
-    console.log('Applied promo code:', promoCode);
     setIsPromoCodeApplied(true);
   };
 
   const totalSavings = calculateSavings(cartItems);
-
-  console.log('calculateTotal', calculateTotal);
-  console.log('cartItem', cartItems);
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
@@ -85,7 +81,6 @@ const Cart = () => {
 
   const handleRemoveItem = (productId: number) => {
     dispatch(deleteProduct(productId));
-    console.log('handleRemoveItem');
   };
 
   return (
@@ -186,7 +181,6 @@ const Cart = () => {
                       <span
                         className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
                         onClick={() => {
-                          console.log('item.id', item.id);
                           dispatch(increaseQuantity(item.id));
                         }}
                       >
@@ -287,12 +281,9 @@ const Cart = () => {
                               data.data.authorization_url;
                             window.location.href = paymentAuthorizationUrl;
                           } else {
-                            console.log('Error in data structure:', data);
                           }
                         })
-                        .catch((e) => {
-                          console.log('Error', e);
-                        });
+                        .catch((e) => {});
                     } else {
                       toast.warning(
                         'Please select a delivery location before checkout.'

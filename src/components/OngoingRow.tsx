@@ -18,9 +18,6 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
   const products = productsData?.data?.products ?? [];
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
-  console.log('Home ongoingGroupsData', groups);
-
-  console.log('Home', products);
   return (
     <div className='my-10 flex flex-col justify-between rounded-md bg-[#F0F4F5] p-2 md:flex-row md:p-3'>
       {/* Show this content on larger screens */}
