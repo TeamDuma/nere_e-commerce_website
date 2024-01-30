@@ -62,7 +62,6 @@ export const shoppingSlice = createSlice({
           ? item.id === productId && item.groupID === groupId
           : item.id === productId;
       });
-      console.log('existingProduct', current(existingProduct));
       if (existingProduct) {
         if (existingProduct.hasMinQuantity) {
           existingProduct.cartQuantity = Math.min(
@@ -98,18 +97,12 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ productId: number; groupId?: number }>
     ) => {
       const { productId, groupId } = payload;
-
-      console.log('Before filter:', state.cartItems);
-
       state.cartItems = state.cartItems.filter((item) => {
         return groupId
-          ? item.id === productId && item.groupID === groupId
-          : item.id === productId;
+          ? `${item.id}-${item.groupID}` !== `${productId}-${groupId}`
+          : item.id !== productId;
       });
-
-      console.log('After filter:', state.cartItems);
     },
-
     resetCart: (state) => {
       state.cartItems = [];
     },

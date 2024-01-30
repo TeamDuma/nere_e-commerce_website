@@ -105,7 +105,10 @@ const Cart = () => {
               </div>
               <p className='text-xl font-medium	 text-[#1A464C]'>Your Order</p>
               {cartItems.map((item: CartItem) => (
-                <div className='items-strech border-t border-gray-50 py-8 md:flex md:py-10 lg:py-8'>
+                <div
+                  key={`${item.id}-${item.groupID ?? ''}`}
+                  className='items-strech border-t border-gray-50 py-8 md:flex md:py-10 lg:py-8'
+                >
                   <div className='w-full md:w-4/12 2xl:w-1/4 '>
                     <img
                       src={item.plain_image}
@@ -182,7 +185,6 @@ const Cart = () => {
                       <span
                         className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
                         onClick={() => {
-                          console.log('Removing item:', item.id, item.groupID);
                           handleRemoveItem(item.id, item.groupID);
                         }}
                       >
@@ -190,7 +192,7 @@ const Cart = () => {
                       </span>
                     </div>
 
-                    <p className='mt-5 text-xs leading-3 text-gray-600 dark:text-white'>
+                    <div className='mt-5 text-xs leading-3 text-gray-600 dark:text-white'>
                       {item.min_quantity ? (
                         <ProgressBar
                           remaining={
@@ -210,7 +212,7 @@ const Cart = () => {
                         }
                         total={item.min_quantity ?? 0}
                       /> */}
-                    </p>
+                    </div>
                   </div>
                 </div>
               ))}

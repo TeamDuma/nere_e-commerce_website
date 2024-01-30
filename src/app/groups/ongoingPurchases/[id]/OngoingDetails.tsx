@@ -81,11 +81,15 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
     dispatch(addToCart({ item: itemToAdd }));
 
-    console.log('itemToAdd', itemToAdd);
     toast.success('Item added to cart!');
   };
 
-  const cartProduct = cartItems.find((item) => item.id === product?.id!);
+  const cartProduct = cartItems.find((item) => {
+    return item.groupID
+      ? item.id === product?.id! && item.groupID === group?.id
+      : item.id === product?.id!;
+  });
+
   const cartQuantity = cartProduct?.cartQuantity;
   const remaining = (cartQuantity ?? 0) + totalQuantity;
 
