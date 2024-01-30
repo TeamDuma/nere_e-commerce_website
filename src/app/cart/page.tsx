@@ -79,8 +79,8 @@ const Cart = () => {
     setRegistrationModalVisible(false);
   };
 
-  const handleRemoveItem = (productId: number) => {
-    dispatch(deleteProduct(productId));
+  const handleRemoveItem = (productId: number, groupId?: number) => {
+    dispatch(deleteProduct({ productId, groupId }));
   };
 
   return (
@@ -137,7 +137,14 @@ const Cart = () => {
                       <div className='itemms-center flex'>
                         <span
                           className=' rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                          onClick={() => dispatch(decreaseQuantity(item.id))}
+                          onClick={() =>
+                            dispatch(
+                              decreaseQuantity({
+                                productId: item.id,
+                                groupId: item.groupID,
+                              })
+                            )
+                          }
                         >
                           {' '}
                           -{' '}
@@ -159,7 +166,12 @@ const Cart = () => {
                           }`}
                           onClick={() => {
                             {
-                              dispatch(increaseQuantity(item.id));
+                              dispatch(
+                                increaseQuantity({
+                                  productId: item.id,
+                                  groupId: item.groupID,
+                                })
+                              );
                             }
                           }}
                         >
@@ -169,7 +181,10 @@ const Cart = () => {
                       </div>
                       <span
                         className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
-                        onClick={() => handleRemoveItem(item.id)}
+                        onClick={() => {
+                          console.log('Removing item:', item.id, item.groupID);
+                          handleRemoveItem(item.id, item.groupID);
+                        }}
                       >
                         <FaRegTrashAlt />
                       </span>
