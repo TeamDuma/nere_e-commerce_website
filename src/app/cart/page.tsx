@@ -94,120 +94,116 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <div className='flex h-full w-full flex-col px-4 py-4 sm:flex-row'>
+          <div className='flex h-full flex-col px-4 py-4 sm:flex-row lg:w-full'>
             <div className='flex h-fit w-full flex-col gap-4 sm:w-2/3 '>
-              <div className='lg:mr-6 lg:w-1/2'>
-                <div className='flex h-20 items-center rounded-lg bg-[#F8F8F8] '>
-                  <h1 className='ml-1 text-2xl text-lg	 text-[#1A464C]'>
+              <div className='lg:w-90 lg:mr-6'>
+                <div className='flex h-20 w-full items-center rounded-lg bg-[#F8F8F8] '>
+                  <h1 className='ml-1 text-lg text-xl	 text-[#1A464C]'>
                     You have saved GHS {totalSavings} on this purchase!
                   </h1>
                 </div>
               </div>
-              <p className='text-xl font-bold text-[#1A464C]'>Your Order</p>
+              <p className='text-xl font-medium	 text-[#1A464C]'>Your Order</p>
               {cartItems.map((item: CartItem) => (
-                <div
-                  key={item.id}
-                  className='py-sm:flex-row flex h-full w-full flex-col rounded-lg border px-2 sm:justify-between'
-                >
-                  <div className='flex flex-col gap-3 sm:flex-row'>
-                    <div className='flex flex-row items-center gap-6'>
-                      <div className='h-24 w-20'>
-                        <div className='mx-auto h-12 rounded-md object-cover md:max-w-lg'>
-                          <img
-                            src={item.plain_image}
-                            alt={item.name}
-                            className='h-24 w-full rounded-lg object-cover sm:w-24'
-                          />
-                        </div>
-                      </div>
-
-                      <div className='flex flex-col gap-1'>
-                        <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
-                          {item?.name}
-                        </h3>
-                        <div className='flex items-center space-x-1'>
-                          <span className='text-sm font-bold text-[#1A464C] sm:text-base'>
-                            ¢{item?.sale_price}
-                          </span>
-                          <span className='text-sm text-[#F31748] line-through sm:text-base'>
-                            ¢{item?.price}
-                          </span>
-                          <span className='rounded-xl bg-[#8CCED7] p-1 text-xs font-bold text-white sm:text-sm'>
-                            Save{' '}
-                            {calculateSavingsPercentage(
-                              item.price,
-                              item.sale_price
-                            )}
-                            %
-                          </span>
-                        </div>
-                        <div className='flex items-center'>
-                          {item.hasMinQuantity && (
-                            <ProgressBar
-                              remaining={item.cartQuantity + item.totalQuantity}
-                              total={item.min_quantity ?? 0}
-                            />
-                          )}
-                        </div>
-                      </div>
+                <div className='items-strech border-t border-gray-50 py-8 md:flex md:py-10 lg:py-8'>
+                  <div className='w-full md:w-4/12 2xl:w-1/4 '>
+                    <img
+                      src={item.plain_image}
+                      alt='Black Leather Bag'
+                      className='hidden h-32 object-cover object-center md:block'
+                    />
+                    <img
+                      src={item.plain_image}
+                      alt='Black Leather Bag'
+                      className='h-32 w-32 object-cover object-center md:hidden'
+                    />
+                  </div>
+                  <div className='flex flex-col justify-center md:w-6/12 md:pl-3 2xl:w-3/4'>
+                    <div className='flex w-full items-center justify-between pt-1'>
+                      <p className='text-sm	 font-medium	 leading-none text-gray-800 dark:text-white'>
+                        {item.name}
+                      </p>
+                    </div>
+                    <div className='flex items-center pt-5'>
+                      <p className='cursor-pointer text-xs font-medium	 leading-3 text-[1A464C] dark:text-white'>
+                        ¢{item.sale_price}
+                      </p>
+                      <p className='cursor-pointer pl-5   text-xs leading-3 text-red-500 line-through'>
+                        ¢{item.price}
+                      </p>
                     </div>
 
-                    <div className='mt-2 sm:mt-0'>
-                      <div className='mt-2 sm:ml-2 sm:flex-1'>
-                        <div className='mt-2 flex items-center space-x-2 border-gray-100'>
-                          <span
-                            className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                            onClick={() => dispatch(decreaseQuantity(item.id))}
-                          >
-                            {' '}
-                            -{' '}
-                          </span>
-                          <span
-                            id={`quantity-${item.id}`}
-                            className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
-                          >
-                            {item.cartQuantity}
-                          </span>
+                    <div className='flex items-center justify-between pt-5'>
+                      <div className='itemms-center flex'>
+                        <span
+                          className=' rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                          onClick={() => dispatch(decreaseQuantity(item.id))}
+                        >
+                          {' '}
+                          -{' '}
+                        </span>
+                        <span
+                          id={`quantity-${item.id}`}
+                          className='m-2.5 w-8 bg-white text-center font-semibold text-[#298592]  outline-none'
+                        >
+                          {item.cartQuantity}
+                        </span>
 
-                          <span
-                            className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
-                              item.min_quantity! -
-                                (item.cartQuantity + item.totalQuantity) >
-                              0
-                                ? ''
-                                : 'disabled'
-                            }`}
-                            onClick={() => {
-                              if (
-                                item.min_quantity! -
-                                  (item.cartQuantity + item.totalQuantity) >
-                                0
-                              ) {
-                                dispatch(increaseQuantity(item.id));
-                              }
-                            }}
-                          >
-                            {' '}
-                            +
-                          </span>
-
-                          <span
-                            className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
-                            onClick={() => handleRemoveItem(item.id)}
-                          >
-                            <FaRegTrashAlt />
-                          </span>
-                        </div>
+                        <span
+                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                            item.min_quantity! -
+                              (item.cartQuantity + item.totalQuantity!) >
+                            0
+                              ? ''
+                              : 'disabled'
+                          }`}
+                          onClick={() => {
+                            {
+                              dispatch(increaseQuantity(item.id));
+                            }
+                          }}
+                        >
+                          {' '}
+                          +
+                        </span>
                       </div>
+                      <span
+                        className='cursor-pointer rounded  px-3.5 py-1 duration-100 hover:bg-red-600 hover:text-white'
+                        onClick={() => handleRemoveItem(item.id)}
+                      >
+                        <FaRegTrashAlt />
+                      </span>
                     </div>
+
+                    <p className='mt-5 text-xs leading-3 text-gray-600 dark:text-white'>
+                      {item.min_quantity ? (
+                        <ProgressBar
+                          remaining={
+                            item.isGroupJoiner
+                              ? item.cartQuantity + (item.totalQuantity || 0)
+                              : item.cartQuantity
+                          }
+                          total={item.min_quantity}
+                        />
+                      ) : null}
+
+                      {/* <ProgressBar
+                        remaining={
+                          item.isGroupJoiner
+                            ? item.cartQuantity + item.totalQuantity!
+                            : item.cartQuantity
+                        }
+                        total={item.min_quantity ?? 0}
+                      /> */}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className='mt-4 flex h-fit w-full flex-col gap-4 p-2 sm:mt-0 sm:w-1/3'>
-              <div className='flex flex-col gap-4 rounded-lg border p-2 text-lg font-semibold shadow-md'>
-                <p className='text-xl font-bold text-[#1A464C]'>
+            <div className='mt-4 flex h-fit w-full flex-col gap-4  sm:mt-0 sm:w-1/2'>
+              <div className='flex flex-col gap-4 rounded-lg border p-4 text-lg font-semibold shadow-md'>
+                <p className='text-l font-medium	 text-[#1A464C]'>
                   Your order summary
                 </p>
                 <hr className='h-0.5 bg-gray-200' />
@@ -242,13 +238,13 @@ const Cart = () => {
                 <hr className='h-0.5 bg-gray-200' />
                 <div className='flex flex-row justify-between'>
                   <div className='flex items-center'>
-                    <div className='relative mt-4 flex items-center rounded-md border border-solid border-[#D0D5DD] p-2'>
+                    <div className='relative mt-4 flex items-center rounded-md border border-solid border-[#D0D5DD] '>
                       <input
                         type='text'
                         placeholder='Enter promo code'
                         value={promoCode}
                         onChange={(e) => setPromoCode(e.target.value)}
-                        className='w-full rounded-md border-none p-2 outline-none'
+                        className='w-full rounded-md border-none  outline-none'
                       />
                       <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
                         <FaTags size={20} color='#1A464C' />
@@ -312,11 +308,17 @@ const Cart = () => {
                   <div>
                     <div className='flex gap-2'>
                       <button
-                        className='text-hover w-full rounded-md bg-[#298592] p-2 text-sm text-white shadow-md transition-colors hover:bg-[#8CCED7]'
                         onClick={openLoginModal}
+                        className='text-hover w-full rounded-md border  bg-[#298592] p-2  text-sm text-white shadow-md transition-colors'
                       >
                         Check out
                       </button>
+                      <Link
+                        href={'./products'}
+                        className='text-hover w-full rounded-md border bg-[#298592] p-2 text-center text-sm text-white shadow-md transition-colors'
+                      >
+                        Add more products
+                      </Link>
                     </div>
                     <p className='ml-2 mt-1 animate-bounce text-base font-semibold text-red-500'>
                       Please login to continue

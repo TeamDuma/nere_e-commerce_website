@@ -68,21 +68,20 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   };
 
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        item: {
-          ...product!,
-          cartQuantity: 0,
-          productID: product?.id!,
-          isGroupJoiner: true,
-          groupID: group?.id!,
-          locationID: undefined,
-          type: GroupType.PUBLIC,
-          totalQuantity: group?.total_quantity!,
-        },
-      })
-    );
+    const itemToAdd = {
+      ...product!,
+      cartQuantity: 1,
+      productID: product?.id!,
+      isGroupJoiner: true,
+      groupID: group?.id!,
+      locationID: undefined,
+      type: GroupType.PUBLIC,
+      totalQuantity: group?.total_quantity!,
+    };
 
+    dispatch(addToCart({ item: itemToAdd }));
+
+    console.log('itemToAdd', itemToAdd);
     toast.success('Item added to cart!');
   };
 

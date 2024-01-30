@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaStar } from 'react-icons/fa';
 import Stepper from '@/components/common/PurchaseGuide';
+import ProgressBar from '@/components/common/ProgressBar';
 
 type Props = {
   params: {
@@ -78,21 +79,16 @@ export default function ProductDetailPage({ params }: Props) {
   };
 
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        item: {
-          ...product!,
-          cartQuantity: 0,
-          productID: product?.id!,
-          isGroupJoiner: true,
-          groupID: group?.id!,
-          locationID: undefined,
-          type: GroupType.PUBLIC,
-          totalQuantity: group?.total_quantity!,
-        },
-      })
-    );
+    const itemToAdd = {
+      ...product!,
+      cartQuantity: 0,
+      productID: product?.id!,
+      isGroupJoiner: false,
+    };
 
+    dispatch(addToCart({ item: itemToAdd }));
+
+    console.log('itemToAdd', itemToAdd);
     toast.success('Item added to cart!');
   };
 
@@ -223,6 +219,13 @@ export default function ProductDetailPage({ params }: Props) {
                 <Link href='/products'>
                   <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
                 </Link>
+
+                {product.min_quantity ? (
+                  <ProgressBar
+                    remaining={cartQuantity}
+                    total={product.min_quantity}
+                  />
+                ) : null}
                 <div className='flex space-x-4 py-4'>
                   <div className='flex items-center justify-center sm:justify-start'>
                     <div className='flex flex-col items-center justify-center sm:justify-start'>

@@ -24,12 +24,11 @@ const customStylesLarge: Styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '700px',
-    height: '700px',
+    width: '550px',
+    height: '550px',
     borderRadius: '15px',
   },
 };
-
 const customStylesSmall: Styles = {
   overlay: {
     position: 'fixed',
@@ -41,15 +40,37 @@ const customStylesSmall: Styles = {
   content: {
     display: 'flex',
     flexDirection: 'column',
-    top: '50%',
+    top: '100%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%', // Adjusted for responsiveness
-    maxWidth: '400px', // Set a maximum width for larger screens
-    margin: 'auto', // Center the modal horizontally
+    width: '80%',
+    maxWidth: '400px',
+    margin: 'auto',
     borderRadius: '15px',
+    height: '90vh',
   },
 };
+
+// const customStylesSmall: Styles = {
+//   overlay: {
+//     position: 'fixed',
+//     top: 0,
+//     left: 0,
+//     right: 0,
+//     bottom: 0,
+//   },
+//   content: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     top: '50%',
+//     left: '50%',
+//     transform: 'translate(-50%, -50%)',
+//     width: '90%',
+//     maxWidth: '400px',
+//     margin: 'auto',
+//     borderRadius: '15px',
+//   },
+// };
 
 const PickupLocation: React.FC<{
   onClose: () => void;
@@ -132,7 +153,7 @@ const PickupLocation: React.FC<{
         style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
         contentLabel='Example Modal'
       >
-        <div className='rounded-md bg-white p-8' style={{ width: '100%' }}>
+        <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
           <h2 className='mb-4 text-xl font-bold text-[#298592]'>
             SELECT PICKUP LOCATION
           </h2>
@@ -141,14 +162,14 @@ const PickupLocation: React.FC<{
 
           <div className='m-5 flex flex-col sm:flex-row'>
             <button
-              className='mb-2 rounded-md border-2 border-solid border-[#298592] px-4 py-2 text-[#298592] sm:mb-0 sm:mr-2'
+              className='mb-2 rounded-md border-2 border-solid border-[#298592] p-2 text-[#298592] sm:mb-0 sm:mr-2'
               style={{ width: '100%' }}
               onClick={onClose}
             >
               Cancel
             </button>
             <button
-              className='rounded-md bg-[#298592] px-4 py-2 text-white'
+              className='rounded-md bg-[#298592] p-2 text-white'
               style={{ width: '100%' }}
               onClick={handleSelectLocation}
             >

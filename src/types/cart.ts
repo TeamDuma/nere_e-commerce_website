@@ -2,7 +2,7 @@ import { GroupType } from './group';
 import { Product } from './product';
 
 export interface CartItem extends Product, CartCheckoutItem {
-  totalQuantity: number;
+  totalQuantity?: number;
 }
 
 export type CartCheckoutBody = {
@@ -18,7 +18,7 @@ export interface CartCheckoutItem {
   isGroupJoiner: boolean;
   groupID?: number;
   locationID?: number;
-  type: GroupType;
+  type?: GroupType;
 }
 
 export type CartUpdateBody = {
