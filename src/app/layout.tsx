@@ -37,7 +37,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
             pauseOnHover
             theme='light'
           />
-          {/* <Footer /> */}
+          <Footer />
         </Providers>
       </body>
     </html>
