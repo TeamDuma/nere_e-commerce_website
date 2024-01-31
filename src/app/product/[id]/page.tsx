@@ -87,8 +87,6 @@ export default function ProductDetailPage({ params }: Props) {
     };
 
     dispatch(addToCart({ item: itemToAdd }));
-
-    console.log('itemToAdd', itemToAdd);
     toast.success('Item added to cart!');
   };
 
