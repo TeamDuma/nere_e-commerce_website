@@ -15,10 +15,30 @@ import { ILocation } from '@/types/location';
 
 import { BsSearch } from 'react-icons/bs';
 import CartIconHeader from '../CartIconHeader';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter();
+
   const { data, isLoading } = useGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    console.log('searchQuery before push:', searchQuery);
+
+    if (searchQuery.length >= 2) {
+      // onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
+
+      router.push(`/search/${searchQuery}`);
+    }
+  };
+
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const { selectedLocationId, userInfo } = useSelector(selectShopping);
 
@@ -146,10 +166,15 @@ const Header = () => {
               className='w-full rounded-lg border border-gray-200 bg-[#F5F5F5] p-2 px-4'
               type='text'
               placeholder='Search for products'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
+
             <BsSearch
-              className='absolute right-0 top-0 mr-3 mt-3 text-gray-400'
+              className='absolute right-0 top-0 mr-3 mt-3 cursor-pointer text-gray-400'
               size={20}
+              onClick={handleSearch}
             />
           </div>
         </div>

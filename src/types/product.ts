@@ -67,3 +67,9 @@ export type getCategoryProductResponse = {
     products: Product[];
   };
 };
+export type getSearchProductsResponse = {
+  status: string;
+  data: {
+    products: Product[];
+  };
+};

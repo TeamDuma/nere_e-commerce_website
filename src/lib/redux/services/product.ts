@@ -1,6 +1,7 @@
 import {
   GetActiveProductsResponse,
   getCategoryProductResponse,
+  getSearchProductsResponse,
 } from '@/types/product';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
@@ -23,6 +24,11 @@ const productApi = apiSlice.injectEndpoints({
         return endpoints.getCategoryProduct(slug);
       },
     }),
+    getSearchProducts: builder.query<getSearchProductsResponse, string>({
+      query: (searchQuery) => {
+        return endpoints.getSearchProducts(searchQuery);
+      },
+    }),
   }),
 });
 
@@ -30,4 +36,5 @@ export const {
   useGetActiveProductsQuery,
   useLazyGetProductQuery,
   useLazyGetCategoryProductQuery,
+  useLazyGetSearchProductsQuery,
 } = productApi;
