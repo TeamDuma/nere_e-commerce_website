@@ -90,9 +90,9 @@ export default function ProductDetailPage({ params }: Props) {
     toast.success('Item added to cart!');
   };
 
-  const cartProduct = cartItems.find((item) => item.id === productId);
+  const cartProduct = cartItems.find((item) => item.id !== productId);
 
-  const cartQuantity = cartProduct ? cartProduct.quantity : 0;
+  const cartQuantity = cartProduct ? cartProduct.cartQuantity : 0;
 
   return (
     <>
