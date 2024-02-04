@@ -1,4 +1,4 @@
-import { GroupType } from './group';
+import { Group, GroupType } from './group';
 import { Product } from './product';
 
 export interface CartItem extends Product, CartCheckoutItem {
@@ -25,6 +25,16 @@ export type CartUpdateBody = {
   customer_id: number;
   cart_object: CartCheckoutItem[];
 };
+
+export type OrderConfirmationResponse = {
+  status: 'success' | 'pending';
+  message?: string;
+  data?: {
+    groups: Group[];
+    amount: number;
+    total_items: number;
+  }
+}
 
 export const transformToCartCheckoutItem = (
   item: CartItem,

@@ -18,7 +18,7 @@ const Search = ({ params }: Props) => {
   const [getSearchProducts, { data, isLoading }] =
     useLazyGetSearchProductsQuery();
 
-  const products = data?.data ?? [];
+  const products = data?.data.products ?? [];
 
   useEffect(() => {
     getSearchProducts(query)

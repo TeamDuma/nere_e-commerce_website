@@ -1,5 +1,6 @@
 import { Customer } from './customer';
 import { Product } from './product';
+import { ILocation } from './location';
 
 export enum GroupType {
   PRIVATE = 'Private',
@@ -20,10 +21,10 @@ export interface Group {
   created_at: string;
   status: string;
   total_quantity: number;
-  initiator: Customer;
-  product: Product;
-  members: Customer[];
-  location: Location;
+  initiator?: Customer;
+  product?: Product;
+  members?: Customer[];
+  location?: ILocation;
 }
 
 export type GetGroupsResponse = {

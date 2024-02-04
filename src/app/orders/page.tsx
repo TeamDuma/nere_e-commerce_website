@@ -78,7 +78,7 @@ const Orders = () => {
               <p className='ml-2 text-sm font-normal text-[#828282]'>Total</p>
               <div>
                 <p className='ml-2 text-sm font-normal text-[#828282]'>
-                  CH¢0.00
+                  GH¢0.00
                 </p>
               </div>
             </div>
@@ -88,7 +88,7 @@ const Orders = () => {
               </p>
               <div>
                 <p className='ml-2 text-sm font-normal text-[#828282]'>
-                  CH¢0.00
+                  GH¢0.00
                 </p>
               </div>
             </div>
@@ -98,11 +98,11 @@ const Orders = () => {
             <div className='flex flex-row justify-between'>
               <p className='font-meduim ml-2 text-sm text-black'>Total</p>
               <div>
-                <p className='font-meduim ml-2 text-sm text-black'>CH¢0.00</p>
+                <p className='font-meduim ml-2 text-sm text-black'>GH¢0.00</p>
               </div>
             </div>
           </div>
-          <div className='flex flex-col gap-4 rounded-sm border p-4 text-lg font-semibold shadow-md'>
+          <div className='flex flex-col gap-3 rounded-sm border p-4 text-lg font-semibold shadow-md'>
             <div className='flex flex-row justify-between'>
               <p className='font-meduim ml-2 text-sm text-black'>
                 Pickup Location
@@ -110,7 +110,7 @@ const Orders = () => {
             </div>
             <hr className='h-0.5 bg-gray-200' />
             <div className='flex flex-row justify-between'>
-              <p className='ml-2 text-sm font-normal text-[#828282]'>
+              <p className='ml-2 text-sm font-bold text-black'>
                 Nere Agent Pickup, East Legon
               </p>
             </div>

@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { ILocation } from './location';
 import { GroupType } from './group';
 
 export interface Location {
@@ -34,8 +35,8 @@ export interface Product {
   variants: string | null;
   isFeaturedProduct: boolean;
   desired_margin: number;
-  categories: Category;
-  locations: Location[];
+  categories?: Category;
+  locations?: ILocation[];
 }
 
 export interface GetProductsResponse {
