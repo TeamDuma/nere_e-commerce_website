@@ -1,71 +1,128 @@
-import React from 'react'
+import React, { useRef } from 'react';
 import { Group } from '@/types/group';
+import Modal, { Styles } from 'react-modal';
+import Spinner from '@/components/common/Spinner';
 
 interface ShareModalProps {
-    onClose: () => void;
-    group: Group;
+  onClose: () => void;
+  isOpen: boolean;
+  group: Group;
 }
 
-const ShareModal = ({ onClose, group }: ShareModalProps) => {
-    return (
-        // <div className="fixed inset-0 flex items-center justify-center z-50">
-        //     <div className="bg-white rounded-lg shadow-lg p-6">
-        //         {/* Close button */}
-        //         <button
-        //             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-        //             onClick={onClose}
-        //         >
-        //             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-        //                 {/* Close icon */}
-        //                 <path
-        //                     d="M18 6L6 18M6 6L18 18"
-        //                     strokeLinecap="round"
-        //                     strokeLinejoin="round"
-        //                     strokeWidth="2"
-        //                 />
-        //             </svg>
-        //         </button>
-        //         {/* Social media icons */}
-        //         <div className="flex items-center justify-center gap-4 mb-4">
-        //             <a href="#" className="text-blue-500 hover:text-blue-700">
-        //                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-        //                     {/* WhatsApp icon */}
-        //                     <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10.5 17.5C9.67 17.5 8.84 17.26 8.16 16.77L6.07 17.07C5.5 17.23 5 16.73 5 16.15V14.5C5 13.12 6.12 12 7.5 12H8V11.5C8 10.12 9.12 9 10.5 9C11.88 9 13 10.12 13 11.5V12H13.5C14.88 12 16 13.12 16 14.5V16.15C16 16.73 15.5 17.23 14.93 17.07L12.84 16.77C12.16 17.26 11.33 17.5 10.5 17.5ZM12 3.5C6.20101 3.5 1.5 8.20101 1.5 14C1.5 16.0609 2.18482 18.0783 3.46447 19.5355L2.05025 22.7071L5.22292 21.2929C6.68015 22.5726 8.69759 23.25 10.5 23.25C16.299 23.25 20.999 18.549 20.999 12.75C20.999 6.95101 16.299 2.25 10.5 2.25C8.69759 2.25 6.68015 2.92742 5.22292 4.20711L2.05025 2.79289L3.46447 5.96447C2.18482 7.4217 1.5 9.43913 1.5 11.5C1.5 8.20101 4.70101 5 8 5H9V4H8C3.58172 4 0 7.58172 0 12C0 16.4183 3.58172 20 8 20H9V19H8C4.70101 19 2 16.299 2 13C2 9.70099 4.70101 7 8 7H9V6H8C5.23858 6 3 8.23858 3 11C3 13.7614 5.23858 16 8 16H9V15H8C4.70101 15 2 12.299 2 9C2 5.70101 4.70101 3 8 3H9V2H8C7.46957 2 7 2.46957 7 3V5H8C11.299 5 14 7.70101 14 11C14 14.299 11.299 17 8 17H7V18H8C12.4183 18 16 14.4183 16 10C16 5.58172 12.4183 2 8 2H7V3H8C8.53043 3 9 3.46957 9 4V6H8C11.299 6 14 8.70101 14 12C14 15.299 11.299 18 8 18H7V19H8C11.299 19 14 21.701 14 25H15C15 21.6863 12.3137 19 9 19H8V18H9C12.3137 18 15 15.3137 15 12C15 8.68629 12.3137 6 9 6H8V5H9C12.3137 5 15 2.31371 15 0H14Z" />
-        //                 </svg>
-        //             </a>
-        //             <a href="#" className="text-purple-500 hover:text-purple-700">
-        //                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-        //                     {/* Instagram icon */}
-        //                     <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4ZM12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM17.5 5.5H19V7H17.5V5.5ZM19 9H17.5V15.5H16V9H14.5V7H19V9Z" />
-        //                 </svg>
-        //             </a>
-        //         </div>
-        //         {/* Input field with copy to clipboard icon */}
-        //         <div className="flex items-center gap-2">
-        //             <input
-        //                 type="text"
-        //                 value="Some text"
-        //                 readOnly
-        //                 className="border border-gray-300 px-2 py-1 rounded"
-        //             />
-        //             <button className="bg-gray-200 hover:bg-gray-300 p-1 rounded">
-        //                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-        //                     {/* Copy to clipboard icon */}
-        //                     <path
-        //                         d="M16 1H6C4.9 1 4 1.9 4 3V4H3C1.9 4 1 4.9 1 6V20C1 21.1 1.9 22 3 22H17C18.1 22 19 21.1 19 20V19H20C21.1 19 22 18.1 22 17V7C22 5.9 21.1 5 20 5H19V3C19 1.9 18.1 1 17 1H16ZM17 19H3V6H17V19ZM19 17H5V8H19V17ZM19 7H5V6H19V7Z"
-        //                     />
-        //                 </svg>
-        //             </button>
-        //         </div>
-        //     </div>
-        // </div>
+const customStyles: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba( 190,192,193, 0.7)',
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '500px',
+    height: '500px',
+    borderRadius: '15px',
+    overflow: 'hidden',
+  },
+};
 
-        <div className='fixed inset-0 flex items-center justify-center z-50 bg-slate-500 h-56 w-56'>
-            <button onClick={onClose}>
-                Close {group.product?.name}
-            </button>
+const ShareModal = ({ isOpen, onClose, group }: ShareModalProps) => {
+  const linkInputRef = useRef<HTMLInputElement>(null);
+
+  const handleCopyClick = () => {
+    if (linkInputRef.current) {
+      linkInputRef.current.select();
+      document.execCommand('copy');
+      // You can provide feedback to the user that the link is copied, e.g., show a tooltip
+      alert('Link copied to clipboard!');
+    }
+  };
+
+  return (
+    <div>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        style={customStyles}
+        contentLabel='Example Modal'
+      >
+        <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center justify-center bg-opacity-50'>
+          <div className='sm:rounded-4xl w-full max-w-md overflow-y-auto bg-white p-4'>
+            <div className='flex items-center justify-between border-b border-gray-200 py-3'>
+              <div className='flex items-center justify-center'>
+                <p className='text-lg font-bold text-gray-800'>
+                  Invite Friends{' '}
+                </p>
+              </div>
+            </div>
+            <div className='my-4'>
+              <p className='text-sm'>Share this link via</p>
+              <div className='my-4 flex justify-around'>
+                <div className='flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-pink-200 fill-[#bc2a8d] shadow-xl hover:bg-[#bc2a8d] hover:fill-white hover:shadow-pink-500/50'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width={24}
+                    height={24}
+                    viewBox='0 0 24 24'
+                  >
+                    <path d='M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z' />
+                    <circle cx='16.806' cy='7.207' r='1.078' />
+                    <path d='M20.533 6.111A4.605 4.605 0 0 0 17.9 3.479a6.606 6.606 0 0 0-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 0 0-2.184.42 4.6 4.6 0 0 0-2.633 2.632 6.585 6.585 0 0 0-.419 2.186c-.043.962-.056 1.267-.056 3.71 0 2.442 0 2.753.056 3.71.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 0 0 2.186-.419 4.613 4.613 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.186.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 0 0-.421-2.217zm-1.218 9.532a5.043 5.043 0 0 1-.311 1.688 2.987 2.987 0 0 1-1.712 1.711 4.985 4.985 0 0 1-1.67.311c-.95.044-1.218.055-3.654.055-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 0 1-1.669-.311 2.985 2.985 0 0 1-1.719-1.711 5.08 5.08 0 0 1-.311-1.669c-.043-.95-.053-1.218-.053-3.654 0-2.437 0-2.686.053-3.655a5.038 5.038 0 0 1 .311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 0 1 1.669-.311c.951-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 0 1 1.67.311 2.991 2.991 0 0 1 1.712 1.712 5.08 5.08 0 0 1 .311 1.669c.043.951.054 1.218.054 3.655 0 2.436 0 2.698-.043 3.654h-.011z' />
+                  </svg>
+                </div>
+                {/*WHATSAPP ICON*/}
+                <div className='flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-green-200 fill-[#25D366] shadow-xl hover:bg-[#25D366] hover:fill-white hover:shadow-green-500/50'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width={24}
+                    height={24}
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      clipRule='evenodd'
+                      d='M18.403 5.633A8.919 8.919 0 0 0 12.053 3c-4.948 0-8.976 4.027-8.978 8.977 0 1.582.413 3.126 1.198 4.488L3 21.116l4.759-1.249a8.981 8.981 0 0 0 4.29 1.093h.004c4.947 0 8.975-4.027 8.977-8.977a8.926 8.926 0 0 0-2.627-6.35m-6.35 13.812h-.003a7.446 7.446 0 0 1-3.798-1.041l-.272-.162-2.824.741.753-2.753-.177-.282a7.448 7.448 0 0 1-1.141-3.971c.002-4.114 3.349-7.461 7.465-7.461a7.413 7.413 0 0 1 5.275 2.188 7.42 7.42 0 0 1 2.183 5.279c-.002 4.114-3.349 7.462-7.461 7.462m4.093-5.589c-.225-.113-1.327-.655-1.533-.73-.205-.075-.354-.112-.504.112s-.58.729-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.014-.346.099-.458c.101-.1.224-.262.336-.393.112-.131.149-.224.224-.374s.038-.281-.019-.393c-.056-.113-.505-1.217-.692-1.666-.181-.435-.366-.377-.504-.383a9.65 9.65 0 0 0-.429-.008.826.826 0 0 0-.599.28c-.206.225-.785.767-.785 1.871s.804 2.171.916 2.321c.112.15 1.582 2.415 3.832 3.387.536.231.954.369 1.279.473.537.171 1.026.146 1.413.089.431-.064 1.327-.542 1.514-1.066.187-.524.187-.973.131-1.067-.056-.094-.207-.151-.43-.263'
+                    />
+                  </svg>
+                </div>{' '}
+              </div>
+              <p className='text-sm'>Or copy link</p>
+              {/* BOX LINK */}
+              <div className='mt-4 flex items-center justify-between border-2 border-gray-200 py-2'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width={20}
+                  height={20}
+                  viewBox='0 0 20 20'
+                  className='ml-2 fill-gray-500'
+                ></svg>
+                <input
+                  ref={linkInputRef}
+                  className='w-9/12	 bg-transparent text-sm outline-none'
+                  type='text'
+                  placeholder='link'
+                  defaultValue={`http://localhost:3000/groups/ongoingPurchases/${group.uid}`}
+                />
+                <button
+                  onClick={handleCopyClick}
+                  className='mr-2 rounded bg-indigo-500 px-3 py-1 text-xs text-white hover:bg-indigo-600'
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-    )
-}
+      </Modal>
+    </div>
+  );
+};
 
-export default ShareModal
+export default ShareModal;

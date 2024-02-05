@@ -257,16 +257,21 @@ const Header = () => {
                 </div>
                 {isDropdownOpen && (
                   <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
-                    <a className='block px-4 py-2 text-[#298592]'>Profile</a>
+                    <a
+                      href='/profile'
+                      className='block px-2 py-1 text-sm text-[#298592]'
+                    >
+                      Profile
+                    </a>
                     <a
                       href='/orders'
-                      className='block px-4 py-2 text-[#298592]'
+                      className='block px-2 py-1 text-sm text-[#298592]'
                     >
                       Orders
                     </a>
                     <a
                       href='#'
-                      className='block px-4 py-2 text-[#298592]'
+                      className='block px-2 py-1 text-sm text-[#298592]'
                       onClick={handleLogout}
                     >
                       Logout

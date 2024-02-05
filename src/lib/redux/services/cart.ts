@@ -1,4 +1,8 @@
-import { CartCheckoutBody, CartUpdateBody, OrderConfirmationResponse } from '@/types/cart';
+import {
+  CartCheckoutBody,
+  CartUpdateBody,
+  OrderConfirmationResponse,
+} from '@/types/cart';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 
@@ -23,9 +27,14 @@ const cartApi = apiSlice.injectEndpoints({
       query: (reference) => ({
         url: endpoints.getOrderConfirmation(reference),
         method: 'GET',
-      })
+      }),
     }),
   }),
 });
 
-export const { useCheckoutCartMutation, useUpdateCartMutation, useLazyGetOrderConfirmationQuery, useGetOrderConfirmationQuery } = cartApi;
+export const {
+  useCheckoutCartMutation,
+  useUpdateCartMutation,
+  useLazyGetOrderConfirmationQuery,
+  useGetOrderConfirmationQuery,
+} = cartApi;

@@ -2,7 +2,7 @@ const endpoints = {
   // Cart
   updateCart: '/cart/update',
   checkoutCart: '/cart/checkout',
-  getOrderConfirmation: (reference: string) =>  `/cart/basket/${reference}`,
+  getOrderConfirmation: (reference: string) => `/cart/basket/${reference}`,
 
   // Products
   getActiveProducts: '/products/active',

@@ -33,8 +33,8 @@ export type OrderConfirmationResponse = {
     groups: Group[];
     amount: number;
     total_items: number;
-  }
-}
+  };
+};
 
 export const transformToCartCheckoutItem = (
   item: CartItem,
