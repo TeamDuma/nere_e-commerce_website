@@ -25,9 +25,6 @@ import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
-
-
-
 export type GetDiscountAmountBody = {
   customer_uid: number;
   total_amount: number;
@@ -35,10 +32,6 @@ export type GetDiscountAmountBody = {
 };
 
 const CartComponent = () => {
-
-
-
-
   const router = useRouter();
   const dispatch = useDispatch();
   const [checkoutCart] = useCheckoutCartMutation();
@@ -48,9 +41,8 @@ const CartComponent = () => {
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [getDiscountAmount, { data, isLoading }] =
-  useLazyGetDiscountAmountQuery();
-const [discountAmount, setDiscountAmount] = useState(0);
-
+    useLazyGetDiscountAmountQuery();
+  const [discountAmount, setDiscountAmount] = useState(0);
 
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
@@ -71,9 +63,6 @@ const [discountAmount, setDiscountAmount] = useState(0);
     }
     return total;
   };
-  
-  
-
 
   const calculateSavings = (cartItems: any[]) => {
     return cartItems.reduce((totalSavings, item) => {
@@ -93,20 +82,20 @@ const [discountAmount, setDiscountAmount] = useState(0);
     try {
       const customer_uid = userInfo.data.customer.uid;
       const total_amount = calculateTotal();
-  
+
       const requestBody: GetDiscountAmountBody = {
         customer_uid,
         total_amount,
-        voucher_code: promoCode
+        voucher_code: promoCode,
       };
-  
+
       const response = await getDiscountAmount(requestBody);
-  
+
       if (response && response.data && response.data.status === 'success') {
         const responseData = response.data;
-         const discountAmount = responseData.data.discount.discount_amount;
-         console.log('discountAmount',discountAmount)
-        
+        const discountAmount = responseData.data.discount.discount_amount;
+        console.log('discountAmount', discountAmount);
+
         setIsPromoCodeApplied(true);
         setDiscountAmount(discountAmount);
       } else {
@@ -119,10 +108,6 @@ const [discountAmount, setDiscountAmount] = useState(0);
       toast.error(error.message);
     }
   };
-  
-
-
-  
 
   const totalSavings = calculateSavings(cartItems);
 
@@ -297,13 +282,17 @@ const [discountAmount, setDiscountAmount] = useState(0);
               </div>
 
               <div>
-      {isPromoCodeApplied ? (
-        <div className='mb-2 flex justify-between'>
-          <p className='text-sm font-normal text-[#979797]'>Discount_amount</p>
-          <p className='text-sm font-normal text-[#979797]'>GH¢ {0.00}</p>
-        </div>
-      ) : null}
-    </div>
+                {isPromoCodeApplied ? (
+                  <div className='mb-2 flex justify-between'>
+                    <p className='text-sm font-normal text-[#979797]'>
+                      Discount_amount
+                    </p>
+                    <p className='text-sm font-normal text-[#979797]'>
+                      GH¢ {0.0}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
 
               <hr className='my-2' />
               <div className='mb-2 flex justify-between'>

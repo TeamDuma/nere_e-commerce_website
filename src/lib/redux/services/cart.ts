@@ -45,5 +45,5 @@ export const {
   useUpdateCartMutation,
   useLazyGetOrderConfirmationQuery,
   useGetOrderConfirmationQuery,
-  useLazyGetDiscountAmountQuery
+  useLazyGetDiscountAmountQuery,
 } = cartApi;

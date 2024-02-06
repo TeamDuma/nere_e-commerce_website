@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Search = ({ params }: Props) => {
-  const [responseProduct,setresponseProduct]= useState<Product>([])
+  const [responseProduct, setresponseProduct] = useState<Product>([]);
 
   const { query } = params;
   console.log('query', query);
@@ -29,10 +29,8 @@ const Search = ({ params }: Props) => {
       .catch(() => {});
   }, [query]);
 
-
   console.log('products', products);
-  console.log('typeproducts',Array.isArray(products) );
-
+  console.log('typeproducts', Array.isArray(products));
 
   return (
     <>

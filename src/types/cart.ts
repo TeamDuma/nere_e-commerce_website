@@ -12,8 +12,6 @@ export type CartCheckoutBody = {
   voucherCode: string;
 };
 
-
-
 export type getDiscountAmountBody = {
   customer_uid: number;
   total_amount: number;
@@ -44,19 +42,14 @@ export type OrderConfirmationResponse = {
   };
 };
 
-
-
-
 export type GetDiscountAmountResponse = {
   status: 'success' | 'error';
   message?: string;
   data?: {
-   
-      discountAmount: number,
-      discountType: number,
-      discount_value: number,
-      voucherCode: string
- 
+    discountAmount: number;
+    discountType: number;
+    discount_value: number;
+    voucherCode: string;
   };
 };
 

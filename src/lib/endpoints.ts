@@ -3,7 +3,7 @@ const endpoints = {
   updateCart: '/cart/update',
   checkoutCart: '/cart/checkout',
   getOrderConfirmation: (reference: string) => `/cart/basket/${reference}`,
-  getDiscountAmount:`/vouchers/calculate_discount`,
+  getDiscountAmount: `/vouchers/calculate_discount`,
 
   // Products
   getActiveProducts: '/products/active',
