@@ -101,8 +101,8 @@ const Header = () => {
   };
 
   return (
-    <div className='m-4 bg-white'>
-      <div className='container flex flex-col  justify-between sm:flex-row '>
+    <div className='h-100 m-3 bg-white '>
+      <div className=' flex flex-col  justify-between sm:flex-row '>
         <div className='flex flex  items-center justify-between '>
           <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
@@ -163,7 +163,7 @@ const Header = () => {
         <div className='flex w-full flex-col items-center gap-4 sm:w-[300px] sm:flex-row md:w-[40%]'>
           <div className='relative w-full rounded'>
             <input
-              className='w-full rounded-lg border border-gray-200 bg-[#F5F5F5] p-2 px-4'
+              className='w-full rounded-2xl border border-gray-200 bg-[#F5F5F5] p-2 px-4'
               type='text'
               placeholder='Search for products'
               value={searchQuery}
