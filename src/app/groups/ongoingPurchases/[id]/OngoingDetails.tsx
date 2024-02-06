@@ -170,7 +170,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 <tr>
                   <th className='flex items-center text-sm md:w-1/2 md:justify-between'>
                     <MdGroups className='my-2 text-[#298592]' />
-                    {group?.members.length} participants
+                    {group?.members?.length} participants
                   </th>
                   <th>
                     <hr className='my-2 border-t-2 border-slate-300 md:hidden' />
