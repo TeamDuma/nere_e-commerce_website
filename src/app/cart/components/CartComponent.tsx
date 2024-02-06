@@ -95,13 +95,14 @@ const CartComponent = () => {
         const responseData = response.data;
         const discountAmount = responseData.data.discount.discount_amount;
         console.log('discountAmount', discountAmount);
+        console.log('responseData', responseData);
 
         setIsPromoCodeApplied(true);
         setDiscountAmount(discountAmount);
       } else {
         setIsPromoCodeApplied(false);
         setDiscountAmount(0);
-        toast.error('Invalid promoCode');
+        toast.error(response.error.data.message);
       }
     } catch (error) {
       console.error('Error during fetch:', error);
@@ -288,7 +289,7 @@ const CartComponent = () => {
                       Discount_amount
                     </p>
                     <p className='text-sm font-normal text-[#979797]'>
-                      GH¢ {0.0}
+                      GH¢ {discountAmount.toFixed(2)}
                     </p>
                   </div>
                 ) : null}
@@ -318,10 +319,10 @@ const CartComponent = () => {
                   </div>
                   <button
                     onClick={handleApplyPromoCode}
-                    disabled={!promoCode.trim()}
+                    disabled={isPromoCodeApplied || !promoCode.trim()}
                     className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                   >
-                    {isPromoCodeApplied ? 'PromoCode Applied' : 'Apply'}
+                    {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
                   </button>
                 </div>
               </div>
