@@ -12,6 +12,14 @@ export type CartCheckoutBody = {
   voucherCode: string;
 };
 
+
+
+export type getDiscountAmountBody = {
+  customer_uid: number;
+  total_amount: number;
+  voucher_code: string;
+};
+
 export interface CartCheckoutItem {
   cartQuantity: number;
   productID: number;
@@ -33,6 +41,22 @@ export type OrderConfirmationResponse = {
     groups: Group[];
     amount: number;
     total_items: number;
+  };
+};
+
+
+
+
+export type GetDiscountAmountResponse = {
+  status: 'success' | 'error';
+  message?: string;
+  data?: {
+   
+      discountAmount: number,
+      discountType: number,
+      discount_value: number,
+      voucherCode: string
+ 
   };
 };
 

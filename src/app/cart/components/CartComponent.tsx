@@ -1,6 +1,7 @@
 'use client';
 import {
   useCheckoutCartMutation,
+  useLazyGetDiscountAmountQuery,
   useUpdateCartMutation,
 } from '@/lib/redux/services/cart';
 import {
@@ -9,7 +10,7 @@ import {
   increaseQuantity,
   selectShopping,
 } from '@/lib/redux/slices/shopping';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { CartItem, transformToCartCheckoutItem } from '@/types/cart';
@@ -24,7 +25,20 @@ import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
+
+
+
+export type GetDiscountAmountBody = {
+  customer_uid: number;
+  total_amount: number;
+  voucher_code: string;
+};
+
 const CartComponent = () => {
+
+
+
+
   const router = useRouter();
   const dispatch = useDispatch();
   const [checkoutCart] = useCheckoutCartMutation();
@@ -33,6 +47,10 @@ const CartComponent = () => {
   const [promoCode, setPromoCode] = useState<string>('');
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [getDiscountAmount, { data, isLoading }] =
+  useLazyGetDiscountAmountQuery();
+const [discountAmount, setDiscountAmount] = useState(0);
+
 
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
@@ -45,6 +63,18 @@ const CartComponent = () => {
       return total + item.sale_price * item.cartQuantity;
     }, 0);
   };
+
+  const calculateTotalAfterDiscount = () => {
+    let total = calculateTotal();
+    if (isPromoCodeApplied && discountAmount > 0) {
+      total -= discountAmount;
+    }
+    return total;
+  };
+  
+  
+
+
   const calculateSavings = (cartItems: any[]) => {
     return cartItems.reduce((totalSavings, item) => {
       const totalOldPrice = item.price * item.cartQuantity;
@@ -59,9 +89,40 @@ const CartComponent = () => {
     return Math.round(savingsPercentage);
   };
 
-  const handleApplyPromoCode = () => {
-    setIsPromoCodeApplied(true);
+  const handleApplyPromoCode = async () => {
+    try {
+      const customer_uid = userInfo.data.customer.uid;
+      const total_amount = calculateTotal();
+  
+      const requestBody: GetDiscountAmountBody = {
+        customer_uid,
+        total_amount,
+        voucher_code: promoCode
+      };
+  
+      const response = await getDiscountAmount(requestBody);
+  
+      if (response && response.data && response.data.status === 'success') {
+        const responseData = response.data;
+         const discountAmount = responseData.data.discount.discount_amount;
+         console.log('discountAmount',discountAmount)
+        
+        setIsPromoCodeApplied(true);
+        setDiscountAmount(discountAmount);
+      } else {
+        setIsPromoCodeApplied(false);
+        setDiscountAmount(0);
+        toast.error('Invalid promoCode');
+      }
+    } catch (error) {
+      console.error('Error during fetch:', error);
+      toast.error(error.message);
+    }
   };
+  
+
+
+  
 
   const totalSavings = calculateSavings(cartItems);
 
@@ -235,12 +296,21 @@ const CartComponent = () => {
                 <p className='text-sm font-normal text-[#979797] '>GH¢ 0.00 </p>
               </div>
 
+              <div>
+      {isPromoCodeApplied ? (
+        <div className='mb-2 flex justify-between'>
+          <p className='text-sm font-normal text-[#979797]'>Discount_amount</p>
+          <p className='text-sm font-normal text-[#979797]'>GH¢ {0.00}</p>
+        </div>
+      ) : null}
+    </div>
+
               <hr className='my-2' />
               <div className='mb-2 flex justify-between'>
                 <span className='font-semibold'>Total</span>
                 <span className='font-semibold'>
                   {' '}
-                  GH¢ {calculateTotal().toFixed(2)}
+                  GH¢ {calculateTotalAfterDiscount().toFixed(2)}
                 </span>
               </div>
               <div className='flex flex-row justify-between'>

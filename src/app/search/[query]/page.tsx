@@ -1,9 +1,10 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { useLazyGetSearchProductsQuery } from '@/lib/redux/services/product';
 import { useRouter } from 'next/navigation';
+import { Product } from '@/types/product';
 
 type Props = {
   params: {
@@ -12,6 +13,8 @@ type Props = {
 };
 
 const Search = ({ params }: Props) => {
+  const [responseProduct,setresponseProduct]= useState<Product>([])
+
   const { query } = params;
   console.log('query', query);
 
@@ -25,6 +28,11 @@ const Search = ({ params }: Props) => {
       .then(() => {})
       .catch(() => {});
   }, [query]);
+
+
+  console.log('products', products);
+  console.log('typeproducts',Array.isArray(products) );
+
 
   return (
     <>
