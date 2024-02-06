@@ -119,7 +119,7 @@ const CartModal: React.FC<{
                   <div className='flex items-center space-x-2 border-gray-100'>
                     <span
                       className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                      onClick={() => dispatch(decreaseQuantity(item.id))}
+                      onClick={() => dispatch(decreaseQuantity({ productId: item.id }))}
                     >
                       {' '}
                       -{' '}
@@ -133,8 +133,8 @@ const CartModal: React.FC<{
                     />
                     <span
                       className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                      onClick={() => dispatch(increaseQuantity(item.id))}
-                    >
+                      onClick={() => dispatch(increaseQuantity({ productId: item.id }))}
+                      >
                       {' '}
                       +{' '}
                     </span>
