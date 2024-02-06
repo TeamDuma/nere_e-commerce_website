@@ -43,9 +43,8 @@ export type OrderConfirmationResponse = {
 };
 
 export type GetDiscountAmountResponse = {
-  status: 'success' | 'error';
-  message?: string;
-  data?: {
+  status: string;
+  data: {
     discountAmount: number;
     discountType: number;
     discount_value: number;

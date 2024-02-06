@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Search = ({ params }: Props) => {
-  const [responseProduct, setresponseProduct] = useState<Product>([]);
+  const [responseProduct, setresponseProduct] = useState<Product[]>([]);
 
   const { query } = params;
   console.log('query', query);
@@ -21,7 +21,7 @@ const Search = ({ params }: Props) => {
   const [getSearchProducts, { data, isLoading }] =
     useLazyGetSearchProductsQuery();
 
-  const products = data?.data.products ?? [];
+  const products = data?.data ?? [];
 
   useEffect(() => {
     getSearchProducts(query)

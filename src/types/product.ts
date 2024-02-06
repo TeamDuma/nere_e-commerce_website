@@ -68,9 +68,18 @@ export type getCategoryProductResponse = {
     products: Product[];
   };
 };
+
 export type getSearchProductsResponse = {
-  status: string;
-  data: {
-    products: Product[];
-  };
+  total: number;
+  current_page: number;
+  count: number;
+  last_page: number;
+  firstItem: number;
+  lastItem: number;
+  per_page: number;
+  first_page_url: string;
+  last_page_url: string;
+  next_page_url: number | null;
+  prev_page_url: number | null;
+  data: Product[];
 };

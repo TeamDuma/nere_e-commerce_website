@@ -1,6 +1,7 @@
 import {
   CartCheckoutBody,
   CartUpdateBody,
+  GetDiscountAmountResponse,
   OrderConfirmationResponse,
   getDiscountAmountBody,
 } from '@/types/cart';
@@ -30,7 +31,10 @@ const cartApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getDiscountAmount: builder.query<any, getDiscountAmountBody>({
+    getDiscountAmount: builder.query<
+      GetDiscountAmountResponse,
+      getDiscountAmountBody
+    >({
       query: (data) => ({
         url: endpoints.getDiscountAmount,
         method: 'POST',

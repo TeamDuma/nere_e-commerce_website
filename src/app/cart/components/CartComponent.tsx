@@ -40,8 +40,7 @@ const CartComponent = () => {
   const [promoCode, setPromoCode] = useState<string>('');
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
-  const [getDiscountAmount, { data, isLoading }] =
-    useLazyGetDiscountAmountQuery();
+  const [getDiscountAmount, { isLoading }] = useLazyGetDiscountAmountQuery();
   const [discountAmount, setDiscountAmount] = useState(0);
 
   const [registrationModalVisible, setRegistrationModalVisible] =
@@ -89,24 +88,19 @@ const CartComponent = () => {
         voucher_code: promoCode,
       };
 
-      const response = await getDiscountAmount(requestBody);
+      const response = await getDiscountAmount(requestBody).unwrap();
+      const { data } = response;
 
-      if (response && response.data && response.data.status === 'success') {
-        const responseData = response.data;
-        const discountAmount = responseData.data.discount.discount_amount;
-        console.log('discountAmount', discountAmount);
-        console.log('responseData', responseData);
+      const discountAmount = data.discountAmount;
+      console.log('discountAmount', discountAmount);
 
-        setIsPromoCodeApplied(true);
-        setDiscountAmount(discountAmount);
-      } else {
-        setIsPromoCodeApplied(false);
-        setDiscountAmount(0);
-        toast.error(response.error.data.message);
-      }
+      setIsPromoCodeApplied(true);
+      setDiscountAmount(discountAmount!);
+      setIsPromoCodeApplied(false);
+      setDiscountAmount(0);
     } catch (error) {
       console.error('Error during fetch:', error);
-      toast.error(error.message);
+      toast.error((error as any).data.message);
     }
   };
 
@@ -311,7 +305,7 @@ const CartComponent = () => {
                       placeholder='Enter promo code'
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      className='w-full rounded-md border-none outline-none'
+                      className='w-full rounded-md border-none pl-2 outline-none'
                     />
                     <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
                       <FaTags size={20} color='#1A464C' />
