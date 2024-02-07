@@ -28,25 +28,12 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ item: CartItem; quantity?: number }>
     ) => {
       const { item, quantity = 1 } = payload;
-      const cartItem = state.cartItems.find((existingItem) => {
-        if (item.isGroupJoiner) {
-          return (
-            existingItem.id === item.id && existingItem.groupID === item.groupID
-          );
-        }
-        return existingItem.id === item.id;
-      });
-
-      if (cartItem) {
-        if (cartItem.hasMinQuantity) {
-          const minQuantity = cartItem.min_quantity ?? 0;
-          cartItem.cartQuantity = Math.min(
-            cartItem.cartQuantity + quantity,
-            minQuantity
-          );
-        } else {
-          cartItem.cartQuantity += quantity;
-        }
+      const existingIndex = state.cartItems.findIndex(
+        (existingItem) =>
+          existingItem.id === item.id && existingItem.groupID === item.groupID
+      );
+      if (existingIndex !== -1) {
+        state.cartItems[existingIndex].cartQuantity += quantity;
       } else {
         state.cartItems.push({ ...item, cartQuantity: quantity });
       }
@@ -57,22 +44,11 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ productId: number; groupId?: number }>
     ) => {
       const { productId, groupId } = payload;
-      const existingProduct = state.cartItems.find((item) => {
-        return groupId
-          ? item.id === productId && item.groupID === groupId
-          : item.id === productId;
-      });
-      if (existingProduct) {
-        if (existingProduct.hasMinQuantity) {
-          existingProduct.cartQuantity = Math.min(
-            existingProduct.cartQuantity!! + 1,
-            existingProduct.min_quantity!!
-          );
-        } else {
-          existingProduct.cartQuantity = Math.max(
-            existingProduct.cartQuantity!! + 1
-          );
-        }
+      const existingIndex = state.cartItems.findIndex(
+        (item) => item.id === productId && item.groupID === groupId
+      );
+      if (existingIndex !== -1) {
+        state.cartItems[existingIndex].cartQuantity++;
       }
     },
     decreaseQuantity: (
@@ -80,14 +56,12 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ productId: number; groupId?: number }>
     ) => {
       const { productId, groupId } = payload;
-      const existingProduct = state.cartItems.find((item) => {
-        return groupId
-          ? item.id === productId && item.groupID === groupId
-          : item.id === productId;
-      });
-      if (existingProduct) {
-        existingProduct.cartQuantity = Math.max(
-          existingProduct.cartQuantity!! - 1,
+      const existingIndex = state.cartItems.findIndex(
+        (item) => item.id === productId && item.groupID === groupId
+      );
+      if (existingIndex !== -1) {
+        state.cartItems[existingIndex].cartQuantity = Math.max(
+          state.cartItems[existingIndex].cartQuantity - 1,
           1
         );
       }
@@ -97,11 +71,9 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ productId: number; groupId?: number }>
     ) => {
       const { productId, groupId } = payload;
-      state.cartItems = state.cartItems.filter((item) => {
-        return groupId
-          ? `${item.id}-${item.groupID}` !== `${productId}-${groupId}`
-          : item.id !== productId;
-      });
+      state.cartItems = state.cartItems.filter(
+        (item) => item.id !== productId || item.groupID !== groupId
+      );
     },
     resetCart: (state) => {
       state.cartItems = [];
