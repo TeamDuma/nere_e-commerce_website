@@ -25,7 +25,18 @@ export default function RootLayout(props: React.PropsWithChildren) {
         <Providers>
           <Header />
           {props.children}
-          <ToastContainer />
+          <ToastContainer
+            position='top-center'
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme='light'
+          />
           <Footer />
         </Providers>
       </body>

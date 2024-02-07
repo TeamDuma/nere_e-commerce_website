@@ -21,8 +21,8 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
     >
       <div className='relative w-1/4 flex-shrink-0 bg-[#FFF]'>
         <img
-          src={item.product.plain_image}
-          alt={item.product.name}
+          src={item?.product?.plain_image}
+          alt={item?.product?.name}
           className='h-140 w-full rounded-lg object-cover'
           style={{ width: '103px', height: '105px' }}
         />
@@ -40,7 +40,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
 
       <div className='ml-4 flex-1'>
         <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
-          {item.product.name}
+          {item?.product?.name}
         </h2>
         <div className='m-2'>
           <div className='flex items-center'>
@@ -63,9 +63,9 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
             </span>
           </div>
           <div className='flex items-center'>
-            {item.product.hasMinQuantity && (
+            {item?.product?.hasMinQuantity && (
               <ProgressBar
-                remaining={item.members.length}
+                remaining={item.total_quantity}
                 total={item.product.min_quantity ?? 0}
               />
             )}

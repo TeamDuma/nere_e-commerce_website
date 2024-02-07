@@ -68,8 +68,6 @@ const LoginModal: React.FC<{
         onClose();
         if (typeof window !== 'undefined') {
         }
-
-        console.log('Login successful:', data);
       } else {
         handleLoginError(response.error);
       }
@@ -79,8 +77,6 @@ const LoginModal: React.FC<{
   };
 
   const handleLoginError = (error: any) => {
-    console.log('Login Error:', error);
-
     toast.error('Login failed. Please check your credentials.');
   };
 
@@ -96,7 +92,6 @@ const LoginModal: React.FC<{
           <div className='sm:rounded-4xl  w-full max-w-xl overflow-y-auto bg-white'>
             <div className='flex w-full items-center justify-center'>
               {' '}
-              {/* Add these classes */}
               <div className='m-8 mx-auto  max-w-[300px]'>
                 <div className='mb-8'>
                   <Logo />

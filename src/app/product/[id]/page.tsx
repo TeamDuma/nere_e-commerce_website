@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaStar } from 'react-icons/fa';
 import Stepper from '@/components/common/PurchaseGuide';
+import ProgressBar from '@/components/common/ProgressBar';
 
 type Props = {
   params: {
@@ -78,141 +79,180 @@ export default function ProductDetailPage({ params }: Props) {
   };
 
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        item: {
-          ...product!,
-          cartQuantity: 0,
-          productID: product?.id!,
-          isGroupJoiner: true,
-          groupID: group?.id!,
-          locationID: undefined,
-          type: GroupType.PUBLIC,
-        },
-      })
-    );
+    const itemToAdd = {
+      ...product!,
+      cartQuantity: 0,
+      productID: product?.id!,
+      isGroupJoiner: false,
+    };
 
+    dispatch(addToCart({ item: itemToAdd }));
     toast.success('Item added to cart!');
   };
 
-  const cartProduct = cartItems.find((item) => item.id === productId);
+  const cartProduct = cartItems.find((item) => item.id !== productId);
 
-  const cartQuantity = cartProduct ? cartProduct.quantity : 0;
-  console.log('cartQuantity');
-
-  console.log('group:', group);
+  const cartQuantity = cartProduct ? cartProduct.cartQuantity : 0;
 
   return (
-    <div className='my-8'>
-      <div className='container mx-auto px-6'>
-        <div className='mb-8 md:flex md:items-center'>
-          <div className='h-387 md:w-387 w-full bg-[#F8F8F8] lg:h-96'>
-            <img
-              className='mx-auto h-full rounded-md object-cover md:max-w-lg '
-              src={product?.plain_image}
-              alt='plain_image'
-            />
+    <>
+      <div>
+        <div className='px-2 py-2'>
+          <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+            <div className='flex items-center space-x-2 text-sm text-gray-400'>
+              <a href='#' className='hover:text-gray-600 hover:underline'>
+                one
+              </a>
+              <span>
+                <svg
+                  className='h-5 w-5 leading-none text-gray-300'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
+              </span>
+              <a href='#' className='hover:text-gray-600 hover:underline'>
+                two
+              </a>
+            </div>
           </div>
-          <div className='mx-auto mt-5 w-full max-w-lg md:ml-8 md:mt-0 md:w-1/2'>
-            <div className='flex items-center'>
-              {' '}
-              <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
-                {product?.slug}
-              </h3>
-              {variantsArray.length > 0 && (
-                <div className='ml-12'>
-                  <div className='mt-1'>
-                    <select
-                      id='variant'
-                      value={selectedVariant}
-                      onChange={(e) => handleVariantChange(e.target.value)}
-                      className='w-full rounded border border-gray-300 p-2'
+          <div className='mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8'>
+            <div className='-mx-4 flex flex-col md:flex-row'>
+              <div className='px-4 md:flex-1'>
+                <div x-data='{ image: 1 }' x-cloak=''>
+                  <div className='mb-4 h-64 rounded-lg bg-gray-100 md:h-80'>
+                    <div
+                      x-show='image === 1'
+                      className='mb-4 flex h-64 items-center justify-center rounded-lg bg-gray-100 md:h-80'
                     >
-                      <option value='' disabled>
-                        Select a variant
-                      </option>
-                      {variantsArray.map((variant, index) => (
-                        <option key={index} value={variant}>
-                          {variant}
-                        </option>
-                      ))}
-                    </select>
+                      <img
+                        className='mx-auto h-full rounded-md object-cover md:max-w-lg '
+                        src={product?.plain_image}
+                        alt='plain_image'
+                      />
+                    </div>
+                  </div>
+
+                  <div className='-mx-2 mb-4 flex'>
+                    <template x-for='i in 4' />
                   </div>
                 </div>
-              )}
-            </div>
-            <div className='star-icon my-4 flex  items-center'>
-              {' '}
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-            </div>
-
-            <div className='mt-3 flex items-center md:flex-row md:items-start'>
-              <span className='text-lg font-medium text-[#1A464C]	'>
-                ¢ {product?.sale_price}
-              </span>
-              <span
-                className='ml-3 text-base font-medium text-red-500'
-                style={{ textDecoration: 'line-through' }}
-              >
-                ¢{product?.price}
-              </span>
-              <div className='w-85 h-21 ml-3 flex items-center justify-center rounded bg-[#8CCED7]'>
-                {product?.price && product.sale_price && (
-                  <span className=' text-sm text-white '>
-                    Save{' '}
-                    {calculateSavingsPercentage(
-                      product.price,
-                      product.sale_price
-                    )}
-                    %
-                  </span>
-                )}
               </div>
-            </div>
+              <div className='px-4 md:flex-1'>
+                <div className='flex items-center'>
+                  {' '}
+                  <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
+                    {product?.name}
+                  </h3>
+                  {variantsArray.length > 0 && (
+                    <div className='ml-12'>
+                      <div className='mt-1'>
+                        <select
+                          id='variant'
+                          value={selectedVariant}
+                          onChange={(e) => handleVariantChange(e.target.value)}
+                          className='w-full rounded border border-gray-300 p-2'
+                        >
+                          <option value='' disabled>
+                            Select a variant
+                          </option>
+                          {variantsArray.map((variant, index) => (
+                            <option key={index} value={variant}>
+                              {variant}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className='star-icon my-4 flex  items-center'>
+                  {' '}
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <div className='my-4 flex items-center space-x-4'>
+                  <div>
+                    <div className='flex rounded-lg px-3 py-2'>
+                      <span className='text-lg font-medium text-[#1A464C]	'>
+                        ¢ {product?.sale_price}
+                      </span>
+                      <span
+                        className='font-small ml-2 mt-1 text-sm text-red-500	'
+                        style={{ textDecoration: 'line-through' }}
+                      >
+                        ¢{product?.price}
+                      </span>
+                    </div>
+                  </div>
+                  <div className='flex-6'>
+                    <p className='text-xl font-semibold text-green-500'>
+                      <div className='w-25 h-21 ml-3 flex items-center justify-center rounded bg-[#8CCED7]'>
+                        {product?.price && product.sale_price && (
+                          <span className=' text-sm text-white '>
+                            Save{' '}
+                            {calculateSavingsPercentage(
+                              product.price,
+                              product.sale_price
+                            )}
+                            %
+                          </span>
+                        )}
+                      </div>
+                    </p>
+                  </div>
+                </div>
 
-            <table className='my-3 w-full  border-b border-t  md:my-5'>
-              <thead>
-                <tr>
-                  <th className='border border-slate-300 text-sm md:w-1/2 '>
-                    {' '}
-                    0 participants
-                  </th>
-                  <th className='border border-slate-300 md:w-1/2'> Ends in</th>
-                </tr>
-              </thead>
-            </table>
-            <Link href='/products'>
-              <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
-            </Link>
+                <Link href='/products'>
+                  <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
+                </Link>
 
-            {/* {product?.hasMinQuantity && (
-              <div className='progress-bar'>
-                <div className='progress-line'></div>
+                {product.min_quantity ? (
+                  <ProgressBar
+                    remaining={cartQuantity}
+                    total={product.min_quantity}
+                  />
+                ) : null}
+                <div className='flex space-x-4 py-4'>
+                  <div className='flex items-center justify-center sm:justify-start'>
+                    <div className='flex flex-col items-center justify-center sm:justify-start'>
+                      <div className='mt-4 sm:mt-0 sm:flex'>
+                        <button
+                          className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                          onClick={handleAddToCart}
+                        >
+                          <span className='hidden sm:inline'>Add to Cart</span>
+                          <span className='sm:hidden'>Launch Purchase</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            )} */}
-
-            <div className='flex items-center'>
-              <button
-                className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                onClick={handleAddToCart}
-              >
-                Add to Cart
-              </button>
             </div>
           </div>
+          <Stepper />
+          <div className='hidden sm:block'>
+            <Banner />
+            <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
+              <h1>You might like</h1>
+            </div>{' '}
+            <FeaturedProducts />
+            <ViewMore />
+          </div>
         </div>
-        <Stepper />
-        <Banner />
-        <div className='mt-12 flex items-center justify-center '>
-          <h1>You might like</h1>
-        </div>{' '}
-        <FeaturedProducts />
-        <ViewMore />
       </div>
-    </div>
+    </>
   );
 }

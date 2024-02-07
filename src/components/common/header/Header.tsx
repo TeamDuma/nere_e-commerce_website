@@ -15,13 +15,32 @@ import { ILocation } from '@/types/location';
 
 import { BsSearch } from 'react-icons/bs';
 import CartIconHeader from '../CartIconHeader';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter();
+
   const { data, isLoading } = useGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    console.log('searchQuery before push:', searchQuery);
+
+    if (searchQuery.length >= 2) {
+      // onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
+
+      router.push(`/search/${searchQuery}`);
+    }
+  };
+
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const { selectedLocationId, userInfo } = useSelector(selectShopping);
-  console.log('useGetLocationsQuery', selectedLocationId);
 
   const locations = data?.data || [];
 
@@ -34,8 +53,6 @@ const Header = () => {
     }
   );
   const selectedLocation = selectedAddress;
-
-  console.log('selectedAddress', selectedAddress);
 
   useEffect(() => {
     if (data && selectedLocationId) {
@@ -80,17 +97,12 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       dispatch(deleteUser());
-
-      console.log('Logout ');
-    } catch (error) {
-      console.error('Logout Error:', error);
-    }
+    } catch (error) {}
   };
 
   return (
-    <div className='m-4 bg-white'>
-      <div className='container flex flex-col  justify-between sm:flex-row '>
-        {/* Logo and Icons in the same row */}
+    <div className='h-100 m-3 bg-white '>
+      <div className=' flex flex-col  justify-between sm:flex-row '>
         <div className='flex flex  items-center justify-between '>
           <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
             <Link href='/'>
@@ -148,22 +160,25 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Search Input */}
         <div className='flex w-full flex-col items-center gap-4 sm:w-[300px] sm:flex-row md:w-[40%]'>
           <div className='relative w-full rounded'>
             <input
-              className='w-full rounded-lg border border-gray-200 bg-[#F5F5F5] p-2 px-4'
+              className='w-full rounded-2xl border border-gray-200 bg-[#F5F5F5] p-2 px-4'
               type='text'
               placeholder='Search for products'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
+
             <BsSearch
-              className='absolute right-0 top-0 mr-3 mt-3 text-gray-400'
+              className='absolute right-0 top-0 mr-3 mt-3 cursor-pointer text-gray-400'
               size={20}
+              onClick={handleSearch}
             />
           </div>
         </div>
 
-        {/* Your new row content for small screens */}
         <div className='sm:hidden'>
           <div className='my-4 flex'>
             <div className='flex lg:hidden'>
@@ -172,7 +187,6 @@ const Header = () => {
               </button>
             </div>
 
-            {/* Responsive Navigation Icons */}
             <div className='flex  gap-4 lg:hidden'>
               <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
               <p
@@ -194,7 +208,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Expanded Navigation for Larger Screens */}
         <div className='hidden gap-4 text-[30px] text-gray-500 lg:flex'>
           <div className='mr-4 flex items-center'>
             <a
@@ -244,16 +257,21 @@ const Header = () => {
                 </div>
                 {isDropdownOpen && (
                   <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
-                    <a className='block px-4 py-2 text-[#298592]'>Profile</a>
+                    <a
+                      href='/profile'
+                      className='block px-2 py-1 text-sm text-[#298592]'
+                    >
+                      Profile
+                    </a>
                     <a
                       href='/orders'
-                      className='block px-4 py-2 text-[#298592]'
+                      className='block px-2 py-1 text-sm text-[#298592]'
                     >
                       Orders
                     </a>
                     <a
                       href='#'
-                      className='block px-4 py-2 text-[#298592]'
+                      className='block px-2 py-1 text-sm text-[#298592]'
                       onClick={handleLogout}
                     >
                       Logout

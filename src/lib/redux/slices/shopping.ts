@@ -28,9 +28,14 @@ export const shoppingSlice = createSlice({
       { payload }: PayloadAction<{ item: CartItem; quantity?: number }>
     ) => {
       const { item, quantity = 1 } = payload;
-      const cartItem = state.cartItems.find(
-        (existingItem) => existingItem.id === item.id
-      );
+      const cartItem = state.cartItems.find((existingItem) => {
+        if (item.isGroupJoiner) {
+          return (
+            existingItem.id === item.id && existingItem.groupID === item.groupID
+          );
+        }
+        return existingItem.id === item.id;
+      });
 
       if (cartItem) {
         if (cartItem.hasMinQuantity) {
@@ -47,9 +52,16 @@ export const shoppingSlice = createSlice({
       }
     },
 
-    increaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
-      const existingProduct = state.cartItems.find((item) => item.id === id);
-      console.log('existingProduct', current(existingProduct));
+    increaseQuantity: (
+      state,
+      { payload }: PayloadAction<{ productId: number; groupId?: number }>
+    ) => {
+      const { productId, groupId } = payload;
+      const existingProduct = state.cartItems.find((item) => {
+        return groupId
+          ? item.id === productId && item.groupID === groupId
+          : item.id === productId;
+      });
       if (existingProduct) {
         if (existingProduct.hasMinQuantity) {
           existingProduct.cartQuantity = Math.min(
@@ -63,8 +75,16 @@ export const shoppingSlice = createSlice({
         }
       }
     },
-    decreaseQuantity: (state, { payload: id }: PayloadAction<number>) => {
-      const existingProduct = state.cartItems.find((item) => item.id === id);
+    decreaseQuantity: (
+      state,
+      { payload }: PayloadAction<{ productId: number; groupId?: number }>
+    ) => {
+      const { productId, groupId } = payload;
+      const existingProduct = state.cartItems.find((item) => {
+        return groupId
+          ? item.id === productId && item.groupID === groupId
+          : item.id === productId;
+      });
       if (existingProduct) {
         existingProduct.cartQuantity = Math.max(
           existingProduct.cartQuantity!! - 1,
@@ -72,8 +92,16 @@ export const shoppingSlice = createSlice({
         );
       }
     },
-    deleteProduct: (state, { payload: id }: PayloadAction<number>) => {
-      state.cartItems = state.cartItems.filter((item) => item.id !== id);
+    deleteProduct: (
+      state,
+      { payload }: PayloadAction<{ productId: number; groupId?: number }>
+    ) => {
+      const { productId, groupId } = payload;
+      state.cartItems = state.cartItems.filter((item) => {
+        return groupId
+          ? `${item.id}-${item.groupID}` !== `${productId}-${groupId}`
+          : item.id !== productId;
+      });
     },
     resetCart: (state) => {
       state.cartItems = [];

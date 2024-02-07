@@ -1,25 +1,44 @@
 'use client';
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 
-const FeaturedProducts = () => {
-  const { data, isLoading } = useGetActiveProductsQuery();
-  const products = data?.data?.products ?? [];
+import { useLazyGetSearchProductsQuery } from '@/lib/redux/services/product';
+import { useRouter } from 'next/navigation';
+import { Product } from '@/types/product';
 
-  const featureProducts = products.filter(
-    (product) => product.isFeaturedProduct
-  );
+type Props = {
+  params: {
+    query: string;
+  };
+};
+
+const Search = ({ params }: Props) => {
+  const [responseProduct, setresponseProduct] = useState<Product[]>([]);
+
+  const { query } = params;
+  console.log('query', query);
+
+  const [getSearchProducts, { data, isLoading }] =
+    useLazyGetSearchProductsQuery();
+
+  const products = data?.data ?? [];
+
+  useEffect(() => {
+    getSearchProducts(query)
+      .then(() => {})
+      .catch(() => {});
+  }, [query]);
+
+  console.log('products', products);
+  console.log('typeproducts', Array.isArray(products));
 
   return (
     <>
       <div>
         <div className='container'>
           {isLoading && <div>Loading...</div>}
-
-          <div className='lg:grid-col-3 grid grid-cols-2  gap-5 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
-            {featureProducts.map((product) => (
+          <div className='lg:grid-col-3 grid grid-cols-2  gap-10 sm:grid-cols-2  xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
+            {products.map((product) => (
               <Link href={`/product/${product.id}`} key={product?.id}>
                 <div key={product?.id}>
                   <>
@@ -94,4 +113,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default Search;

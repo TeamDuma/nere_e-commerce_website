@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { ILocation } from './location';
 import { GroupType } from './group';
 
 export interface Location {
@@ -34,8 +35,8 @@ export interface Product {
   variants: string | null;
   isFeaturedProduct: boolean;
   desired_margin: number;
-  categories: Category;
-  locations: Location[];
+  categories?: Category;
+  locations?: ILocation[];
 }
 
 export interface GetProductsResponse {
@@ -61,9 +62,24 @@ export type GetProductResponse = {
   };
 };
 
-export type getCategoryProductResponse = {
+export type GetCategoryProductResponse = {
   status: string;
   data: {
     products: Product[];
   };
+};
+
+export type GetSearchProductsResponse = {
+  total: number;
+  current_page: number;
+  count: number;
+  last_page: number;
+  firstItem: number;
+  lastItem: number;
+  per_page: number;
+  first_page_url: string;
+  last_page_url: string;
+  next_page_url: number | null;
+  prev_page_url: number | null;
+  data: Product[];
 };

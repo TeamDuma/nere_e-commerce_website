@@ -36,12 +36,11 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const [getGroup, { data, isLoading, isError }] = useLazyGetGroupQuery();
   const group = data?.data?.group;
   const product = group?.product;
+  const totalQuantity = group?.total_quantity || 0;
 
   useEffect(() => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
-
-  console.log('product in  OngoingDetails', data);
 
   if (isLoading) {
     return (
@@ -69,27 +68,30 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   };
 
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        item: {
-          ...product!,
-          cartQuantity: 0,
-          productID: product?.id!,
-          isGroupJoiner: true,
-          groupID: group?.id!,
-          locationID: undefined,
-          type: GroupType.PUBLIC,
-        },
-      })
-    );
+    const itemToAdd = {
+      ...product!,
+      cartQuantity: 1,
+      productID: product?.id!,
+      isGroupJoiner: true,
+      groupID: group?.id!,
+      locationID: undefined,
+      type: GroupType.PUBLIC,
+      totalQuantity: group?.total_quantity!,
+    };
+
+    dispatch(addToCart({ item: itemToAdd }));
 
     toast.success('Item added to cart!');
   };
 
-  const cartProduct = cartItems.find((item) => item.id === product?.id!);
-  const cartQuantity = cartProduct?.cartQuantity;
+  const cartProduct = cartItems.find((item) => {
+    return item.groupID
+      ? item.id === product?.id! && item.groupID === group?.id
+      : item.id === product?.id!;
+  });
 
-  const remaining = (cartQuantity ?? 0) + (group?.members.length ?? 0);
+  const cartQuantity = cartProduct?.cartQuantity;
+  const remaining = (cartQuantity ?? 0) + totalQuantity;
 
   return (
     <div className='my-8'>
@@ -106,7 +108,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <div className='flex items-center'>
               {' '}
               <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
-                {product?.slug}
+                {product?.name}
               </h3>
               {variantsArray.length > 0 && (
                 <div className='ml-12'>
@@ -168,7 +170,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 <tr>
                   <th className='flex items-center text-sm md:w-1/2 md:justify-between'>
                     <MdGroups className='my-2 text-[#298592]' />
-                    {group?.members.length} participants
+                    {group?.members?.length} participants
                   </th>
                   <th>
                     <hr className='my-2 border-t-2 border-slate-300 md:hidden' />
@@ -218,12 +220,14 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
           </div>
         </div>
         <PurchaseGuide />
-        <Banner />
-        <div className='mt-12 flex items-center justify-center '>
-          <h1>You might like</h1>
-        </div>{' '}
-        <FeaturedProducts />
-        <ViewMore />
+        <div className='hidden sm:block'>
+          <Banner />
+          <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
+            <h1>You might like</h1>
+          </div>{' '}
+          <FeaturedProducts />
+          <ViewMore />
+        </div>
       </div>
     </div>
   );

@@ -2,11 +2,15 @@ const endpoints = {
   // Cart
   updateCart: '/cart/update',
   checkoutCart: '/cart/checkout',
+  getOrderConfirmation: (reference: string) => `/cart/basket/${reference}`,
+  getDiscountAmount: `/vouchers/calculate_discount`,
 
   // Products
   getActiveProducts: '/products/active',
   getProduct: (id: number) => `/products/${id}`,
   getCategoryProduct: (slug: string) => `/products/category/${slug}`,
+  getSearchProducts: (searchQuery: string) =>
+    `/products/all?search=${encodeURIComponent(searchQuery)}`,
 
   // Category
   getCategories: '/categories',

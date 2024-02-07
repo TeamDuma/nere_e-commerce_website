@@ -1,4 +1,10 @@
-import { CartCheckoutBody, CartUpdateBody } from '@/types/cart';
+import {
+  CartCheckoutBody,
+  CartUpdateBody,
+  GetDiscountAmountResponse,
+  OrderConfirmationResponse,
+  GetDiscountAmountBody,
+} from '@/types/cart';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
 
@@ -19,7 +25,26 @@ const cartApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getOrderConfirmation: builder.query<OrderConfirmationResponse, string>({
+      query: (reference) => ({
+        url: endpoints.getOrderConfirmation(reference),
+        method: 'GET',
+      }),
+    }),
+    getDiscountAmount: builder.query<GetDiscountAmountResponse, GetDiscountAmountBody>({
+      query: (data) => ({
+        url: endpoints.getDiscountAmount,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useCheckoutCartMutation, useUpdateCartMutation } = cartApi;
+export const {
+  useCheckoutCartMutation,
+  useUpdateCartMutation,
+  useLazyGetOrderConfirmationQuery,
+  useGetOrderConfirmationQuery,
+  useLazyGetDiscountAmountQuery,
+} = cartApi;

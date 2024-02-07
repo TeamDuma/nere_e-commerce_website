@@ -69,12 +69,10 @@ const RegistrationModal: React.FC<{
 
     signUp({ email, name, phone, password })
       .then((data) => {
-        console.log('Login successful:', data);
         toast.success('signUp successfully');
         onClose();
       })
       .catch((e) => {
-        console.log('Login Error:', e);
         toast.error(e);
       });
   };

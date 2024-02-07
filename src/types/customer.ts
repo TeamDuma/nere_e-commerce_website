@@ -3,7 +3,6 @@ export interface Customer {
   uid: string;
   email: string;
   name: string;
-  password: string;
   phone: string;
   avatar: null | string;
   isActive: boolean;

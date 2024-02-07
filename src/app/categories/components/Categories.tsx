@@ -12,7 +12,10 @@ const Categories = () => {
       <div className='flex flex-nowrap justify-start'>
         {categories.length > 0 ? (
           categories.map((category: any) => (
-            <div className='w-full p-4 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5'>
+            <div
+              key={category.id}
+              className='w-full p-4 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5'
+            >
               <Link href={`/category/${category.slug}`}>
                 <div className='sm:grid-md:grid- row grid gap-2 xl:grid-cols-2'>
                   <div className='flex flex-col items-center justify-center rounded-lg'>

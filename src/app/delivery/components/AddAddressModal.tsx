@@ -71,17 +71,6 @@ const AddAddressModal: React.FC<{
     }
   }, [selectedLocationId, data]);
 
-  const handleSave = () => {
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Phone Number:', phoneNumber);
-    console.log('Address:', address);
-    console.log('Additional Information:', additionalInfo);
-    console.log('Is Default:', isDefault);
-
-    onClose();
-  };
-
   return (
     <div>
       <Modal
@@ -216,9 +205,12 @@ const AddAddressModal: React.FC<{
                 className=' rounded-md bg-[#298592] px-4 py-2 text-white'
                 style={{ width: '100%' }}
                 onClick={() => {
-                  console.log('Selected Region:', selectedRegion);
-                  console.log('Selected City:', selectedCity);
-                  console.log('Selected Address:', address);
+                  console.log(
+                    'Selected address:',
+                    selectedRegion,
+                    selectedCity,
+                    address
+                  );
                 }}
               >
                 Save
