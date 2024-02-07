@@ -197,6 +197,16 @@ const CartComponent = () => {
                             %
                           </span>
                         </div>
+                        {item.min_quantity ? (
+                          <ProgressBar
+                            remaining={
+                              item.isGroupJoiner
+                                ? item.cartQuantity + (item.totalQuantity || 0)
+                                : item.cartQuantity
+                            }
+                            total={item.min_quantity}
+                          />
+                        ) : null}
                       </div>
                     </div>
                     <div className='flex items-center md:mt-3'>
@@ -244,6 +254,16 @@ const CartComponent = () => {
                         {' '}
                         +
                       </button>
+
+                      <div className='ml-5'>
+                        <span
+                          onClick={() => {
+                            handleRemoveItem(item.id, item.groupID);
+                          }}
+                        >
+                          <FaRegTrashAlt size={20} color='#1A464C' />
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -333,13 +353,6 @@ const CartComponent = () => {
                       />
                     </div>
                   )}
-                  {/* <button
-                    onClick={handleApplyPromoCode}
-                    disabled={isPromoCodeApplied || !promoCode.trim()}
-                    className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
-                  >
-                    {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
-                  </button> */}
                 </div>
               </div>
               {userInfo ? (
