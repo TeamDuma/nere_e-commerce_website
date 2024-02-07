@@ -31,7 +31,10 @@ const cartApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getDiscountAmount: builder.query<GetDiscountAmountResponse, GetDiscountAmountBody>({
+    getDiscountAmount: builder.query<
+      GetDiscountAmountResponse,
+      GetDiscountAmountBody
+    >({
       query: (data) => ({
         url: endpoints.getDiscountAmount,
         method: 'POST',

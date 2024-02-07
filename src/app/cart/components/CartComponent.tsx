@@ -96,7 +96,6 @@ const CartComponent = () => {
 
       setIsPromoCodeApplied(true);
       setDiscountAmount(discountAmount!);
-      setIsPromoCodeApplied(false);
       setDiscountAmount(0);
     } catch (error) {
       console.error('Error during fetch:', error);
@@ -164,7 +163,7 @@ const CartComponent = () => {
                       src={item?.plain_image}
                       width={
                         item.name === 'Frytol sunflower oil 0.9L' ||
-                          item.name === "Dr. Annie's honey 500ml"
+                        item.name === "Dr. Annie's honey 500ml"
                           ? '60px'
                           : '90px'
                       }
@@ -230,10 +229,11 @@ const CartComponent = () => {
       px-3.5 py-1 duration-100 
       hover:bg-orange-500 
       hover:text-orange-50
-      ${item.min_quantity! - (item.cartQuantity + item.totalQuantity!) > 0
-                            ? ''
-                            : 'disabled'
-                          }`}
+      ${
+        item.min_quantity! - (item.cartQuantity + item.totalQuantity!) > 0
+          ? ''
+          : 'disabled'
+      }`}
                         onClick={() => {
                           dispatch(
                             increaseQuantity({
@@ -310,13 +310,38 @@ const CartComponent = () => {
                       <FaTags size={20} color='#1A464C' />
                     </div>
                   </div>
-                  <button
+                  {userInfo ? (
+                    <button
+                      onClick={handleApplyPromoCode}
+                      disabled={isPromoCodeApplied || !promoCode.trim()}
+                      className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
+                    >
+                      {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
+                    </button>
+                  ) : (
+                    <div>
+                      {' '}
+                      <button
+                        onClick={openLoginModal}
+                        className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
+                      >
+                        Apply
+                      </button>
+                      <LoginModal
+                        onClose={closeModal}
+                        onRegistrationClick={handleRegistrationClick}
+                        session={null}
+                        isOpen={loginModalVisible}
+                      />
+                    </div>
+                  )}
+                  {/* <button
                     onClick={handleApplyPromoCode}
                     disabled={isPromoCodeApplied || !promoCode.trim()}
                     className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                   >
                     {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
-                  </button>
+                  </button> */}
                 </div>
               </div>
               {userInfo ? (
@@ -353,7 +378,7 @@ const CartComponent = () => {
                           } else {
                           }
                         })
-                        .catch((e) => { });
+                        .catch((e) => {});
                     } else {
                       toast.warning(
                         'Please select a delivery location before checkout.'
