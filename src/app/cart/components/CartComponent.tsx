@@ -128,7 +128,7 @@ const CartComponent = () => {
     <div className=' h-full py-8'>
       <div className='container mx-auto px-4'>
         <div className='flex h-20 w-1/2 items-center rounded-lg bg-gray-100 '>
-          <h1 className='ml-2 text-lg text-xl	 text-[#1A464C] '>
+          <h1 className='ml-2 text-lg text-[#1A464C] '>
             You have saved GHS {totalSavings} on this purchase!
           </h1>
         </div>{' '}
@@ -164,7 +164,7 @@ const CartComponent = () => {
                       src={item?.plain_image}
                       width={
                         item.name === 'Frytol sunflower oil 0.9L' ||
-                        item.name === "Dr. Annie's honey 500ml"
+                          item.name === "Dr. Annie's honey 500ml"
                           ? '60px'
                           : '90px'
                       }
@@ -230,11 +230,10 @@ const CartComponent = () => {
       px-3.5 py-1 duration-100 
       hover:bg-orange-500 
       hover:text-orange-50
-      ${
-        item.min_quantity! - (item.cartQuantity + item.totalQuantity!) > 0
-          ? ''
-          : 'disabled'
-      }`}
+      ${item.min_quantity! - (item.cartQuantity + item.totalQuantity!) > 0
+                            ? ''
+                            : 'disabled'
+                          }`}
                         onClick={() => {
                           dispatch(
                             increaseQuantity({
@@ -354,7 +353,7 @@ const CartComponent = () => {
                           } else {
                           }
                         })
-                        .catch((e) => {});
+                        .catch((e) => { });
                     } else {
                       toast.warning(
                         'Please select a delivery location before checkout.'

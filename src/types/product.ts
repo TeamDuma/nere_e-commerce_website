@@ -62,14 +62,14 @@ export type GetProductResponse = {
   };
 };
 
-export type getCategoryProductResponse = {
+export type GetCategoryProductResponse = {
   status: string;
   data: {
     products: Product[];
   };
 };
 
-export type getSearchProductsResponse = {
+export type GetSearchProductsResponse = {
   total: number;
   current_page: number;
   count: number;

@@ -12,7 +12,7 @@ export type CartCheckoutBody = {
   voucherCode: string;
 };
 
-export type getDiscountAmountBody = {
+export type GetDiscountAmountBody = {
   customer_uid: number;
   total_amount: number;
   voucher_code: string;
@@ -39,6 +39,7 @@ export type OrderConfirmationResponse = {
     groups: Group[];
     amount: number;
     total_items: number;
+    total_savings: number;
   };
 };
 
