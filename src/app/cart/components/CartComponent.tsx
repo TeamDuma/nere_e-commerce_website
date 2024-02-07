@@ -90,13 +90,11 @@ const CartComponent = () => {
 
       const response = await getDiscountAmount(requestBody).unwrap();
       const { data } = response;
-
-      const discountAmount = data.discountAmount;
+      const discountAmount = data.discount.discount_amount;
       console.log('discountAmount', discountAmount);
-
       setIsPromoCodeApplied(true);
-      setDiscountAmount(discountAmount!);
-      setDiscountAmount(0);
+      setDiscountAmount(discountAmount);
+      toast.success('Promo code Applied!');
     } catch (error) {
       console.error('Error during fetch:', error);
       toast.error((error as any).data.message);

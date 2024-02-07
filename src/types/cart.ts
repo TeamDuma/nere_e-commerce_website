@@ -45,11 +45,14 @@ export type OrderConfirmationResponse = {
 
 export type GetDiscountAmountResponse = {
   status: string;
+
   data: {
-    discountAmount: number;
-    discountType: number;
-    discount_value: number;
-    voucherCode: string;
+    discount: {
+      discount_amount: number;
+      discountType: number;
+      discount_value: number;
+      voucherCode: string;
+    };
   };
 };
 
