@@ -30,15 +30,16 @@ const customStyles: Styles = {
   },
   content: {
     position: 'fixed',
-    top: 0,
+    top: '10%',
     left: 'auto',
     right: 0,
-    height: '100%',
+    height: '90%',
     width: '95%',
     maxWidth: '400px',
     backgroundColor: 'white',
     padding: '20px',
-    borderRadius: '20px',
+    borderTopLeftRadius: '20px',
+    borderBottomLeftRadius: '20px',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
     zIndex: 1001,
     overflowY: 'auto',
@@ -83,8 +84,8 @@ const CartModal: React.FC<{
           cartItems.map((item) => (
             <div
               key={item.id}
-              className='mt-5 flex items-center rounded-lg bg-[#fff] p-4 shadow-md'
-              style={{ width: '405px', height: '100px' }}
+              className='mt-5 flex items-center rounded-lg border-2 border-gray-50 bg-[#fff] p-4 shadow-md'
+              style={{ width: '350px', height: '140px' }}
             >
               <div className='relative w-1/4 flex-shrink-0 bg-[#F5F5F5]'>
                 <img
