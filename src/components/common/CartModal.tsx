@@ -8,6 +8,7 @@ import Modal, { Styles } from 'react-modal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import {
   decreaseQuantity,
+  deleteProduct,
   increaseQuantity,
   selectShopping,
 } from '@/lib/redux/slices/shopping';
@@ -16,6 +17,7 @@ import Link from 'next/link';
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, transformToCartCheckoutItem } from '@/types/cart';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 const customStyles: Styles = {
   overlay: {
@@ -57,6 +59,10 @@ const CartModal: React.FC<{
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
 
+  const handleRemoveItem = (productId: number, groupId?: number) => {
+    dispatch(deleteProduct({ productId, groupId }));
+  };
+
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
       return total + item.price * item.cartQuantity;
@@ -78,7 +84,7 @@ const CartModal: React.FC<{
             <div
               key={item.id}
               className='mt-5 flex items-center rounded-lg bg-[#fff] p-4 shadow-md'
-              style={{ width: '405px', height: '128px' }}
+              style={{ width: '405px', height: '100px' }}
             >
               <div className='relative w-1/4 flex-shrink-0 bg-[#F5F5F5]'>
                 <img
@@ -118,9 +124,14 @@ const CartModal: React.FC<{
                 <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
                   <div className='flex items-center space-x-2 border-gray-100'>
                     <span
-                      className='cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                      className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50`}
                       onClick={() =>
-                        dispatch(decreaseQuantity({ productId: item.id }))
+                        dispatch(
+                          decreaseQuantity({
+                            productId: item.id,
+                            groupId: item.groupID,
+                          })
+                        )
                       }
                     >
                       {' '}
@@ -134,14 +145,35 @@ const CartModal: React.FC<{
                       min='1'
                     />
                     <span
-                      className='cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
+                      className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                        (item.isGroupJoiner
+                          ? item.cartQuantity + (item.totalQuantity || 0)
+                          : item.cartQuantity) < (item.min_quantity ?? 0)
+                          ? ''
+                          : 'pointer-events-none opacity-50'
+                      }`}
                       onClick={() =>
-                        dispatch(increaseQuantity({ productId: item.id }))
+                        dispatch(
+                          increaseQuantity({
+                            productId: item.id,
+                            groupId: item.groupID,
+                          })
+                        )
                       }
                     >
                       {' '}
                       +{' '}
                     </span>
+
+                    <div className='pl-5'>
+                      <span
+                        onClick={() => {
+                          handleRemoveItem(item.id, item.groupID);
+                        }}
+                      >
+                        <FaRegTrashAlt size={20} color='#1A464C' />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

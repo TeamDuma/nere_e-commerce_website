@@ -209,7 +209,63 @@ const CartComponent = () => {
                         ) : null}
                       </div>
                     </div>
-                    <div className='flex items-center md:mt-3'>
+                    <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100'>
+                        <span
+                          className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50`}
+                          onClick={() =>
+                            dispatch(
+                              decreaseQuantity({
+                                productId: item.id,
+                                groupId: item.groupID,
+                              })
+                            )
+                          }
+                        >
+                          {' '}
+                          -{' '}
+                        </span>
+                        <input
+                          id={`quantity-${item.id}`}
+                          className='h-8 w-8  bg-white text-center text-xs outline-none'
+                          type='number'
+                          value={item.cartQuantity}
+                          min='1'
+                        />
+                        <span
+                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                            (item.isGroupJoiner
+                              ? item.cartQuantity + (item.totalQuantity || 0)
+                              : item.cartQuantity) < (item.min_quantity ?? 0)
+                              ? ''
+                              : 'pointer-events-none opacity-50'
+                          }`}
+                          onClick={() =>
+                            dispatch(
+                              increaseQuantity({
+                                productId: item.id,
+                                groupId: item.groupID,
+                              })
+                            )
+                          }
+                        >
+                          {' '}
+                          +{' '}
+                        </span>
+
+                        <div className='pl-5'>
+                          <span
+                            onClick={() => {
+                              handleRemoveItem(item.id, item.groupID);
+                            }}
+                          >
+                            <FaRegTrashAlt size={20} color='#1A464C' />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* <div className='flex items-center md:mt-3'>
                       <span
                         className='rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
                         onClick={() =>
@@ -264,7 +320,7 @@ const CartComponent = () => {
                           <FaRegTrashAlt size={20} color='#1A464C' />
                         </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -356,49 +412,65 @@ const CartComponent = () => {
                 </div>
               </div>
               {userInfo ? (
-                <button
-                  type='button'
-                  className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-                  onClick={() => {
-                    if (selectedLocationId) {
-                      const locationID = selectedLocationId;
-                      const customerID = userInfo.data.customer.id;
-                      const totalAmount = calculateTotal();
-                      const voucherCode = promoCode;
-                      const cartObject = cartItems.map((item: CartItem) => {
-                        const isStartingGroup = !item.isGroupJoiner;
-                        return transformToCartCheckoutItem(
-                          item,
-                          isStartingGroup ? locationID : undefined
-                        );
-                      });
-                      checkoutCart({
-                        customerID,
-                        totalAmount,
-                        cartObject,
-                        voucherCode,
-                      })
-                        .then((data) => {
-                          if (
-                            'data' in data &&
-                            'authorization_url' in data.data
-                          ) {
-                            const paymentAuthorizationUrl =
-                              data.data.authorization_url;
-                            window.location.href = paymentAuthorizationUrl;
-                          } else {
-                          }
-                        })
-                        .catch((e) => {});
-                    } else {
-                      toast.warning(
-                        'Please select a delivery location before checkout.'
-                      );
-                    }
-                  }}
-                >
-                  <span>Checkout</span>
-                </button>
+                <div>
+                  <div className='flex gap-2'>
+                    <button
+                      onClick={() => {
+                        if (selectedLocationId) {
+                          const locationID = selectedLocationId;
+                          const customerID = userInfo.data.customer.id;
+                          const totalAmount = calculateTotal();
+                          const voucherCode = promoCode;
+                          const cartObject = cartItems.map((item: CartItem) => {
+                            const isStartingGroup = !item.isGroupJoiner;
+                            return transformToCartCheckoutItem(
+                              item,
+                              isStartingGroup ? locationID : undefined
+                            );
+                          });
+                          console.log('cart', {
+                            customerID,
+                            totalAmount,
+                            cartObject,
+                            voucherCode,
+                          });
+                          checkoutCart({
+                            customerID,
+                            totalAmount,
+                            cartObject,
+                            voucherCode,
+                          })
+                            .then((data) => {
+                              if (
+                                'data' in data &&
+                                'authorization_url' in data.data
+                              ) {
+                                // console.log('data in cart',data)
+                                const paymentAuthorizationUrl =
+                                  data.data.authorization_url;
+                                window.location.href = paymentAuthorizationUrl;
+                              } else {
+                              }
+                            })
+                            .catch((e) => {});
+                        } else {
+                          toast.warning(
+                            'Please select a delivery location before checkout.'
+                          );
+                        }
+                      }}
+                      className='text-hover w-full rounded-md border  bg-[#298592] p-2  text-sm text-white shadow-md transition-colors'
+                    >
+                      Check out
+                    </button>
+                    <Link
+                      href={'./products'}
+                      className='text-hover w-full rounded-md border bg-white p-2 text-center text-sm text-[#298592] shadow-md transition-colors'
+                    >
+                      Continue Shopping
+                    </Link>
+                  </div>
+                </div>
               ) : (
                 <div>
                   <div className='flex gap-2'>
@@ -410,7 +482,7 @@ const CartComponent = () => {
                     </button>
                     <Link
                       href={'./products'}
-                      className='text-hover w-full rounded-md border bg-[#298592] p-2 text-center text-sm text-white shadow-md transition-colors'
+                      className='text-hover w-full rounded-md border bg-white p-2 text-center text-sm text-[#298592] shadow-md transition-colors'
                     >
                       Continue Shopping
                     </Link>
