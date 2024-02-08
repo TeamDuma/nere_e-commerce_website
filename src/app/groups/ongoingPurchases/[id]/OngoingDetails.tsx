@@ -195,10 +195,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
             {product?.hasMinQuantity ? (
               <>
-                <ProgressBar
+                {/* <ProgressBar
                   remaining={remaining ?? 0}
                   total={product.min_quantity ?? 0}
-                />
+                /> */}
 
                 <div className='flex items-center'>
                   <button

@@ -223,12 +223,12 @@ export default function ProductDetailPage({ params }: Props) {
                   <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
                 </Link>
 
-                {product.min_quantity ? (
+                {/* {product.min_quantity ? (
                   <ProgressBar
                     remaining={cartQuantity}
                     total={product.min_quantity}
                   />
-                ) : null}
+                ) : null} */}
                 <div className='flex space-x-4 py-4'>
                   <div className='flex items-center justify-center sm:justify-start'>
                     <div className='flex flex-col items-center justify-center sm:justify-start'>
