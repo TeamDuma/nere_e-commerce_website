@@ -138,14 +138,10 @@ const CartModal: React.FC<{
                       {' '}
                       -{' '}
                     </span>
-                    <div
-  className='h-8 w-8 bg-white text-center text-xs outline-none flex items-center justify-center font-bold  text-[#298592]'
+                    <div className='flex h-8 w-8 items-center justify-center bg-white text-center text-xs font-bold text-[#298592]  outline-none'>
+                      {item.cartQuantity}
+                    </div>
 
->
-  {item.cartQuantity}
-</div>
-
-                    
                     {/* <div
                       id={`quantity-${item.id}`}
                       className='h-8 w-8  bg-white text-center text-xs outline-none'
@@ -174,7 +170,7 @@ const CartModal: React.FC<{
                       {' '}
                       +{' '}
                     </span>
-                    <div className='pl-5 cursor-pointer'>
+                    <div className='cursor-pointer pl-5'>
                       <span
                         onClick={() => {
                           handleRemoveItem(item.id, item.groupID);
