@@ -124,8 +124,6 @@ export default function ProductDetailPage({ params }: Props) {
                 className='hover:text-gray-600 hover:underline'
               >
                 {product.categories?.name}
-                {/* <Link href={`/category/${product.categories?.slug}`}>
-                  </Link> */}
               </a>
             </div>
           </div>

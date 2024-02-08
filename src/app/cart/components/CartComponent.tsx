@@ -20,10 +20,11 @@ import ViewMore from '@/components/common/ViewMore';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaTags } from 'react-icons/fa';
+import { FaSpinner, FaTags } from 'react-icons/fa';
 import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { ImSpinner6 } from 'react-icons/im';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -42,6 +43,7 @@ const CartComponent = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [getDiscountAmount, { isLoading }] = useLazyGetDiscountAmountQuery();
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [Loading, setLoading] = useState(false);
 
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
@@ -81,7 +83,7 @@ const CartComponent = () => {
     try {
       const customer_uid = userInfo.data.customer.uid;
       const total_amount = calculateTotal();
-
+      setLoading(true);
       const requestBody: GetDiscountAmountBody = {
         customer_uid,
         total_amount,
@@ -94,6 +96,7 @@ const CartComponent = () => {
       console.log('discountAmount', discountAmount);
       setIsPromoCodeApplied(true);
       setDiscountAmount(discountAmount);
+      setLoading(false);
       toast.success('Promo code Applied!');
     } catch (error) {
       console.error('Error during fetch:', error);
@@ -124,7 +127,7 @@ const CartComponent = () => {
   return (
     <div className=' h-full py-8'>
       <div className='container mx-auto px-4'>
-        <div className='flex h-20 w-1/2 items-center rounded-lg bg-gray-100 '>
+        <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '>
           <h1 className='ml-2 text-lg text-[#1A464C] '>
             You have saved GHS {totalSavings} on this purchase!
           </h1>
@@ -144,7 +147,21 @@ const CartComponent = () => {
                 className='gap-5 border-b border-gray-200 py-6 md:flex md:items-center'
               >
                 <div className='flex'>
-                  <div
+                  <div className='my-4 flex h-48 w-full items-center justify-center rounded-md bg-[#F8F8F8] md:w-48'>
+                    <img
+                      className='rounded-md'
+                      src={item?.plain_image}
+                      width={
+                        item.name === 'Frytol sunflower oil 0.9L' ||
+                        item.name === "Dr. Annie's honey 500ml"
+                          ? '60px'
+                          : '90px'
+                      }
+                      alt='cerelac image'
+                    />
+                  </div>
+
+                  {/* <div
                     style={{
                       backgroundSize: 'cover',
                       backgroundColor: '#F8F8F8',
@@ -167,7 +184,7 @@ const CartComponent = () => {
                       }
                       alt='cerelac image'
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className='flex-1'>
@@ -254,23 +271,6 @@ const CartComponent = () => {
                           +{' '}
                         </span>
 
-                        {/* <span
-      className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
-        (item.isGroupJoiner
-          ? item.cartQuantity + (item.totalQuantity || 0)
-          : item.cartQuantity) < (item.min_quantity ?? 0)
-          ? ''
-          : 'opacity-50 pointer-events-none'
-      }`}
-      onClick={() =>
-        dispatch(increaseQuantity({  productId: item.id,
-          groupId: item.groupID }))
-      }
-    >
-      {' '}
-      +{' '}
-    </span> */}
-
                         <div className='pl-5'>
                           <span
                             onClick={() => {
@@ -282,63 +282,6 @@ const CartComponent = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* <div className='flex items-center md:mt-3'>
-                      <span
-                        className='rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                        onClick={() =>
-                          dispatch(
-                            decreaseQuantity({
-                              productId: item.id,
-                              groupId: item.groupID,
-                            })
-                          )
-                        }
-                      >
-                        {' '}
-                        -
-                      </span>
-                      <span
-                        id={`quantity-${item.id}`}
-                        className='mx-2.5 w-8 text-center font-semibold text-[#1A464C] outline-none'
-                      >
-                        {item.cartQuantity}
-                      </span>
-                      <button
-                        className={`
-      cursor-pointer 
-      rounded-r bg-orange-400
-      px-3.5 py-1 duration-100 
-      hover:bg-orange-500 
-      hover:text-orange-50
-      ${
-        item.min_quantity! - (item.cartQuantity + item.totalQuantity!) > 0
-          ? ''
-          : 'disabled'
-      }`}
-                        onClick={() => {
-                          dispatch(
-                            increaseQuantity({
-                              productId: item.id,
-                              groupId: item.groupID,
-                            })
-                          );
-                        }}
-                      >
-                        {' '}
-                        +
-                      </button>
-
-                      <div className='ml-5'>
-                        <span
-                          onClick={() => {
-                            handleRemoveItem(item.id, item.groupID);
-                          }}
-                        >
-                          <FaRegTrashAlt size={20} color='#1A464C' />
-                        </span>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </div>
@@ -405,9 +348,17 @@ const CartComponent = () => {
                   {userInfo ? (
                     <button
                       onClick={handleApplyPromoCode}
-                      disabled={isPromoCodeApplied || !promoCode.trim()}
-                      className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
+                      disabled={
+                        isPromoCodeApplied || !promoCode.trim() || Loading
+                      }
+                      className='relative ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                     >
+                      {isLoading && (
+                        <ImSpinner6
+                          className='absolute left-24 top-1/2 -translate-y-1/2 transform animate-spin'
+                          style={{ fontSize: '24px' }}
+                        />
+                      )}
                       {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
                     </button>
                   ) : (

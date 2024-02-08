@@ -145,27 +145,27 @@ const CartModal: React.FC<{
                       value={item.cartQuantity}
                       min='1'
                     />
-                   <span
-                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
-                            !item.min_quantity ||
-                            (item.isGroupJoiner
-                              ? item.cartQuantity + (item.totalQuantity || 0)
-                              : item.cartQuantity) < (item.min_quantity ?? 0)
-                              ? ''
-                              : 'pointer-events-none opacity-50'
-                          }`}
-                          onClick={() =>
-                            dispatch(
-                              increaseQuantity({
-                                productId: item.id,
-                                groupId: item.groupID,
-                              })
-                            )
-                          }
-                        >
-                          {' '}
-                          +{' '}
-                        </span>
+                    <span
+                      className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                        !item.min_quantity ||
+                        (item.isGroupJoiner
+                          ? item.cartQuantity + (item.totalQuantity || 0)
+                          : item.cartQuantity) < (item.min_quantity ?? 0)
+                          ? ''
+                          : 'pointer-events-none opacity-50'
+                      }`}
+                      onClick={() =>
+                        dispatch(
+                          increaseQuantity({
+                            productId: item.id,
+                            groupId: item.groupID,
+                          })
+                        )
+                      }
+                    >
+                      {' '}
+                      +{' '}
+                    </span>
                     <div className='pl-5'>
                       <span
                         onClick={() => {
