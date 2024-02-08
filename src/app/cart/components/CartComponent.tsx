@@ -418,7 +418,7 @@ const CartComponent = () => {
                       onClick={openLoginModal}
                       className='text-hover w-full rounded-md border  bg-[#298592] p-2  text-sm text-white shadow-md transition-colors'
                     >
-                      Check out
+                      Checkout
                     </button>
                     <Link
                       href={'./products'}
