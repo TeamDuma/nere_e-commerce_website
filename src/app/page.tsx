@@ -78,7 +78,7 @@ export default function Home() {
                   {(cartItems ?? []).length} Items
                 </p>
               </div>
-              <div className='m-2 flex flex-row items-center justify-center rounded bg-white'>
+              <div className='m-1 flex flex-row items-center justify-center rounded bg-white'>
                 <p className='mx-1 text-xs text-orange-500 sm:text-sm '>
                   GH¢ {calculateTotal().toFixed(2)}
                 </p>

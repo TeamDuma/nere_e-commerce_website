@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <>
       {/* component */}
-      <div className='static mt-12'>
+      <div className=' mt-12'>
         <div className='fixed inset-x-0 bottom-0  '>
           <footer className='body-font text-gray-600'>
             <div className='bg-gray-100'>

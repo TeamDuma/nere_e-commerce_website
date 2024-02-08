@@ -169,29 +169,39 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 )}
               </div>
             </div>
-
-            <table className='my-3 w-full border-b border-t md:my-5'>
-              <thead>
-                <tr>
-                  <th className='flex items-center text-sm md:w-1/2 md:justify-between'>
-                    <MdGroups className='my-2 text-[#298592]' />
-                    {group?.members?.length} participants
-                  </th>
-                  <th>
-                    <hr className='my-2 border-t-2 border-slate-300 md:hidden' />
-                  </th>
-                  <th className='flex items-center border-l-2 border-slate-300 text-sm md:w-1/2 md:justify-between'>
-                    <MdOutlineAccessAlarms className='my-2 text-[#298592]' />
-                    Ends in{' '}
-                    <span className='my-2 text-[#F58929]'> 00:00:00</span>
-                  </th>
-                </tr>
-              </thead>
-            </table>
+            <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
+              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
+                <MdGroups className='mr-2 text-[#298592]' />
+                {group?.members?.length} participants
+              </div>
+              <div className='flex items-center border-b border-t border-blue-200 p-2'>
+                <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
+                <span>Ends in</span>
+                <span
+                  className='text-[#F58929]'
+                  style={{ paddingLeft: '0.5rem' }}
+                >
+                  00:00:00
+                </span>
+              </div>
+            </div>
 
             <Link href='/products'>
-              <h1 className=' my-2 text-[#F58929]'>Continue Shopping</h1>
+              <h1 className=' my-2 w-1/2 text-[#F58929]'>Continue Shopping</h1>
             </Link>
+            {product?.hasMinQuantity ? (
+              <h2>
+                <span>
+                  <span style={{ color: 'orange' }}>
+                    {' '}
+                    {product?.min_quantity && group?.total_quantity
+                      ? product.min_quantity - group.total_quantity
+                      : ''}{' '}
+                  </span>
+                  <span> remaining in this group</span>
+                </span>
+              </h2>
+            ) : null}
 
             {product?.hasMinQuantity ? (
               <>
