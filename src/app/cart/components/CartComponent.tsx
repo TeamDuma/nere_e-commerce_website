@@ -160,31 +160,6 @@ const CartComponent = () => {
                       alt='cerelac image'
                     />
                   </div>
-
-                  {/* <div
-                    style={{
-                      backgroundSize: 'cover',
-                      backgroundColor: '#F8F8F8',
-                      width: '200px',
-                      height: '200px',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderRadius: '10px',
-                    }}
-                  >
-                    <img
-                      style={{ borderRadius: '10px' }}
-                      src={item?.plain_image}
-                      width={
-                        item.name === 'Frytol sunflower oil 0.9L' ||
-                        item.name === "Dr. Annie's honey 500ml"
-                          ? '60px'
-                          : '90px'
-                      }
-                      alt='cerelac image'
-                    />
-                  </div> */}
                 </div>
 
                 <div className='flex-1'>
@@ -242,13 +217,9 @@ const CartComponent = () => {
                           {' '}
                           -{' '}
                         </span>
-                        <input
-                          id={`quantity-${item.id}`}
-                          className='h-8 w-8  bg-white text-center text-xs outline-none'
-                          type='number'
-                          value={item.cartQuantity}
-                          min='1'
-                        />
+                        <div className='flex h-8 w-8 items-center justify-center bg-white text-center text-xs font-bold text-[#298592]  outline-none'>
+                          {item.cartQuantity}
+                        </div>
                         <span
                           className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
                             !item.min_quantity ||
@@ -271,7 +242,7 @@ const CartComponent = () => {
                           +{' '}
                         </span>
 
-                        <div className='pl-5'>
+                        <div className='cursor-pointer pl-5'>
                           <span
                             onClick={() => {
                               handleRemoveItem(item.id, item.groupID);
