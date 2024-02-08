@@ -20,10 +20,11 @@ import ViewMore from '@/components/common/ViewMore';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaTags } from 'react-icons/fa';
+import { FaSpinner, FaTags } from 'react-icons/fa';
 import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { ImSpinner6 } from 'react-icons/im';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -42,6 +43,7 @@ const CartComponent = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [getDiscountAmount, { isLoading }] = useLazyGetDiscountAmountQuery();
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [Loading, setLoading] = useState(false);
 
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
@@ -81,7 +83,7 @@ const CartComponent = () => {
     try {
       const customer_uid = userInfo.data.customer.uid;
       const total_amount = calculateTotal();
-
+      setLoading(true);
       const requestBody: GetDiscountAmountBody = {
         customer_uid,
         total_amount,
@@ -94,6 +96,7 @@ const CartComponent = () => {
       console.log('discountAmount', discountAmount);
       setIsPromoCodeApplied(true);
       setDiscountAmount(discountAmount);
+      setLoading(false);
       toast.success('Promo code Applied!');
     } catch (error) {
       console.error('Error during fetch:', error);
@@ -124,7 +127,7 @@ const CartComponent = () => {
   return (
     <div className=' h-full py-8'>
       <div className='container mx-auto px-4'>
-        <div className='flex h-20 w-1/2 items-center rounded-lg bg-gray-100 '>
+        <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '>
           <h1 className='ml-2 text-lg text-[#1A464C] '>
             You have saved GHS {totalSavings} on this purchase!
           </h1>
@@ -144,20 +147,9 @@ const CartComponent = () => {
                 className='gap-5 border-b border-gray-200 py-6 md:flex md:items-center'
               >
                 <div className='flex'>
-                  <div
-                    style={{
-                      backgroundSize: 'cover',
-                      backgroundColor: '#F8F8F8',
-                      width: '200px',
-                      height: '200px',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderRadius: '10px',
-                    }}
-                  >
+                  <div className='my-4 flex h-48 w-full items-center justify-center rounded-md bg-[#F8F8F8] md:w-48'>
                     <img
-                      style={{ borderRadius: '10px' }}
+                      className='rounded-md'
                       src={item?.plain_image}
                       width={
                         item.name === 'Frytol sunflower oil 0.9L' ||
@@ -197,53 +189,69 @@ const CartComponent = () => {
                             %
                           </span>
                         </div>
+                        {item.min_quantity ? (
+                          <ProgressBar
+                            remaining={
+                              item.isGroupJoiner
+                                ? item.cartQuantity + (item.totalQuantity || 0)
+                                : item.cartQuantity
+                            }
+                            total={item.min_quantity}
+                          />
+                        ) : null}
                       </div>
                     </div>
-                    <div className='flex items-center md:mt-3'>
-                      <span
-                        className='rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50'
-                        onClick={() =>
-                          dispatch(
-                            decreaseQuantity({
-                              productId: item.id,
-                              groupId: item.groupID,
-                            })
-                          )
-                        }
-                      >
-                        {' '}
-                        -
-                      </span>
-                      <span
-                        id={`quantity-${item.id}`}
-                        className='mx-2.5 w-8 text-center font-semibold text-[#1A464C] outline-none'
-                      >
-                        {item.cartQuantity}
-                      </span>
-                      <button
-                        className={`
-      cursor-pointer 
-      rounded-r bg-orange-400
-      px-3.5 py-1 duration-100 
-      hover:bg-orange-500 
-      hover:text-orange-50
-      ${
-        item.min_quantity! - (item.cartQuantity + item.totalQuantity!) > 0
-          ? ''
-          : 'disabled'
-      }`}
-                        onClick={() => {
-                          dispatch(
-                            increaseQuantity({
-                              productId: item.id,
-                              groupId: item.groupID,
-                            })
-                          );
-                        }}
-                      >
-                        {' '}
-                        +
-                      </button>
+                    <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100'>
+                        <span
+                          className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50`}
+                          onClick={() =>
+                            dispatch(
+                              decreaseQuantity({
+                                productId: item.id,
+                                groupId: item.groupID,
+                              })
+                            )
+                          }
+                        >
+                          {' '}
+                          -{' '}
+                        </span>
+                        <div className='flex h-8 w-8 items-center justify-center bg-white text-center text-xs font-bold text-[#298592]  outline-none'>
+                          {item.cartQuantity}
+                        </div>
+                        <span
+                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                            !item.min_quantity ||
+                            (item.isGroupJoiner
+                              ? item.cartQuantity + (item.totalQuantity || 0)
+                              : item.cartQuantity) < (item.min_quantity ?? 0)
+                              ? ''
+                              : 'pointer-events-none opacity-50'
+                          }`}
+                          onClick={() =>
+                            dispatch(
+                              increaseQuantity({
+                                productId: item.id,
+                                groupId: item.groupID,
+                              })
+                            )
+                          }
+                        >
+                          {' '}
+                          +{' '}
+                        </span>
+
+                        <div className='cursor-pointer pl-5'>
+                          <span
+                            onClick={() => {
+                              handleRemoveItem(item.id, item.groupID);
+                            }}
+                          >
+                            <FaRegTrashAlt size={20} color='#1A464C' />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -311,9 +319,17 @@ const CartComponent = () => {
                   {userInfo ? (
                     <button
                       onClick={handleApplyPromoCode}
-                      disabled={isPromoCodeApplied || !promoCode.trim()}
-                      className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
+                      disabled={
+                        isPromoCodeApplied || !promoCode.trim() || Loading
+                      }
+                      className='relative ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                     >
+                      {isLoading && (
+                        <ImSpinner6
+                          className='absolute left-24 top-1/2 -translate-y-1/2 transform animate-spin'
+                          style={{ fontSize: '24px' }}
+                        />
+                      )}
                       {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
                     </button>
                   ) : (
@@ -333,59 +349,68 @@ const CartComponent = () => {
                       />
                     </div>
                   )}
-                  {/* <button
-                    onClick={handleApplyPromoCode}
-                    disabled={isPromoCodeApplied || !promoCode.trim()}
-                    className='ml-8 rounded-md px-4 py-2 text-[#1A464C]'
-                  >
-                    {isPromoCodeApplied ? 'Promo code applied!' : 'Apply'}
-                  </button> */}
                 </div>
               </div>
               {userInfo ? (
-                <button
-                  type='button'
-                  className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-                  onClick={() => {
-                    if (selectedLocationId) {
-                      const locationID = selectedLocationId;
-                      const customerID = userInfo.data.customer.id;
-                      const totalAmount = calculateTotal();
-                      const voucherCode = promoCode;
-                      const cartObject = cartItems.map((item: CartItem) => {
-                        const isStartingGroup = !item.isGroupJoiner;
-                        return transformToCartCheckoutItem(
-                          item,
-                          isStartingGroup ? locationID : undefined
-                        );
-                      });
-                      checkoutCart({
-                        customerID,
-                        totalAmount,
-                        cartObject,
-                        voucherCode,
-                      })
-                        .then((data) => {
-                          if (
-                            'data' in data &&
-                            'authorization_url' in data.data
-                          ) {
-                            const paymentAuthorizationUrl =
-                              data.data.authorization_url;
-                            window.location.href = paymentAuthorizationUrl;
-                          } else {
-                          }
-                        })
-                        .catch((e) => {});
-                    } else {
-                      toast.warning(
-                        'Please select a delivery location before checkout.'
-                      );
-                    }
-                  }}
-                >
-                  <span>Checkout</span>
-                </button>
+                <div>
+                  <div className='flex gap-2'>
+                    <button
+                      onClick={() => {
+                        if (selectedLocationId) {
+                          const locationID = selectedLocationId;
+                          const customerID = userInfo.data.customer.id;
+                          const totalAmount = calculateTotal();
+                          const voucherCode = promoCode;
+                          const cartObject = cartItems.map((item: CartItem) => {
+                            const isStartingGroup = !item.isGroupJoiner;
+                            return transformToCartCheckoutItem(
+                              item,
+                              isStartingGroup ? locationID : undefined
+                            );
+                          });
+                          console.log('cart', {
+                            customerID,
+                            totalAmount,
+                            cartObject,
+                            voucherCode,
+                          });
+                          checkoutCart({
+                            customerID,
+                            totalAmount,
+                            cartObject,
+                            voucherCode,
+                          })
+                            .then((data) => {
+                              if (
+                                'data' in data &&
+                                'authorization_url' in data.data
+                              ) {
+                                // console.log('data in cart',data)
+                                const paymentAuthorizationUrl =
+                                  data.data.authorization_url;
+                                window.location.href = paymentAuthorizationUrl;
+                              } else {
+                              }
+                            })
+                            .catch((e) => {});
+                        } else {
+                          toast.warning(
+                            'Please select a delivery location before checkout.'
+                          );
+                        }
+                      }}
+                      className='text-hover w-full rounded-md border  bg-[#298592] p-2  text-sm text-white shadow-md transition-colors'
+                    >
+                      Check out
+                    </button>
+                    <Link
+                      href={'./products'}
+                      className='text-hover w-full rounded-md border bg-white p-2 text-center text-sm text-[#298592] shadow-md transition-colors'
+                    >
+                      Continue Shopping
+                    </Link>
+                  </div>
+                </div>
               ) : (
                 <div>
                   <div className='flex gap-2'>
@@ -393,11 +418,11 @@ const CartComponent = () => {
                       onClick={openLoginModal}
                       className='text-hover w-full rounded-md border  bg-[#298592] p-2  text-sm text-white shadow-md transition-colors'
                     >
-                      Check out
+                      Checkout
                     </button>
                     <Link
                       href={'./products'}
-                      className='text-hover w-full rounded-md border bg-[#298592] p-2 text-center text-sm text-white shadow-md transition-colors'
+                      className='text-hover w-full rounded-md border bg-white p-2 text-center text-sm text-[#298592] shadow-md transition-colors'
                     >
                       Continue Shopping
                     </Link>

@@ -86,12 +86,17 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   const cartProduct = cartItems.find((item) => {
     return item.groupID
-      ? item.id === product?.id! && item.groupID === group?.id
-      : item.id === product?.id!;
+      ? item.id === product?.id && item.groupID === group?.id
+      : item.id === product?.id;
   });
 
-  const cartQuantity = cartProduct?.cartQuantity;
-  const remaining = (cartQuantity ?? 0) + totalQuantity;
+  const cartQuantity = cartProduct?.cartQuantity ?? 0;
+  const remaining = cartQuantity + (group?.total_quantity ?? 0);
+
+  // Debugging logs
+  console.log('cartProduct in on going', cartProduct);
+  console.log('cartQuantity in on going', cartQuantity);
+  console.log('remaining in on going', remaining);
 
   return (
     <div className='my-8'>
@@ -190,10 +195,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
             {product?.hasMinQuantity ? (
               <>
-                <ProgressBar
+                {/* <ProgressBar
                   remaining={remaining ?? 0}
                   total={product.min_quantity ?? 0}
-                />
+                /> */}
 
                 <div className='flex items-center'>
                   <button

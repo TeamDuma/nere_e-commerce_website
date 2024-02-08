@@ -66,7 +66,7 @@ export default function Home() {
         <TwoBannerLayout />
         <FeaturedProducts />
         <ViewMore />
-        <div className='fixed right-0 top-3/4 z-50 flex -translate-y-1/2 transform items-center justify-center'>
+        <div className='fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'>
           <div
             onClick={openCartModal}
             className='sm:w-110 sm:mt-35 mt-8 h-16 w-28 cursor-pointer rounded-bl-2xl rounded-tl-2xl bg-orange-500 py-2 text-center text-sm font-semibold text-white sm:h-20 sm:py-4 sm:text-base'
@@ -87,7 +87,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className='fixed left-0 top-3/4 z-50 -translate-y-1/2 transform'>
+        <div className='fixed left-0 top-1/2 z-50 -translate-y-1/2 transform'>
           <div
             onClick={openOngoingModal}
             className='h-15 mt-8 w-28 cursor-pointer rounded-br-2xl rounded-tr-2xl bg-orange-500 pt-2 text-center text-sm font-semibold text-white shadow'

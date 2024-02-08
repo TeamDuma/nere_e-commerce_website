@@ -28,7 +28,7 @@ const Products = () => {
                 )}%`}
               </div>
 
-              <div className='mt-8 flex items-center justify-center md:mt-24'>
+              <div className='mt-4 flex items-center justify-center md:mt-12'>
                 <div
                   style={{
                     backgroundSize: 'cover',
@@ -48,7 +48,7 @@ const Products = () => {
                       product.name === 'Frytol sunflower oil 0.9L' ||
                       product.name === "Dr. Annie's honey 500ml"
                         ? '60px'
-                        : '90px'
+                        : '60px'
                     }
                     alt='cerelac image'
                   />
@@ -106,7 +106,7 @@ const Products = () => {
     <div>
       <div className='container'>
         {isLoading && <div>Loading...</div>}
-        <div className='lg:grid-col-4 grid grid-cols-2  sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-10 xl:gap-y-5'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-10 xl:gap-y-5'>
           {renderProducts}
         </div>
         <ul className='pagination'>{renderPagination}</ul>

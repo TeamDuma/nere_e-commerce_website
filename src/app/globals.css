@@ -265,6 +265,13 @@
   align-items: center;
 }
 
+@media screen and (max-width: 768px) {
+  .progress-bar {
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+  }
+}
+
 .progress-text {
   color: #828282;
   font-size: 14px;
