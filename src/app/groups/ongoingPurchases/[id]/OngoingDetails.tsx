@@ -174,7 +174,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 <MdGroups className='mr-2 text-[#298592]' />
                 {group?.members?.length} participants
               </div>
-              <div className='flex items-center border-b border-t border-blue-200 p-2'>
+              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
                 <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
                 <span>Ends in</span>
                 <span
