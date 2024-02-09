@@ -31,6 +31,7 @@ const Header = () => {
       // onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
 
       router.push(`/search/${searchQuery}`);
+      setSearchQuery('');
     }
   };
 

@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaStar } from 'react-icons/fa';
 import Stepper from '@/components/common/PurchaseGuide';
 import ProgressBar from '@/components/common/ProgressBar';
+import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 
 type Props = {
   params: {
@@ -217,9 +218,34 @@ export default function ProductDetailPage({ params }: Props) {
                   </div>
                 </div>
 
+                <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
+                  <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
+                    <MdGroups className='mr-2 text-[#298592]' />
+                    {group?.members?.length} 0 participants
+                  </div>
+                  <div className='flex items-center border-b border-t border-blue-200 p-2'>
+                    <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
+                    <span>Ends in</span>
+                    <span
+                      className='text-[#F58929]'
+                      style={{ paddingLeft: '0.5rem' }}
+                    >
+                      00:00:00
+                    </span>
+                  </div>
+                </div>
+
                 <Link href='/products'>
                   <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
                 </Link>
+                {product.min_quantity ? (
+                  <h2>
+                    <span style={{ color: 'orange', marginLeft: 5 }}>
+                      {product.min_quantity}{' '}
+                    </span>{' '}
+                    people required for this group buy
+                  </h2>
+                ) : null}
 
                 {/* {product.min_quantity ? (
                   <ProgressBar
