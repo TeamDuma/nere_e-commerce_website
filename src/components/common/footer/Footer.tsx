@@ -1,18 +1,16 @@
-'use client';
-import { FaFacebookSquare } from 'react-icons/fa';
-import { FaInstagramSquare } from 'react-icons/fa';
-import { FaTwitterSquare } from 'react-icons/fa';
-import { FaLinkedin } from 'react-icons/fa';
-import Logo from '../Logo';
+"use client";
+
+
+import Link from "next/link";
+import Logo from "../Logo";
 
 const Footer = () => {
+
   return (
-    <>
-      {/* component */}
-      <div className=' mt-12'>
-        <div className='fixed inset-x-0 bottom-0  '>
-          <footer className='body-font text-gray-600'>
-            <div className='bg-gray-100'>
+    <footer className="bg-theme-light dark:bg-darkmode-theme-light">
+
+        <div className="text-center text-light dark:text-darkmode-light">
+          <div className='bg-gray-100'>
               <div className='container mx-auto flex flex-col flex-wrap px-5 py-4 sm:flex-row'>
                 <p className='text-center text-sm text-gray-500 sm:text-left'>
                   Product of Duma
@@ -89,10 +87,8 @@ const Footer = () => {
                 </span>
               </div>
             </div>
-          </footer>
         </div>
-      </div>
-    </>
+    </footer>
   );
 };
 
