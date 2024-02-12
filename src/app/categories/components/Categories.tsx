@@ -23,7 +23,7 @@ const Categories = () => {
                       <img
                         src={category.image}
                         alt={category.name}
-                        className='h-full w-full'
+                        className='relative inline-block h-[80px] w-[80px] !rounded-full object-cover object-center'
                       />
                     </div>
                     <h6 className='mt-2 text-sm font-medium'>
