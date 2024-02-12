@@ -20,7 +20,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
     <html lang='en'>
       <body
         className={`${Mnontserrat.className}`}
-        style={{ backgroundColor: '#FFFFFF' }}
+        style={{ backgroundColor: '#FAFAFA' }}
       >
         <Providers>
           <Header />
