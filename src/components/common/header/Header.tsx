@@ -102,8 +102,8 @@ const Header = () => {
   };
 
   return (
-    <div className='h-50 sticky top-0 z-10 my-3 bg-[#FaFaFa]'>
-      <div className='h-100 my-3 bg-[#FaFaFa] '>
+    <div className='-mx-3 mb-5 flex flex-wrap'>
+      <div className='mx-auto mb-6  w-full rounded-xl bg-[#fafafa] px-3'>
         <div className=' flex flex-col  justify-between sm:flex-row '>
           <div className='flex flex  items-center justify-between '>
             <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>

@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className='container lg:pt-0'>
+      <Container>
         <OngoingRow />
         <Banner />
         <EntertainmentSection />
@@ -110,7 +110,7 @@ export default function Home() {
 
         <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
         <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
-      </div>
+      </Container>
     </main>
   );
 }
