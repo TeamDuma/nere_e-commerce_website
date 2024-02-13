@@ -7,7 +7,7 @@ const endpoints = {
 
   // Products
   getActiveProducts: '/products/active',
-  getProduct: (slug: string) => `/products/${slug}`,
+  getProduct: (slug: string) => `/products/slug/${slug}`,
   getCategoryProduct: (slug: string) => `/products/category/${slug}`,
   getSearchProducts: (searchQuery: string) =>
     `/products/all?search=${encodeURIComponent(searchQuery)}`,
