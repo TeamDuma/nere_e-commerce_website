@@ -51,26 +51,6 @@ const customStylesSmall: Styles = {
   },
 };
 
-// const customStylesSmall: Styles = {
-//   overlay: {
-//     position: 'fixed',
-//     top: 0,
-//     left: 0,
-//     right: 0,
-//     bottom: 0,
-//   },
-//   content: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: '90%',
-//     maxWidth: '400px',
-//     margin: 'auto',
-//     borderRadius: '15px',
-//   },
-// };
 
 const PickupLocation: React.FC<{
   onClose: () => void;

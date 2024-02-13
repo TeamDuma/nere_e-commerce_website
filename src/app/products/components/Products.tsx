@@ -59,8 +59,6 @@ const Products = () => {
           slug: 'breakfast',
         }}
       />
-
-      <FeaturedProducts />
     </Container>
   );
 };
