@@ -14,9 +14,9 @@ const productApi = apiSlice.injectEndpoints({
         return endpoints.getActiveProducts;
       },
     }),
-    getProduct: builder.query<GetProductResponse, number>({
-      query: (id) => {
-        return endpoints.getProduct(id);
+    getProduct: builder.query<GetProductResponse, string>({
+      query: (slug) => {
+        return endpoints.getProduct(slug);
       },
     }),
     getCategoryProduct: builder.query<GetCategoryProductResponse, string>({

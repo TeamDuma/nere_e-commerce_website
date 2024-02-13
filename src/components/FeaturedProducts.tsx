@@ -20,7 +20,7 @@ const FeaturedProducts = () => {
 
           <div className='lg:grid-col-3 grid grid-cols-2  gap-5 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
             {featureProducts.map((product) => (
-              <Link href={`/product/${product.id}`} key={product?.id}>
+              <Link href={`/product/${product.slug}`} key={product?.id}>
                 <div key={product?.id}>
                   <>
                     <div className='px-4 md:px-4 lg:px-4'>
