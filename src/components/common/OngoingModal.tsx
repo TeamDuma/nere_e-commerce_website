@@ -20,8 +20,8 @@ const customStyles: Styles = {
   },
   content: {
     position: 'fixed',
-    left: 0,
     top: '15%',
+    left: 0,
     right: 'auto',
     height: '120%',
     width: '95%',

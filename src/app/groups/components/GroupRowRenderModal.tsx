@@ -19,10 +19,10 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
       className='flex items-center rounded-lg bg-[#F5F5F5] p-4 shadow-md'
       style={{ width: '405px', height: '128px' }}
     >
-      <div className='flex flex-col items-center justify-center'>
+      <div className='relative w-1/4 flex-shrink-0 '>
         <img
-          src={item?.product?.plain_image}
-          alt={item?.product?.name}
+          src={item.product?.plain_image}
+          alt={item.product?.name}
           className='h-[83px] w-[83px] rounded-lg'
           style={{ width: '70px', height: '105px' }}
         />
@@ -40,7 +40,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
 
       <div className='ml-4 flex-1'>
         <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
-          {item?.product?.name}
+          {item.product?.name}
         </h2>
         <div className='m-2'>
           <div className='flex items-center'>
@@ -63,7 +63,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
             </span>
           </div>
           <div className='flex items-center'>
-            {item?.product?.hasMinQuantity && (
+            {item.product?.hasMinQuantity && (
               <ProgressBar
                 remaining={item.total_quantity}
                 total={item.product.min_quantity ?? 0}

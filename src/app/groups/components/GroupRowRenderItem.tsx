@@ -19,10 +19,10 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
       className='flex items-center rounded-lg bg-[#F5F5F5] p-4 shadow-md'
       style={{ width: '405px', height: '128px' }}
     >
-      <div className='flex flex-col items-center justify-center'>
+      <div className='relative w-1/4 flex-shrink-0 '>
         <img
-          src={item?.product?.plain_image}
-          alt={item?.product?.name}
+          src={item.product?.plain_image}
+          alt={item.product?.name}
           className='h-[83px] w-[83px] rounded-lg'
           style={{ width: '70px', height: '105px' }}
         />

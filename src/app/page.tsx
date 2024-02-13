@@ -20,6 +20,8 @@ import CartIcon from '@/components/common/CartIcon';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { MdGroups } from 'react-icons/md';
+import ThreeBannerLayout from '@/components/ThreeBannerLayout';
+// import FeaturedProductsTwo from '@/components/FeaturedProductsTwo';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -65,6 +67,9 @@ export default function Home() {
         <OngoingPurchases />
         <TwoBannerLayout />
         <FeaturedProducts />
+        <ThreeBannerLayout />
+        <FeaturedProducts />
+
         <ViewMore />
         <div className='hidden sm:block'>
           <div className='fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'>

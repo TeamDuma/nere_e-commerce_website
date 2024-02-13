@@ -65,7 +65,7 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
         <MdGroups className='social-icon' />
         <p className='p-text'>Ongoing Purchases near me</p>
       </div>
-      <Link href={'/products'}>
+      <Link href={'/ongoingGroupPage'}>
         <div className='flex items-center gap-2 md:hidden'>
           <HiOutlineRocketLaunch className='social-icon' />
           <p className='p-text'>Launch a purchase</p>
