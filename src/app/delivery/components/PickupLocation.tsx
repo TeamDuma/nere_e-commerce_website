@@ -7,6 +7,7 @@ import {
 } from '@/lib/redux/slices/shopping';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
+import { IoIosArrowDown } from 'react-icons/io';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -55,8 +56,6 @@ const PickupLocation: React.FC<{
   onClose: () => void;
   isOpen: boolean;
 }> = ({ onClose, isOpen }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { selectedLocationId } = useSelector(selectShopping);
 
@@ -89,6 +88,16 @@ const PickupLocation: React.FC<{
     }
   }, [selectedLocationId, data]);
 
+  const [expandedAddress, setExpandedAddress] = useState<number | null>(null);
+
+  const toggleAccordion = (locationId: number) => {
+    if (expandedAddress === locationId) {
+      setExpandedAddress(null);
+    } else {
+      setExpandedAddress(locationId);
+    }
+  };
+
   const renderAddresses = () => {
     if (isLoading) {
       return <div>Loading...</div>;
@@ -113,10 +122,18 @@ const PickupLocation: React.FC<{
             />
             <label
               htmlFor={`address${location.id}`}
-              className='m-4 text-gray-400'
+              className='m-4 cursor-pointer text-gray-400'
+              onClick={() => toggleAccordion(location.id)}
             >
               {location.name}
             </label>
+            {expandedAddress === location.id && (
+              <div className='ml-8 text-gray-500'>
+                <p>Additional information:</p>
+                <p>Nere Agent Pickup, East Legon</p>
+                <p>MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra</p>
+              </div>
+            )}
             <hr className='my-2' />
           </div>
         ))}

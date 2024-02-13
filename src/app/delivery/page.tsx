@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal, { Styles } from 'react-modal';
+import {
+  selectShopping,
+  setSelectedLocationId,
+} from '@/lib/redux/slices/shopping';
+import { useGetlocationsQuery } from '@/lib/redux/services/location';
+import { ILocation } from '@/types/location';
 import PickupLocation from './components/PickupLocation';
-import AddAddressModal from './components/AddAddressModal';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const customStylesLarge: Styles = {
@@ -22,11 +28,33 @@ const customStylesLarge: Styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '650px',
-    height: '550px',
+    width: '550px',
+    height: '500px',
     borderRadius: '15px',
   },
 };
+const customStylesMedium: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    maxWidth: '550px',
+    margin: 'auto',
+    borderRadius: '15px',
+    height: '500px',
+  },
+};
+
 const customStylesSmall: Styles = {
   overlay: {
     position: 'fixed',
@@ -49,97 +77,141 @@ const customStylesSmall: Styles = {
   },
 };
 
-interface DeliveryModalProps {
-  isOpen: boolean;
+const DeliveryModal: React.FC<{
   onClose: () => void;
-}
+  isOpen: boolean;
+}> = ({ onClose, isOpen }) => {
+  const dispatch = useDispatch();
+  const { selectedLocationId } = useSelector(selectShopping);
 
-const DeliveryModal: React.FC<DeliveryModalProps> = ({ isOpen, onClose }) => {
-  const [selectedOption, setSelectedOption] = useState<
-    'pickup' | 'custom' | null
-  >(null);
-  const [isPickupLocationOpen, setPickupLocationOpen] = useState(false);
+  const { data, isLoading } = useGetlocationsQuery();
+  const locations = data?.data || [];
+
+  const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
+    () => {
+      return (
+        locations.find((location) => location.id === selectedLocationId) || null
+      );
+    }
+  );
+  const [selectedOption, setSelectedOption] = useState<'pickup' | null>(null);
+
+  console.log('data', data);
 
   const closeModal = () => {
     onClose();
   };
 
-  const togglePickupLocation = () => {
-    setPickupLocationOpen(!isPickupLocationOpen);
+  const handleSelectLocation = () => {
+    if (selectedAddress) {
+      dispatch(setSelectedLocationId(selectedAddress.id));
+      onClose();
+    } else {
+      onClose();
+    }
   };
 
+  useEffect(() => {
+    if (data && selectedLocationId) {
+      const newlySelectedAddress = locations.find(
+        (location) => location.id === selectedLocationId
+      );
+      setSelectedAddress(newlySelectedAddress || null);
+    }
+  }, [selectedLocationId, data]);
+
+  const screenWidth = window.innerWidth;
+  let modalStyles = customStylesSmall;
+
+  if (screenWidth >= 960) {
+    modalStyles = customStylesLarge;
+  } else if (screenWidth >= 600) {
+    modalStyles = customStylesMedium;
+  }
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={closeModal}
-      style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
-      contentLabel='Delivery Modal'
-    >
-      <div>
-        <h2 className='mb-4 text-xl font-bold'>DELIVERY DETAILS</h2>
-        <div className='mb-4'>
-          <div>
+    <div>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        style={modalStyles}
+        contentLabel='Example Modal'
+      >
+        <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
+          <h2 className='mb-4 text-xl'>DELIVERY DETAILS</h2>
+
+          <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
             <input
               type='radio'
               id='pickupOption'
               name='deliveryOption'
-              value='pickup'
-              checked={selectedOption === 'pickup'}
-              onChange={() => setSelectedOption('pickup')}
+              value='selected'
+              checked={selectedOption !== 'pickup'}
             />
-            <label htmlFor='pickupOption'>Change pickup location</label>
+            <label htmlFor='pickupOption'>Pick-up location</label>
+            <h5 className='mb-4 ml-4 text-sm text-[#979797]'>
+              Delivery between 05 December and 07 December
+            </h5>
           </div>
-          <div
-            className='flex cursor-pointer items-center justify-between'
-            onClick={togglePickupLocation}
-          >
-            <div className='flex items-center'>
-              <h3 className='mr-2 text-lg font-bold'>Pick-up location</h3>
 
-              {/* <p>Change pickup location</p> */}
-              <IoIosArrowDown />
+          <div
+            className='rounded-md border border-[#CFCFCF] bg-white'
+            style={{ width: '100%' }}
+          >
+            <div className='flex justify-between p-4'>
+              <div className='rounded-md bg-white'>Pickup Location</div>
+              <div
+                className='cursor-pointer text-xs text-[#298592]	 '
+                onClick={() => setSelectedOption('pickup')}
+              >
+                Change pickup location {'>'}
+              </div>
             </div>
-          </div>
-          {isPickupLocationOpen && (
-            <>
-              <p className='mt-2'>
-                Delivery between 05 December and 07 December
-              </p>
-              <div className='mb-4'>
+
+            <div className='flex flex-col border-t border-[#CFCFCF]'>
+              <div className='rounded-md bg-white p-2'>
+                {selectedAddress ? (
+                  <>
+                    <p className='font-bold'>{selectedAddress.name}</p>
+                  </>
+                ) : null}
+              </div>
+              <div className='m-2 text-gray-500'>
+                <p>Additional information:</p>
+
+                <p className='cursor-pointer text-[#298592]'>
+                  {' '}
+                  See on google maps
+                </p>
                 <p>Nere Agent Pickup, East Legon</p>
                 <p>MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra</p>
               </div>
-            </>
-          )}
-        </div>
-        <hr />
-        <div className='mt-5 flex cursor-pointer items-center justify-between'>
-          <div>
-            <input
-              type='radio'
-              id='customOption'
-              name='deliveryOption'
-              value='custom'
-              checked={selectedOption === 'custom'}
-              onChange={() => setSelectedOption('custom')}
-            />
+            </div>
           </div>
-          <div className='flex items-center'>
-            <h3 className='mr-2 text-lg font-bold'>Custom Address</h3>
-            <p onClick={() => setSelectedOption('custom')}>
-              Add preferred address
-            </p>
-          </div>
-        </div>
-      </div>
 
-      {selectedOption === 'pickup' && (
-        <PickupLocation onClose={closeModal} isOpen={isOpen} />
-      )}
-      {selectedOption === 'custom' && (
-        <AddAddressModal onClose={closeModal} isOpen={isOpen} />
-      )}
-    </Modal>
+          <div className='m-5 flex flex-col sm:flex-row'>
+            <button
+              className='mb-2 rounded-md border-2 border-solid border-[#298592] p-2 text-[#298592] sm:mb-0 sm:mr-2'
+              style={{ width: '100%' }}
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button
+              className='rounded-md bg-[#298592] p-2 text-white'
+              style={{ width: '100%' }}
+              onClick={handleSelectLocation}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+
+        {selectedOption === 'pickup' && (
+          <PickupLocation onClose={closeModal} isOpen={isOpen} />
+        )}
+      </Modal>
+    </div>
   );
 };
 

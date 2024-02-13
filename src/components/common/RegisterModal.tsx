@@ -5,7 +5,7 @@ import { useSignUpMutation } from '@/lib/redux/services/customers';
 import Logo from './Logo';
 import { toast } from 'react-toastify';
 
-const customStyles: Styles = {
+const customStylesLarge: Styles = {
   overlay: {
     position: 'fixed',
     top: 0,
@@ -23,7 +23,29 @@ const customStyles: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '500px',
-    height: '800px',
+    height: '750px',
+    borderRadius: '15px',
+  },
+};
+const customStylesSmall: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba( 190,192,193, 0.7)',
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '350px',
+    height: '650px',
     borderRadius: '15px',
   },
 };
@@ -90,13 +112,13 @@ const RegistrationModal: React.FC<{
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel='Registration Modal'
-      style={customStyles}
+      style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
     >
       <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center justify-center bg-opacity-50'>
         <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white sm:max-h-screen'>
           <div className='flex w-full items-center justify-center'>
-            <div className='m-8 mx-auto max-w-[400px]'>
-              <div className='mb-8'>
+            <div className=' mx-auto max-w-[400px]'>
+              <div className='mb-4'>
                 <Logo />
                 <p className='text-gray-600'>
                   Register with your email & password
