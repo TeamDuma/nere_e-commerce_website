@@ -132,10 +132,10 @@ export default function ProductDetailPage({ params }: Props) {
             <div className='-mx-4 flex flex-col md:flex-row'>
               <div className='px-4 md:flex-1'>
                 <div x-data='{ image: 1 }' x-cloak=''>
-                  <div className='mb-4 h-64 rounded-lg bg-gray-100 md:h-80'>
+                  <div className='mb-4 h-64 rounded-lg  md:h-80'>
                     <div
                       x-show='image === 1'
-                      className='mb-4 flex h-64 items-center justify-center rounded-lg bg-gray-100 md:h-80'
+                      className='mb-4 flex h-64 items-center justify-center rounded-lg  md:h-80'
                     >
                       <img
                         className='mx-auto h-full rounded-md object-cover md:max-w-lg '

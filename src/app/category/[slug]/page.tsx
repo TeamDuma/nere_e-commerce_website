@@ -31,7 +31,7 @@ const Category = ({ params }: Props) => {
         <div className='container'>
           {isLoading && <div>Loading...</div>}
           <div className='px-4 md:px-4 lg:px-4'>
-            <Title text={products[0]?.categories?.name || 'Default Text'} />
+            <Title text={products[0]?.categories?.name || 'Category Name'} />
           </div>
           <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>
             {products.map((product) => (
@@ -62,26 +62,18 @@ const Category = ({ params }: Props) => {
                             }}
                           >
                             <img
-                              style={{ borderRadius: '10px' }}
                               src={product?.plain_image}
-                              width={
-                                product.name === 'Frytol sunflower oil 0.9L' ||
-                                product.name === "Dr. Annie's honey 500ml"
-                                  ? '60px'
-                                  : '90px'
-                              }
-                              alt='cerelac image'
+                              className='h-[83px] w-[83px] rounded-lg'
+                              style={{ width: '70px', height: '105px' }}
                             />
                           </div>
                         </div>
-                        <div className='flex items-center'>
-                          <h2
-                            tabIndex={0}
-                            className='product-name text-lg font-semibold focus:outline-none lg:text-lg lg:font-semibold'
-                          >
+                        <div className='ml-4 flex-1'>
+                          <h2 className='text line-clamp-2 overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
                             {product?.name}
                           </h2>
                         </div>
+
                         <div className='ml-2 flex'>
                           <div
                             style={{ color: '#F31748' }}
