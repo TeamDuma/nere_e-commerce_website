@@ -51,7 +51,6 @@ const customStylesSmall: Styles = {
   },
 };
 
-
 const PickupLocation: React.FC<{
   onClose: () => void;
   isOpen: boolean;

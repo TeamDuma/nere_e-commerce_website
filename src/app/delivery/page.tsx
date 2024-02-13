@@ -1,109 +1,146 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
+import Modal, { Styles } from 'react-modal';
 import PickupLocation from './components/PickupLocation';
-import { useRouter } from 'next/navigation';
 import AddAddressModal from './components/AddAddressModal';
+import { IoIosArrowDown } from 'react-icons/io';
 
-const DeliveryPage = () => {
-  const [isPickupModalOpen, setPickupModalOpen] = useState(false);
-  const [isCustomAddressModalOpen, setCustomAddressModalOpen] = useState(false);
+const customStylesLarge: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '650px',
+    height: '550px',
+    borderRadius: '15px',
+  },
+};
+const customStylesSmall: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    top: '100%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    maxWidth: '400px',
+    margin: 'auto',
+    borderRadius: '15px',
+    height: '90vh',
+  },
+};
 
-  const router = useRouter();
+interface DeliveryModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-  const openPickupModal = () => {
-    setPickupModalOpen(true);
-  };
-  const openCustomAddressModal = () => {
-    setCustomAddressModalOpen(true);
-  };
+const DeliveryModal: React.FC<DeliveryModalProps> = ({ isOpen, onClose }) => {
+  const [selectedOption, setSelectedOption] = useState<
+    'pickup' | 'custom' | null
+  >(null);
+  const [isPickupLocationOpen, setPickupLocationOpen] = useState(false);
 
   const closeModal = () => {
-    setPickupModalOpen(false);
-    setCustomAddressModalOpen(false);
+    onClose();
+  };
+
+  const togglePickupLocation = () => {
+    setPickupLocationOpen(!isPickupLocationOpen);
   };
 
   return (
-    <>
-      <div className='flex h-full w-screen flex-col px-14 py-7 md:flex-row'>
-        <div className='flex h-fit w-full flex-col gap-4 p-4 '>
-          <div className='mt-5 flex flex-col rounded-sm border p-4 text-lg font-semibold shadow-md'>
-            <div className='flex flex-col justify-between gap-3 md:flex-row'>
-              <div className='mb-4'>
-                <h3 className='mb-2 text-lg font-bold'>DELIVERY DETAILS</h3>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={closeModal}
+      style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
+      contentLabel='Delivery Modal'
+    >
+      <div>
+        <h2 className='mb-4 text-xl font-bold'>DELIVERY DETAILS</h2>
+        <div className='mb-4'>
+          <div>
+            <input
+              type='radio'
+              id='pickupOption'
+              name='deliveryOption'
+              value='pickup'
+              checked={selectedOption === 'pickup'}
+              onChange={() => setSelectedOption('pickup')}
+            />
+            <label htmlFor='pickupOption'>Change pickup location</label>
+          </div>
+          <div
+            className='flex cursor-pointer items-center justify-between'
+            onClick={togglePickupLocation}
+          >
+            <div className='flex items-center'>
+              <h3 className='mr-2 text-lg font-bold'>Pick-up location</h3>
 
-                <div className='flex items-center'>
-                  <input
-                    type='radio'
-                    id='pickupLocation'
-                    name='deliveryOption'
-                    className='mr-2'
-                    onChange={openPickupModal}
-                  />
-                  <label htmlFor='pickupLocation'>Pick-up location</label>
-                </div>
-
-                <div className='pl-8 text-sm text-gray-500'>
-                  Delivery between 05 December and 07 December
-                </div>
-                <div className='mb-4'>
-                  <div className='mb-2 flex items-center'>
-                    <input
-                      type='radio'
-                      id='customAddress'
-                      name='deliveryOption'
-                      className='mr-2'
-                      onChange={openCustomAddressModal}
-                    />
-                    <label htmlFor='customAddress'>Select Custom Address</label>
-                  </div>
-                  <div className='pl-8 text-sm text-gray-500'>
-                    Delivery between 05 December and 07 December
-                  </div>
-                </div>
-              </div>
+              {/* <p>Change pickup location</p> */}
+              <IoIosArrowDown />
             </div>
           </div>
-        </div>
-        <div className='ml-3 mt-5 flex h-fit w-full flex-col gap-3 p-4 md:w-2/3'>
-          <div className='flex flex-col gap-4 rounded-sm border p-4 text-lg font-semibold shadow-md'>
-            <div className='flex flex-row justify-between'>
-              <p className='text-gray-600'>Your order summary</p>
-            </div>
-            <hr className='h-0.5 bg-gray-200' />
-
-            <div className='flex flex-row justify-between'>
-              <p className='text-gray-600'>Total items (5) </p>
-              <p className='text-end font-bold'> GH¢ 1280.00</p>
-            </div>
-
-            <div className='flex flex-row justify-between'>
-              <p className='text-gray-600'>Delivery fee</p>
-              <p className='text-end font-bold'> GH¢ 0.00</p>
-            </div>
-
-            <hr className='h-0.5 bg-gray-200' />
-            <div className='flex flex-row justify-between'>
-              <p className='text-gray-600'>Total</p>
-              <div>
-                <p className='text-end font-bold'> GH¢ 1280.00</p>
+          {isPickupLocationOpen && (
+            <>
+              <p className='mt-2'>
+                Delivery between 05 December and 07 December
+              </p>
+              <div className='mb-4'>
+                <p>Nere Agent Pickup, East Legon</p>
+                <p>MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra</p>
               </div>
-            </div>
-            <div className='flex gap-2'>
-              <button
-                onClick={() => router.push('/orderPreview')}
-                className='text-hover w-full rounded-sm bg-[#298592] p-2 text-sm text-white shadow-md transition-colors hover:bg-[#298592]'
-              >
-                FINISH
-              </button>
-            </div>
+            </>
+          )}
+        </div>
+        <hr />
+        <div className='mt-5 flex cursor-pointer items-center justify-between'>
+          <div>
+            <input
+              type='radio'
+              id='customOption'
+              name='deliveryOption'
+              value='custom'
+              checked={selectedOption === 'custom'}
+              onChange={() => setSelectedOption('custom')}
+            />
+          </div>
+          <div className='flex items-center'>
+            <h3 className='mr-2 text-lg font-bold'>Custom Address</h3>
+            <p onClick={() => setSelectedOption('custom')}>
+              Add preferred address
+            </p>
           </div>
         </div>
       </div>
 
-      <PickupLocation onClose={closeModal} isOpen={isPickupModalOpen} />
-      <AddAddressModal onClose={closeModal} isOpen={isCustomAddressModalOpen} />
-    </>
+      {selectedOption === 'pickup' && (
+        <PickupLocation onClose={closeModal} isOpen={isOpen} />
+      )}
+      {selectedOption === 'custom' && (
+        <AddAddressModal onClose={closeModal} isOpen={isOpen} />
+      )}
+    </Modal>
   );
 };
 
-export default DeliveryPage;
+export default DeliveryModal;

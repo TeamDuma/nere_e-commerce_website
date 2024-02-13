@@ -16,6 +16,7 @@ import { ILocation } from '@/types/location';
 import { BsSearch } from 'react-icons/bs';
 import CartIconHeader from '../CartIconHeader';
 import { useRouter } from 'next/navigation';
+import DeliveryModal from '@/app/delivery/page';
 
 const Header = () => {
   const router = useRouter();
@@ -318,13 +319,13 @@ const Header = () => {
             </Link>
 
             {locationModalVisible && (
-              <PickupLocation
+              <DeliveryModal
                 onClose={closeModal}
                 isOpen={locationModalVisible}
               />
             )}
             {locationModalVisible && (
-              <PickupLocation
+              <DeliveryModal
                 onClose={closeModal}
                 isOpen={locationModalVisible}
               />

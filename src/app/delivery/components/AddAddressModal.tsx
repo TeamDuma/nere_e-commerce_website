@@ -24,8 +24,8 @@ const customStyles: Styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '700px',
-    height: '700px',
+    width: '600px',
+    height: '650px',
     borderRadius: '15px',
   },
 };
@@ -77,7 +77,7 @@ const AddAddressModal: React.FC<{
         isOpen={isOpen}
         onRequestClose={onClose}
         style={customStyles}
-        contentLabel='Example Modal'
+        contentLabel='ADD NEW ADDRESS'
       >
         <div className='fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50'>
           <div
@@ -88,7 +88,7 @@ const AddAddressModal: React.FC<{
               ADD NEW ADDRESS
             </h2>
 
-            <div className='mb-4 flex'>
+            <div className='m-2 flex'>
               <div className='w-1/2 pr-2'>
                 <label className='block  text-gray-400'>First Name</label>
                 <input
@@ -179,7 +179,7 @@ const AddAddressModal: React.FC<{
               </div>
             </div>
 
-            <div className='mb-4 '>
+            <div className='mb-2 '>
               <label className='block  text-gray-400'>
                 <input
                   type='checkbox'
@@ -191,7 +191,7 @@ const AddAddressModal: React.FC<{
             </div>
 
             <div
-              className='m-5 flex rounded-md bg-white p-8'
+              className='flex rounded-md bg-white p-8'
               style={{ width: '100%' }}
             >
               <button
