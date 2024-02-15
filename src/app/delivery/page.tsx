@@ -28,7 +28,7 @@ const customStylesLarge: Styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '550px',
+    width: '650px',
     height: '500px',
     borderRadius: '15px',
   },
@@ -142,13 +142,19 @@ const DeliveryModal: React.FC<{
 
           <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
             <input
+              style={{ marginRight: 10 }}
               type='radio'
               id='pickupOption'
               name='deliveryOption'
               value='selected'
               checked={selectedOption !== 'pickup'}
             />
-            <label htmlFor='pickupOption'>Pick-up location</label>
+            <label
+              htmlFor='pickupOption'
+              className='text-base	font-medium	 text-[#000]'
+            >
+              Pick-up location
+            </label>
             <h5 className='mb-4 ml-4 text-sm text-[#979797]'>
               Delivery between 05 December and 07 December
             </h5>
@@ -158,7 +164,7 @@ const DeliveryModal: React.FC<{
             className='rounded-md border border-[#CFCFCF] bg-white'
             style={{ width: '100%' }}
           >
-            <div className='flex justify-between p-4'>
+            <div className='flex justify-between p-2'>
               <div className='rounded-md bg-white'>Pickup Location</div>
               <div
                 className='cursor-pointer text-xs text-[#298592]	 '
@@ -172,11 +178,16 @@ const DeliveryModal: React.FC<{
               <div className='rounded-md bg-white p-2'>
                 {selectedAddress ? (
                   <>
-                    <p className='font-bold'>{selectedAddress.name}</p>
+                    <p className='text-sm	 font-medium	'>
+                      {selectedAddress.name}
+                    </p>
+                    <p className='text-xs font-medium		text-[#979797]'>
+                      MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
+                    </p>
                   </>
                 ) : null}
               </div>
-              <div className='m-2 text-gray-500'>
+              {/* <div className='m-2 text-gray-500'>
                 <p>Additional information:</p>
 
                 <p className='cursor-pointer text-[#298592]'>
@@ -185,7 +196,7 @@ const DeliveryModal: React.FC<{
                 </p>
                 <p>Nere Agent Pickup, East Legon</p>
                 <p>MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra</p>
-              </div>
+              </div> */}
             </div>
           </div>
 
