@@ -23,7 +23,7 @@ const CategoriesRow = ({ params }: Props) => {
   const categoryNames = products
     .map((product) => product.categories?.name)
     .filter((name) => typeof name === 'string');
-  const subTitleText = categoryNames.length > 0 ? categoryNames[0] : '';
+  const subTitleText = categoryNames.length > 0 ? categoryNames[0]! : '';
 
   console.log(categoryNames);
 
