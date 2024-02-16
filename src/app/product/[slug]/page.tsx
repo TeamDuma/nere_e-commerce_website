@@ -19,13 +19,13 @@ import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 
 type Props = {
   params: {
-    id: number;
+    slug: string;
   };
 };
 
 export default function ProductDetailPage({ params }: Props) {
   const dispatch = useDispatch();
-  const { id: productId } = params;
+  const { slug: productSlug } = params;
   const [selectedVariant, setSelectedVariant] = useState('');
   const [productQuantity, setProductQuantity] = useState(0);
 
@@ -36,8 +36,8 @@ export default function ProductDetailPage({ params }: Props) {
   const group = groupData?.data?.group;
 
   useEffect(() => {
-    getProduct(productId);
-  }, [productId]);
+    getProduct(productSlug);
+  }, [productSlug]);
 
   if (isError) return <div>Failed to load</div>;
   if (isLoading) return <div>Loading...</div>;
@@ -91,7 +91,7 @@ export default function ProductDetailPage({ params }: Props) {
     toast.success('Item added to cart!');
   };
 
-  const cartProduct = cartItems.find((item) => item.id !== productId);
+  const cartProduct = cartItems.find((item) => item.slug !== productSlug);
 
   const cartQuantity = cartProduct ? cartProduct.cartQuantity : 0;
 
@@ -132,10 +132,10 @@ export default function ProductDetailPage({ params }: Props) {
             <div className='-mx-4 flex flex-col md:flex-row'>
               <div className='px-4 md:flex-1'>
                 <div x-data='{ image: 1 }' x-cloak=''>
-                  <div className='mb-4 h-64 rounded-lg bg-gray-100 md:h-80'>
+                  <div className='mb-4 h-64 rounded-lg  md:h-80'>
                     <div
                       x-show='image === 1'
-                      className='mb-4 flex h-64 items-center justify-center rounded-lg bg-gray-100 md:h-80'
+                      className='mb-4 flex h-64 items-center justify-center rounded-lg  md:h-80'
                     >
                       <img
                         className='mx-auto h-full rounded-md object-cover md:max-w-lg '

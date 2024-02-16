@@ -8,7 +8,7 @@ const ViewMore = () => {
         justifyContent: 'center',
         alignItems: 'center',
         height: '10vh',
-        marginTop: '10px',
+        marginTop: '15px',
         marginBottom: '10px',
       }}
     >

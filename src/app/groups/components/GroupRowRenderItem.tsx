@@ -17,14 +17,14 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
       className='flex items-center rounded-lg bg-[#F5F5F5] p-4 shadow-md'
-      style={{ width: '405px', height: '128px' }}
+      style={{ width: '405px', height: '160px' }}
     >
-      <div className='relative w-1/4 flex-shrink-0 bg-[#FFF]'>
+      <div className='relative w-1/4 flex-shrink-0 '>
         <img
-          src={item?.product?.plain_image}
-          alt={item?.product?.name}
-          className='h-140 w-full rounded-lg object-cover'
-          style={{ width: '103px', height: '105px' }}
+          src={item.product?.plain_image}
+          alt={item.product?.name}
+          className='h-[83px] w-[83px] rounded-lg'
+          style={{ width: '70px', height: '105px' }}
         />
         {item.product?.price && item.product.sale_price && (
           <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white'>

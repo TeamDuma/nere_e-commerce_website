@@ -4,6 +4,7 @@ import React from 'react';
 import { MdGroups } from 'react-icons/md';
 import { HiOutlineRocketLaunch } from 'react-icons/hi2';
 import { FaRegUserCircle } from 'react-icons/fa';
+import Link from 'next/link';
 
 interface OngoingRowProps {}
 
@@ -19,13 +20,15 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
   return (
-    <div className='my-10 flex flex-col justify-between rounded-xl	 bg-[#F0F4F5] p-2 md:flex-row md:p-3'>
+    <div className='my-4 flex flex-col justify-between rounded-xl	 bg-[#F0F4F5] p-2 md:flex-row md:p-3'>
       <div className="box-border hidden w-full rounded-xl	 bg-['#b4c8ca'] p-3 md:block md:w-1/2">
         <div className='flex flex-col items-center justify-between gap-1 md:flex-row'>
-          <div className='flex items-center gap-2 md:gap-2'>
-            <MdGroups className='social-icon' />
-            <p className='p-text'>Ongoing Purchases near me</p>
-          </div>
+          <Link href={'/ongoingPage'}>
+            <div className='flex items-center md:gap-2'>
+              <MdGroups className='social-icon' />
+              <p className='p-text'>Ongoing Purchases near me</p>
+            </div>
+          </Link>
           <div className='md:ml-2'>
             <p className='p-text2'>Groups</p>
             <p className='p-text3'>{groups.length}</p>
@@ -38,11 +41,13 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
       </div>
 
       <div className='box-border hidden w-full rounded-lg bg-white p-3 md:block md:w-1/2'>
-        <div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
-          <div className='flex items-center gap-2 md:gap-2'>
-            <HiOutlineRocketLaunch className='social-icon' />
-            <p className='p-text'>Launch a purchase</p>
-          </div>
+        <div className='flex flex-col items-center justify-between  md:flex-row'>
+          <Link href={'/products'}>
+            <div className='flex items-center gap-2 md:gap-2'>
+              <HiOutlineRocketLaunch className='social-icon' />
+              <p className='p-text'>Launch a purchase</p>
+            </div>
+          </Link>
           <div className='md:ml-2'>
             <p className='p-text2'>Delivery Time</p>
             <p className='p-text4'>2 : 00 : 00</p>
@@ -57,16 +62,18 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
           </div>
         </div>
       </div>
-
-      <div className='flex items-center gap-2 md:hidden'>
-        <MdGroups className='social-icon' />
-        <p className='p-text'>Ongoing Purchases near me</p>
-      </div>
-
-      <div className='flex items-center gap-2 md:hidden'>
-        <HiOutlineRocketLaunch className='social-icon' />
-        <p className='p-text'>Launch a purchase</p>
-      </div>
+      <Link href={'/ongoingPage'}>
+        <div className='flex items-center gap-2 md:hidden'>
+          <MdGroups className='social-icon' />
+          <p className='p-text'>Ongoing Purchases near me</p>
+        </div>
+      </Link>
+      <Link href={'/products'}>
+        <div className='flex items-center gap-2 md:hidden'>
+          <HiOutlineRocketLaunch className='social-icon' />
+          <p className='p-text'>Launch a purchase</p>
+        </div>
+      </Link>
     </div>
   );
 };

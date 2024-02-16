@@ -20,16 +20,15 @@ const customStyles: Styles = {
   },
   content: {
     position: 'fixed',
+    top: 40,
     left: 0,
-    top: '15%',
     right: 'auto',
-    height: '90%',
+    height: '100%',
     width: '95%',
     maxWidth: '450px',
     margin: 'auto',
     backgroundColor: 'white',
     padding: '20px',
-    // borderRadius:'20px',
     borderTopRightRadius: '20px',
     borderBottomRightRadius: '20px',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
@@ -68,7 +67,7 @@ const OngoingModal: React.FC<{
               {groups.map((item) => (
                 <div
                   key={item.id}
-                  className='my-8 flex-shrink-0 rounded border'
+                  className='my-4 flex-shrink-0 rounded border'
                 >
                   <GroupRowRenderModal item={item} />
                 </div>

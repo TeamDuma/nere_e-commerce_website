@@ -7,6 +7,7 @@ import {
 } from '@/lib/redux/slices/shopping';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
+import { IoIosArrowDown } from 'react-icons/io';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -24,7 +25,7 @@ const customStylesLarge: Styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '550px',
+    width: '650px',
     height: '550px',
     borderRadius: '15px',
   },
@@ -51,33 +52,10 @@ const customStylesSmall: Styles = {
   },
 };
 
-// const customStylesSmall: Styles = {
-//   overlay: {
-//     position: 'fixed',
-//     top: 0,
-//     left: 0,
-//     right: 0,
-//     bottom: 0,
-//   },
-//   content: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: '90%',
-//     maxWidth: '400px',
-//     margin: 'auto',
-//     borderRadius: '15px',
-//   },
-// };
-
 const PickupLocation: React.FC<{
   onClose: () => void;
   isOpen: boolean;
 }> = ({ onClose, isOpen }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { selectedLocationId } = useSelector(selectShopping);
 
@@ -110,6 +88,16 @@ const PickupLocation: React.FC<{
     }
   }, [selectedLocationId, data]);
 
+  const [expandedAddress, setExpandedAddress] = useState<number | null>(null);
+
+  const toggleAccordion = (locationId: number) => {
+    if (expandedAddress === locationId) {
+      setExpandedAddress(null);
+    } else {
+      setExpandedAddress(locationId);
+    }
+  };
+
   const renderAddresses = () => {
     if (isLoading) {
       return <div>Loading...</div>;
@@ -120,24 +108,57 @@ const PickupLocation: React.FC<{
     }
 
     return (
-      <div className='mb-4'>
+      <div className='mb-4 '>
         <label className='mb-4 block text-gray-400'>Address</label>
         {locations.map((location: ILocation) => (
           <div key={location.id}>
-            <input
-              type='radio'
-              id={`address${location.id}`}
-              name='address'
-              value={location.name}
-              defaultChecked={selectedAddress?.id === location.id}
-              onChange={() => setSelectedAddress(location)}
-            />
-            <label
-              htmlFor={`address${location.id}`}
-              className='m-4 text-gray-400'
-            >
-              {location.name}
-            </label>
+            <div className='flex justify-between p-2'>
+              <div className='rounded-md bg-white'>
+                <input
+                  type='radio'
+                  id={`address${location.id}`}
+                  name='address'
+                  value={location.name}
+                  defaultChecked={selectedAddress?.id === location.id}
+                  onChange={() => setSelectedAddress(location)}
+                />
+                <label
+                  htmlFor={`address${location.id}`}
+                  className='m-4 cursor-pointer text-gray-400'
+                  onClick={() => toggleAccordion(location.id)}
+                >
+                  {location.name}
+                </label>
+              </div>
+              <div className='ml-8 text-gray-500'>
+                <p className='my-1 cursor-pointer text-xs font-bold text-[#298592]'>
+                  {' '}
+                  Opening hours:
+                </p>
+
+                <p className='my-1	text-xs text-[#000]'>
+                  Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
+                </p>
+              </div>
+            </div>
+
+            {expandedAddress === location.id && (
+              <div className='ml-8 text-gray-500'>
+                <p className='my-1 text-xs		font-medium text-[#979797]'>
+                  MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
+                </p>
+
+                <p className='my-1 cursor-pointer text-xs font-bold text-[#298592]'>
+                  {' '}
+                  See on google maps
+                </p>
+
+                <p className='my-1	text-xs text-[#000]'>Contact information:</p>
+                <p className='my-1	text-xs text-[#979797]'>
+                  Mr. Stephen 0549829923
+                </p>
+              </div>
+            )}
             <hr className='my-2' />
           </div>
         ))}

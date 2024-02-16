@@ -16,6 +16,7 @@ import { ILocation } from '@/types/location';
 import { BsSearch } from 'react-icons/bs';
 import CartIconHeader from '../CartIconHeader';
 import { useRouter } from 'next/navigation';
+import DeliveryModal from '../DeliveryModal';
 
 const Header = () => {
   const router = useRouter();
@@ -102,11 +103,11 @@ const Header = () => {
   };
 
   return (
-    <div className='h-50 sticky top-0 z-10 my-3 bg-[#FaFaFa]'>
-      <div className='h-100 my-3 bg-[#FaFaFa] '>
+    <div className='mb-5 flex flex-wrap'>
+      <div className='mb-6  w-full rounded-xl bg-[#fff] px-3'>
         <div className=' flex flex-col  justify-between sm:flex-row '>
-          <div className='flex flex  items-center justify-between '>
-            <div className='text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
+          <div className='flex  items-center justify-between '>
+            <div className='ml-4 text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
               <Link href='/'>
                 <Logo />
               </Link>
@@ -318,13 +319,7 @@ const Header = () => {
             </Link>
 
             {locationModalVisible && (
-              <PickupLocation
-                onClose={closeModal}
-                isOpen={locationModalVisible}
-              />
-            )}
-            {locationModalVisible && (
-              <PickupLocation
+              <DeliveryModal
                 onClose={closeModal}
                 isOpen={locationModalVisible}
               />
