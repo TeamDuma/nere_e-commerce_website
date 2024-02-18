@@ -92,7 +92,9 @@ const OTPModal: React.FC<{
     setInputs(newInputs);
 
     if (value.length === 1 && index < 5) {
-      const nextInput = document.getElementById(`input-${index + 1}`) as HTMLInputElement | null;
+      const nextInput = document.getElementById(
+        `input-${index + 1}`
+      ) as HTMLInputElement | null;
       if (nextInput) {
         nextInput.focus();
       }
@@ -125,26 +127,28 @@ const OTPModal: React.FC<{
           <h2 className='mb-4 font-semibold'>Verify Phone Number</h2>
           <p className='text-sm'>
             Code is sent to 0549230728{' '}
-            <span className='cursor-pointer text-[#298592]'>Change Number?</span>
+            <span className='cursor-pointer text-[#298592]'>
+              Change Number?
+            </span>
           </p>
           <div className='flex flex-row '>
-  {inputs.map((_, index) => (
-    <div className='w-35 h-30 m-2' key={index}>
-      <input
-        className='w-14 h-14 flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white text-black focus:bg-gray-50 focus:ring-1 ring-blue-700' // Added text-black class
-        type='text'
-        name={`input-${index}`}
-        id={`input-${index}`}
-        maxLength={1}
-        value={inputs[index]}
-        onChange={(e) => handleChange(index, e.target.value)}
-        onPaste={(e) => handlePaste(e)}
-      />
-    </div>
-  ))}
-</div>
+            {inputs.map((_, index) => (
+              <div className='w-35 h-30 m-2' key={index}>
+                <input
+                  className='flex h-14 w-14 flex-col items-center justify-center rounded-xl border border-gray-200 bg-white px-5 text-center text-lg text-black outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1' // Added text-black class
+                  type='text'
+                  name={`input-${index}`}
+                  id={`input-${index}`}
+                  maxLength={1}
+                  value={inputs[index]}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                  onPaste={(e) => handlePaste(e)}
+                />
+              </div>
+            ))}
+          </div>
 
-          <div className='flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500'>
+          <div className='flex flex-row items-center justify-center space-x-1 text-center text-sm font-medium text-gray-500'>
             <p>Timer</p>
             <a
               className='flex flex-row items-center text-[#B8B7B5]'
