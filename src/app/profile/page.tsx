@@ -1,6 +1,11 @@
 'use client';
 import ProgressBar from '@/components/common/ProgressBar';
 import React, { useState } from 'react';
+import UserContent from './components/UserContent';
+import OrderContent from './components/OrderContent';
+import VoucherContent from './components/VoucherContent';
+import { FaTags, FaUser } from 'react-icons/fa';
+import { IoIosListBox } from 'react-icons/io';
 
 const SettingsPage = () => {
   const [selectedTab, setSelectedTab] = useState('profile');
@@ -13,100 +18,67 @@ const SettingsPage = () => {
     <>
       <div className='px-6 py-8 lg:w-full'>
         <div className='items-stretch gap-4 lg:flex'>
-          <div className='mb-4 rounded-lg border border-gray-200 bg-white p-6 shadow-md md:p-2 lg:mb-0 lg:w-[35%]'>
+          <div className='mb-4 rounded-lg border border-gray-200 bg-white p-6 shadow-md md:p-2 lg:mb-0 lg:w-[25%]'>
             <div className='flex h-full flex-col justify-between'>
               <div className='border-b border-white'>
                 <div
-                  className='flex-auto justify-center p-5 text-center'
+                  className='flex-auto p-5'
                   onClick={() => handleTabClick('profile')}
+                  style={{
+                    color: selectedTab === 'profile' ? '#298592' : '#8A8886',
+                  }}
                 >
-                  My Profile
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
+                    <FaUser className='mr-2' />
+                    My Profile
+                  </span>
                 </div>
               </div>
               <div className='border-b border-white'>
                 <div
-                  className='flex-auto justify-center p-5 text-center'
+                  className='flex-auto p-5'
                   onClick={() => handleTabClick('order')}
+                  style={{
+                    color: selectedTab === 'order' ? '#298592' : '#8A8886',
+                  }}
                 >
-                  My Orders
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
+                    <IoIosListBox className='mr-2' />
+                    My Orders
+                  </span>
                 </div>
               </div>
               <div>
                 <div
-                  className='flex-auto justify-center p-5 text-center'
+                  className='flex-auto p-5'
                   onClick={() => handleTabClick('voucher')}
+                  style={{
+                    color: selectedTab === 'voucher' ? '#298592' : '#8A8886',
+                  }}
                 >
-                  My Vouchers
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
+                    <FaTags className='mr-2' />
+                    My Vouchers
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div className='xs:mb-4 max-w-full rounded-lg bg-white p-4 shadow-md lg:w-[60%]'>
-            {selectedTab === 'profile' && <ProfileContent />}
+
+          <div className='xs:mb-4 max-w-full  lg:w-[60%]'>
+            {selectedTab === 'profile' && <UserContent />}
             {selectedTab === 'order' && <OrderContent />}
             {selectedTab === 'voucher' && <VoucherContent />}
           </div>
         </div>
       </div>
     </>
-  );
-};
-
-const ProfileContent = () => {
-  return (
-    <div className='flex '>
-      <div className='mb-8'>
-        <p>JOHN ISUTSAH</p>
-        <div className='mt-8 flex flex-wrap'>
-          <div className='p-2'>
-            <p>Email Address</p>
-            <p>John@gmail.com</p>
-          </div>
-          <div className=' p-2'>
-            <p>Number</p>
-            <p>0549230728</p>
-          </div>
-          <div className=' p-2'>
-            <p>Title</p>
-            <p>Mr</p>
-          </div>
-          <div className=' p-2'>
-            <p>Total Savings</p>
-            <p>GHS 500.00</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Order content component
-const OrderContent = () => {
-  return (
-    <div className='flex '>
-      <div className='mb-8'>
-        <p>Items</p>
-        <div className='m-2 mt-8 flex flex-wrap'>
-          <div className='m-2 bg-gray-700 p-8 '></div>
-          <div className='m-2 bg-gray-600 p-8 '></div>
-          <div className='m-2 bg-gray-500 p-8 '></div>
-          <div className='m-2 bg-gray-400 p-8 '></div>
-        </div>
-        <h1 className='my-2'>order confirmed</h1>
-        <div className='progress-line'>
-          <div className='progress' style={{ width: `10%` }}></div>
-          <h1 className='my-2'> Picked up on Fri, 23 Aug 2024</h1>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const VoucherContent = () => {
-  return (
-    <div>
-      <h2>Voucher Content</h2>
-    </div>
   );
 };
 
