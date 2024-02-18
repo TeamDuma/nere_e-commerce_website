@@ -39,7 +39,7 @@ const Category = ({ params }: Props) => {
                 <div key={product?.id}>
                   <>
                     <div className='px-2 md:px-2 lg:px-2'>
-                      <div className='relative rounded-md bg-gray-100 dark:bg-gray-800'>
+                      <div className='relative m-4 rounded-md bg-gray-100 dark:bg-gray-800'>
                         <div className='absolute right-2 top-2 flex h-5 w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                           {`${Math.round(
                             ((product.price - product.sale_price) /
@@ -69,9 +69,14 @@ const Category = ({ params }: Props) => {
                           </div>
                         </div>
                         <div className='ml-4 flex-1'>
-                          <h2 className='text line-clamp-2 overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
-                            {product?.name}
-                          </h2>
+                          <div className='h-12'>
+                            <h5
+                              tabIndex={0}
+                              className='text line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                            >
+                              {product?.name}
+                            </h5>
+                          </div>
                         </div>
 
                         <div className='ml-2 flex'>

@@ -54,7 +54,7 @@ const CategoriesRow = ({ params }: Props) => {
                     <Link href={`/product/${product.slug}`} key={product?.id}>
                       <div
                         key={product?.id}
-                        className='relative rounded-md bg-gray-100 dark:bg-gray-800'
+                        className='relative mx-4 rounded-md bg-gray-100 dark:bg-gray-800'
                       >
                         <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                           {`${Math.round(
@@ -90,12 +90,14 @@ const CategoriesRow = ({ params }: Props) => {
                           </div>
                         </div>
                         <div className='flex items-center'>
-                          <h2
-                            tabIndex={0}
-                            className='product-name text-lg font-semibold focus:outline-none lg:text-lg lg:font-semibold'
-                          >
-                            {product?.name}
-                          </h2>
+                          <div className='h-12'>
+                            <h5
+                              tabIndex={0}
+                              className='text line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                            >
+                              {product?.name}
+                            </h5>
+                          </div>
                         </div>
                         <div className='ml-2 flex'>
                           <div
