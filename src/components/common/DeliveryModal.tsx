@@ -166,12 +166,21 @@ const DeliveryModal: React.FC<{
           >
             <div className='flex justify-between p-2'>
               <div className='rounded-md bg-white'>Pickup Location</div>
-              <div
-                className='cursor-pointer text-xs text-[#298592]	 '
-                onClick={() => setSelectedOption('pickup')}
-              >
-                Change pickup location {'>'}
-              </div>
+              {selectedAddress ? (
+                <div
+                  className='cursor-pointer text-xs text-[#298592]	 '
+                  onClick={() => setSelectedOption('pickup')}
+                >
+                  Change pickup location {'>'}
+                </div>
+              ) : (
+                <p
+                  className='cursor-pointer text-xs font-medium 		text-[#979797]'
+                  onClick={() => setSelectedOption('pickup')}
+                >
+                  Please select a Location
+                </p>
+              )}
             </div>
 
             <div className='flex flex-col border-t border-[#CFCFCF]'>
@@ -185,7 +194,11 @@ const DeliveryModal: React.FC<{
                       MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
                     </p>
                   </>
-                ) : null}
+                ) : (
+                  <p className='text-xs font-medium		text-[#979797]'>
+                    Please select a Location
+                  </p>
+                )}
               </div>
               {/* <div className='m-2 text-gray-500'>
                 <p>Additional information:</p>

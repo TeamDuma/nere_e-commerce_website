@@ -1,6 +1,44 @@
+import PickupLocation from '@/app/delivery/components/PickupLocation';
+import { selectShopping, setSelectedLocationId } from '@/lib/redux';
+import { useGetlocationsQuery } from '@/lib/redux/services/location';
+import { ILocation } from '@/types/location';
+import { useEffect, useState } from 'react';
 import { FaCircleCheck } from 'react-icons/fa6';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UserContent = () => {
+  const [PickupLocationVisible, setPickupLocationVisible] = useState(false);
+
+  const dispatch = useDispatch();
+  const { selectedLocationId } = useSelector(selectShopping);
+
+  const { data, isLoading } = useGetlocationsQuery();
+  const locations = data?.data || [];
+  const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
+    () => {
+      return (
+        locations.find((location) => location.id === selectedLocationId) || null
+      );
+    }
+  );
+
+  useEffect(() => {
+    if (data && selectedLocationId) {
+      const newlySelectedAddress = locations.find(
+        (location) => location.id === selectedLocationId
+      );
+      setSelectedAddress(newlySelectedAddress || null);
+    }
+  }, [selectedLocationId, data]);
+
+  const openPickupModal = () => {
+    setPickupLocationVisible(true);
+  };
+
+  const closeModal = () => {
+    setPickupLocationVisible(false);
+  };
+
   return (
     <>
       <div className='p-6'>
@@ -43,7 +81,7 @@ const UserContent = () => {
                 <div className='rounded-md bg-white'>Pickup Location</div>
                 <div
                   className='cursor-pointer text-xs text-[#298592]	 '
-                  // onClick={() => setSelectedOption('pickup')}
+                  onClick={openPickupModal}
                 >
                   Change pickup location {'>'}
                 </div>
@@ -51,16 +89,20 @@ const UserContent = () => {
 
               <div className='flex flex-col'>
                 <div className='rounded-md bg-white p-2'>
-                  {/* {selectedAddress ? ( */}
-                  <>
-                    <p className='text-sm	 font-medium	'>
-                      {/* {selectedAddress.name} */}
-                    </p>
+                  {selectedAddress ? (
+                    <>
+                      <p className='text-sm	 font-medium	'>
+                        {selectedAddress.name}
+                      </p>
+                      <p className='text-xs font-medium		text-[#979797]'>
+                        MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
+                      </p>
+                    </>
+                  ) : (
                     <p className='text-xs font-medium		text-[#979797]'>
-                      MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
+                      Please select a Location
                     </p>
-                  </>
-                  {/* ) : null} */}
+                  )}
                 </div>
                 {/* <div className='m-2 text-gray-500'>
                 <p>Additional information:</p>
@@ -93,6 +135,8 @@ const UserContent = () => {
               </div>
             </div>
           </div>
+
+          <PickupLocation onClose={closeModal} isOpen={PickupLocationVisible} />
         </div>
       </div>
     </>
