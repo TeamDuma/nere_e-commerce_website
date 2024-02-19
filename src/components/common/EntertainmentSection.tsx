@@ -1,8 +1,41 @@
+'use client';
+
+import { useState } from 'react';
+
+import GameModal from './GameModal';
+import LoyaltyModal from './LoyaltyModal';
+import NereCoinModal from './NereCoinModal';
+
 const EntertainmentSection = () => {
+  const [GameModalVisible, setGameModalVisible] = useState(false);
+  const [LoyaltyModalVisible, setLoyaltyModalVisible] = useState(false);
+  const [NereCoinModalVisible, setNereCoinModalVisible] = useState(false);
+
+  const openGameModal = () => {
+    setGameModalVisible(true);
+  };
+
+  const openLoyaltyModal = () => {
+    setLoyaltyModalVisible(true);
+  };
+
+  const openNereCoinModal = () => {
+    setNereCoinModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setGameModalVisible(false);
+    setLoyaltyModalVisible(false);
+    setNereCoinModalVisible(false);
+  };
+
   return (
     <section className='m-3 rounded '>
       <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
-        <div className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'>
+        <div
+          className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
+          onClick={openNereCoinModal}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -24,7 +57,10 @@ const EntertainmentSection = () => {
           </div>
         </div>
 
-        <div className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'>
+        <div
+          className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
+          onClick={openGameModal}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -46,7 +82,10 @@ const EntertainmentSection = () => {
           </div>
         </div>
 
-        <div className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'>
+        <div
+          className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
+          onClick={openLoyaltyModal}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -68,6 +107,10 @@ const EntertainmentSection = () => {
           </div>
         </div>
       </div>
+
+      <NereCoinModal onClose={closeModal} isOpen={NereCoinModalVisible} />
+      <LoyaltyModal onClose={closeModal} isOpen={LoyaltyModalVisible} />
+      <GameModal onClose={closeModal} isOpen={GameModalVisible} />
     </section>
   );
 };

@@ -24,7 +24,7 @@ const FeaturedProducts = () => {
                 <div key={product?.id}>
                   <>
                     <div className='px-4 md:px-4 lg:px-4'>
-                      <div className='relative rounded-md bg-gray-50 dark:bg-gray-800'>
+                      <div className='relative rounded-md bg-gray-100 dark:bg-gray-800'>
                         <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                           {`${Math.round(
                             ((product.price - product.sale_price) /
@@ -37,7 +37,7 @@ const FeaturedProducts = () => {
                           <div
                             style={{
                               backgroundSize: 'cover',
-                              backgroundColor: '#F8F8F8',
+                              backgroundColor: 'gray-100',
                               width: '200px',
                               height: '200px',
                               display: 'flex',

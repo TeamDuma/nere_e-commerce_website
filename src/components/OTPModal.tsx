@@ -1,0 +1,168 @@
+import React, { useEffect, useState } from 'react';
+import Modal, { Styles } from 'react-modal';
+import Logo from './common/Logo';
+
+const customStylesLarge: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '450px',
+    height: '350px',
+    borderRadius: '15px',
+  },
+};
+const customStylesMedium: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '60%',
+    maxWidth: '550px',
+    margin: 'auto',
+    borderRadius: '15px',
+    height: '350px',
+  },
+};
+
+const customStylesSmall: Styles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    maxWidth: '400px',
+    margin: 'auto',
+    borderRadius: '15px',
+    height: '40vh',
+  },
+};
+
+const OTPModal: React.FC<{
+  onClose: () => void;
+  isOpen: boolean;
+}> = ({ onClose, isOpen }) => {
+  const closeModal = () => {
+    onClose();
+  };
+
+  const screenWidth = window.innerWidth;
+  let modalStyles = customStylesSmall;
+
+  if (screenWidth >= 960) {
+    modalStyles = customStylesLarge;
+  } else if (screenWidth >= 600) {
+    modalStyles = customStylesMedium;
+  }
+
+  const [inputs, setInputs] = useState(['', '', '', '', '', '']);
+
+  const handleChange = (index: number, value: string) => {
+    const newInputs = [...inputs];
+    newInputs[index] = value;
+    setInputs(newInputs);
+
+    if (value.length === 1 && index < 5) {
+      const nextInput = document.getElementById(
+        `input-${index + 1}`
+      ) as HTMLInputElement | null;
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text/plain');
+    const pastedChars = pastedData.split('');
+    const newInputs = [...inputs];
+    pastedChars.forEach((char, index) => {
+      if (index < inputs.length) {
+        newInputs[index] = char;
+      }
+    });
+    setInputs(newInputs);
+  };
+
+  return (
+    <div>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        style={modalStyles}
+        contentLabel='OTP Modal'
+      >
+        <div className='flex h-full flex-col items-center justify-center'>
+          <Logo />
+          <h2 className='mb-4 font-semibold'>Verify Phone Number</h2>
+          <p className='text-sm'>
+            Code is sent to 0549230728{' '}
+            <span className='cursor-pointer text-[#298592]'>
+              Change Number?
+            </span>
+          </p>
+          <div className='flex flex-row '>
+            {inputs.map((_, index) => (
+              <div className='w-35 h-30 m-2' key={index}>
+                <input
+                  className='flex h-14 w-14 flex-col items-center justify-center rounded-xl border border-gray-200 bg-white px-5 text-center text-lg text-black outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1' // Added text-black class
+                  type='text'
+                  name={`input-${index}`}
+                  id={`input-${index}`}
+                  maxLength={1}
+                  value={inputs[index]}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                  onPaste={(e) => handlePaste(e)}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className='flex flex-row items-center justify-center space-x-1 text-center text-sm font-medium text-gray-500'>
+            <p>Timer</p>
+            <a
+              className='flex flex-row items-center text-[#B8B7B5]'
+              href='http://'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Resend
+            </a>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export default OTPModal;

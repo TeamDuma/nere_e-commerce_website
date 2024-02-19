@@ -35,11 +35,11 @@ const Category = ({ params }: Props) => {
           </div>
           <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>
             {products.map((product) => (
-              <Link href={`/product/${product.id}`} key={product?.id}>
+              <Link href={`/product/${product.slug}`} key={product?.id}>
                 <div key={product?.id}>
                   <>
                     <div className='px-2 md:px-2 lg:px-2'>
-                      <div className='relative rounded-md bg-gray-50 dark:bg-gray-800'>
+                      <div className='relative m-4 rounded-md bg-gray-100 dark:bg-gray-800'>
                         <div className='absolute right-2 top-2 flex h-5 w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                           {`${Math.round(
                             ((product.price - product.sale_price) /
@@ -52,7 +52,7 @@ const Category = ({ params }: Props) => {
                           <div
                             style={{
                               backgroundSize: 'cover',
-                              backgroundColor: '#F8F8F8',
+                              backgroundColor: 'gray-100',
                               width: '200px',
                               height: '200px',
                               display: 'flex',
@@ -69,9 +69,14 @@ const Category = ({ params }: Props) => {
                           </div>
                         </div>
                         <div className='ml-4 flex-1'>
-                          <h2 className='text line-clamp-2 overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
-                            {product?.name}
-                          </h2>
+                          <div className='h-12'>
+                            <h5
+                              tabIndex={0}
+                              className='text line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                            >
+                              {product?.name}
+                            </h5>
+                          </div>
                         </div>
 
                         <div className='ml-2 flex'>
