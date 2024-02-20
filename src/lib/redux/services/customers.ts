@@ -35,22 +35,26 @@ const customerApi = apiSlice.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
-      
     }),
-    phoneVerifyToken: builder.mutation<IphoneVerifyTokenResponse, IphoneVerifyTokenRequest>({
-      query: ({ token,code }) => ({
-          url: endpoints.phoneVerifyToken,
-          method: 'POST',
-          body: code,
-          headers: {
-              Authorization: `Bearer ${token}`,
-          },
+    phoneVerifyToken: builder.mutation<
+      IphoneVerifyTokenResponse,
+      IphoneVerifyTokenRequest
+    >({
+      query: ({ token, code }) => ({
+        url: endpoints.phoneVerifyToken,
+        method: 'POST',
+        body: code,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
-  }),
-    
- 
-    
+    }),
   }),
 });
 
-export const { useSignInMutation, useSignUpMutation,usePhoneVerifyMutation,usePhoneVerifyTokenMutation } = customerApi;
+export const {
+  useSignInMutation,
+  useSignUpMutation,
+  usePhoneVerifyMutation,
+  usePhoneVerifyTokenMutation,
+} = customerApi;

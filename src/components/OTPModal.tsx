@@ -81,7 +81,6 @@ const OTPModal: React.FC<{
   const { token } = useSelector(selectShopping);
   const [phoneVerifyToken] = usePhoneVerifyTokenMutation();
 
-
   console.log(phoneNumber, token);
 
   const screenWidth = window.innerWidth;
@@ -127,17 +126,16 @@ const OTPModal: React.FC<{
     const otpCode = inputs.join('');
     console.log('handleSubmit', token, otpCode);
     phoneVerifyToken(token, otpCode)
-    .then((response) => {
-      console.log('hi', token, otpCode );
-      console.log('response', response);
-      // toast.success('signUp successfully');
-       onClose();
-    })
-    .catch((error) => {
-      toast.error(error.message || 'Error signing up');
-    });
-};
-
+      .then((response) => {
+        console.log('hi', token, otpCode);
+        console.log('response', response);
+        // toast.success('signUp successfully');
+        onClose();
+      })
+      .catch((error) => {
+        toast.error(error.message || 'Error signing up');
+      });
+  };
 
   return (
     <div>

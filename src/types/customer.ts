@@ -11,8 +11,6 @@ export interface Customer {
   updatedAt: string;
 }
 
-
-
 export interface ILoginRequest {
   email: string;
   password: string;
@@ -39,18 +37,15 @@ export interface IRegisterResponse {
     Customer: Customer[];
   };
   token: string;
-  message:string
+  message: string;
 }
-
 
 export interface IphoneVerifyRequest {
   token: string;
 }
 export interface IphoneVerifyResponse {
   status: string;
-
 }
-
 
 export interface IphoneVerifyTokenRequest {
   token?: string | null;
@@ -60,5 +55,4 @@ export interface IphoneVerifyTokenRequest {
 export interface IphoneVerifyTokenResponse {
   message: string;
   status: string;
-
 }
