@@ -75,7 +75,7 @@ const customStylesSmall: Styles = {
 
 const OTPModal: React.FC<{
   onClose: () => void;
-  isOpen: true;
+  isOpen: boolean;
   phoneNumber: string;
 }> = ({ onClose, isOpen, phoneNumber }) => {
   const { token } = useSelector(selectShopping);

@@ -24,7 +24,7 @@ const customStylesLarge: Styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '500px',
+    width: '550px',
     height: '500px',
     borderRadius: '15px',
   },
@@ -47,7 +47,7 @@ const customStylesSmall: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '350px',
-    height: '500px',
+    height: '550px',
     borderRadius: '15px',
   },
 };

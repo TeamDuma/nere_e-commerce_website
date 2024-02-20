@@ -16,7 +16,7 @@ const customStylesLarge: Styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    top: '50%',
+    top: '53%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '400px',
@@ -86,7 +86,7 @@ const NereCoinModal: React.FC<{
   }
 
   return (
-    <div>
+    <div className=' bg-gray-50'>
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}

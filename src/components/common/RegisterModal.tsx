@@ -254,7 +254,11 @@ const RegistrationModal: React.FC<{
             </div>
           </div>
         </div>
-        <OTPModal onClose={onClose} isOpen={true} phoneNumber={phone} />
+        <OTPModal
+          onClose={onClose}
+          isOpen={oTpModalVisible}
+          phoneNumber={phone}
+        />
       </div>
     </Modal>
   );
