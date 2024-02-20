@@ -125,7 +125,7 @@ const OTPModal: React.FC<{
   const handleSubmit = () => {
     const otpCode = inputs.join('');
     console.log('handleSubmit', token, otpCode);
-    phoneVerifyToken(token, otpCode)
+    phoneVerifyToken({ token, code: otpCode })
       .then((response) => {
         console.log('hi', token, otpCode);
         console.log('response', response);

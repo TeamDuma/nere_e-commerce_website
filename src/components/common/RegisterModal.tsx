@@ -72,6 +72,7 @@ const RegistrationModal: React.FC<{
   const handleOtpClick = () => {
     setoTpModalVisible(true);
   };
+
   const [signUp, { isLoading, isError, isSuccess, error }] =
     useSignUpMutation();
   const [phoneVerify] = usePhoneVerifyMutation();
@@ -253,11 +254,7 @@ const RegistrationModal: React.FC<{
             </div>
           </div>
         </div>
-        <OTPModal
-          onClose={onClose}
-          isOpen={oTpModalVisible}
-          phoneNumber={phone}
-        />
+        <OTPModal onClose={onClose} isOpen={true} phoneNumber={phone} />
       </div>
     </Modal>
   );
