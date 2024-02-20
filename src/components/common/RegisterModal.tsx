@@ -104,7 +104,7 @@ const RegistrationModal: React.FC<{
   };
 
   const isValidPhoneNumber = (phone: string): boolean => {
-    return /^\d{10}$/.test(phone);
+    return /^\+\d{12}$/.test(phone);
   };
 
   return (
@@ -161,7 +161,7 @@ const RegistrationModal: React.FC<{
                 Phone
               </label>
               <input
-                type='number'
+                type='text'
                 id='phone'
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
