@@ -11,6 +11,8 @@ export interface Customer {
   updatedAt: string;
 }
 
+
+
 export interface ILoginRequest {
   email: string;
   password: string;
@@ -32,29 +34,31 @@ export interface IRegisterRequest {
 }
 
 export interface IRegisterResponse {
-  status: string;
+  success: string;
   data: {
     Customer: Customer[];
   };
   token: string;
+  message:string
 }
+
 
 export interface IphoneVerifyRequest {
   token: string;
 }
 export interface IphoneVerifyResponse {
-  message: string;
   status: string;
-  data: [];
+
 }
 
+
 export interface IphoneVerifyTokenRequest {
-  token: string;
+  token?: string | null;
   code: string;
 }
 
 export interface IphoneVerifyTokenResponse {
   message: string;
   status: string;
-  data: [];
+
 }

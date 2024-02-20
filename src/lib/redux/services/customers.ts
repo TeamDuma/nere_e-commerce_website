@@ -3,6 +3,10 @@ import {
   ILoginResponse,
   IRegisterRequest,
   IRegisterResponse,
+  IphoneVerifyRequest,
+  IphoneVerifyResponse,
+  IphoneVerifyTokenRequest,
+  IphoneVerifyTokenResponse,
 } from '@/types/customer';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
@@ -23,7 +27,30 @@ const customerApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    phoneVerify: builder.mutation<IphoneVerifyResponse, IphoneVerifyRequest>({
+      query: ({ token }) => ({
+        url: endpoints.phoneVerify,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      
+    }),
+    phoneVerifyToken: builder.mutation<IphoneVerifyTokenResponse, IphoneVerifyTokenRequest>({
+      query: ({ token,code }) => ({
+          url: endpoints.phoneVerifyToken,
+          method: 'POST',
+          body: code,
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+      }),
+  }),
+    
+ 
+    
   }),
 });
 
-export const { useSignInMutation, useSignUpMutation } = customerApi;
+export const { useSignInMutation, useSignUpMutation,usePhoneVerifyMutation,usePhoneVerifyTokenMutation } = customerApi;

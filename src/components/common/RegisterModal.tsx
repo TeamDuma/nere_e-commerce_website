@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal, { Styles } from 'react-modal';
 import LoginModal from './LoginModal';
-import { useSignUpMutation } from '@/lib/redux/services/customers';
+import {
+  useSignUpMutation,
+  usePhoneVerifyMutation,
+} from '@/lib/redux/services/customers';
 import Logo from './Logo';
 import { toast } from 'react-toastify';
+import OTPModal from '../OTPModal';
+import { useDispatch } from 'react-redux';
+import { addUser, saveToken } from '@/lib/redux';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -60,9 +66,15 @@ const RegistrationModal: React.FC<{
   const [password, setPassword] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [oTpModalVisible, setoTpModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
+  const handleOtpClick = () => {
+    setoTpModalVisible(true);
+  };
   const [signUp, { isLoading, isError, isSuccess, error }] =
     useSignUpMutation();
+  const [phoneVerify] = usePhoneVerifyMutation();
 
   const handleRegister = async () => {
     if (!name) {
@@ -88,14 +100,26 @@ const RegistrationModal: React.FC<{
       toast.error('Password and Confirm Password do not match');
       return;
     }
-
     signUp({ email, name, phone, password })
-      .then((data) => {
-        toast.success('signUp successfully');
-        onClose();
+      .then((response) => {
+        if ('data' in response) {
+          const data = response.data;
+          const token = response.data.token;
+          if (data.message === 'success') {
+            dispatch(addUser({ data }));
+          }
+          dispatch(saveToken(token));
+          toast.success('Signed Up successfully');
+          phoneVerify({ token }).then((response) => {
+            handleOtpClick();
+            console.log('response', response);
+          });
+        } else {
+          console.log('response', response.error);
+        }
       })
-      .catch((e) => {
-        toast.error(e);
+      .catch((error) => {
+        toast.error(error.message || 'Error signing up');
       });
   };
 
@@ -229,6 +253,11 @@ const RegistrationModal: React.FC<{
             </div>
           </div>
         </div>
+        <OTPModal
+          onClose={onClose}
+          isOpen={oTpModalVisible}
+          phoneNumber={phone}
+        />
       </div>
     </Modal>
   );

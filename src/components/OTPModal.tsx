@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Modal, { Styles } from 'react-modal';
 import Logo from './common/Logo';
+import Timer from './Timer';
+import { useSelector } from 'react-redux';
+import { RootState } from '@reduxjs/toolkit/dist/query/core/apiState';
+import shopping, { selectShopping } from '@/lib/redux/slices/shopping';
+import { usePhoneVerifyTokenMutation } from '@/lib/redux/services/customers';
+import { toast } from 'react-toastify';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -69,11 +75,14 @@ const customStylesSmall: Styles = {
 
 const OTPModal: React.FC<{
   onClose: () => void;
-  isOpen: boolean;
-}> = ({ onClose, isOpen }) => {
-  const closeModal = () => {
-    onClose();
-  };
+  isOpen: true;
+  phoneNumber: string;
+}> = ({ onClose, isOpen, phoneNumber }) => {
+  const { token } = useSelector(selectShopping);
+  const [phoneVerifyToken] = usePhoneVerifyTokenMutation();
+
+
+  console.log(phoneNumber, token);
 
   const screenWidth = window.innerWidth;
   let modalStyles = customStylesSmall;
@@ -114,6 +123,22 @@ const OTPModal: React.FC<{
     setInputs(newInputs);
   };
 
+  const handleSubmit = () => {
+    const otpCode = inputs.join('');
+    console.log('handleSubmit', token, otpCode);
+    phoneVerifyToken(token, otpCode)
+    .then((response) => {
+      console.log('hi', token, otpCode );
+      console.log('response', response);
+      // toast.success('signUp successfully');
+       onClose();
+    })
+    .catch((error) => {
+      toast.error(error.message || 'Error signing up');
+    });
+};
+
+
   return (
     <div>
       <Modal
@@ -126,7 +151,7 @@ const OTPModal: React.FC<{
           <Logo />
           <h2 className='mb-4 font-semibold'>Verify Phone Number</h2>
           <p className='text-sm'>
-            Code is sent to 0549230728{' '}
+            Code is sent to {phoneNumber}
             <span className='cursor-pointer text-[#298592]'>
               Change Number?
             </span>
@@ -149,7 +174,9 @@ const OTPModal: React.FC<{
           </div>
 
           <div className='flex flex-row items-center justify-center space-x-1 text-center text-sm font-medium text-gray-500'>
-            <p>Timer</p>
+            <div>
+              <Timer />
+            </div>
             <a
               className='flex flex-row items-center text-[#B8B7B5]'
               href='http://'
@@ -159,6 +186,12 @@ const OTPModal: React.FC<{
               Resend
             </a>
           </div>
+          <button
+            className='mt-4 rounded bg-[#298592] px-6 py-2 text-white hover:bg-[#1e6771] focus:bg-blue-600 focus:outline-none'
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </Modal>
     </div>
