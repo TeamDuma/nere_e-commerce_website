@@ -7,30 +7,6 @@ import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 import Spinner from './Spinner';
 
-// const customStyles: Styles = {
-//   overlay: {
-//     position: 'fixed',
-//     top: 0,
-//     left: 0,
-//     right: 0,
-//     bottom: 0,
-//     backgroundColor: 'rgba( 190,192,193, 0.7)',
-//   },
-//   content: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     flexDirection: 'column',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: '500px',
-//     height: '500px',
-//     borderRadius: '15px',
-//     overflow: 'hidden',
-//   },
-// };
-
 const customStylesLarge: Styles = {
   overlay: {
     position: 'fixed',

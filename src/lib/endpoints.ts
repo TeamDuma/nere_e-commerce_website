@@ -23,6 +23,8 @@ const endpoints = {
   // Customers
   signup: 'customers/signUp',
   signIn: 'customers/signIn',
+  phoneVerify: 'customers/phone/verify',
+  phoneVerifyToken: 'customers/phone/verify/token',
 
   // Location
   activeLocations: 'locations/active',

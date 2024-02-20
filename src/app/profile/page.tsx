@@ -18,7 +18,7 @@ const SettingsPage = () => {
     <>
       <div className='px-6 py-8 lg:w-full'>
         <div className='items-stretch gap-4 lg:flex'>
-          <div className='mb-4 rounded-lg border border-gray-200 bg-white p-6 shadow-md md:p-2 lg:mb-0 lg:w-[25%]'>
+          <div className='mb-4 h-[100%] rounded-lg border border-gray-200 bg-white p-6 shadow-md md:p-2 lg:mb-0 lg:w-[25%]'>
             <div className='flex h-full flex-col justify-between'>
               <div className='border-b border-white'>
                 <div
@@ -71,7 +71,7 @@ const SettingsPage = () => {
             </div>
           </div>
 
-          <div className='xs:mb-4 max-w-full  lg:w-[60%]'>
+          <div className='xs:mb-4 max-w-full  lg:w-[60%] '>
             {selectedTab === 'profile' && <UserContent />}
             {selectedTab === 'order' && <OrderContent />}
             {selectedTab === 'voucher' && <VoucherContent />}
