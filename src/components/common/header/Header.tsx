@@ -125,10 +125,10 @@ const Header = () => {
                         Profile
                       </button>
                       <a
-                        href='/orders'
+                        href='/lastorder'
                         className='block px-4 py-2 text-[#298592]'
                       >
-                        Orders
+                        Last orders
                       </a>
                       <a
                         href='#'
@@ -271,10 +271,10 @@ const Header = () => {
                         Profile
                       </a>
                       <a
-                        href='/orders'
+                        href='/lastorder'
                         className='block px-2 py-1 text-sm text-[#298592]'
                       >
-                        Orders
+                        Last order
                       </a>
                       <a
                         href='#'
