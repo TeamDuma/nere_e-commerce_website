@@ -80,6 +80,7 @@ const OTPModal: React.FC<{
 }> = ({ onClose, isOpen, phoneNumber }) => {
   const { token } = useSelector(selectShopping);
   const [phoneVerifyToken] = usePhoneVerifyTokenMutation();
+  const [submitted, setSubmitted] = useState(false);
 
   console.log(phoneNumber, token);
 
@@ -127,9 +128,10 @@ const OTPModal: React.FC<{
     console.log('handleSubmit', token, otpCode);
     phoneVerifyToken({ token, code: otpCode })
       .then((response) => {
+        setSubmitted(true);
+
         console.log('hi', token, otpCode);
         console.log('response', response);
-        // toast.success('signUp successfully');
         onClose();
       })
       .catch((error) => {
@@ -141,7 +143,7 @@ const OTPModal: React.FC<{
     <div>
       <Modal
         isOpen={isOpen}
-        onRequestClose={onClose}
+        onRequestClose={submitted ? onClose : undefined}
         style={modalStyles}
         contentLabel='OTP Modal'
       >
@@ -184,12 +186,14 @@ const OTPModal: React.FC<{
               Resend
             </a>
           </div>
-          <button
-            className='mt-4 rounded bg-[#298592] px-6 py-2 text-white hover:bg-[#1e6771] focus:bg-blue-600 focus:outline-none'
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+          {!submitted && (
+            <button
+              className='mt-4 rounded bg-[#298592] px-6 py-2 text-white hover:bg-[#1e6771] focus:bg-blue-600 focus:outline-none'
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          )}
         </div>
       </Modal>
     </div>

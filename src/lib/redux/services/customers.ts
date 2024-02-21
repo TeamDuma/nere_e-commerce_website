@@ -43,7 +43,7 @@ const customerApi = apiSlice.injectEndpoints({
       query: ({ token, code }) => ({
         url: endpoints.phoneVerifyToken,
         method: 'POST',
-        body: code,
+        body: { code },
         headers: {
           Authorization: `Bearer ${token}`,
         },
