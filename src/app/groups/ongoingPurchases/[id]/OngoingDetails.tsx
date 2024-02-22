@@ -93,11 +93,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const cartQuantity = cartProduct?.cartQuantity ?? 0;
   const remaining = cartQuantity + (group?.total_quantity ?? 0);
 
-  // Debugging logs
-  console.log('cartProduct in on going', cartProduct);
-  console.log('cartQuantity in on going', cartQuantity);
-  console.log('remaining in on going', remaining);
-
   return (
     <div className='my-8'>
       <div className='container mx-auto px-6'>

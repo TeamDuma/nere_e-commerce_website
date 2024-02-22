@@ -25,8 +25,6 @@ const CategoriesRow = ({ params }: Props) => {
     .filter((name) => typeof name === 'string');
   const subTitleText = categoryNames.length > 0 ? categoryNames[0]! : '';
 
-  console.log(categoryNames);
-
   useEffect(() => {
     getCategoryProduct(slug)
       .then(() => {})

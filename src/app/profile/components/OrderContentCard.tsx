@@ -30,10 +30,6 @@ const OrderContentCard: React.FC<OrderContentCardProps> = ({ item }) => {
     months[date.getMonth()]
   } ${date.getFullYear()}`;
 
-  console.log('item', item);
-  console.log('group', item.groups);
-  console.log('product', item.groups[0].product);
-
   return (
     <div className='mt-4'>
       <div className='grid grid-cols-3 gap-4'>

@@ -38,9 +38,6 @@ const Search = ({ params }: Props) => {
               <h1 className='my-5 text-[#F58929]'>Go to the Shop</h1>
             </Link>
           </div>
-          // <div className="flex justify-center items-center h-screen text-5xl">
-          //   <p>No products found.</p>
-          // </div>
         )}
         <div className='px-4 md:px-4 lg:px-4'></div>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>

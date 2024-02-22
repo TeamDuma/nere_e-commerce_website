@@ -82,8 +82,6 @@ const OTPModal: React.FC<{
   const [phoneVerifyToken] = usePhoneVerifyTokenMutation();
   const [submitted, setSubmitted] = useState(false);
 
-  console.log(phoneNumber, token);
-
   const screenWidth = window.innerWidth;
   let modalStyles = customStylesSmall;
 
@@ -125,13 +123,9 @@ const OTPModal: React.FC<{
 
   const handleSubmit = () => {
     const otpCode = inputs.join('');
-    console.log('handleSubmit', token, otpCode);
     phoneVerifyToken({ token, code: otpCode })
       .then((response) => {
         setSubmitted(true);
-
-        console.log('hi', token, otpCode);
-        console.log('response', response);
         onClose();
       })
       .catch((error) => {
@@ -179,7 +173,7 @@ const OTPModal: React.FC<{
             </div>
             <a
               className='flex flex-row items-center text-[#B8B7B5]'
-              href='http://'
+              href='http:/'
               target='_blank'
               rel='noopener noreferrer'
             >

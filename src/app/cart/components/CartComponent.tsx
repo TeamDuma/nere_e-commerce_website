@@ -93,7 +93,6 @@ const CartComponent = () => {
       const response = await getDiscountAmount(requestBody).unwrap();
       const { data } = response;
       const discountAmount = data.discount.discount_amount;
-      console.log('discountAmount', discountAmount);
       setIsPromoCodeApplied(true);
       setDiscountAmount(discountAmount);
       setLoading(false);
@@ -385,7 +384,6 @@ const CartComponent = () => {
                                 'data' in data &&
                                 'authorization_url' in data.data
                               ) {
-                                // console.log('data in cart',data)
                                 const paymentAuthorizationUrl =
                                   data.data.authorization_url;
                                 window.location.href = paymentAuthorizationUrl;

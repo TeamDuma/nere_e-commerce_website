@@ -1,11 +1,10 @@
-import { Orders } from '@/types/orders'; // Ensure correct import path
+import { Orders } from '@/types/orders';
 
 interface OldOrderContentCardProps {
   item: Orders;
 }
 
 const OldOrderContentCard: React.FC<OldOrderContentCardProps> = ({ item }) => {
-  console.log('item', item);
   return (
     <div className='mt-4'>
       <div className='grid grid-cols-3 gap-4'>

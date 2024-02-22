@@ -26,11 +26,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    console.log('searchQuery before push:', searchQuery);
-
     if (searchQuery.length >= 2) {
-      // onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-
       router.push(`/search/${searchQuery}`);
       setSearchQuery('');
     }

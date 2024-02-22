@@ -22,7 +22,7 @@ interface Product {
   unit: string;
   isActive: boolean;
   hasVariants: boolean;
-  variants: any[] | null; // Adjust type if variants have a specific structure
+  variants: any[] | null;
   isFeaturedProduct: boolean;
   desired_margin: number;
 }

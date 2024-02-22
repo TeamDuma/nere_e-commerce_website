@@ -113,7 +113,6 @@ const RegistrationModal: React.FC<{
           toast.success('Signed Up successfully');
           phoneVerify({ token }).then((response) => {
             handleOtpClick();
-            console.log('response', response);
           });
         } else {
           console.log('response', response.error);
