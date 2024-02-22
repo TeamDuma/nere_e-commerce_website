@@ -1,13 +1,48 @@
-import Logo from '@/components/common/Logo';
+import { Orders } from '@/types/orders';
 import OrderProgressBar from '@/components/common/OrderProgressBar';
 
-const OrderContentCard = () => {
+interface OrderContentCardProps {
+  item: Orders;
+}
+
+const timestamp = '2024-02-05T09:44:39.886Z';
+const date = new Date(timestamp);
+
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+const OrderContentCard: React.FC<OrderContentCardProps> = ({ item }) => {
+  const timestamp = item.created_at;
+  const date = new Date(timestamp);
+  const formattedDate = ` ${date.getDate()} ${
+    months[date.getMonth()]
+  } ${date.getFullYear()}`;
+
+  console.log('item', item);
+  console.log('group', item.groups);
+  console.log('product', item.groups[0].product);
+
   return (
     <div className='mt-4'>
       <div className='grid grid-cols-3 gap-4'>
         <div className='... grid justify-items-stretch'>
           <div className='justify-self-auto '>
-            <p className='text-xs	 font-normal	text-[#298592]	'>Mon, 4 Jan 2020</p>
+            <p className='text-xs	 font-normal	text-[#298592]	'>
+              {' '}
+              {formattedDate}
+            </p>
           </div>
         </div>{' '}
         <div className='... invisible'>02</div>
@@ -29,7 +64,7 @@ const OrderContentCard = () => {
         </div>{' '}
         <div className='... invisible'>02</div>
         <div>
-          <p className='text-xs	 font-bold	text-[#838281]	'> NCG123 </p>
+          <p className='text-xs	 font-bold	text-[#838281]	'> {item.reference} </p>
         </div>
       </div>
       <div className='grid grid-cols-3 gap-4'>
@@ -57,30 +92,35 @@ const OrderContentCard = () => {
           </div>
         </div>
         <div className='m-2 mt-8 flex flex-wrap'>
-          <div className='relative  m-2           rounded border-2 border-solid border-[#F58929] p-8'>
-            <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#F58929] p-1 text-xs text-white'>
-              8/12
-            </span>
-          </div>
-
-          <div
-            className='relative m-2 
-          rounded border-2 border-solid border-[#F58929] p-8'
-          >
-            <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#F58929] p-1 text-xs text-white'>
-              8/12
-            </span>
-          </div>
-          <div className='relative  m-2           rounded border-2 border-solid border-[#298592] p-8'>
-            <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#298592] p-1 text-xs text-white'>
-              12/12
-            </span>
-          </div>
-          <div className='relative  m-2           rounded border-2 border-solid border-[#F58929] p-8'>
-            <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#F58929] p-1 text-xs text-white'>
-              8/12
-            </span>
-          </div>
+          {item.groups.map((group, index) => (
+            <div key={index}>
+              <div
+                className='relative m-2 rounded border-2 border-solid border-[#F58929] p-8'
+                style={{
+                  borderRadius:
+                    group.total_quantity === group.product.min_quantity
+                      ? '10px'
+                      : '0',
+                }}
+              >
+                <img
+                  src={group.product?.plain_image}
+                  alt={group.product?.name}
+                  className='h-[83px] w-[83px] rounded-lg'
+                  style={{ width: '20px', height: '50px' }}
+                />
+                {group.product.hasMinQuantity ? (
+                  <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#F58929] p-1 text-xs text-white'>
+                    {group.total_quantity} / {group.product.min_quantity}
+                  </span>
+                ) : (
+                  <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#F58929] p-1 text-xs text-white'>
+                    {group.total_quantity}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className='grid grid-cols-3 gap-4'>

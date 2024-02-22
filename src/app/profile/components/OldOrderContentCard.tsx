@@ -1,8 +1,11 @@
-import Logo from '@/components/common/Logo';
-import OldOrderProgressBar from '@/components/common/OldOrderProgressBar';
-import OrderProgressBar from '@/components/common/OrderProgressBar';
+import { Orders } from '@/types/orders'; // Ensure correct import path
 
-const OldOrderContentCard = () => {
+interface OldOrderContentCardProps {
+  item: Orders;
+}
+
+const OldOrderContentCard: React.FC<OldOrderContentCardProps> = ({ item }) => {
+  console.log('item', item);
   return (
     <div className='mt-4'>
       <div className='grid grid-cols-3 gap-4'>
@@ -64,8 +67,16 @@ const OldOrderContentCard = () => {
             </span>
           </div>
 
-          <div className='relative  m-2           rounded border-2 border-solid border-[#8A8886] p-8'>
+          <div
+            className='relative m-2 
+        rounded border-2 border-solid border-[#8A8886] p-8'
+          >
             <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#8A8886] p-1 text-xs text-white'>
+              8/12
+            </span>
+          </div>
+          <div className='relative  m-2           rounded border-2 border-solid border-[#298592] p-8'>
+            <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#298592] p-1 text-xs text-white'>
               12/12
             </span>
           </div>
@@ -90,7 +101,7 @@ const OldOrderContentCard = () => {
           </div>
         </div>
 
-        <OldOrderProgressBar percentage={10} />
+        {/* <OldOrderProgressBar percentage={10}/> */}
 
         <div className='grid grid-cols-3 gap-4'>
           <p className='mt-4	  text-xs		font-medium	text-[#1A464C]'>

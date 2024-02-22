@@ -10,6 +10,7 @@ import {
 } from '@/types/customer';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
+import { GetOrdersResponse } from '@/types/orders';
 
 const customerApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -49,6 +50,11 @@ const customerApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+    getOrders: builder.query<GetOrdersResponse, string>({
+      query: (uid) => {
+        return endpoints.getOrders(uid);
+      },
+    }),
   }),
 });
 
@@ -57,4 +63,5 @@ export const {
   useSignUpMutation,
   usePhoneVerifyMutation,
   usePhoneVerifyTokenMutation,
+  useLazyGetOrdersQuery,
 } = customerApi;
