@@ -41,7 +41,6 @@ const Page = () => {
     if (reference) {
       getOrderConfirmation(reference).then((response) => {
         setStatus(response.data?.status!);
-        console.log('response', response.data);
         setGroups(response.data?.data?.groups!);
         setTotal(response.data?.data?.amount!);
         setTotalItems(response.data?.data?.total_items!);

@@ -32,8 +32,27 @@ export interface IRegisterRequest {
 }
 
 export interface IRegisterResponse {
-  status: string;
+  success: string;
   data: {
     Customer: Customer[];
   };
+  token: string;
+  message: string;
+}
+
+export interface IphoneVerifyRequest {
+  token: string;
+}
+export interface IphoneVerifyResponse {
+  status: string;
+}
+
+export interface IphoneVerifyTokenRequest {
+  token?: string | null;
+  code: string;
+}
+
+export interface IphoneVerifyTokenResponse {
+  message: string;
+  status: string;
 }

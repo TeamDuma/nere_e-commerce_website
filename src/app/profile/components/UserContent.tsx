@@ -69,7 +69,7 @@ const UserContent = () => {
               </div>
             </div>
             <div className='mb-8'>
-              <p className='cursor-pointer  text-[#298592]	 '>Edit</p>
+              <p className='cursor-pointer  text-[#1A464C]	 '>Edit</p>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ const UserContent = () => {
               <div className='flex justify-between p-2'>
                 <div className='rounded-md bg-white'>Pickup Location</div>
                 <div
-                  className='cursor-pointer text-xs text-[#298592]	 '
+                  className='cursor-pointer text-xs text-[#1A464C]	 '
                   onClick={openPickupModal}
                 >
                   Change pickup location {'>'}
@@ -104,34 +104,42 @@ const UserContent = () => {
                     </p>
                   )}
                 </div>
-                {/* <div className='m-2 text-gray-500'>
-                <p>Additional information:</p>
-
-                <p className='cursor-pointer text-[#298592]'>
-                  {' '}
-                  See on google maps
-                </p>
-                <p>Nere Agent Pickup, East Legon</p>
-                <p>MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra</p>
-              </div> */}
               </div>
             </div>
           </div>
           <div className='rounded-md border border-gray-100 bg-white p-6 shadow-md shadow-black/5'>
             <div className='flex justify-between p-2'>
-              <div className='rounded-md bg-white'>Nere Quest</div>
-              <div className='cursor-pointer text-xs text-[#298592]	 '>
-                <img src='/Users/alaa/new git e-commece/nere_e-commerce_website/public/images/coin.png' />
+              <div className='rounded-md bg-white'>
+                <p className='ml-2'> 22 Nere Quest</p>
+              </div>
+              <div className='cursor-pointer text-xs text-[#1A464C]	 '>
+                <img
+                  className='mx-5 my-1'
+                  src='/images/coinSmall.svg'
+                  alt='Coin'
+                />
               </div>
             </div>
             <div className='flex justify-between p-2'>
-              <div className='cursor-pointer text-xs text-[#298592]	 '>
-                <img src='/Users/alaa/new git e-commece/nere_e-commerce_website/public/images/coin.png' />
-                Game point
+              <div className='cursor-pointer text-xs text-[#1A464C]	 '>
+                <img
+                  className='mx-5 my-1'
+                  src='/images/joystickSmall.svg'
+                  alt='Coin'
+                />
+
+                <p className='my-1 ml-8'> 34</p>
+                <p className='ml-2'> Game point</p>
               </div>
-              <div className='cursor-pointer text-xs text-[#298592]	 '>
-                <img src='/Users/alaa/new git e-commece/nere_e-commerce_website/public/images/coin.png' />
-                Game point
+              <div className='mt-1 cursor-pointer text-xs text-[#1A464C]	 '>
+                <img
+                  className='mx-5 my-1'
+                  src='/images/loyaltySmall.svg'
+                  alt='Coin'
+                />
+
+                <p className='my-1 ml-8'> 34</p>
+                <p className='ml-2'> Loyalty point</p>
               </div>
             </div>
           </div>

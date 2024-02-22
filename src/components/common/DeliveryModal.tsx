@@ -96,8 +96,6 @@ const DeliveryModal: React.FC<{
   );
   const [selectedOption, setSelectedOption] = useState<'pickup' | null>(null);
 
-  console.log('data', data);
-
   const closeModal = () => {
     onClose();
   };

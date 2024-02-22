@@ -9,6 +9,7 @@ export interface IShoppingState {
   orderData: any[];
   selectedLocationId?: number;
   locations: Location[];
+  token: string | null;
 }
 
 const initialState: IShoppingState = {
@@ -17,6 +18,7 @@ const initialState: IShoppingState = {
   orderData: [],
   selectedLocationId: undefined,
   locations: [],
+  token: null,
 };
 
 export const shoppingSlice = createSlice({
@@ -98,6 +100,12 @@ export const shoppingSlice = createSlice({
     setLocations: (state, action: PayloadAction<Location[]>) => {
       state.locations = action.payload;
     },
+    saveToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
+    clearToken: (state) => {
+      state.token = null;
+    },
   },
 });
 
@@ -113,6 +121,8 @@ export const {
   deleteUser,
   setSelectedLocationId,
   setLocations,
+  saveToken,
+  clearToken,
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;
 

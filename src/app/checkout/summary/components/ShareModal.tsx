@@ -40,7 +40,6 @@ const ShareModal = ({ isOpen, onClose, group }: ShareModalProps) => {
     if (linkInputRef.current) {
       linkInputRef.current.select();
       document.execCommand('copy');
-      // You can provide feedback to the user that the link is copied, e.g., show a tooltip
       alert('Link copied to clipboard!');
     }
   };

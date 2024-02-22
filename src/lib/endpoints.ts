@@ -23,6 +23,9 @@ const endpoints = {
   // Customers
   signup: 'customers/signUp',
   signIn: 'customers/signIn',
+  phoneVerify: 'customers/phone/verify',
+  phoneVerifyToken: 'customers/phone/verify/token',
+  getOrders: (uid: string) => `/orders/customer/${uid}`,
 
   // Location
   activeLocations: 'locations/active',

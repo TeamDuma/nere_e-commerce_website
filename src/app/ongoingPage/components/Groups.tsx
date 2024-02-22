@@ -6,7 +6,6 @@ import { useGetGroupsQuery } from '@/lib/redux/services/group';
 const Groups = () => {
   const { data, isLoading } = useGetGroupsQuery();
   const groups = data?.data?.groups ?? [];
-  console.log('data', groups);
 
   return (
     <div>

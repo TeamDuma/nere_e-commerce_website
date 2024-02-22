@@ -16,7 +16,7 @@ const customStylesLarge: Styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    top: '50%',
+    top: '53%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '400px',
@@ -86,7 +86,7 @@ const LoyaltyModal: React.FC<{
   }
 
   return (
-    <div>
+    <div className=' bg-gray-50'>
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
@@ -94,11 +94,19 @@ const LoyaltyModal: React.FC<{
         contentLabel='Example Modal'
       >
         <div className='flex h-full flex-col items-center justify-center'>
-          <h2 className='mb-4 text-xl'>Coming Soon !!</h2>
-          <h2 className='mb-4 text-xl'>image</h2>
-          <h2 className='mb-4 text-xl'>Loyalty Offers</h2>
+          <h2 className='mb-4 text-2xl	font-semibold	 text-[#298592]'>
+            Coming Soon !!
+          </h2>
+          <div className='mb-4 text-xl'>
+            <img
+              className='w-156 h-156 mx-1 my-1'
+              src='/images/loyalty.svg'
+              alt='Coin'
+            />
+          </div>
+          <h2 className='mb-4 text-xl font-medium	'>Loyalty Offers</h2>
           <div className='... flex items-stretch'>
-            <p className='mb-4 text-center'>
+            <p className='mb-4 text-center text-sm font-normal			'>
               Enjoy exciting games while you shop, and win Nere coins that can
               be redeemed as Discount!{' '}
             </p>

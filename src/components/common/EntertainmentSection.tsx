@@ -36,18 +36,9 @@ const EntertainmentSection = () => {
           className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
           onClick={openNereCoinModal}
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth='1.5'
-            stroke='currentColor'
-            className='h-12 w-20 text-green-400'
-          ></svg>
+          <img className='mx-4 my-1' src='/images/coinSmall.svg' alt='Coin' />
           <div>
-            <h2 className='my-1' style={{ fontSize: '12px' }}>
-              Nere Coins
-            </h2>
+            <h2 style={{ fontSize: '12px' }}>Nere Coins</h2>
             <h4
               className='text-md inline font-semibold text-[#298592]'
               style={{ fontSize: '14px' }}
@@ -61,14 +52,12 @@ const EntertainmentSection = () => {
           className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
           onClick={openGameModal}
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth='1.5'
-            stroke='currentColor'
-            className='h-12 w-20 text-gray-400'
-          ></svg>
+          <img
+            className='mx-4 my-1'
+            src='/images/joystickSmall.svg'
+            alt='Coin'
+          />
+
           <div>
             <h2 className='my-1' style={{ fontSize: '12px' }}>
               Game and win coins
@@ -86,14 +75,12 @@ const EntertainmentSection = () => {
           className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
           onClick={openLoyaltyModal}
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth='1.5'
-            stroke='currentColor'
-            className='h-12 w-20 text-red-300'
-          ></svg>
+          <img
+            className='mx-4 my-1'
+            src='/images/loyaltySmall.svg'
+            alt='Coin'
+          />
+
           <div>
             <h2 className='my-1' style={{ fontSize: '12px' }}>
               Loyalty offers?

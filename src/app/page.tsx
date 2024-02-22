@@ -21,7 +21,6 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { MdGroups } from 'react-icons/md';
 import ThreeBannerLayout from '@/components/ThreeBannerLayout';
-// import FeaturedProductsTwo from '@/components/FeaturedProductsTwo';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
