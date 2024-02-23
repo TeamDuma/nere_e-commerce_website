@@ -79,6 +79,8 @@ const CartComponent = () => {
     return Math.round(savingsPercentage);
   };
 
+  console.log('cartItems', cartItems);
+
   const handleApplyPromoCode = async () => {
     try {
       const customer_uid = userInfo.data.customer.uid;
@@ -168,6 +170,27 @@ const CartComponent = () => {
                         <h6 className='text-base font-semibold leading-7 text-black'>
                           {item.name}
                         </h6>
+                      </div>
+                    </div>
+                    <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100'>
+                        {item.isGroupJoiner ? (
+                          <div className='h-max-h-[5px] ml-8 rounded-md border border-[#298592] p-2'>
+                            <span className='text-xs text-[#298592]'>
+                              groupID : {item.groupID}
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='grid grid-cols-1 md:grid-cols-4'>
+                    <div className='md:col-span-2'>
+                      <div className='flex max-w-[500px] flex-col gap-3'>
+                        {/* <h6 className='text-base font-semibold leading-7 text-black'>
+                          {item.name}
+                        </h6> */}
                         <div className='flex items-center pt-5'>
                           <p className='cursor-pointer text-base font-medium leading-3 text-[1A464C] dark:text-white'>
                             ¢{item.sale_price}
