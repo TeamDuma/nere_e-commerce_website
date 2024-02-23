@@ -1,16 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
+import { Product } from '@/types/product';
+import { addToCart } from '@/lib/redux/slices/shopping';
+import { useDispatch } from 'react-redux';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
   const products = data?.data?.products ?? [];
+  const dispatch = useDispatch();
 
   const featureProducts = products.filter(
     (product) => product.isFeaturedProduct
   );
+
+  const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+
+  const product = products.find(
+    (product) =>
+      product.categories && typeof product.categories.name === 'string'
+  );
+
+  const handleAddToCart = (product: Product) => {
+    const itemToAdd = {
+      ...product,
+      cartQuantity: 0,
+      productID: product.id,
+      isGroupJoiner: false,
+    };
+
+    dispatch(addToCart({ item: itemToAdd }));
+  };
 
   return (
     <>
@@ -23,7 +45,90 @@ const FeaturedProducts = () => {
               <Link href={`/product/${product.slug}`} key={product?.id}>
                 <div key={product?.id}>
                   <>
-                    <div className='px-4 md:px-4 lg:px-4'>
+                    <div
+                      key={product?.id}
+                      onMouseEnter={() =>
+                        setHoveredProductId(String(product.id))
+                      }
+                      onMouseLeave={() => setHoveredProductId(null)}
+                      className='relative mx-4 rounded-md bg-gray-100 dark:bg-gray-800'
+                    >
+                      <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
+                        {`${Math.round(
+                          ((product.price - product.sale_price) /
+                            product.price) *
+                            100
+                        )}%`}
+                      </div>
+                      <div className='mt-2 flex items-center justify-center md:mt-4'>
+                        <div
+                          style={{
+                            backgroundSize: 'cover',
+                            backgroundColor: 'gray-100',
+                            width: '200px',
+                            height: '200px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <img
+                            style={{ borderRadius: '10px' }}
+                            src={product?.plain_image}
+                            width={
+                              product.name === 'Frytol sunflower oil 0.9L' ||
+                              product.name === "Dr. Annie's honey 500ml"
+                                ? '60px'
+                                : '60px'
+                            }
+                            alt='cerelac image'
+                          />
+                        </div>
+                      </div>
+                      {hoveredProductId === String(product.id) && (
+                        <div className='flex  justify-items-center'>
+                          <button
+                            className='mx-6 my-4 rounded bg-[#1A464C] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                            style={{ zIndex: 1 }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              console.log(product.id);
+                              handleAddToCart(product);
+                            }}
+                          >
+                            Quick Add
+                          </button>
+                        </div>
+                      )}
+
+                      <div className='flex items-center'>
+                        <div className='h-12'>
+                          <h5
+                            tabIndex={0}
+                            className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                            style={{ maxWidth: '12rem' }}
+                          >
+                            {product?.name}
+                          </h5>
+                        </div>
+                      </div>
+                      <div className='ml-2 flex'>
+                        <div
+                          style={{ color: '#F31748' }}
+                        >{`¢ ${product?.sale_price}`}</div>
+                        <div
+                          style={{
+                            marginLeft: '14px',
+                            color: '#B3B3B3',
+                            textDecoration: 'line-through',
+                          }}
+                        >
+                          {`¢ ${product?.price}`}
+                        </div>
+                      </div>
+                    </div>
+                    {/* <div className='px-4 md:px-4 lg:px-4'>
                       <div className='relative rounded-md bg-gray-100 dark:bg-gray-800'>
                         <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                           {`${Math.round(
@@ -82,7 +187,7 @@ const FeaturedProducts = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </>
                 </div>
               </Link>

@@ -1,11 +1,14 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { useLazyGetCategoryProductQuery } from '@/lib/redux/services/product';
 import Title from '@/components/Title';
 import SubTitle from '@/components/SubTitle';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { addToCart } from '@/lib/redux/slices/shopping';
+import { useDispatch, useSelector } from 'react-redux';
+import { Product } from '@/types/product';
 
 type Props = {
   params: {
@@ -14,6 +17,8 @@ type Props = {
 };
 
 const CategoriesRow = ({ params }: Props) => {
+  const dispatch = useDispatch();
+
   const { slug } = params;
 
   const [getCategoryProduct, { data, isLoading }] =
@@ -24,12 +29,31 @@ const CategoriesRow = ({ params }: Props) => {
     .map((product) => product.categories?.name)
     .filter((name) => typeof name === 'string');
   const subTitleText = categoryNames.length > 0 ? categoryNames[0]! : '';
+  const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+
+  const product = products.find(
+    (product) =>
+      product.categories && typeof product.categories.name === 'string'
+  );
+
+  console.log('productWithCategory', product);
 
   useEffect(() => {
     getCategoryProduct(slug)
       .then(() => {})
       .catch(() => {});
   }, [slug]);
+
+  const handleAddToCart = (product: Product) => {
+    const itemToAdd = {
+      ...product,
+      cartQuantity: 0,
+      productID: product.id,
+      isGroupJoiner: false,
+    };
+
+    dispatch(addToCart({ item: itemToAdd }));
+  };
 
   return (
     <>
@@ -52,6 +76,10 @@ const CategoriesRow = ({ params }: Props) => {
                     <Link href={`/product/${product.slug}`} key={product?.id}>
                       <div
                         key={product?.id}
+                        onMouseEnter={() =>
+                          setHoveredProductId(String(product.id))
+                        }
+                        onMouseLeave={() => setHoveredProductId(null)}
                         className='relative mx-4 rounded-md bg-gray-100 dark:bg-gray-800'
                       >
                         <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
@@ -87,11 +115,28 @@ const CategoriesRow = ({ params }: Props) => {
                             />
                           </div>
                         </div>
+                        {hoveredProductId === String(product.id) && (
+                          <div className='flex  justify-items-center'>
+                            <button
+                              className='mx-6 my-4 rounded bg-[#1A464C] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                              style={{ zIndex: 1 }}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                console.log(product.id);
+                                handleAddToCart(product);
+                              }}
+                            >
+                              Quick Add
+                            </button>
+                          </div>
+                        )}
+
                         <div className='flex items-center'>
                           <div className='h-12'>
                             <h5
                               tabIndex={0}
-                              className='text line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                              className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                              style={{ maxWidth: '12rem' }}
                             >
                               {product?.name}
                             </h5>
