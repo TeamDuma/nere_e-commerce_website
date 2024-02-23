@@ -188,9 +188,6 @@ const CartComponent = () => {
                   <div className='grid grid-cols-1 md:grid-cols-4'>
                     <div className='md:col-span-2'>
                       <div className='flex max-w-[500px] flex-col gap-3'>
-                        {/* <h6 className='text-base font-semibold leading-7 text-black'>
-                          {item.name}
-                        </h6> */}
                         <div className='flex items-center pt-5'>
                           <p className='cursor-pointer text-base font-medium leading-3 text-[1A464C] dark:text-white'>
                             ¢{item.sale_price}
