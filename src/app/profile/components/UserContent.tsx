@@ -1,4 +1,5 @@
 import PickupLocation from '@/app/delivery/components/PickupLocation';
+import EditProfile from '@/components/common/EditProfile';
 import { selectShopping, setSelectedLocationId } from '@/lib/redux';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
@@ -8,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const UserContent = () => {
   const [PickupLocationVisible, setPickupLocationVisible] = useState(false);
+  const [ProfileEditVisible, setProfileEditVisible] = useState(false);
 
   const dispatch = useDispatch();
   const { selectedLocationId } = useSelector(selectShopping);
@@ -37,6 +39,13 @@ const UserContent = () => {
 
   const closeModal = () => {
     setPickupLocationVisible(false);
+  };
+  const openEditModal = () => {
+    setProfileEditVisible(true);
+  };
+
+  const closeEditModal = () => {
+    setProfileEditVisible(false);
   };
 
   return (
@@ -69,7 +78,12 @@ const UserContent = () => {
               </div>
             </div>
             <div className='mb-8'>
-              <p className='cursor-pointer  text-[#1A464C]	 '>Edit</p>
+              <p
+                className='cursor-pointer  text-[#1A464C]	 '
+                onClick={openEditModal}
+              >
+                Edit
+              </p>
             </div>
           </div>
         </div>
@@ -145,6 +159,7 @@ const UserContent = () => {
           </div>
 
           <PickupLocation onClose={closeModal} isOpen={PickupLocationVisible} />
+          <EditProfile onClose={closeEditModal} isOpen={ProfileEditVisible} />
         </div>
       </div>
     </>
