@@ -145,11 +145,13 @@ const OTPModal: React.FC<{
           <Logo />
           <h2 className='mb-4 font-semibold'>Verify Phone Number</h2>
           <p className='text-sm'>
-            Code is sent to {phoneNumber}
+            Code is sent to{' '}
+            <span className='mx-2 font-semibold'> {phoneNumber} </span>
             <span className='cursor-pointer text-[#298592]'>
               Change Number?
             </span>
           </p>
+
           <div className='flex flex-row '>
             {inputs.map((_, index) => (
               <div className='w-35 h-30 m-2' key={index}>
