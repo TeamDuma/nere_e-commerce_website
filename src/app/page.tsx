@@ -1,5 +1,5 @@
 'use client';
-import Categories from '@/app/categories/page';
+import Categories from '@/components/categories/page';
 import Banner from '@/components/Slider';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import OngoingRow from '@/components/OngoingRow';

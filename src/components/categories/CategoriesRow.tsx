@@ -102,17 +102,33 @@ const CategoriesRow = ({ params }: Props) => {
                               borderRadius: '10px',
                             }}
                           >
-                            <img
-                              style={{ borderRadius: '10px' }}
-                              src={product?.plain_image}
-                              width={
-                                product.name === 'Frytol sunflower oil 0.9L' ||
-                                product.name === "Dr. Annie's honey 500ml"
-                                  ? '60px'
-                                  : '60px'
-                              }
-                              alt='cerelac image'
-                            />
+                            <div className='mt-2 flex items-center justify-center md:mt-4'>
+                              <div
+                                style={{
+                                  backgroundSize: 'cover',
+                                  backgroundColor: 'gray-100',
+                                  width: '200px',
+                                  height: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  borderRadius: '10px',
+                                }}
+                              >
+                                <img
+                                  style={{ borderRadius: '10px' }}
+                                  src={product?.plain_image}
+                                  width={
+                                    product.name ===
+                                      'Frytol sunflower oil 0.9L' ||
+                                    product.name === "Dr. Annie's honey 500ml"
+                                      ? '60px'
+                                      : '60px'
+                                  }
+                                  alt='cerelac image'
+                                />
+                              </div>
+                            </div>
                           </div>
                         </div>
                         {hoveredProductId === String(product.id) && (
