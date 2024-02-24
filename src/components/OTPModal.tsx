@@ -42,7 +42,7 @@ const customStylesMedium: Styles = {
     flexDirection: 'column',
     top: '30%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(50%, 50%)',
     width: '60%',
     maxWidth: '550px',
     margin: 'auto',
@@ -146,7 +146,7 @@ const OTPModal: React.FC<{
           <h2 className='mb-4 font-semibold'>Verify Phone Number</h2>
           <p className='text-sm'>
             Code is sent to{' '}
-            <span className='mx-2 font-semibold'> {phoneNumber} </span>
+            <span className='mx-2 font-semibold'>{phoneNumber}</span>
             <span className='cursor-pointer text-[#298592]'>
               Change Number?
             </span>
@@ -184,7 +184,7 @@ const OTPModal: React.FC<{
           </div>
           {!submitted && (
             <button
-              className='mt-4 rounded bg-[#298592] px-6 py-2 text-white hover:bg-[#1e6771] focus:bg-blue-600 focus:outline-none'
+              className='mt-4 rounded bg-[#298592] px-6 py-2 text-white hover:bg-[#1e6771] focus:bg-[#08383f] focus:outline-none'
               onClick={handleSubmit}
             >
               Submit
