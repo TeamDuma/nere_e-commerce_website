@@ -51,7 +51,7 @@ const customStylesSmall: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '350px',
-    height: '650px',
+    height: '700px',
     borderRadius: '15px',
   },
 };
@@ -139,15 +139,21 @@ const RegistrationModal: React.FC<{
       style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
     >
       <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center justify-center bg-opacity-50'>
+   
         <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white sm:max-h-screen'>
           <div className='flex w-full items-center justify-center'>
             <div className=' mx-auto max-w-[400px]'>
-              <div className='mb-4'>
-                <Logo />
-                <p className='text-gray-600'>
-                  Register with your email & password
-                </p>
-              </div>
+            <div className='rounded-xl p-4 '>
+            <div className=' flex items-center justify-center text-center  '>
+              <Logo />
+            </div>
+            <div className=' flex items-center justify-center text-center  '>
+              <p className='text-sm	font-bold	'>
+              Register with your email & Password
+              </p>
+            </div>
+          </div>
+            
 
               <label
                 htmlFor='Name'
@@ -190,7 +196,7 @@ const RegistrationModal: React.FC<{
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='kojo@gmail.com'
+                placeholder='+233(XXX-XXX-XXX)'
               />
 
               <label
@@ -235,13 +241,16 @@ const RegistrationModal: React.FC<{
                   Register
                 </button>
               </div>
+              
               <div className='inline-flex w-full items-center justify-center'>
-                <hr className='my-8 h-px w-64 border-0 bg-gray-200 dark:bg-gray-700' />
-                <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                <hr className='my-2 h-px w-32 border-0 bg-gray-200 dark:bg-gray-700' />
+                <span className='  bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
                   or
                 </span>
+                <hr className='my-4 h-px w-32 border-0 bg-gray-200 dark:bg-gray-700' />
+
               </div>
-              <p>
+              <p className='ml-8'>
                 Already have an account?{' '}
                 <span
                   onClick={onLoginClick}
