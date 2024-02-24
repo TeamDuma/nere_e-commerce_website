@@ -42,7 +42,7 @@ const customStylesMedium: Styles = {
     flexDirection: 'column',
     top: '30%',
     left: '50%',
-    transform: 'translate(50%, 50%)',
+    transform: 'translate(-50%, -50%)',
     width: '60%',
     maxWidth: '550px',
     margin: 'auto',
@@ -146,7 +146,7 @@ const OTPModal: React.FC<{
           <h2 className='mb-4 font-semibold'>Verify Phone Number</h2>
           <p className='text-sm'>
             Code is sent to{' '}
-            <span className='mx-2 font-semibold'>{phoneNumber}</span>
+            <span className='mx-2 font-semibold'> {phoneNumber} </span>
             <span className='cursor-pointer text-[#298592]'>
               Change Number?
             </span>
