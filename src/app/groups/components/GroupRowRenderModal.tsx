@@ -24,7 +24,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
           src={item.product?.plain_image}
           alt={item.product?.name}
           className='h-[83px] w-[83px] rounded-lg'
-          style={{ width: '70px', height: '105px' }}
+          style={{ width: '60px', height: '105px' }}
         />
         {item.product?.price && item.product.sale_price && (
           <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white'>
