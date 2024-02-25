@@ -116,10 +116,19 @@ const Header = () => {
                     <UserIcon />
                   </button>
                   {isDropdownOpen && (
-                    <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
-                      <button className='block px-4 py-2 text-[#298592]'>
+                    <div
+                      className='absolute mt-2 rounded-md bg-white shadow-lg'
+                      style={{ zIndex: 1 }}
+                    >
+                      {/* <button className='block px-4 py-2 text-[#298592]'>
                         Profile
-                      </button>
+                      </button> */}
+                      <a
+                        href='/profile'
+                        className='block px-4 py-2 text-[#298592]'
+                      >
+                        Profile
+                      </a>
                       <a
                         href='/lastorder'
                         className='block px-4 py-2 text-[#298592]'

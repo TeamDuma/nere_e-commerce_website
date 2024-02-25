@@ -26,7 +26,7 @@ const customStyles: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(190, 192, 193, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     position: 'fixed',
@@ -67,7 +67,7 @@ const CartModal: React.FC<{
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + item.price * item.cartQuantity;
+      return total + item.sale_price * item.cartQuantity;
     }, 0);
   };
 
@@ -78,7 +78,10 @@ const CartModal: React.FC<{
 
   return (
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={onClose}>
-      <div className='mb-5 rounded-lg md:w-full'>
+      <div
+        className='mb-5 rounded-lg md:w-full'
+        style={{ zIndex: isOpen ? 50 : -1 }}
+      >
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
@@ -188,7 +191,15 @@ const CartModal: React.FC<{
         )}
       </div>
       <div className='mt-6 w-full rounded-lg'>
-        {userInfo ? (
+        <Link href='/cart'>
+          <button
+            type='button'
+            className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
+          >
+            <span>Checkout</span>
+          </button>
+        </Link>
+        {/* {userInfo ? (
           <Link href='/cart'>
             <button
               type='button'
@@ -215,7 +226,7 @@ const CartModal: React.FC<{
               Delivery fee is not included
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </Modal>
   );

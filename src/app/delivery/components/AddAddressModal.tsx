@@ -15,6 +15,7 @@ const customStyles: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     display: 'flex',
@@ -27,6 +28,7 @@ const customStyles: Styles = {
     width: '600px',
     height: '650px',
     borderRadius: '15px',
+    border: 'none',
   },
 };
 

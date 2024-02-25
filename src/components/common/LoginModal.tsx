@@ -14,19 +14,18 @@ const customStylesLarge: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'column',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '550px',
-    height: '500px',
+    width: '509px',
+    height: '600px',
     borderRadius: '15px',
+    border: 'none',
   },
 };
 const customStylesSmall: Styles = {
@@ -36,7 +35,7 @@ const customStylesSmall: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     display: 'flex',
@@ -47,8 +46,9 @@ const customStylesSmall: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '350px',
-    height: '550px',
+    height: '600px',
     borderRadius: '15px',
+    border: 'none',
   },
 };
 
@@ -109,79 +109,109 @@ const LoginModal: React.FC<{
         style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
         contentLabel='Example Modal'
       >
-        <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center  justify-center bg-opacity-50'>
-          <div className='sm:rounded-4xl  w-full max-w-xl overflow-y-auto bg-white'>
-            <div className='flex w-full items-center justify-center'>
-              {' '}
-              <div className='m-8 mx-auto  max-w-[300px]'>
-                <div className='mb-8'>
-                  <Logo />
-                  <p>Login with your email & Password</p>
-                </div>
-
-                <label
-                  htmlFor='Email'
-                  className='text-sm  leading-tight tracking-normal text-gray-800'
-                >
-                  Email{' '}
-                </label>
-                <input
-                  type='email'
-                  id='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                  placeholder='kojo@gmail.com'
-                />
-
-                <label
-                  htmlFor='Password'
-                  className='text-sm  leading-tight tracking-normal text-gray-800'
-                >
-                  Password{' '}
-                </label>
-                <div className='relative mb-5 mt-2'>
-                  <input
-                    type='password'
-                    id='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                    placeholder='Password'
-                  />
-                </div>
-
-                <div className='space-y-4'>
-                  <div className='space-y-4'>
-                    <button
-                      className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
-                      onClick={handleLogin}
-                      disabled={isLoading}
-                    >
-                      {isLoading ? <Spinner /> : 'Login'}
-                    </button>
-                  </div>
-                </div>
-
-                <div className='inline-flex w-full items-center justify-center'>
-                  <hr className='my-8 h-px w-64 border-0 bg-gray-200 dark:bg-gray-700' />
-                  <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
-                    or
-                  </span>
-                </div>
-                <p>
-                  Don't have an account?{' '}
-                  <span
-                    onClick={onRegistrationClick}
-                    className='cursor-pointer text-[#298592]'
-                  >
-                    Register
-                  </span>
-                </p>
-              </div>
+        <>
+          <div className='rounded-xl p-4 '>
+            <div className=' flex items-center justify-center text-center  '>
+              <Logo />
+            </div>
+            <div className=' flex items-center justify-center text-center  '>
+              <p className='text-sm	font-bold	'>
+                Login with your email & Password
+              </p>
             </div>
           </div>
-        </div>
+          <form action='' className='my-2'>
+            <div className='flex flex-col space-y-5'>
+              <label htmlFor='email'>
+                <p className='pb-2 text-sm font-medium	 text-slate-700'>Email</p>
+                <input
+                  id='email'
+                  name='email'
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className='w-full rounded-lg border border-slate-200 px-3 py-3 hover:shadow focus:border-slate-500 focus:outline-none'
+                  placeholder='Enter email address'
+                />
+              </label>
+              <label htmlFor='password'>
+                <p className='pb-2 text-sm font-medium	 text-slate-700'>
+                  Password
+                </p>
+                <input
+                  id='password'
+                  name='password'
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className='w-full rounded-lg border border-slate-200 px-3 py-3 hover:shadow focus:border-slate-50 focus:outline-none'
+                  placeholder='Enter your password'
+                />
+              </label>
+              <div className='flex flex-row justify-end'>
+                <div>
+                  <a href='#' className='font-medium text-[#298592]'>
+                    Forgot Password?
+                  </a>
+                </div>
+              </div>
+              <button
+                className='inline-flex w-full items-center justify-center space-x-2 rounded-lg border-[#298592] bg-[#298592] py-3 font-medium text-white hover:bg-[#298592] hover:shadow'
+                onClick={handleLogin}
+                disabled={isLoading}
+              >
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-6 w-6'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
+                  />
+                </svg>
+
+                <span> {isLoading ? <Spinner /> : 'Login'}</span>
+              </button>
+              <div className='inline-flex w-full items-center justify-center'>
+                <hr className='my-4 h-px w-64 border-0 bg-gray-200 dark:bg-gray-700' />
+                <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                  or
+                </span>
+              </div>
+
+              <p className='text-center'>
+                Dont have any account?{' '}
+                <a
+                  href='#'
+                  className='inline-flex items-center space-x-1 font-medium text-[#298592]'
+                >
+                  <span onClick={onRegistrationClick}>Register</span>
+                  <span>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-4 w-4'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </p>
+            </div>
+          </form>
+        </>
       </Modal>
     </div>
   );

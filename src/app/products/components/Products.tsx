@@ -9,8 +9,8 @@ import ThreeBannerLayout from '@/components/ThreeBannerLayout';
 import TwoBannerLayout from '@/components/TwoBannerLayout';
 import Container from '@/components/common/Container';
 import ViewMore from '@/components/common/ViewMore';
-import CategoriesHeader from '@/app/categories/components/CategoriesHeader';
-import CategoriesRow from '@/app/categories/CategoriesRow';
+import CategoriesHeader from '@/components/categories/components/CategoriesHeader';
+import CategoriesRow from '@/components/categories/CategoriesRow';
 
 const Products = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
