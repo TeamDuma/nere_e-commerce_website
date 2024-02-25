@@ -9,6 +9,7 @@ import { FaLongArrowAltRight } from 'react-icons/fa';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { useDispatch, useSelector } from 'react-redux';
 import { Product } from '@/types/product';
+import { toast } from 'react-toastify';
 
 type Props = {
   params: {
@@ -128,10 +129,44 @@ const CategoriesRow = ({ params }: Props) => {
                                   alt='cerelac image'
                                 />
                               </div>
+                              {hoveredProductId === String(product.id) && (
+                                <div
+                                  style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                    borderRadius: '10px',
+                                  }}
+                                >
+                                  <button
+                                    className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                                    style={{ zIndex: 1 }}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      console.log(product.id);
+                                      handleAddToCart(product);
+                                      toast.success(
+                                        `${product.name} added to cart!`,
+                                        {
+                                          autoClose: 500,
+                                        }
+                                      );
+                                    }}
+                                  >
+                                    Quick Add
+                                  </button>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
-                        {hoveredProductId === String(product.id) && (
+                        {/* {hoveredProductId === String(product.id) && (
                           <div className='flex  justify-items-center'>
                             <button
                               className='mx-6 my-4 rounded bg-[#1A464C] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
@@ -145,7 +180,7 @@ const CategoriesRow = ({ params }: Props) => {
                               Quick Add
                             </button>
                           </div>
-                        )}
+                        )} */}
 
                         <div className='flex items-center'>
                           <div className='h-12'>

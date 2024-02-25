@@ -1,19 +1,34 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useGetGroupsQuery } from '@/lib/redux/services/group';
+import {
+  useGetGroupsQuery,
+  useGetPublicOngoingGroupsQuery,
+} from '@/lib/redux/services/group';
+import OngoingRow from '@/components/OngoingRow';
+import GroupRowRenderModal from '@/app/groups/components/GroupRowRenderModal';
+import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
 
 const Groups = () => {
-  const { data, isLoading } = useGetGroupsQuery();
+  const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
 
   return (
     <div>
       <div className='container'>
-        {isLoading && <div>Loading...</div>}
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-10 xl:gap-y-5'>
-          Groups Page
-        </div>
+        {isLoading && <p>Loading...</p>}
+        {isError && <p style={{ color: 'red' }}>Error</p>}
+        {data && (
+          <div className='overflow-x-auto'>
+            <div className='grid grid-cols-3 gap-6'>
+              {groups.map((item) => (
+                <div key={item.id}>
+                  <GroupRowRenderItem item={item} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
