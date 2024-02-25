@@ -85,7 +85,9 @@ const LoginModal: React.FC<{
       if ('data' in response) {
         const data = response.data;
         if (data.message === 'success') dispatch(addUser({ data }));
-        toast.success('Loged In successfully');
+        toast.success('Loged In successfully', {
+          autoClose: 500,
+        });
         onClose();
         if (typeof window !== 'undefined') {
         }

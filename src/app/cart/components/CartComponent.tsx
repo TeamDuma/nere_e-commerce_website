@@ -25,6 +25,7 @@ import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
+import RegistrationModal from '@/components/common/RegisterModal';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -98,7 +99,10 @@ const CartComponent = () => {
       setIsPromoCodeApplied(true);
       setDiscountAmount(discountAmount);
       setLoading(false);
-      toast.success('Promo code Applied!');
+      // toast.success('Promo code Applied!');
+      toast.success('Promo code Applied!', {
+        autoClose: 500,
+      });
     } catch (error) {
       console.error('Error during fetch:', error);
       toast.error((error as any).data.message);
@@ -457,6 +461,11 @@ const CartComponent = () => {
                     onRegistrationClick={handleRegistrationClick}
                     session={null}
                     isOpen={loginModalVisible}
+                  />
+                  <RegistrationModal
+                    onClose={closeModal}
+                    onLoginClick={openLoginModal}
+                    isOpen={registrationModalVisible}
                   />
                 </div>
               )}

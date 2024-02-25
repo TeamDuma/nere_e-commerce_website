@@ -112,7 +112,9 @@ const RegistrationModal: React.FC<{
             dispatch(addUser({ data }));
           }
           dispatch(saveToken(token));
-          toast.success('Signed Up successfully');
+          toast.success('Signed Up successfully', {
+            autoClose: 500,
+          });
           phoneVerify({ token }).then((response) => {
             handleOtpClick();
           });
