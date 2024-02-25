@@ -99,7 +99,10 @@ const CartComponent = () => {
       setIsPromoCodeApplied(true);
       setDiscountAmount(discountAmount);
       setLoading(false);
-      toast.success('Promo code Applied!');
+      // toast.success('Promo code Applied!');
+      toast.success('Promo code Applied!', {
+        autoClose: 500,
+      });
     } catch (error) {
       console.error('Error during fetch:', error);
       toast.error((error as any).data.message);
@@ -459,10 +462,10 @@ const CartComponent = () => {
                     session={null}
                     isOpen={loginModalVisible}
                   />
-                   <RegistrationModal
+                  <RegistrationModal
                     onClose={closeModal}
                     onLoginClick={openLoginModal}
-                    isOpen={registrationModalVisible }
+                    isOpen={registrationModalVisible}
                   />
                 </div>
               )}

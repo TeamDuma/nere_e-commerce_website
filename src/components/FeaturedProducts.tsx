@@ -6,6 +6,7 @@ import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { Product } from '@/types/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
@@ -63,6 +64,7 @@ const FeaturedProducts = () => {
                       <div className='mt-2 flex items-center justify-center md:mt-4'>
                         <div
                           style={{
+                            position: 'relative',
                             backgroundSize: 'cover',
                             backgroundColor: 'gray-100',
                             width: '200px',
@@ -85,25 +87,44 @@ const FeaturedProducts = () => {
                             alt='cerelac image'
                           />
                         </div>
-                      </div>
-                      {hoveredProductId === String(product.id) && (
-                        <div className='flex  justify-items-center'>
-                          <button
-                            className='mx-6 my-4 rounded bg-[#1A464C] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                            style={{ zIndex: 1 }}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              console.log(product.id);
-                              handleAddToCart(product);
+                        {hoveredProductId === String(product.id) && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                              borderRadius: '10px',
                             }}
                           >
-                            Quick Add
-                          </button>
-                        </div>
-                      )}
+                            <button
+                              className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                              style={{ zIndex: 1 }}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                console.log(product.id);
+                                handleAddToCart(product);
+                                toast.success(
+                                  `${product.name} added to cart!`,
+                                  {
+                                    autoClose: 500,
+                                  }
+                                );
+                              }}
+                            >
+                              Quick Add
+                            </button>
+                          </div>
+                        )}
+                      </div>
 
                       <div className='flex items-center'>
-                        <div className='h-12'>
+                        <div className='h-6'>
                           <h5
                             tabIndex={0}
                             className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'

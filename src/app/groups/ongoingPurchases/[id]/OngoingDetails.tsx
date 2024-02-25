@@ -81,7 +81,9 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
     dispatch(addToCart({ item: itemToAdd }));
 
-    toast.success('Item added to cart!');
+    toast.success('Item added to cart!', {
+      autoClose: 500,
+    });
   };
 
   const cartProduct = cartItems.find((item) => {
