@@ -21,7 +21,7 @@ const Page = () => {
   const [groupModal, setGroupModal] = useState<Group>();
 
   const searchParams = useSearchParams();
-  const reference = searchParams.get('ref');
+  const reference = searchParams.get('reference');
 
   const router = useRouter();
 
@@ -46,10 +46,9 @@ const Page = () => {
         setTotalItems(response.data?.data?.total_items!);
         setTotalSavings(response.data?.data?.total_savings!);
       });
+    } else {
+      router.push('/');
     }
-    //  else {
-    //   router.push('/');
-    // }
   }, [reference]);
 
   useEffect(() => {
