@@ -25,6 +25,7 @@ import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
+import RegistrationModal from '@/components/common/RegisterModal';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -457,6 +458,11 @@ const CartComponent = () => {
                     onRegistrationClick={handleRegistrationClick}
                     session={null}
                     isOpen={loginModalVisible}
+                  />
+                   <RegistrationModal
+                    onClose={closeModal}
+                    onLoginClick={openLoginModal}
+                    isOpen={registrationModalVisible }
                   />
                 </div>
               )}
