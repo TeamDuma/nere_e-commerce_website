@@ -99,7 +99,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     <div className='my-8'>
       <div className='container mx-auto px-6'>
         <div className='mb-8 md:flex md:items-center'>
-          <div className='h-387 w-387 bg-[#F8F8F8] md:w-1/2 lg:h-96 '>
+          <div className='h-387 w-387 bg-gray-100 md:w-1/2 lg:h-96 '>
             <img
               className='mx-auto h-full rounded-md object-cover md:max-w-lg '
               src={product?.plain_image}
@@ -171,7 +171,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 <MdGroups className='mr-2 text-[#298592]' />
                 {group?.members?.length} participants
               </div>
-              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
+              <div className='flex items-center border-b border-t border-blue-200 p-2'>
                 <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
                 <span>Ends in</span>
                 <span
@@ -182,6 +182,22 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 </span>
               </div>
             </div>
+            {/* <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
+              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
+                <MdGroups className='mr-2 text-[#298592]' />
+                {group?.members?.length} participants
+              </div>
+              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
+                <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
+                <span>Ends in</span>
+                <span
+                  className='text-[#F58929]'
+                  style={{ paddingLeft: '0.5rem' }}
+                >
+                  00:00:00
+                </span>
+              </div>
+            </div> */}
 
             <Link href='/products'>
               <h1 className=' my-2 w-1/2 text-[#F58929]'>Continue Shopping</h1>
