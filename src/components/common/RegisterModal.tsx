@@ -18,7 +18,7 @@ const customStylesLarge: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     display: 'flex',
@@ -31,6 +31,7 @@ const customStylesLarge: Styles = {
     width: '500px',
     height: '750px',
     borderRadius: '15px',
+    border: 'none',
   },
 };
 const customStylesSmall: Styles = {
@@ -40,7 +41,7 @@ const customStylesSmall: Styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     display: 'flex',
@@ -53,6 +54,7 @@ const customStylesSmall: Styles = {
     width: '350px',
     height: '700px',
     borderRadius: '15px',
+    border: 'none',
   },
 };
 

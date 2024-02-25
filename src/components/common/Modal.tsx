@@ -14,7 +14,7 @@ const customStyles: ReactModal.Styles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    border: '2px solid #ddd',
+    // border: '2px solid #ddd',
     borderRadius: '8px',
     padding: '20px',
     backgroundColor: '#fff',
