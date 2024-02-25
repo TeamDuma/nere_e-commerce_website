@@ -77,6 +77,9 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
       locationID: undefined,
       type: GroupType.PUBLIC,
       totalQuantity: group?.total_quantity!,
+      groupCode: group?.join_code,
+
+
     };
 
     dispatch(addToCart({ item: itemToAdd }));

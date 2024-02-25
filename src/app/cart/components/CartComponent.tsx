@@ -179,9 +179,9 @@ const CartComponent = () => {
                     <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
                       <div className='flex items-center space-x-2 border-gray-100'>
                         {item.isGroupJoiner ? (
-                          <div className='h-max-h-[5px] ml-8 rounded-md border border-[#298592] p-2'>
+                          <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
                             <span className='text-xs text-[#298592]'>
-                              groupID : {item.groupID}
+                              Group Code : {item.groupCode}
                             </span>
                           </div>
                         ) : null}

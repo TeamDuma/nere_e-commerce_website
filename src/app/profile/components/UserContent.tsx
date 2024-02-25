@@ -1,4 +1,4 @@
-import PickupLocation from '@/app/delivery/components/PickupLocation';
+import PickupLocation from '@/app/delivery/components/SelectPickupLocation';
 import EditProfile from '@/components/common/EditProfile';
 import { selectShopping, setSelectedLocationId } from '@/lib/redux';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
