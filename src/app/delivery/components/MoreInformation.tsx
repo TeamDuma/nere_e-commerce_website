@@ -62,24 +62,26 @@ interface MoreInformationProps {
   location: ILocation | null;
 }
 
-const MoreInformation: React.FC<MoreInformationProps> = ({ onClose, isOpen, selectedAddress, location }) => {
-
+const MoreInformation: React.FC<MoreInformationProps> = ({
+  onClose,
+  isOpen,
+  selectedAddress,
+  location,
+}) => {
   const dispatch = useDispatch();
 
-  const { data, } = useGetlocationsQuery();
+  const { data } = useGetlocationsQuery();
 
-  console.log('MoreInformation selectedAddress',data)
-
-  
+  console.log('MoreInformation selectedAddress', data);
 
   const screenWidth = window.innerWidth;
   let modalStyles = customStylesSmall;
 
   if (screenWidth >= 960) {
     modalStyles = customStylesLarge;
-  } 
+  }
 
-  console.log( "MoreInformation",selectedAddress)
+  console.log('MoreInformation', selectedAddress);
 
   return (
     <div>
@@ -91,43 +93,27 @@ const MoreInformation: React.FC<MoreInformationProps> = ({ onClose, isOpen, sele
       >
         <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
           <h2 className='mb-4 text-xl text-[#1A464C]'>DELIVERY DETAILS</h2>
-       
-            <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
-         
-         <h5 className='text-sm	font-medium'>
-         Nere Pickup Station East Legon
-         </h5>
-         <p className='text-xs font-medium my-2 text-[#979797]'>
-     {selectedAddress?.name}
-         </p>
-         <p 
-                  className='cursor-pointer my-2 text-xs font-medium text-[#298592] underline underline-offset-1'
-                  >
-         See on google maps
-         </p>
-         <p className='text-xs font-medium'>
-         Contact information
-         </p>
-         <p className='text-xs font-medium my-2 text-[#979797]'>
-         Mr. Stephen 0549829923         </p>
-         <p className='text-xs font-medium my-2'>
-         Opening hours:
-         </p>
-         <p className='text-xs font-medium my-2 text-[#979797]'>
-         Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
-         </p>
 
-       </div>
-         
+          <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
+            <h5 className='text-sm	font-medium'>
+              Nere Pickup Station East Legon
+            </h5>
+            <p className='my-2 text-xs font-medium text-[#979797]'>
+              {selectedAddress?.name}
+            </p>
+            <p className='my-2 cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'>
+              See on google maps
+            </p>
+            <p className='text-xs font-medium'>Contact information</p>
+            <p className='my-2 text-xs font-medium text-[#979797]'>
+              Mr. Stephen 0549829923{' '}
+            </p>
+            <p className='my-2 text-xs font-medium'>Opening hours:</p>
+            <p className='my-2 text-xs font-medium text-[#979797]'>
+              Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
+            </p>
           </div>
-     
-        
-
-         
-
-        
-
-
+        </div>
       </Modal>
     </div>
   );

@@ -94,11 +94,14 @@ const SelectPickupLocation: React.FC<{
 
   const [expandedAddress, setExpandedAddress] = useState<number | null>(null);
 
-  const [moreInformationData, setMoreInformationData] = useState<{ selectedOption: string | null; location: ILocation | null }>({
+  const [moreInformationData, setMoreInformationData] = useState<{
+    selectedOption: string | null;
+    location: ILocation | null;
+  }>({
     selectedOption: null,
-    location: null
+    location: null,
   });
-  
+
   const closeModal = () => {
     onClose();
   };
@@ -109,8 +112,6 @@ const SelectPickupLocation: React.FC<{
       setExpandedAddress(locationId);
     }
   };
-
-
 
   const renderAddresses = () => {
     if (isLoading) {
@@ -145,23 +146,21 @@ const SelectPickupLocation: React.FC<{
                 </label>
 
                 <div className='ml-8 text-gray-500'>
-                  
-
                   <p className='my-1	text-xs text-[#000]'>
                     Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
                   </p>
                   <p
-                        onClick={() =>
-                          setMoreInformationData({
-                            selectedOption: 'more',
-                            location: location
-                          })
-                        }
-                        className='my-1 cursor-pointer text-xs font-bold text-[#298592] underline underline-offset-1'
-                      >
-                        {' '}
-                        More information{'>'}
-                      </p>
+                    onClick={() =>
+                      setMoreInformationData({
+                        selectedOption: 'more',
+                        location: location,
+                      })
+                    }
+                    className='my-1 cursor-pointer text-xs font-bold text-[#298592] underline underline-offset-1'
+                  >
+                    {' '}
+                    More information{'>'}
+                  </p>
                 </div>
               </div>
             </div>

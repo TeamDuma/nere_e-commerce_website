@@ -133,7 +133,6 @@ const DeliveryModal: React.FC<{
     modalStyles = customStylesMedium;
   }
 
-
   return (
     <div>
       <Modal
@@ -205,7 +204,6 @@ const DeliveryModal: React.FC<{
                   </p>
                 )}
               </div>
-              
             </div>
           </div>
 

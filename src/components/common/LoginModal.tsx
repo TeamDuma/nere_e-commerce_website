@@ -162,8 +162,6 @@ const LoginModal: React.FC<{
                 onClick={handleLogin}
                 disabled={isLoading}
               >
-               
-
                 <span> {isLoading ? <Spinner /> : 'Login'}</span>
               </button>
               <div className='inline-flex w-full items-center justify-center'>

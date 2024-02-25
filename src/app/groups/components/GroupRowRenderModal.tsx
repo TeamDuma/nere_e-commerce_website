@@ -42,7 +42,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
         <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
           {item.product?.name}
         </h2>
-        <div >
+        <div>
           <div className='flex items-center'>
             <span className='text-xs  text-[#F58929]'>GH¢</span>
             <span className='  font-bold text-[#F58929]'>
