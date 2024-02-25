@@ -179,10 +179,10 @@ const DeliveryModal: React.FC<{
                 </div>
               ) : (
                 <p
-                  className='cursor-pointer text-xs font-medium 		text-[#979797]'
+                  className='cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'
                   onClick={() => setSelectedOption('pickup')}
                 >
-                  Please select a Location
+                  Please select a Location {'>'}
                 </p>
               )}
             </div>

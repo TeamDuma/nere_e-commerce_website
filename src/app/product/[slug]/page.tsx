@@ -137,7 +137,7 @@ export default function ProductDetailPage({ params }: Props) {
                   <div className='mb-4 h-64 rounded-lg  md:h-80'>
                     <div
                       x-show='image === 1'
-                      className='mb-4 flex h-64 items-center justify-center rounded-lg  md:h-80'
+                      className='mb-4 flex h-64 items-center justify-center rounded-lg  bg-gray-100 md:h-80'
                     >
                       <img
                         className='mx-auto h-full rounded-md object-cover md:max-w-lg '
@@ -223,7 +223,7 @@ export default function ProductDetailPage({ params }: Props) {
                 <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
                   <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
                     <MdGroups className='mr-2 text-[#298592]' />
-                    {group?.members?.length} 0 participants
+                    {group?.members?.length} participants
                   </div>
                   <div className='flex items-center border-b border-t border-blue-200 p-2'>
                     <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
