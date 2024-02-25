@@ -71,7 +71,7 @@ const SettingsPage = () => {
             </div>
           </div>
 
-          <div className='xs:mb-4 max-w-full  lg:w-[60%] '>
+          <div className='xs:mb-4 max-w-full  lg:w-[70%]  '>
             {selectedTab === 'profile' && <UserContent />}
             {selectedTab === 'order' && <OrderContent />}
             {selectedTab === 'voucher' && <VoucherContent />}

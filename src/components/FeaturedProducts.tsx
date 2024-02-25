@@ -124,7 +124,7 @@ const FeaturedProducts = () => {
                       </div>
 
                       <div className='flex items-center'>
-                        <div className='h-6'>
+                        <div className='h-12'>
                           <h5
                             tabIndex={0}
                             className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'

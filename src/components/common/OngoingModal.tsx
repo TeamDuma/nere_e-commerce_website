@@ -12,11 +12,11 @@ import Modal, { Styles } from 'react-modal';
 const customStyles: Styles = {
   overlay: {
     position: 'fixed',
-    top: 10,
+    top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba( 190,192,193, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
     position: 'fixed',
@@ -25,7 +25,7 @@ const customStyles: Styles = {
     right: 'auto',
     height: '100%',
     width: '95%',
-    maxWidth: '450px',
+    maxWidth: '380px',
     margin: 'auto',
     backgroundColor: 'white',
     padding: '20px',
