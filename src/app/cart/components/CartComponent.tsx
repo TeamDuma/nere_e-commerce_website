@@ -131,7 +131,7 @@ const CartComponent = () => {
 
   return (
     <div className=' h-full py-8'>
-      <div className='container mx-auto px-4'>
+      <div className=' mx-auto px-4'>
         <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '>
           <h1 className='ml-2 text-lg text-[#1A464C] '>
             You have saved GHS {totalSavings} on this purchase!
@@ -149,10 +149,10 @@ const CartComponent = () => {
             {cartItems.map((item: CartItem) => (
               <div
                 key={`${item.id}-${item.groupID ?? ''}`}
-                className='gap-5 border-b border-gray-200 py-6 md:flex md:items-center'
+                className='gap-5 border-b border-gray-200 rounded-md py-6 md:flex md:items-center bg-gray-100'
               >
                 <div className='flex'>
-                  <div className='my-4 flex h-48 w-full items-center justify-center rounded-md bg-[#F8F8F8] md:w-48'>
+                  <div className='m-2  flex h-48 w-full items-center justify-center rounded-md  md:w-48'>
                     <img
                       className='rounded-md'
                       src={item?.plain_image}
@@ -240,7 +240,7 @@ const CartComponent = () => {
                           {' '}
                           -{' '}
                         </span>
-                        <div className='flex h-8 w-8 items-center justify-center bg-white text-center text-xs font-bold text-[#298592]  outline-none'>
+                        <div className='flex h-8 w-8 items-center justify-center text-center text-xs font-bold text-[#298592]  outline-none'>
                           {item.cartQuantity}
                         </div>
                         <span
