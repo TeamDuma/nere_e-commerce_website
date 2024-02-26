@@ -62,15 +62,14 @@ const customStylesSmall: Styles = {
   content: {
     display: 'flex',
     flexDirection: 'column',
-    top: '30%',
+    top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%',
-    maxWidth: '400px',
+    width: '350px',
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
-    height: '40vh',
+    height: '400px',
   },
 };
 
