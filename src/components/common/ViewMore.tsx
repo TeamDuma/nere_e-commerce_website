@@ -1,4 +1,3 @@
-import { sendGTMEvent } from '@next/third-parties/google';
 import Link from 'next/link';
 
 const ViewMore = () => {
@@ -15,7 +14,6 @@ const ViewMore = () => {
     >
       <Link
         href='/products'
-        onClick={() => sendGTMEvent({ evet: 'Hello', value: 'Helloe world' })}
       >
         <div
           className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'

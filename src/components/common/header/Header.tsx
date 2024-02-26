@@ -17,6 +17,7 @@ import { BsSearch } from 'react-icons/bs';
 import CartIconHeader from '../CartIconHeader';
 import { useRouter } from 'next/navigation';
 import DeliveryModal from '../../../app/delivery/components/DeliveryModal';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const Header = () => {
   const router = useRouter();
@@ -177,6 +178,7 @@ const Header = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
+                onClick={() => sendGTMEvent({ evet: 'searchBarClicked', value: 'Helloe world' })}
               />
 
               <BsSearch
