@@ -7,7 +7,7 @@ import Container from '@/components/common/Container';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Footer from '@/components/common/footer/Footer';
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const Mnontserrat = Montserrat({ subsets: ['latin'] });
 
