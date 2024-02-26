@@ -17,7 +17,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
       className='flex items-center rounded-lg bg-[#F5F5F5] p-4 shadow-md'
-      style={{ width: '405px', height: '128px' }}
+      style={{ width: '335px', height: '128px' }}
     >
       <div className='relative w-1/4 flex-shrink-0 '>
         <img
@@ -45,7 +45,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
         <div>
           <div className='flex items-center'>
             <span className='text-xs  text-[#F58929]'>GH¢</span>
-            <span className='  font-bold text-[#F58929]'>
+            <span className='  mr-2 font-bold text-[#F58929]'>
               {item.product?.sale_price}
             </span>
 

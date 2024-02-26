@@ -103,7 +103,7 @@ const GameModal: React.FC<{
           <h2 className='mb-4 text-2xl	font-semibold	 text-[#298592]'>
             Coming Soon !!
           </h2>
-          <div className='mb-4 text-xl'>
+          <div className='w-156 h-156  mb-4 text-xl'>
             <img
               className='w-156 h-156 mx-1 my-1'
               src='/images/joystick.svg'
