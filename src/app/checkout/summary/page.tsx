@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from 'react';
 import GroupItem from './components/GroupItem';
 import OrderSummary from './components/OrderSummary';
 import ShareModal from './components/ShareModal';
-import { resetCart } from '@/lib/redux';
+import { resetCart, useDispatch } from '@/lib/redux';
 
 const Page = () => {
   const [getOrderConfirmation, { data, isFetching, isLoading, isSuccess }] =
@@ -28,6 +28,7 @@ const Page = () => {
 
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
 
   const handleShowModal = (group: Group) => {
     setShowModal(true);
@@ -46,7 +47,7 @@ const Page = () => {
         setTotal(response.data?.data?.amount!);
         setTotalItems(response.data?.data?.total_items!);
         setTotalSavings(response.data?.data?.total_savings!);
-        resetCart();
+        dispatch(resetCart());
       });
     } else {
       router.push('/');

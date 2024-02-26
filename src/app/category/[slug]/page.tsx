@@ -134,7 +134,10 @@ const Category = ({ params }: Props) => {
                                         autoClose: 500,
                                       }
                                     );
-                                    sendGTMEvent({ event: 'categoryroductClicked', value: `${product.name}` })
+                                    sendGTMEvent({
+                                      event: 'categoryroductClicked',
+                                      value: `${product.name}`,
+                                    });
                                   }}
                                 >
                                   Quick Add

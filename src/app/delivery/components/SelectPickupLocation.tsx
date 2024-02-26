@@ -28,7 +28,7 @@ const customStylesLarge: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '650px',
-    height: '700px',
+    height: '600px',
     borderRadius: '15px',
     border: 'none',
   },
@@ -45,14 +45,14 @@ const customStylesSmall: Styles = {
   content: {
     display: 'flex',
     flexDirection: 'column',
-    top: '90%',
+    top: '102%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '320px',
+    width: '350px',
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
-    height: '680px',
+    height: '650px',
   },
 };
 
@@ -65,6 +65,8 @@ const SelectPickupLocation: React.FC<{
 
   const { data, isLoading } = useGetlocationsQuery();
   const locations = data?.data || [];
+  const [isMoreInformationModalOpen, setMoreInformationModalOpen] =
+    useState(false);
 
   const [selectedAddress, setSelectedAddress] = useState<ILocation | null>(
     () => {
@@ -73,6 +75,18 @@ const SelectPickupLocation: React.FC<{
       );
     }
   );
+
+  const handleOpenMoreInformationModal = (location: ILocation) => {
+    setMoreInformationData({
+      selectedOption: 'more',
+      location: location,
+    });
+    setMoreInformationModalOpen(true);
+  };
+
+  const handleCloseMoreInformationModal = () => {
+    setMoreInformationModalOpen(false);
+  };
 
   const handleSelectLocation = () => {
     if (selectedAddress) {
@@ -150,12 +164,13 @@ const SelectPickupLocation: React.FC<{
                     Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
                   </p>
                   <p
-                    onClick={() =>
-                      setMoreInformationData({
-                        selectedOption: 'more',
-                        location: location,
-                      })
-                    }
+                    // onClick={() =>
+                    //   setMoreInformationData({
+                    //     selectedOption: 'more',
+                    //     location: location,
+                    //   })
+                    // }
+                    onClick={() => handleOpenMoreInformationModal(location)}
                     className='my-1 cursor-pointer text-xs font-bold text-[#298592] underline underline-offset-1'
                   >
                     {' '}
@@ -203,14 +218,21 @@ const SelectPickupLocation: React.FC<{
               Select Pickup Location
             </button>
           </div>
-          {moreInformationData.selectedOption === 'more' && (
+          <MoreInformation
+            onClose={handleCloseMoreInformationModal}
+            isOpen={isMoreInformationModalOpen}
+            selectedAddress={selectedAddress}
+            location={moreInformationData.location}
+          />
+
+          {/* {moreInformationData.selectedOption === 'more' && (
             <MoreInformation
-              onClose={closeModal}
-              isOpen={isOpen}
+              onClose={handleCloseMoreInformationModal}
+              isOpen={isMoreInformationModalOpen}
               selectedAddress={selectedAddress}
               location={moreInformationData.location}
             />
-          )}
+          )} */}
         </div>
       </Modal>
     </div>
