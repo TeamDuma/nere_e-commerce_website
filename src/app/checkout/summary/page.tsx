@@ -46,7 +46,7 @@ const Page = () => {
         setTotal(response.data?.data?.amount!);
         setTotalItems(response.data?.data?.total_items!);
         setTotalSavings(response.data?.data?.total_savings!);
-        resetCart()
+        resetCart();
       });
     } else {
       router.push('/');
