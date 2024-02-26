@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { Product } from '@/types/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { toast } from 'react-toastify';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 type Props = {
   params: {
@@ -133,6 +134,7 @@ const Category = ({ params }: Props) => {
                                         autoClose: 500,
                                       }
                                     );
+                                    sendGTMEvent({ event: 'categoryroductClicked', value: `${product.name}` })
                                   }}
                                 >
                                   Quick Add

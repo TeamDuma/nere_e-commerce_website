@@ -7,6 +7,7 @@ import { Product } from '@/types/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
@@ -114,6 +115,7 @@ const FeaturedProducts = () => {
                                       autoClose: 500,
                                     }
                                   );
+                                  sendGTMEvent({ event: 'featuredProductClicked', value: `${product.name}` })
                                 }}
                               >
                                 Quick Add

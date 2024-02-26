@@ -180,7 +180,7 @@ const Header = () => {
                 onKeyPress={handleKeyPress}
                 onClick={() =>
                   sendGTMEvent({
-                    evet: 'searchBarClicked',
+                    event: 'searchBarClicked',
                     value: 'Helloe world',
                   })
                 }
