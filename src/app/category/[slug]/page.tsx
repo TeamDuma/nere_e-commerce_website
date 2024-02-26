@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { Product } from '@/types/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { toast } from 'react-toastify';
-import { sendGTMEvent } from '@next/third-parties/google';
+import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 
 type Props = {
   params: {
@@ -135,7 +135,11 @@ const Category = ({ params }: Props) => {
                                       }
                                     );
                                     sendGTMEvent({
-                                      event: 'categoryroductClicked',
+                                      event: 'categoryProductClicked',
+                                      value: `${product.name}`,
+                                    });
+                                    sendGAEvent({
+                                      event: 'categoryProductClicked',
                                       value: `${product.name}`,
                                     });
                                   }}
