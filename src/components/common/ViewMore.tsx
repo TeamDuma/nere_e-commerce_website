@@ -13,8 +13,10 @@ const ViewMore = () => {
         marginBottom: '10px',
       }}
     >
-      <Link href='/products'
-      onClick={() => sendGTMEvent({evet: 'Hello', value: 'Helloe world'})}>
+      <Link
+        href='/products'
+        onClick={() => sendGTMEvent({ evet: 'Hello', value: 'Helloe world' })}
+      >
         <div
           className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
           style={{
