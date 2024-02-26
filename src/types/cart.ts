@@ -23,6 +23,8 @@ export interface CartCheckoutItem {
   productID: number;
   isGroupJoiner: boolean;
   groupID?: number;
+  groupCode?: string;
+
   locationID?: number;
   type?: GroupType;
 }

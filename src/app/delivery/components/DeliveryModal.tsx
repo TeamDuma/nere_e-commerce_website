@@ -10,7 +10,7 @@ import {
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
 import { IoIosArrowDown } from 'react-icons/io';
-import PickupLocation from '@/app/delivery/components/PickupLocation';
+import PickupLocation from '@/app/delivery/components/SelectPickupLocation';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -71,15 +71,15 @@ const customStylesSmall: Styles = {
   content: {
     display: 'flex',
     flexDirection: 'column',
-    top: '100%',
+    top: '80%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '80%',
-    maxWidth: '400px',
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
-    height: '90vh',
+    height: '500px',
+    // width: '90%',
+    width: '350px',
   },
 };
 
@@ -172,7 +172,7 @@ const DeliveryModal: React.FC<{
               <div className='rounded-md bg-white'>Pickup Location</div>
               {selectedAddress ? (
                 <div
-                  className='cursor-pointer text-xs text-[#298592]	 '
+                  className='cursor-pointer text-xs text-[#298592] underline underline-offset-1	 '
                   onClick={() => setSelectedOption('pickup')}
                 >
                   Change pickup location {'>'}
@@ -182,7 +182,7 @@ const DeliveryModal: React.FC<{
                   className='cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'
                   onClick={() => setSelectedOption('pickup')}
                 >
-                  Please select a Location {'>'}
+                  Please select a Location{'>'}
                 </p>
               )}
             </div>
@@ -204,16 +204,6 @@ const DeliveryModal: React.FC<{
                   </p>
                 )}
               </div>
-              {/* <div className='m-2 text-gray-500'>
-                <p>Additional information:</p>
-
-                <p className='cursor-pointer text-[#298592]'>
-                  {' '}
-                  See on google maps
-                </p>
-                <p>Nere Agent Pickup, East Legon</p>
-                <p>MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra</p>
-              </div> */}
             </div>
           </div>
 

@@ -131,8 +131,9 @@ const CartComponent = () => {
 
   return (
     <div className=' h-full py-8'>
-      <div className='container mx-auto px-4'>
-        <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '>
+      <div className=' mx-auto px-4'>
+        {/* <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '> */}
+        <div className='h-20 gap-5 rounded-lg border bg-gray-50 p-2 py-2 shadow-xl md:mb-2 md:flex md:w-1/2 md:items-center'>
           <h1 className='ml-2 text-lg text-[#1A464C] '>
             You have saved GHS {totalSavings} on this purchase!
           </h1>
@@ -149,10 +150,10 @@ const CartComponent = () => {
             {cartItems.map((item: CartItem) => (
               <div
                 key={`${item.id}-${item.groupID ?? ''}`}
-                className='gap-5 border-b border-gray-200 py-6 md:flex md:items-center'
+                className='mt-4 gap-5 rounded-lg border bg-gray-50 p-2 py-2 shadow-xl md:flex md:items-center'
               >
                 <div className='flex'>
-                  <div className='my-4 flex h-48 w-full items-center justify-center rounded-md bg-[#F8F8F8] md:w-48'>
+                  <div className='m-2  flex h-48 w-full items-center justify-center rounded-md  md:w-48 '>
                     <img
                       className='rounded-md'
                       src={item?.plain_image}
@@ -167,9 +168,9 @@ const CartComponent = () => {
                   </div>
                 </div>
 
-                <div className='flex-1'>
+                <div className='ml-2 flex-1'>
                   <div className='grid grid-cols-1 md:grid-cols-4'>
-                    <div className='md:col-span-2'>
+                    <div className='md:col-span-2 '>
                       <div className='flex max-w-[500px] flex-col gap-3'>
                         <h6 className='text-base font-semibold leading-7 text-black'>
                           {item.name}
@@ -179,9 +180,9 @@ const CartComponent = () => {
                     <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
                       <div className='flex items-center space-x-2 border-gray-100'>
                         {item.isGroupJoiner ? (
-                          <div className='h-max-h-[5px] ml-8 rounded-md border border-[#298592] p-2'>
+                          <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
                             <span className='text-xs text-[#298592]'>
-                              groupID : {item.groupID}
+                              Group Code : {item.groupCode}
                             </span>
                           </div>
                         ) : null}
@@ -240,7 +241,7 @@ const CartComponent = () => {
                           {' '}
                           -{' '}
                         </span>
-                        <div className='flex h-8 w-8 items-center justify-center bg-white text-center text-xs font-bold text-[#298592]  outline-none'>
+                        <div className='flex h-8 w-8 items-center justify-center text-center text-xs font-bold text-[#298592]  outline-none'>
                           {item.cartQuantity}
                         </div>
                         <span
@@ -282,7 +283,10 @@ const CartComponent = () => {
             ))}
           </div>
           <div className='md:w-2/5'>
-            <div className='rounded-lg bg-gray-50 p-6 shadow-md'>
+            {/* <div
+                className='gap-5 border rounded-lg h-20 bg-gray-50 p-2 shadow-xl py-2 md:flex md:items-center md:w-1/2'
+              > */}
+            <div className='gap-5 rounded-lg border bg-gray-50 p-3 shadow-xl'>
               <p className='text-l font-medium	 text-[#1A464C]'>
                 Your order summary
               </p>

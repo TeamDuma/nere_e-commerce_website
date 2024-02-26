@@ -8,6 +8,7 @@ import {
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
 import { IoIosArrowDown } from 'react-icons/io';
+import MoreInformation from './MoreInformation';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -27,7 +28,7 @@ const customStylesLarge: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '650px',
-    height: '550px',
+    height: '700px',
     borderRadius: '15px',
     border: 'none',
   },
@@ -44,19 +45,18 @@ const customStylesSmall: Styles = {
   content: {
     display: 'flex',
     flexDirection: 'column',
-    top: '100%',
+    top: '90%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '80%',
-    maxWidth: '400px',
+    width: '320px',
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
-    height: '90vh',
+    height: '680px',
   },
 };
 
-const PickupLocation: React.FC<{
+const SelectPickupLocation: React.FC<{
   onClose: () => void;
   isOpen: boolean;
 }> = ({ onClose, isOpen }) => {
@@ -94,6 +94,17 @@ const PickupLocation: React.FC<{
 
   const [expandedAddress, setExpandedAddress] = useState<number | null>(null);
 
+  const [moreInformationData, setMoreInformationData] = useState<{
+    selectedOption: string | null;
+    location: ILocation | null;
+  }>({
+    selectedOption: null,
+    location: null,
+  });
+
+  const closeModal = () => {
+    onClose();
+  };
   const toggleAccordion = (locationId: number) => {
     if (expandedAddress === locationId) {
       setExpandedAddress(null);
@@ -112,8 +123,8 @@ const PickupLocation: React.FC<{
     }
 
     return (
-      <div className='mb-4 '>
-        <label className='mb-4 block text-gray-400'>Address</label>
+      <div className='mb-2 '>
+        <label className='mb-2 block text-gray-400'>Address</label>
         {locations.map((location: ILocation) => (
           <div key={location.id}>
             <div className='flex justify-between p-2'>
@@ -133,36 +144,27 @@ const PickupLocation: React.FC<{
                 >
                   {location.name}
                 </label>
-              </div>
-              <div className='ml-8 text-gray-500'>
-                <p className='my-1 cursor-pointer text-xs font-bold text-[#298592]'>
-                  {' '}
-                  Opening hours:
-                </p>
 
-                <p className='my-1	text-xs text-[#000]'>
-                  Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
-                </p>
+                <div className='ml-8 text-gray-500'>
+                  <p className='my-1	text-xs text-[#000]'>
+                    Mon - Fri 08:00 - 5:30 ; Sat 09:00 - 15:30
+                  </p>
+                  <p
+                    onClick={() =>
+                      setMoreInformationData({
+                        selectedOption: 'more',
+                        location: location,
+                      })
+                    }
+                    className='my-1 cursor-pointer text-xs font-bold text-[#298592] underline underline-offset-1'
+                  >
+                    {' '}
+                    More information{'>'}
+                  </p>
+                </div>
               </div>
             </div>
 
-            {expandedAddress === location.id && (
-              <div className='ml-8 text-gray-500'>
-                <p className='my-1 text-xs		font-medium text-[#979797]'>
-                  MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
-                </p>
-
-                <p className='my-1 cursor-pointer text-xs font-bold text-[#298592]'>
-                  {' '}
-                  See on google maps
-                </p>
-
-                <p className='my-1	text-xs text-[#000]'>Contact information:</p>
-                <p className='my-1	text-xs text-[#979797]'>
-                  Mr. Stephen 0549829923
-                </p>
-              </div>
-            )}
             <hr className='my-2' />
           </div>
         ))}
@@ -179,7 +181,7 @@ const PickupLocation: React.FC<{
         contentLabel='Example Modal'
       >
         <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
-          <h2 className='mb-4 text-xl font-bold text-[#298592]'>
+          <h2 className=' text-xl font-bold text-[#298592]'>
             SELECT PICKUP LOCATION
           </h2>
 
@@ -201,10 +203,18 @@ const PickupLocation: React.FC<{
               Select Pickup Location
             </button>
           </div>
+          {moreInformationData.selectedOption === 'more' && (
+            <MoreInformation
+              onClose={closeModal}
+              isOpen={isOpen}
+              selectedAddress={selectedAddress}
+              location={moreInformationData.location}
+            />
+          )}
         </div>
       </Modal>
     </div>
   );
 };
 
-export default PickupLocation;
+export default SelectPickupLocation;

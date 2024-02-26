@@ -93,6 +93,7 @@ const CategoriesRow = ({ params }: Props) => {
                         <div className='mt-2 flex items-center justify-center md:mt-4'>
                           <div
                             style={{
+                              position: 'relative',
                               backgroundSize: 'cover',
                               backgroundColor: 'gray-100',
                               width: '200px',
@@ -103,84 +104,53 @@ const CategoriesRow = ({ params }: Props) => {
                               borderRadius: '10px',
                             }}
                           >
-                            <div className='mt-2 flex items-center justify-center md:mt-4'>
+                            <img
+                              style={{ borderRadius: '10px' }}
+                              src={product?.plain_image}
+                              width={
+                                product.name === 'Frytol sunflower oil 0.9L' ||
+                                product.name === "Dr. Annie's honey 500ml"
+                                  ? '60px'
+                                  : '60px'
+                              }
+                              alt='cerelac image'
+                            />
+                            {hoveredProductId === String(product.id) && (
                               <div
                                 style={{
-                                  backgroundSize: 'cover',
-                                  backgroundColor: 'gray-100',
-                                  width: '200px',
-                                  height: '200px',
+                                  position: 'absolute',
+                                  top: 0,
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
+                                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                   borderRadius: '10px',
                                 }}
                               >
-                                <img
-                                  style={{ borderRadius: '10px' }}
-                                  src={product?.plain_image}
-                                  width={
-                                    product.name ===
-                                      'Frytol sunflower oil 0.9L' ||
-                                    product.name === "Dr. Annie's honey 500ml"
-                                      ? '60px'
-                                      : '60px'
-                                  }
-                                  alt='cerelac image'
-                                />
-                              </div>
-                              {hoveredProductId === String(product.id) && (
-                                <div
-                                  style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                                    borderRadius: '10px',
+                                <button
+                                  className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                                  style={{ zIndex: 1 }}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log(product.id);
+                                    handleAddToCart(product);
+                                    toast.success(
+                                      `${product.name} added to cart!`,
+                                      {
+                                        autoClose: 500,
+                                      }
+                                    );
                                   }}
                                 >
-                                  <button
-                                    className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                                    style={{ zIndex: 1 }}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      console.log(product.id);
-                                      handleAddToCart(product);
-                                      toast.success(
-                                        `${product.name} added to cart!`,
-                                        {
-                                          autoClose: 500,
-                                        }
-                                      );
-                                    }}
-                                  >
-                                    Quick Add
-                                  </button>
-                                </div>
-                              )}
-                            </div>
+                                  Quick Add
+                                </button>
+                              </div>
+                            )}
                           </div>
                         </div>
-                        {/* {hoveredProductId === String(product.id) && (
-                          <div className='flex  justify-items-center'>
-                            <button
-                              className='mx-6 my-4 rounded bg-[#1A464C] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                              style={{ zIndex: 1 }}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log(product.id);
-                                handleAddToCart(product);
-                              }}
-                            >
-                              Quick Add
-                            </button>
-                          </div>
-                        )} */}
 
                         <div className='flex items-center'>
                           <div className='h-12'>

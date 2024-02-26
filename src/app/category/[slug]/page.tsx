@@ -105,41 +105,41 @@ const Category = ({ params }: Props) => {
                               }
                               alt='cerelac image'
                             />
-                          </div>
-                          {hoveredProductId === String(product.id) && (
-                            <div
-                              style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                                borderRadius: '10px',
-                              }}
-                            >
-                              <button
-                                className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                                style={{ zIndex: 1 }}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  console.log(product.id);
-                                  handleAddToCart(product);
-                                  toast.success(
-                                    `${product.name} added to cart!`,
-                                    {
-                                      autoClose: 500,
-                                    }
-                                  );
+                            {hoveredProductId === String(product.id) && (
+                              <div
+                                style={{
+                                  position: 'absolute',
+                                  top: 0,
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                  borderRadius: '10px',
                                 }}
                               >
-                                Quick Add
-                              </button>
-                            </div>
-                          )}
+                                <button
+                                  className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                                  style={{ zIndex: 1 }}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log(product.id);
+                                    handleAddToCart(product);
+                                    toast.success(
+                                      `${product.name} added to cart!`,
+                                      {
+                                        autoClose: 500,
+                                      }
+                                    );
+                                  }}
+                                >
+                                  Quick Add
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
 
                         <div className='flex items-center'>
@@ -170,103 +170,6 @@ const Category = ({ params }: Props) => {
                       </div>
                     </>
                   </div>
-                  {/* <div key={product?.id}
-                
-                >
-                  <>
-                    <div className='px-2 md:px-2 lg:px-2'>
-                      <div className='relative m-4 rounded-md bg-gray-100 dark:bg-gray-800'>
-                        <div className='absolute right-2 top-2 flex h-5 w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
-                          {`${Math.round(
-                            ((product.price - product.sale_price) /
-                              product.price) *
-                              100
-                          )}%`}
-                        </div>
-
-                        <div className='mt-8 flex items-center justify-center md:mt-4'>
-                          <div
-                            style={{
-                              backgroundSize: 'cover',
-                              backgroundColor: 'gray-100',
-                              width: '200px',
-                              height: '200px',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              borderRadius: '10px',
-                            }}
-                          >
-                            <img
-                              src={product?.plain_image}
-                              className='h-[83px] w-[83px] rounded-lg'
-                              style={{ width: '70px', height: '105px' }}
-                            />
-                          </div>
-                          {hoveredProductId === String(product.id) && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                              borderRadius: '10px',
-                            }}
-                          >
-                            <button
-                              className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                              style={{ zIndex: 1 }}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log(product.id);
-                                handleAddToCart(product);
-                                toast.success(
-                                  `${product.name} added to cart!`,
-                                  {
-                                    autoClose: 500,
-                                  }
-                                );
-                              }}
-                            >
-                              Quick Add
-                            </button>
-                          </div>
-                        )}
-                        </div>
-                        <div className='ml-4 flex-1'>
-                          <div className='h-12'>
-                            <h5
-                              tabIndex={0}
-                              className='text line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
-                            >
-                              {product?.name}
-                            </h5>
-                          </div>
-                        </div>
-
-                        <div className='ml-2 flex'>
-                          <div
-                            style={{ color: '#F31748' }}
-                          >{`¢ ${product?.sale_price}`}</div>
-                          <div
-                            style={{
-                              marginLeft: '14px',
-                              color: '#B3B3B3',
-                              textDecoration: 'line-through',
-                            }}
-                          >
-                            {`¢ ${product?.price}`}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                </div> */}
                 </Link>
               ))}
             </div>

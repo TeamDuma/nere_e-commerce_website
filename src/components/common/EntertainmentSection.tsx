@@ -33,7 +33,7 @@ const EntertainmentSection = () => {
     <section className='m-3 rounded '>
       <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
         <div
-          className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
+          className='m-3 flex w-80 rounded-lg  border border-[#298592] p-2 lg:w-1/3'
           onClick={openNereCoinModal}
         >
           <img className='mx-4 my-1' src='/images/coinSmall.svg' alt='Coin' />
@@ -49,7 +49,7 @@ const EntertainmentSection = () => {
         </div>
 
         <div
-          className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
+          className='m-3 flex w-80 rounded-lg  border border-[#298592] p-2 lg:w-1/3'
           onClick={openGameModal}
         >
           <img
@@ -72,7 +72,7 @@ const EntertainmentSection = () => {
         </div>
 
         <div
-          className='m-3 flex w-80 rounded-lg  border border-[#298592] lg:w-1/3'
+          className='m-3 flex w-80 rounded-lg  border border-[#298592] p-2 lg:w-1/3'
           onClick={openLoyaltyModal}
         >
           <img

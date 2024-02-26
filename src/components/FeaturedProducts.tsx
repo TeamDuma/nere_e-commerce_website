@@ -86,41 +86,41 @@ const FeaturedProducts = () => {
                             }
                             alt='cerelac image'
                           />
-                        </div>
-                        {hoveredProductId === String(product.id) && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                              borderRadius: '10px',
-                            }}
-                          >
-                            <button
-                              className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                              style={{ zIndex: 1 }}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                console.log(product.id);
-                                handleAddToCart(product);
-                                toast.success(
-                                  `${product.name} added to cart!`,
-                                  {
-                                    autoClose: 500,
-                                  }
-                                );
+                          {hoveredProductId === String(product.id) && (
+                            <div
+                              style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                borderRadius: '10px',
                               }}
                             >
-                              Quick Add
-                            </button>
-                          </div>
-                        )}
+                              <button
+                                className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                                style={{ zIndex: 1 }}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  console.log(product.id);
+                                  handleAddToCart(product);
+                                  toast.success(
+                                    `${product.name} added to cart!`,
+                                    {
+                                      autoClose: 500,
+                                    }
+                                  );
+                                }}
+                              >
+                                Quick Add
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
 
                       <div className='flex items-center'>

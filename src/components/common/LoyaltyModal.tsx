@@ -62,15 +62,14 @@ const customStylesSmall: Styles = {
   content: {
     display: 'flex',
     flexDirection: 'column',
-    top: '30%',
+    top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%',
-    maxWidth: '400px',
+    width: '350px',
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
-    height: '40vh',
+    height: '400px',
   },
 };
 
@@ -103,7 +102,7 @@ const LoyaltyModal: React.FC<{
           <h2 className='mb-4 text-2xl	font-semibold	 text-[#298592]'>
             Coming Soon !!
           </h2>
-          <div className='mb-4 text-xl'>
+          <div className='w-156 h-156  mb-4 text-xl'>
             <img
               className='w-156 h-156 mx-1 my-1'
               src='/images/loyalty.svg'
