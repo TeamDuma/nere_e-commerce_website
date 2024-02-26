@@ -7,7 +7,7 @@ import { Product } from '@/types/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { sendGTMEvent } from '@next/third-parties/google';
+import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
@@ -116,6 +116,10 @@ const FeaturedProducts = () => {
                                     }
                                   );
                                   sendGTMEvent({
+                                    event: 'featuredProductClicked',
+                                    value: `${product.name}`,
+                                  });
+                                  sendGAEvent({
                                     event: 'featuredProductClicked',
                                     value: `${product.name}`,
                                   });
