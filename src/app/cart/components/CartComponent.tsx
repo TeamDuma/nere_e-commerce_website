@@ -132,7 +132,8 @@ const CartComponent = () => {
   return (
     <div className=' h-full py-8'>
       <div className=' mx-auto px-4'>
-        <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '>
+        {/* <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '> */}
+        <div className='h-20 gap-5 rounded-lg border bg-gray-50 p-2 py-2 shadow-xl md:mb-2 md:flex md:w-1/2 md:items-center'>
           <h1 className='ml-2 text-lg text-[#1A464C] '>
             You have saved GHS {totalSavings} on this purchase!
           </h1>
@@ -149,10 +150,10 @@ const CartComponent = () => {
             {cartItems.map((item: CartItem) => (
               <div
                 key={`${item.id}-${item.groupID ?? ''}`}
-                className='gap-5 border-b border-gray-200 rounded-md py-6 md:flex md:items-center bg-gray-100'
+                className='mt-4 gap-5 rounded-lg border bg-gray-50 p-2 py-2 shadow-xl md:flex md:items-center'
               >
                 <div className='flex'>
-                  <div className='m-2  flex h-48 w-full items-center justify-center rounded-md  md:w-48'>
+                  <div className='m-2  flex h-48 w-full items-center justify-center rounded-md  md:w-48 '>
                     <img
                       className='rounded-md'
                       src={item?.plain_image}
@@ -167,9 +168,9 @@ const CartComponent = () => {
                   </div>
                 </div>
 
-                <div className='flex-1'>
+                <div className='ml-2 flex-1'>
                   <div className='grid grid-cols-1 md:grid-cols-4'>
-                    <div className='md:col-span-2'>
+                    <div className='md:col-span-2 '>
                       <div className='flex max-w-[500px] flex-col gap-3'>
                         <h6 className='text-base font-semibold leading-7 text-black'>
                           {item.name}
@@ -282,7 +283,10 @@ const CartComponent = () => {
             ))}
           </div>
           <div className='md:w-2/5'>
-            <div className='rounded-lg bg-gray-50 p-6 shadow-md'>
+            {/* <div
+                className='gap-5 border rounded-lg h-20 bg-gray-50 p-2 shadow-xl py-2 md:flex md:items-center md:w-1/2'
+              > */}
+            <div className='gap-5 rounded-lg border bg-gray-50 p-3 shadow-xl'>
               <p className='text-l font-medium	 text-[#1A464C]'>
                 Your order summary
               </p>

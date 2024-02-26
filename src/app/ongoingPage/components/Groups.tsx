@@ -20,9 +20,10 @@ const Groups = () => {
         {isError && <p style={{ color: 'red' }}>Error</p>}
         {data && (
           <div className='overflow-x-auto'>
-            <div className='grid cursor-pointer grid-cols-3 gap-6'>
+            <div className='grid cursor-pointer grid-cols-1 gap-6 sm:grid-cols-3 '>
+              {/* Mapping Group Items */}
               {groups.map((item) => (
-                <div key={item.id}>
+                <div key={item.id} className='sm:m-4'>
                   <GroupRowRenderItem item={item} />
                 </div>
               ))}
