@@ -28,7 +28,7 @@ const customStylesLarge: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '650px',
-    height: '50px',
+    height: '700px',
     borderRadius: '15px',
     border: 'none',
   },
