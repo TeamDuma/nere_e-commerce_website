@@ -45,26 +45,20 @@ export default function Home() {
   const openCartModal = () => {
     setIsCartModalOpen(true);
     setIsOngoingModalOpen(false);
-
   };
 
   const openOngoingModal = () => {
     setIsOngoingModalOpen(true);
     setIsCartModalOpen(false);
-
   };
 
   const closeCartModal = () => {
     setIsCartModalOpen(false);
-    
   };
 
   const closeOngoingModal = () => {
     setIsOngoingModalOpen(false);
   };
- 
-
-
 
   return (
     <main>
