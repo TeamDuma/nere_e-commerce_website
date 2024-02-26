@@ -28,7 +28,9 @@ const Cart = () => {
         <div className='text-center text-5xl text-black'>
           Your cart is empty
           <Link href='/products'>
-            <h1 className='my-5 text-[#F58929]'>Go to the Shop</h1>
+            <h1 className='my-5 cursor-pointer text-[#F58929] underline'>
+              Go to the Shop
+            </h1>
           </Link>
         </div>
       ) : (
