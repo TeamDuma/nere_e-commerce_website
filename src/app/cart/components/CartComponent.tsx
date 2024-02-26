@@ -113,6 +113,7 @@ const CartComponent = () => {
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
+    setRegistrationModalVisible(false);
   };
 
   const handleRegistrationClick = () => {

@@ -77,9 +77,9 @@ const customStylesSmall: Styles = {
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
-    height: '500px',
+    height: '440px',
     // width: '90%',
-    width: '350px',
+    width: '370px',
   },
 };
 
@@ -101,6 +101,16 @@ const DeliveryModal: React.FC<{
     }
   );
   const [selectedOption, setSelectedOption] = useState<'pickup' | null>(null);
+  const [isPickupLocationModalOpen, setPickupLocationModalOpen] =
+    useState(false);
+
+  const handleOpenPickupLocationModal = () => {
+    setPickupLocationModalOpen(true);
+  };
+
+  const handleClosePickupLocationModal = () => {
+    setPickupLocationModalOpen(false);
+  };
 
   const closeModal = () => {
     onClose();
@@ -173,14 +183,20 @@ const DeliveryModal: React.FC<{
               {selectedAddress ? (
                 <div
                   className='cursor-pointer text-xs text-[#298592] underline underline-offset-1	 '
-                  onClick={() => setSelectedOption('pickup')}
+                  onClick={() => {
+                    setSelectedOption('pickup');
+                    handleOpenPickupLocationModal();
+                  }}
                 >
                   Change pickup location {'>'}
                 </div>
               ) : (
                 <p
                   className='cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'
-                  onClick={() => setSelectedOption('pickup')}
+                  onClick={() => {
+                    setSelectedOption('pickup');
+                    handleOpenPickupLocationModal();
+                  }}
                 >
                   Please select a Location{'>'}
                 </p>

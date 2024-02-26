@@ -115,7 +115,10 @@ const FeaturedProducts = () => {
                                       autoClose: 500,
                                     }
                                   );
-                                  sendGTMEvent({ event: 'featuredProductClicked', value: `${product.name}` })
+                                  sendGTMEvent({
+                                    event: 'featuredProductClicked',
+                                    value: `${product.name}`,
+                                  });
                                 }}
                               >
                                 Quick Add

@@ -99,7 +99,7 @@ const MoreInformation: React.FC<MoreInformationProps> = ({
               Nere Pickup Station East Legon
             </h5>
             <p className='my-2 text-xs font-medium text-[#979797]'>
-              {selectedAddress?.name}
+              {location?.name}
             </p>
             <p className='my-2 cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'>
               See on google maps
