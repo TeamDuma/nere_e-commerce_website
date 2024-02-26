@@ -178,7 +178,12 @@ const Header = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
-                onClick={() => sendGTMEvent({ evet: 'searchBarClicked', value: 'Helloe world' })}
+                onClick={() =>
+                  sendGTMEvent({
+                    evet: 'searchBarClicked',
+                    value: 'Helloe world',
+                  })
+                }
               />
 
               <BsSearch

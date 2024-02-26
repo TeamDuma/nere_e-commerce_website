@@ -12,9 +12,7 @@ const ViewMore = () => {
         marginBottom: '10px',
       }}
     >
-      <Link
-        href='/products'
-      >
+      <Link href='/products'>
         <div
           className='rounded-lg py-3 text-center text-base font-semibold text-white shadow'
           style={{
