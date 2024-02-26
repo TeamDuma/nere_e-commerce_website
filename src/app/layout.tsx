@@ -7,7 +7,7 @@ import Container from '@/components/common/Container';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Footer from '@/components/common/footer/Footer';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
 const Mnontserrat = Montserrat({ subsets: ['latin'] });
 
@@ -39,7 +39,8 @@ export default function RootLayout(props: React.PropsWithChildren) {
             theme='light'
           />
           <Footer />
-          <GoogleTagManager gtmId='GTM-T76G6F9Q' />
+          {/* <GoogleTagManager gtmId='GTM-T76G6F9Q' /> */}
+          <GoogleAnalytics gaId='G-2NJ28203XK' />
         </Providers>
       </body>
     </html>
