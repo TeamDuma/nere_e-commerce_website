@@ -217,7 +217,9 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             </div> */}
 
             <Link href='/products'>
-              <h1 className=' my-2 w-1/2 text-[#F58929]'>Continue Shopping</h1>
+              <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
+                Continue Shopping
+              </h1>
             </Link>
             {product?.hasMinQuantity ? (
               <h2>

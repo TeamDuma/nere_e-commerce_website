@@ -34,6 +34,10 @@ export default function Home() {
   } = useGetPublicOngoingGroupsQuery();
   const { data: productsData, isLoading: productsLoading } =
     useGetActiveProductsQuery();
+  
+  const posthog = usePostHog();
+  posthog.identify(userInfo?.data?.customer.email);
+  
   const products = productsData?.data?.products ?? [];
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
@@ -45,19 +49,21 @@ export default function Home() {
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
+    setIsOngoingModalOpen(false);
   };
 
   const openOngoingModal = () => {
     setIsOngoingModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOngoingModalOpen(false);
     setIsCartModalOpen(false);
   };
 
-  const posthog = usePostHog();
-  posthog.identify(userInfo?.data?.customer.email);
+  const closeCartModal = () => {
+    setIsCartModalOpen(false);
+  };
+  
+  const closeOngoingModal = () => {
+    setIsOngoingModalOpen(false);
+  };
 
   return (
     <main>
@@ -118,18 +124,18 @@ export default function Home() {
               </div>
               <div className='m-2 flex flex-row rounded'>
                 <p className='mb-1 hidden text-xs text-white sm:block'>
-                  {groups.length} Ongoing Purchases near me
+                  <span>{groups.length}</span> Ongoing Purchases near me
                 </p>
-                <p className='mb-1 text-xs text-white sm:block lg:hidden'>
+                {/* <p className='mb-1 text-xs text-white sm:block lg:hidden'>
                   {groups.length} groups
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
         </div>
 
-        <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
-        <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
+        <CartModal onClose={closeCartModal} isOpen={isCartModalOpen} />
+        <OngoingModal onClose={closeOngoingModal} isOpen={isOngoingModalOpen} />
       </Container>
     </main>
   );

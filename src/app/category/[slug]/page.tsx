@@ -57,8 +57,13 @@ const Category = ({ params }: Props) => {
             <Title text={products[0]?.categories?.name || ''} />
           </div>
           {products.length === 0 ? (
-            <div className='flex h-screen items-center justify-center'>
-              <h2 className='text-center'>This category has no items.</h2>
+            <div className='text-center text-5xl text-black'>
+              This category has no items.
+              <Link href='/products'>
+                <h1 className='my-5 cursor-pointer text-[#F58929] underline'>
+                  Continue Shopping
+                </h1>
+              </Link>
             </div>
           ) : (
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>
