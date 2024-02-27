@@ -7,7 +7,8 @@ import Container from '@/components/common/Container';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Footer from '@/components/common/footer/Footer';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import { PHProvider } from '@/lib/posthog/providers';
 
 const Mnontserrat = Montserrat({ subsets: ['latin'] });
 
@@ -19,30 +20,32 @@ export const metadata: Metadata = {
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <html lang='en'>
-      <body
-        className={`${Mnontserrat.className}`}
-        style={{ backgroundColor: '#FAFAFA' }}
-      >
-        <Providers>
-          <Header />
-          {props.children}
-          <ToastContainer
-            position='top-center'
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme='light'
-          />
-          <Footer />
-          {/* <GoogleTagManager gtmId='GTM-T76G6F9Q' /> */}
-          <GoogleAnalytics gaId='G-2NJ28203XK' />
-        </Providers>
-      </body>
+      <PHProvider>
+        <body
+          className={`${Mnontserrat.className}`}
+          style={{ backgroundColor: '#FAFAFA' }}
+        >
+          <Providers>
+            <Header />
+            {props.children}
+            <ToastContainer
+              position='top-center'
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme='light'
+            />
+            <Footer />
+            {/* <GoogleTagManager gtmId='GTM-T76G6F9Q' /> */}
+            <GoogleAnalytics gaId='G-2NJ28203XK' />
+          </Providers>
+        </body>
+      </PHProvider>
     </html>
   );
 }

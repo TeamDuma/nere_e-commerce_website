@@ -18,6 +18,7 @@ import CartIconHeader from '../CartIconHeader';
 import { useRouter } from 'next/navigation';
 import DeliveryModal from '../../../app/delivery/components/DeliveryModal';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
+import { usePostHog } from 'posthog-js/react';
 
 const Header = () => {
   const router = useRouter();
@@ -70,6 +71,8 @@ const Header = () => {
   const [registrationModalVisible, setRegistrationModalVisible] =
     useState(false);
 
+  const posthog = usePostHog();
+
   const handLocation = () => {
     setLocationModalVisible(true);
   };
@@ -96,6 +99,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       dispatch(deleteUser());
+      posthog.reset();
     } catch (error) { }
   };
 

@@ -21,11 +21,12 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { MdGroups } from 'react-icons/md';
 import ThreeBannerLayout from '@/components/ThreeBannerLayout';
+import { usePostHog } from 'posthog-js/react';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isOngoingModalOpen, setIsOngoingModalOpen] = useState(false);
-  const { cartItems } = useSelector(selectShopping);
+  const { cartItems, userInfo } = useSelector(selectShopping);
   const {
     data: ongoingGroupsData,
     isLoading: ongoingGroupsLoading,
@@ -55,6 +56,10 @@ export default function Home() {
     setIsCartModalOpen(false);
   };
 
+  const posthog = usePostHog();
+  console.log('userInfo', userInfo);
+  posthog.identify(userInfo?.data?.customer.email);
+
   return (
     <main>
       <Container>
@@ -71,11 +76,10 @@ export default function Home() {
 
         <ViewMore />
         <div
-          className={`hidden sm:block ${
-            isCartModalOpen
-              ? 'hidden'
-              : 'fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
-          }`}
+          className={`hidden sm:block ${isCartModalOpen
+            ? 'hidden'
+            : 'fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
+            }`}
         >
           <div
             onClick={openCartModal}
@@ -98,11 +102,10 @@ export default function Home() {
         </div>
 
         <div
-          className={`hidden sm:block ${
-            isOngoingModalOpen
-              ? 'hidden'
-              : 'fixed left-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
-          }`}
+          className={`hidden sm:block ${isOngoingModalOpen
+            ? 'hidden'
+            : 'fixed left-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
+            }`}
         >
           <div
             onClick={openOngoingModal}
