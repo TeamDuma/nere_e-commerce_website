@@ -64,7 +64,7 @@ const FeaturedProducts = () => {
                         {`${Math.round(
                           ((product.price - product.sale_price) /
                             product.price) *
-                          100
+                            100
                         )}%`}
                       </div>
                       <div className='mt-2 flex items-center justify-center md:mt-4'>
@@ -86,7 +86,7 @@ const FeaturedProducts = () => {
                             src={product?.plain_image}
                             width={
                               product.name === 'Frytol sunflower oil 0.9L' ||
-                                product.name === "Dr. Annie's honey 500ml"
+                              product.name === "Dr. Annie's honey 500ml"
                                 ? '60px'
                                 : '60px'
                             }

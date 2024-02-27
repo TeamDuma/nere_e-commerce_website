@@ -242,8 +242,9 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
                 <div className='flex items-center'>
                   <button
-                    className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none ${remaining >= (product.min_quantity ?? 0) ? 'disabled' : ''
-                      }`}
+                    className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none ${
+                      remaining >= (product.min_quantity ?? 0) ? 'disabled' : ''
+                    }`}
                     onClick={handleAddToCart}
                     disabled={remaining >= (product.min_quantity ?? 0)}
                   >

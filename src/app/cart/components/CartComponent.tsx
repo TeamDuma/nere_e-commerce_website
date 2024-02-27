@@ -52,7 +52,7 @@ const CartComponent = () => {
 
   const { cartItems, selectedLocationId, userInfo } =
     useSelector(selectShopping);
-  
+
   const postHogClient = PostHogClient();
 
   const calculateTotal = () => {
@@ -423,11 +423,11 @@ const CartComponent = () => {
                               }
                             })
                             .catch((e) => {});
-                            postHogClient.capture({
-                              distinctId: userInfo.data.customer.email,
-                              event: 'checkoutProductClicked',
-                              properties: { ...cartItems },
-                            });
+                          postHogClient.capture({
+                            distinctId: userInfo.data.customer.email,
+                            event: 'checkoutProductClicked',
+                            properties: { ...cartItems },
+                          });
                         } else {
                           toast.warning(
                             'Please select a delivery location before checkout.'
