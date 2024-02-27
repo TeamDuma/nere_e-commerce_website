@@ -48,7 +48,7 @@ const Header = () => {
     () => {
       return data
         ? locations.find((location) => location.id === selectedLocationId) ||
-        null
+            null
         : null;
     }
   );
@@ -100,7 +100,7 @@ const Header = () => {
     try {
       dispatch(deleteUser());
       posthog.reset();
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
@@ -159,8 +159,9 @@ const Header = () => {
               )}
               <Link
                 href='/cart'
-                className={`block ${cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-                  }`}
+                className={`block ${
+                  cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+                }`}
               >
                 <div className='mr-4 flex flex-row gap-2'>
                   <CartIconHeader />
@@ -185,13 +186,12 @@ const Header = () => {
                   sendGTMEvent({
                     event: 'searchBarClicked',
                     value: `${searchQuery}`,
-                  })
+                  });
                   sendGAEvent({
                     event: 'searchBarClicked',
                     value: `${searchQuery}`,
-                  })
-                }
-                }
+                  });
+                }}
               />
 
               <BsSearch
@@ -326,8 +326,9 @@ const Header = () => {
             </div>
             <Link
               href='/cart'
-              className={`mt-4 block rounded-md p-2 ${cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-                }`}
+              className={`mt-4 block rounded-md p-2 ${
+                cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+              }`}
             >
               <div className='mr-4 flex flex-row gap-2'>
                 <CartIconHeader />

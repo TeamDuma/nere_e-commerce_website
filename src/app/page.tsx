@@ -76,10 +76,11 @@ export default function Home() {
 
         <ViewMore />
         <div
-          className={`hidden sm:block ${isCartModalOpen
-            ? 'hidden'
-            : 'fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
-            }`}
+          className={`hidden sm:block ${
+            isCartModalOpen
+              ? 'hidden'
+              : 'fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
+          }`}
         >
           <div
             onClick={openCartModal}
@@ -102,10 +103,11 @@ export default function Home() {
         </div>
 
         <div
-          className={`hidden sm:block ${isOngoingModalOpen
-            ? 'hidden'
-            : 'fixed left-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
-            }`}
+          className={`hidden sm:block ${
+            isOngoingModalOpen
+              ? 'hidden'
+              : 'fixed left-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
+          }`}
         >
           <div
             onClick={openOngoingModal}
