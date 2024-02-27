@@ -57,7 +57,6 @@ export default function Home() {
   };
 
   const posthog = usePostHog();
-  console.log('userInfo', userInfo);
   posthog.identify(userInfo?.data?.customer.email);
 
   return (

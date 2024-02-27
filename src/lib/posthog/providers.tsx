@@ -14,14 +14,14 @@ if (typeof window !== 'undefined') {
 
 export function PHProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+//   const searchParams = useSearchParams();
 
   useEffect(() => {
     if (pathname) {
       let url = window.origin + pathname;
-      if (searchParams.toString()) {
-        url += '?' + searchParams.toString();
-      }
+    //   if (searchParams.toString()) {
+    //     url += '?' + searchParams.toString();
+    //   }
       posthog.capture('$pageview', { $current_url: url });
     }
 
@@ -31,7 +31,7 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
     //     $pathname: pathname,
     //     $search: searchParams.toString(),
     // })
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }

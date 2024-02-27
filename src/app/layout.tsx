@@ -20,32 +20,32 @@ export const metadata: Metadata = {
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <html lang='en'>
-      <PHProvider>
-        <body
-          className={`${Mnontserrat.className}`}
-          style={{ backgroundColor: '#FAFAFA' }}
-        >
-          <Providers>
-            <Header />
-            {props.children}
-            <ToastContainer
-              position='top-center'
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme='light'
-            />
-            <Footer />
-            {/* <GoogleTagManager gtmId='GTM-T76G6F9Q' /> */}
-            <GoogleAnalytics gaId='G-2NJ28203XK' />
-          </Providers>
-        </body>
-      </PHProvider>
+        <PHProvider>
+          <body
+            className={`${Mnontserrat.className}`}
+            style={{ backgroundColor: '#FAFAFA' }}
+          >
+            <Providers>
+              <Header />
+              {props.children}
+              <ToastContainer
+                position='top-center'
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+              />
+              <Footer />
+              {/* <GoogleTagManager gtmId='GTM-T76G6F9Q' /> */}
+              <GoogleAnalytics gaId='G-2NJ28203XK' />
+            </Providers>
+          </body>
+        </PHProvider>
     </html>
   );
 }

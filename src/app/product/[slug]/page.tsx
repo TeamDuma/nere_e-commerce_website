@@ -16,6 +16,7 @@ import { FaStar } from 'react-icons/fa';
 import Stepper from '@/components/common/PurchaseGuide';
 import ProgressBar from '@/components/common/ProgressBar';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
+import PostHogClient from '@/app/posthog';
 
 type Props = {
   params: {
@@ -29,11 +30,13 @@ export default function ProductDetailPage({ params }: Props) {
   const [selectedVariant, setSelectedVariant] = useState('');
   const [productQuantity, setProductQuantity] = useState(0);
 
-  const { cartItems } = useSelector(selectShopping);
+  const { cartItems, userInfo } = useSelector(selectShopping);
   const [getProduct, { data, isLoading, isError }] = useLazyGetProductQuery();
   const product = data?.data?.product;
   const [getGroup, { data: groupData }] = useLazyGetGroupQuery();
   const group = groupData?.data?.group;
+
+  const posthogClient = PostHogClient();
 
   useEffect(() => {
     getProduct(productSlug);
@@ -261,7 +264,17 @@ export default function ProductDetailPage({ params }: Props) {
                       <div className='mt-4 sm:mt-0 sm:flex'>
                         <button
                           className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                          onClick={handleAddToCart}
+                          onClick={() => {
+                            handleAddToCart()
+                            console.log('Product added to cart')
+                            console.log(product)
+                            posthogClient.capture({
+                              distinctId: userInfo?.data?.customer.email,
+                              event: 'product_added_to_cart',
+                              properties: { ...product },
+                            });
+                          }
+                          }
                         >
                           <span className='hidden sm:inline'>Add to Cart</span>
                           <span className='sm:hidden'>Launch Purchase</span>

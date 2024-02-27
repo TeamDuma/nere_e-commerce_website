@@ -2,12 +2,14 @@
 
 import { useLazyGetOrderConfirmationQuery } from '@/lib/redux/services/cart';
 import { Group } from '@/types/group';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState, useRef, use } from 'react';
 import GroupItem from './components/GroupItem';
 import OrderSummary from './components/OrderSummary';
 import ShareModal from './components/ShareModal';
-import { resetCart, useDispatch } from '@/lib/redux';
+import { resetCart, selectShopping, useDispatch } from '@/lib/redux';
+import PostHogClient from '@/app/posthog';
+import { useSelector } from 'react-redux';
 
 const Page = () => {
   const [getOrderConfirmation, { data, isFetching, isLoading, isSuccess }] =
@@ -29,6 +31,15 @@ const Page = () => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
+
+  const { userInfo } = useSelector(selectShopping);
+
+  const posthogClient = PostHogClient();
+  posthogClient.capture({
+    distinctId: userInfo?.data?.customer.email,
+    event: 'order_confirmation_page_viewed',
+    properties: { reference },
+  });
 
   const handleShowModal = (group: Group) => {
     setShowModal(true);
