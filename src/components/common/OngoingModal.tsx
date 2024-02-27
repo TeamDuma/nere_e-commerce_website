@@ -20,10 +20,10 @@ const customStyles: Styles = {
   },
   content: {
     position: 'fixed',
-    top: 40,
+    top: 100,
     left: 0,
     right: 'auto',
-    height: '100%',
+    height: '95%',
     width: '95%',
     maxWidth: '380px',
     margin: 'auto',

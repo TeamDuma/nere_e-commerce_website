@@ -47,7 +47,7 @@ const Header = () => {
     () => {
       return data
         ? locations.find((location) => location.id === selectedLocationId) ||
-        null
+            null
         : null;
     }
   );
@@ -96,67 +96,237 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       dispatch(deleteUser());
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
-    <div className='mb-5 flex flex-wrap'>
-      <div className='mb-6  w-full rounded-xl bg-[#fff] px-3'>
-        <div className=' flex flex-col  justify-between sm:flex-row '>
-          <div className='flex  items-center justify-between '>
-            <div className='ml-4 text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
-              <Link href='/'>
-                <Logo />
-              </Link>
+    <div className='sticky top-0 z-50'>
+      <div className='mb-5 flex flex-wrap'>
+        <div className='mb-6  w-full rounded-xl bg-[#fff] px-3'>
+          <div className=' flex flex-col  justify-between sm:flex-row '>
+            <div className='flex  items-center justify-between '>
+              <div className='ml-4 text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
+                <Link href='/'>
+                  <Logo />
+                </Link>
+              </div>
+
+              <div className='flex items-center gap-4 lg:hidden'>
+                {userInfo && userInfo.data ? (
+                  <div className='relative mr-4 inline-block'>
+                    <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                      <UserIcon />
+                    </button>
+                    {isDropdownOpen && (
+                      <div
+                        className='absolute mt-2 rounded-md bg-white shadow-lg'
+                        style={{ zIndex: 1 }}
+                      >
+                        <a
+                          href='/profile'
+                          className='block px-4 py-2 text-[#298592]'
+                        >
+                          Profile
+                        </a>
+                        <a
+                          href='/lastorder'
+                          className='block px-4 py-2 text-[#298592]'
+                        >
+                          Last orders
+                        </a>
+                        <a
+                          href='#'
+                          className='block px-4 py-2 text-[#298592]'
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className='relative block'>
+                    <button onClick={openLoginModal}>
+                      <UserIcon />
+                    </button>
+                  </div>
+                )}
+                <Link
+                  href='/cart'
+                  className={`block ${
+                    cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+                  }`}
+                >
+                  <div className='mr-4 flex flex-row gap-2'>
+                    <CartIconHeader />
+                    <p style={{ color: '#298592', fontSize: 12 }}>
+                      {(cartItems ?? []).length}
+                    </p>
+                  </div>
+                </Link>
+              </div>
             </div>
 
-            <div className='flex items-center gap-4 lg:hidden'>
-              {userInfo && userInfo.data ? (
-                <div className='relative mr-4 inline-block'>
-                  <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                    <UserIcon />
+            <div className='flex w-full flex-col items-center gap-4 px-2 sm:w-[300px] sm:flex-row md:w-[40%]'>
+              <div className='relative w-full rounded'>
+                <input
+                  className='w-full rounded-2xl border border-gray-200 bg-[#F5F5F5] p-2 px-4'
+                  type='text'
+                  placeholder='Search for products'
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  onClick={() => {
+                    sendGTMEvent({
+                      event: 'searchBarClicked',
+                      value: `${searchQuery}`,
+                    });
+                    sendGAEvent({
+                      event: 'searchBarClicked',
+                      value: `${searchQuery}`,
+                    });
+                  }}
+                />
+
+                <BsSearch
+                  className='absolute right-0 top-0 mr-3 mt-3 cursor-pointer text-gray-400'
+                  size={20}
+                  onClick={handleSearch}
+                />
+              </div>
+            </div>
+
+            <div className='px-2 sm:hidden'>
+              <div className='my-4 flex'>
+                <div className='flex lg:hidden'>
+                  <button>
+                    <Location />
                   </button>
-                  {isDropdownOpen && (
+                </div>
+
+                <div className='flex  gap-4 lg:hidden '>
+                  <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
+                  <p
+                    style={{
+                      color: '#298592',
+                      fontWeight: 'bold',
+                      fontSize: 12,
+                    }}
+                  >
+                    {selectedLocation
+                      ? selectedLocation.name
+                      : 'Select a location'}
+                  </p>
+                  <p
+                    style={{
+                      color: '#298592',
+                      fontSize: 14,
+                      fontWeight: 'bold',
+                    }}
+                    onClick={handLocation}
+                  >
+                    Change
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='hidden gap-4 text-[30px] text-gray-500 lg:flex '>
+              <div className='mr-4 flex items-center'>
+                <a
+                  className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                  href='#'
+                >
+                  <div
+                    className='hidden items-center md:flex '
+                    onClick={handLocation}
+                  >
+                    <Location />
+                    <div className='ml-2'>
+                      <p style={{ color: '#298592', fontSize: 12 }}>
+                        Pick up from
+                      </p>
+                      <p
+                        style={{
+                          color: '#298592',
+                          fontWeight: 'bold',
+                          fontSize: 12,
+                        }}
+                      >
+                        {selectedLocation
+                          ? selectedLocation.name
+                          : 'Select a location'}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+                {userInfo && userInfo.data ? (
+                  <div className='relative inline-block'>
                     <div
-                      className='absolute mt-2 rounded-md bg-white shadow-lg'
-                      style={{ zIndex: 1 }}
+                      className='hidden items-center md:flex'
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     >
-                      {/* <button className='block px-4 py-2 text-[#298592]'>
-                        Profile
-                      </button> */}
                       <a
-                        href='/profile'
-                        className='block px-4 py-2 text-[#298592]'
-                      >
-                        Profile
-                      </a>
-                      <a
-                        href='/lastorder'
-                        className='block px-4 py-2 text-[#298592]'
-                      >
-                        Last orders
-                      </a>
-                      <a
+                        className='inline-block cursor-pointer rounded-full px-3 py-2 hover:bg-gray-200'
                         href='#'
-                        className='block px-4 py-2 text-[#298592]'
-                        onClick={handleLogout}
                       >
-                        Logout
+                        <div className='flex items-center'>
+                          <UserIcon />
+                          <div className='ml-2'>
+                            <p style={{ color: '#298592', fontSize: 12 }}>
+                              Welcome: {userInfo?.data?.customer.name}
+                            </p>
+                          </div>
+                        </div>
                       </a>
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div className='relative block'>
-                  <button onClick={openLoginModal}>
-                    <UserIcon />
-                  </button>
-                </div>
-              )}
+                    {isDropdownOpen && (
+                      <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
+                        <a
+                          href='/profile'
+                          className='block px-2 py-1 text-sm text-[#298592]'
+                        >
+                          Profile
+                        </a>
+                        <a
+                          href='/lastorder'
+                          className='block px-2 py-1 text-sm text-[#298592]'
+                        >
+                          Last order
+                        </a>
+                        <a
+                          href='#'
+                          className='block px-2 py-1 text-sm text-[#298592]'
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className='relative block'>
+                    <a
+                      className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
+                      onClick={openLoginModal}
+                    >
+                      <div className='hidden items-center md:flex'>
+                        <UserIcon />
+                        <div className='ml-2'>
+                          <p style={{ color: '#298592', fontSize: 12 }}>
+                            Login & Register
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                )}
+              </div>
               <Link
                 href='/cart'
-                className={`block ${cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-                  }`}
+                className={`mt-4 block rounded-md p-2 ${
+                  cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+                }`}
               >
                 <div className='mr-4 flex flex-row gap-2'>
                   <CartIconHeader />
@@ -165,197 +335,31 @@ const Header = () => {
                   </p>
                 </div>
               </Link>
-            </div>
-          </div>
 
-          <div className='flex w-full flex-col items-center gap-4 px-2 sm:w-[300px] sm:flex-row md:w-[40%]'>
-            <div className='relative w-full rounded'>
-              <input
-                className='w-full rounded-2xl border border-gray-200 bg-[#F5F5F5] p-2 px-4'
-                type='text'
-                placeholder='Search for products'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={handleKeyPress}
-                onClick={() => {
-                  sendGTMEvent({
-                    event: 'searchBarClicked',
-                    value: `${searchQuery}`,
-                  })
-                  sendGAEvent({
-                    event: 'searchBarClicked',
-                    value: `${searchQuery}`,
-                  })
-                }
-                }
-              />
+              {locationModalVisible && (
+                <DeliveryModal
+                  onClose={closeModal}
+                  isOpen={locationModalVisible}
+                />
+              )}
 
-              <BsSearch
-                className='absolute right-0 top-0 mr-3 mt-3 cursor-pointer text-gray-400'
-                size={20}
-                onClick={handleSearch}
-              />
-            </div>
-          </div>
+              {loginModalVisible && (
+                <LoginModal
+                  onClose={closeModal}
+                  onRegistrationClick={handleRegistrationClick}
+                  session={null}
+                  isOpen={loginModalVisible}
+                />
+              )}
 
-          <div className='px-2 sm:hidden'>
-            <div className='my-4 flex'>
-              <div className='flex lg:hidden'>
-                <button>
-                  <Location />
-                </button>
-              </div>
-
-              <div className='flex  gap-4 lg:hidden '>
-                <p style={{ color: '#298592', fontSize: 12 }}>Pick up from</p>
-                <p
-                  style={{
-                    color: '#298592',
-                    fontWeight: 'bold',
-                    fontSize: 12,
-                  }}
-                >
-                  {selectedLocation
-                    ? selectedLocation.name
-                    : 'Select a location'}
-                </p>
-                <p
-                  style={{ color: '#298592', fontSize: 14, fontWeight: 'bold' }}
-                  onClick={handLocation}
-                >
-                  Change
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className='hidden gap-4 text-[30px] text-gray-500 lg:flex '>
-            <div className='mr-4 flex items-center'>
-              <a
-                className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                href='#'
-              >
-                <div
-                  className='hidden items-center md:flex '
-                  onClick={handLocation}
-                >
-                  <Location />
-                  <div className='ml-2'>
-                    <p style={{ color: '#298592', fontSize: 12 }}>
-                      Pick up from
-                    </p>
-                    <p
-                      style={{
-                        color: '#298592',
-                        fontWeight: 'bold',
-                        fontSize: 12,
-                      }}
-                    >
-                      {selectedLocation
-                        ? selectedLocation.name
-                        : 'Select a location'}
-                    </p>
-                  </div>
-                </div>
-              </a>
-              {userInfo && userInfo.data ? (
-                <div className='relative inline-block'>
-                  <div
-                    className='hidden items-center md:flex'
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  >
-                    <a
-                      className='inline-block cursor-pointer rounded-full px-3 py-2 hover:bg-gray-200'
-                      href='#'
-                    >
-                      <div className='flex items-center'>
-                        <UserIcon />
-                        <div className='ml-2'>
-                          <p style={{ color: '#298592', fontSize: 12 }}>
-                            Welcome: {userInfo?.data?.customer.name}
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  {isDropdownOpen && (
-                    <div className='absolute mt-2 rounded-md bg-white shadow-lg'>
-                      <a
-                        href='/profile'
-                        className='block px-2 py-1 text-sm text-[#298592]'
-                      >
-                        Profile
-                      </a>
-                      <a
-                        href='/lastorder'
-                        className='block px-2 py-1 text-sm text-[#298592]'
-                      >
-                        Last order
-                      </a>
-                      <a
-                        href='#'
-                        className='block px-2 py-1 text-sm text-[#298592]'
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </a>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className='relative block'>
-                  <a
-                    className='inline-block rounded-full px-3 py-2 hover:bg-gray-200'
-                    onClick={openLoginModal}
-                  >
-                    <div className='hidden items-center md:flex'>
-                      <UserIcon />
-                      <div className='ml-2'>
-                        <p style={{ color: '#298592', fontSize: 12 }}>
-                          Login & Register
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
+              {registrationModalVisible && (
+                <RegistrationModal
+                  onClose={closeModal}
+                  isOpen={registrationModalVisible}
+                  onLoginClick={handleLoginClick}
+                />
               )}
             </div>
-            <Link
-              href='/cart'
-              className={`mt-4 block rounded-md p-2 ${cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-                }`}
-            >
-              <div className='mr-4 flex flex-row gap-2'>
-                <CartIconHeader />
-                <p style={{ color: '#298592', fontSize: 12 }}>
-                  {(cartItems ?? []).length}
-                </p>
-              </div>
-            </Link>
-
-            {locationModalVisible && (
-              <DeliveryModal
-                onClose={closeModal}
-                isOpen={locationModalVisible}
-              />
-            )}
-
-            {loginModalVisible && (
-              <LoginModal
-                onClose={closeModal}
-                onRegistrationClick={handleRegistrationClick}
-                session={null}
-                isOpen={loginModalVisible}
-              />
-            )}
-
-            {registrationModalVisible && (
-              <RegistrationModal
-                onClose={closeModal}
-                isOpen={registrationModalVisible}
-                onLoginClick={handleLoginClick}
-              />
-            )}
           </div>
         </div>
       </div>

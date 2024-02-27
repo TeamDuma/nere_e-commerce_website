@@ -19,7 +19,7 @@ const OngoingPurchases: React.FC = () => {
             {groups.map((item: Group) => (
               <div
                 key={item.id}
-                className='m-4 flex-shrink-0 cursor-pointer rounded border '
+                className='m-4 flex-shrink-0 cursor-pointer rounded  '
               >
                 <GroupRowRenderItem item={item} />
               </div>
