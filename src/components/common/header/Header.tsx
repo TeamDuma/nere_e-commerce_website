@@ -48,7 +48,7 @@ const Header = () => {
     () => {
       return data
         ? locations.find((location) => location.id === selectedLocationId) ||
-                null
+            null
         : null;
     }
   );
