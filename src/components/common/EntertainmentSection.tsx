@@ -55,7 +55,7 @@ const EntertainmentSection = () => {
           >
             <img
               className='mx-4 my-1'
-              src='/images/loyaltySmall.svg'
+              src='/images/joystickSmall.svg'
               alt='Coin'
             />
             <div>
@@ -68,11 +68,11 @@ const EntertainmentSection = () => {
           </div>
           <div
             className='m-2  flex items-center rounded-lg border border-[#298592]  p-2 shadow'
-            onClick={openGameModal}
+            onClick={openLoyaltyModal}
           >
             <img
+              src='/images/loyaltySmall.svg'
               className='mx-4 my-1'
-              src='/images/joystickSmall.svg'
               alt='Coin'
             />
 

@@ -1,64 +1,5 @@
-// 'use client';
-// import React, { useEffect } from 'react';
+'use client';
 
-// const Slider = () => {
-//   useEffect(() => {
-//     const slider = document.querySelector<HTMLDivElement>('#slider');
-//     let moveSlideTimeout: NodeJS.Timeout;
-
-//     const moveSlide = () => {
-//       if (!slider) return;
-
-//       const max = slider.scrollWidth - slider.clientWidth;
-//       const left = slider.clientWidth;
-
-//       if (max === slider.scrollLeft) {
-//         slider.scrollTo({ left: 0, behavior: 'smooth' });
-//       } else {
-//         slider.scrollBy({ left, behavior: 'smooth' });
-//       }
-
-//       moveSlideTimeout = setTimeout(moveSlide, 2000);
-//     };
-
-//     moveSlide();
-
-//     return () => {
-//       clearTimeout(moveSlideTimeout);
-//     };
-//   }, []);
-
-//   return (
-//     <div
-//       className='space-4 flex h-96 w-full flex-nowrap overflow-hidden rounded-xl text-center'
-//       id='slider'
-//     >
-//       <div className='flex w-full flex-none flex-col items-center justify-center space-y-4 bg-blue-600 text-white'>
-//         <h2 className='max-w-md text-4xl'>Your Big Ideia</h2>
-//         <p className='max-w-md'>
-//           It's fast, flexible, and reliable — with zero-runtime.
-//         </p>
-//       </div>
-//       <div className='flex w-full flex-none flex-col items-center justify-center space-y-4 bg-pink-400 text-white'>
-//         <h2 className='max-w-md text-4xl'>
-//           Tailwind CSS works by scanning all of your HTML
-//         </h2>
-//         <p className='max-w-md'>
-//           It's fast, flexible, and reliable — with zero-runtime.
-//         </p>
-//       </div>
-//       <div className='flex w-full flex-none flex-col items-center justify-center space-y-4 bg-teal-500 text-white'>
-//         <h2 className='max-w-md text-4xl'>React, Vue, and HTML</h2>
-//         <p className='max-w-md'>
-//           Accessible, interactive examples for React and Vue powered by Headless
-//           UI, plus vanilla HTML if you’d rather write any necessary JS yourself.
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Slider;
 import React, { useEffect, useState } from 'react';
 
 const Slider = () => {
@@ -104,21 +45,6 @@ const Slider = () => {
         ))}
       </div>
 
-      <div className='absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3'>
-        {images.map((_, index) => (
-          <button
-            key={index}
-            type='button'
-            className={`h-3 w-3 rounded-full${
-              index === currentIndex ? ' bg-gray-800' : ''
-            }`}
-            aria-current={index === currentIndex ? 'true' : 'false'}
-            aria-label={`Slide ${index + 1}`}
-            onClick={() => setCurrentIndex(index)}
-          />
-        ))}
-      </div>
-
       <button
         type='button'
         className='group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none'
@@ -128,9 +54,7 @@ const Slider = () => {
             prevIndex === 0 ? images.length - 1 : prevIndex - 1
           )
         }
-      >
-        {/* Previous button content */}
-      </button>
+      ></button>
 
       <button
         type='button'
