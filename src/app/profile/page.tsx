@@ -6,13 +6,24 @@ import OrderContent from './components/OrderContent';
 import VoucherContent from './components/VoucherContent';
 import { FaTags, FaUser } from 'react-icons/fa';
 import { IoIosListBox } from 'react-icons/io';
+import { useSelector } from 'react-redux';
+import { selectShopping } from '@/lib/redux/slices/shopping';
 
 const SettingsPage = () => {
   const [selectedTab, setSelectedTab] = useState('profile');
+  const { userInfo } = useSelector(selectShopping);
 
   const handleTabClick = (tabName: React.SetStateAction<string>) => {
     setSelectedTab(tabName);
   };
+
+  if (!userInfo || !userInfo.data) {
+    return (
+      <div className='text-center text-5xl text-black'>
+        Please log in to view this content
+      </div>
+    );
+  }
 
   return (
     <>
