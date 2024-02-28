@@ -115,6 +115,78 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   return (
     <div className='my-8'>
       <div className='container mx-auto px-6'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='my-2 flex flex-wrap items-center text-sm text-gray-400'>
+            <a href='/' className='hover:text-gray-600 hover:underline'>
+              Home
+            </a>
+            <span>
+              <svg
+                className='h-5 w-5 leading-none text-gray-300'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </span>
+            <a
+              href='/groups/ongoingPurchases'
+              className='hover:text-gray-600 hover:underline'
+            >
+              Groups
+            </a>
+            <span>
+              <svg
+                className='h-5 w-5 leading-none text-gray-300'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </span>
+
+            <a
+              href={`/groups/ongoingPurchases/${group?.uid}`}
+              className='hover:text-gray-600 hover:underline'
+            >
+              {group?.uid}
+            </a>
+
+            <span>
+              <svg
+                className='h-5 w-5 leading-none text-gray-300'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </span>
+            <a className='font-bold hover:text-gray-600 hover:underline'>
+              {product?.name}
+            </a>
+          </div>
+        </div>
         <div className='mb-8 md:flex md:items-center'>
           <div className='h-387 w-387 bg-gray-100 md:w-1/2 lg:h-96 '>
             <img
