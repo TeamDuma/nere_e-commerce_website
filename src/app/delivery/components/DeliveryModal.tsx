@@ -20,6 +20,7 @@ const customStylesLarge: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -33,6 +34,7 @@ const customStylesLarge: Styles = {
     height: '500px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 const customStylesMedium: Styles = {
@@ -43,6 +45,7 @@ const customStylesMedium: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -56,6 +59,7 @@ const customStylesMedium: Styles = {
     borderRadius: '15px',
     border: 'none',
     height: '500px',
+    zIndex: 1001,
   },
 };
 
@@ -67,6 +71,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -80,6 +85,7 @@ const customStylesSmall: Styles = {
     height: '440px',
     // width: '90%',
     width: '370px',
+    zIndex: 1001,
   },
 };
 
@@ -151,7 +157,7 @@ const DeliveryModal: React.FC<{
         style={modalStyles}
         contentLabel='Example Modal'
       >
-        <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
+        <div className='rounded-md  bg-white p-2' style={{ width: '100%' }}>
           <h2 className='mb-4 text-xl'>DELIVERY DETAILS</h2>
 
           <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
