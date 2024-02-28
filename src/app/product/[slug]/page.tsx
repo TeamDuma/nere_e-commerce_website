@@ -105,7 +105,7 @@ export default function ProductDetailPage({ params }: Props) {
       <div>
         <div className='px-2 py-2'>
           <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-            <div className='flex items-center space-x-2 text-sm text-gray-400'>
+            <div className='my-2 flex flex-wrap items-center text-sm text-gray-400'>
               <a href='/' className='hover:text-gray-600 hover:underline'>
                 Home
               </a>
@@ -126,10 +126,53 @@ export default function ProductDetailPage({ params }: Props) {
                 </svg>
               </span>
               <a
+                href='/products'
+                className='hover:text-gray-600 hover:underline'
+              >
+                Products
+              </a>
+              <span>
+                <svg
+                  className='h-5 w-5 leading-none text-gray-300'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
+              </span>
+
+              <a
                 href={`/category/${product.categories?.slug}`}
                 className='hover:text-gray-600 hover:underline'
               >
                 {product.categories?.name}
+              </a>
+
+              <span>
+                <svg
+                  className='h-5 w-5 leading-none text-gray-300'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
+              </span>
+              <a className='font-bold hover:text-gray-600 hover:underline'>
+                {product?.name}
               </a>
             </div>
           </div>
