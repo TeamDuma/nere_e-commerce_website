@@ -45,7 +45,6 @@ const Slider = () => {
         ))}
       </div>
 
-
       <button
         type='button'
         className='group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none'
@@ -55,8 +54,7 @@ const Slider = () => {
             prevIndex === 0 ? images.length - 1 : prevIndex - 1
           )
         }
-      >
-      </button>
+      ></button>
 
       <button
         type='button'
