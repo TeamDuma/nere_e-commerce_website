@@ -42,7 +42,7 @@ const EntertainmentSection = () => {
           >
             <img className='mx-4 my-1' src='/images/coinSmall.svg' alt='Coin' />
             <div>
-              <h2>Nere Coins</h2>
+              <h2 className='font-light		'>Nere Coins</h2>
               <p className='text-md inline font-semibold text-[#298592]'>
                 {' '}
                 Earn more
@@ -59,7 +59,7 @@ const EntertainmentSection = () => {
               alt='Coin'
             />
             <div>
-              <h2> Game and win coins</h2>
+              <h2 className='font-light		'> Game and win coins</h2>
               <p className='text-md inline font-semibold text-[#298592]'>
                 {' '}
                 Play Now
@@ -77,7 +77,7 @@ const EntertainmentSection = () => {
             />
 
             <div>
-              <h2>Loyalty offers?</h2>
+              <h2 className='font-light		'>Loyalty offers?</h2>
               <p className='text-md inline font-semibold text-[#298592]'>
                 {' '}
                 Buy Again
