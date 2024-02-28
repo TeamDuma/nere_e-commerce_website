@@ -77,7 +77,7 @@ const Category = ({ params }: Props) => {
                           setHoveredProductId(String(product.id))
                         }
                         onMouseLeave={() => setHoveredProductId(null)}
-                        className='relative mx-4 mb-4 rounded-md bg-gray-100  dark:bg-gray-800'
+                        className='relative mx-8 mb-4 rounded-md bg-gray-100  dark:bg-gray-800'
                       >
                         <div className='h-15 absolute  right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                           {`${Math.round(
