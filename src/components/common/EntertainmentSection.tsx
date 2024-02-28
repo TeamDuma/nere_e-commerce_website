@@ -30,75 +30,67 @@ const EntertainmentSection = () => {
   };
 
   return (
-    <section className='m-3 rounded '>
-      <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
-        <div
-          className='m-3 flex w-80 rounded-lg  border border-[#298592] p-2 lg:w-1/3'
-          onClick={openNereCoinModal}
-        >
-          <img className='mx-4 my-1' src='/images/coinSmall.svg' alt='Coin' />
-          <div>
-            <h2 style={{ fontSize: '12px' }}>Nere Coins</h2>
-            <h4
-              className='text-md inline font-semibold text-[#298592]'
-              style={{ fontSize: '14px' }}
-            >
-              Earn more
-            </h4>
+    <>
+      <section
+        id='content'
+        className='right-0 w-[100wh-60px]  p-5 transition-all duration-500 ease-in-out lg:w-[100wh-250px]'
+      >
+        <div className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3'>
+          <div
+            className='m-2  flex items-center rounded-lg border  border-[#298592]  p-2 shadow'
+            onClick={openNereCoinModal}
+          >
+            <img className='mx-4 my-1' src='/images/coinSmall.svg' alt='Coin' />
+            <div>
+              <h2>Nere Coins</h2>
+              <p className='text-md inline font-semibold text-[#298592]'>
+                {' '}
+                Earn more
+              </p>
+            </div>
+          </div>
+          <div
+            className='m-2  flex items-center rounded-lg border border-[#298592]  p-2 shadow'
+            onClick={openGameModal}
+          >
+            <img
+              className='mx-4 my-1'
+              src='/images/loyaltySmall.svg'
+              alt='Coin'
+            />
+            <div>
+              <h2> Game and win coins</h2>
+              <p className='text-md inline font-semibold text-[#298592]'>
+                {' '}
+                Play Now
+              </p>
+            </div>
+          </div>
+          <div
+            className='m-2  flex items-center rounded-lg border border-[#298592]  p-2 shadow'
+            onClick={openGameModal}
+          >
+            <img
+              className='mx-4 my-1'
+              src='/images/joystickSmall.svg'
+              alt='Coin'
+            />
+
+            <div>
+              <h2>Loyalty offers?</h2>
+              <p className='text-md inline font-semibold text-[#298592]'>
+                {' '}
+                Buy Again
+              </p>
+            </div>
           </div>
         </div>
 
-        <div
-          className='m-3 flex w-80 rounded-lg  border border-[#298592] p-2 lg:w-1/3'
-          onClick={openGameModal}
-        >
-          <img
-            className='mx-4 my-1'
-            src='/images/joystickSmall.svg'
-            alt='Coin'
-          />
-
-          <div>
-            <h2 className='my-1' style={{ fontSize: '12px' }}>
-              Game and win coins
-            </h2>
-            <h4
-              className='text-md inline font-semibold text-[#298592]'
-              style={{ fontSize: '14px' }}
-            >
-              Play Now
-            </h4>
-          </div>
-        </div>
-
-        <div
-          className='m-3 flex w-80 rounded-lg  border border-[#298592] p-2 lg:w-1/3'
-          onClick={openLoyaltyModal}
-        >
-          <img
-            className='mx-4 my-1'
-            src='/images/loyaltySmall.svg'
-            alt='Coin'
-          />
-
-          <div>
-            <h2 className='my-1' style={{ fontSize: '12px' }}>
-              Loyalty offers?
-            </h2>
-            <h4
-              className='text-md inline font-semibold text-[#298592]'
-              style={{ fontSize: '14px' }}
-            >
-              Buy Again
-            </h4>
-          </div>
-        </div>
-      </div>
-
-      <NereCoinModal onClose={closeModal} isOpen={NereCoinModalVisible} />
-      <LoyaltyModal onClose={closeModal} isOpen={LoyaltyModalVisible} />
-      <GameModal onClose={closeModal} isOpen={GameModalVisible} />
-    </section>
+        <NereCoinModal onClose={closeModal} isOpen={NereCoinModalVisible} />
+        <LoyaltyModal onClose={closeModal} isOpen={LoyaltyModalVisible} />
+        <GameModal onClose={closeModal} isOpen={GameModalVisible} />
+      </section>
+    </>
   );
 };
 

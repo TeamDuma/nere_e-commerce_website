@@ -42,7 +42,7 @@ const FeaturedProducts = () => {
         <div className='container'>
           {isLoading && <div>Loading...</div>}
 
-          <div className='lg:grid-col-3 grid grid-cols-2  gap-5 sm:grid-cols-2 sm:place-items-start xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
+          <div className='grid grid-cols-2 gap-5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-10 xl:grid-cols-4 xl:gap-x-20 xl:gap-y-10'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.slug}`} key={product?.id}>
                 <div key={product?.id}>
