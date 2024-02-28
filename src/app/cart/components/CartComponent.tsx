@@ -26,6 +26,7 @@ import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
 import RegistrationModal from '@/components/common/RegisterModal';
+import PostHogClient from '@/app/posthog';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -51,6 +52,8 @@ const CartComponent = () => {
 
   const { cartItems, selectedLocationId, userInfo } =
     useSelector(selectShopping);
+
+  const postHogClient = PostHogClient();
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -420,6 +423,11 @@ const CartComponent = () => {
                               }
                             })
                             .catch((e) => {});
+                          postHogClient.capture({
+                            distinctId: userInfo.data.customer.email,
+                            event: 'checkoutProductClicked',
+                            properties: { ...cartItems },
+                          });
                         } else {
                           toast.warning(
                             'Please select a delivery location before checkout.'
@@ -442,7 +450,14 @@ const CartComponent = () => {
                 <div>
                   <div className='flex gap-2'>
                     <button
-                      onClick={openLoginModal}
+                      onClick={() => {
+                        openLoginModal();
+                        postHogClient.capture({
+                          distinctId: userInfo?.data?.customer.email,
+                          event: 'checkoutProductClicked_LoggedOut',
+                          properties: { ...cartItems },
+                        });
+                      }}
                       className='text-hover w-full rounded-md border  bg-[#298592] p-2  text-sm text-white shadow-md transition-colors'
                     >
                       Checkout

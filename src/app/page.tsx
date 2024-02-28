@@ -21,11 +21,12 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { MdGroups } from 'react-icons/md';
 import ThreeBannerLayout from '@/components/ThreeBannerLayout';
+import { usePostHog } from 'posthog-js/react';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isOngoingModalOpen, setIsOngoingModalOpen] = useState(false);
-  const { cartItems } = useSelector(selectShopping);
+  const { cartItems, userInfo } = useSelector(selectShopping);
   const {
     data: ongoingGroupsData,
     isLoading: ongoingGroupsLoading,
@@ -33,6 +34,10 @@ export default function Home() {
   } = useGetPublicOngoingGroupsQuery();
   const { data: productsData, isLoading: productsLoading } =
     useGetActiveProductsQuery();
+  
+  const posthog = usePostHog();
+  posthog.identify(userInfo?.data?.customer.email);
+  
   const products = productsData?.data?.products ?? [];
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
@@ -55,7 +60,7 @@ export default function Home() {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
-
+  
   const closeOngoingModal = () => {
     setIsOngoingModalOpen(false);
   };

@@ -23,6 +23,7 @@ import { FaStar } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
 import { MdOutlineAccessAlarms } from 'react-icons/md';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import PostHogClient from '@/app/posthog';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -37,6 +38,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   const group = data?.data?.group;
   const product = group?.product;
   const totalQuantity = group?.total_quantity || 0;
+
+  const { userInfo } = useSelector(selectShopping);
+
+  const posthogClient = PostHogClient();
 
   useEffect(() => {
     getGroup(ongoingUid);
@@ -84,6 +89,17 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
     toast.success('Item added to cart!', {
       autoClose: 500,
+    });
+
+    posthogClient.capture({
+      distinctId: userInfo?.data?.customer.email,
+      event: `group_product_added_to_cart`,
+      properties: {
+        productID: product?.id,
+        productName: product?.name,
+        groupID: group?.id,
+        groupCode: group?.join_code,
+      },
     });
   };
 

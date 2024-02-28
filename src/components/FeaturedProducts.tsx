@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { Product } from '@/types/product';
-import { addToCart } from '@/lib/redux/slices/shopping';
-import { useDispatch } from 'react-redux';
+import { addToCart, selectShopping } from '@/lib/redux/slices/shopping';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
+import PostHogClient from '@/app/posthog';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
@@ -19,6 +20,10 @@ const FeaturedProducts = () => {
   );
 
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+
+  const { userInfo } = useSelector(selectShopping);
+
+  const postHogClient = PostHogClient();
 
   const product = products.find(
     (product) =>
@@ -122,6 +127,11 @@ const FeaturedProducts = () => {
                                   sendGAEvent({
                                     event: 'featuredProductClicked',
                                     value: `${product.name}`,
+                                  });
+                                  postHogClient.capture({
+                                    distinctId: userInfo?.data?.customer.email,
+                                    event: 'featuredProductClicked',
+                                    properties: { ...product },
                                   });
                                 }}
                               >
