@@ -126,9 +126,7 @@ export default function Home() {
                 <p className='mb-1 hidden text-xs text-white sm:block'>
                   <span>{groups.length}</span> Ongoing Purchases near me
                 </p>
-                {/* <p className='mb-1 text-xs text-white sm:block lg:hidden'>
-                  {groups.length} groups
-                </p> */}
+
               </div>
             </div>
           </div>

@@ -30,7 +30,7 @@ const customStyles: Styles = {
   },
   content: {
     position: 'fixed',
-    top: 40,
+    top: 100,
     left: 'auto',
     right: 0,
     height: '100%',
@@ -79,16 +79,23 @@ const CartModal: React.FC<{
   return (
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={onClose}>
       <div
-        className='mb-5 rounded-lg md:w-full'
+        className='mb-5  rounded-lg md:w-full'
         style={{ zIndex: isOpen ? 50 : -1 }}
       >
         {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
+          <div className='mt-12 text-center text-5xl text-black'>
+            Your cart is empty
+            <Link href='/products'>
+              <h1 className='my-5 cursor-pointer text-[#F58929] underline'>
+                Go to the Shop
+              </h1>
+            </Link>
+          </div>
         ) : (
           cartItems.map((item) => (
             <div
               key={item.id}
-              className='my-5 flex items-center rounded-lg border-2 border-gray-50 bg-[#fff] p-4 shadow-md'
+              className='my-12 flex items-center rounded-lg border-2 border-gray-50 bg-[#fff] p-4 shadow-md'
               style={{ width: '350px', height: '140px' }}
             >
               <div className='relative w-1/4 flex-shrink-0 bg-[#F5F5F5]'>
@@ -146,13 +153,6 @@ const CartModal: React.FC<{
                       {item.cartQuantity}
                     </div>
 
-                    {/* <div
-                      id={`quantity-${item.id}`}
-                      className='h-8 w-8  bg-white text-center text-xs outline-none'
-                      type='number'
-                      value={item.cartQuantity}
-                      min='1'
-                    /> */}
                     <span
                       className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
                         !item.min_quantity ||
@@ -199,34 +199,6 @@ const CartModal: React.FC<{
             <span>Checkout</span>
           </button>
         </Link>
-        {/* {userInfo ? (
-          <Link href='/cart'>
-            <button
-              type='button'
-              className='mb-2 mt-5 flex w-full items-center justify-center rounded-lg bg-[#0097B2] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#0097B2]/90 focus:ring-4 focus:ring-[#0097B2]/50 dark:focus:ring-[#2557D6]/50'
-            >
-              <span>Checkout</span>
-            </button>
-          </Link>
-        ) : (
-          <div>
-            <div className='flex items-center'>
-              <p className='mx-4 mt-1 font-semibold text-[#1A464C]'>
-                GH¢ {calculateTotal().toFixed(2)}
-              </p>
-              <button className='hover:bg-[#298592]-950 mx-4 mt-4 cursor-not-allowed rounded bg-[#298592] px-6 py-3 text-slate-100 duration-200'>
-                Checkout
-              </button>
-            </div>
-
-            <p className='ml-2 mt-1 animate-bounce text-base font-semibold text-red-500'>
-              Please login to continue
-            </p>
-            <p className='mt-1  text-base font-semibold text-[#1A464C]'>
-              Delivery fee is not included
-            </p>
-          </div>
-        )} */}
       </div>
     </Modal>
   );
