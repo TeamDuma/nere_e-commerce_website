@@ -44,15 +44,20 @@ export default function Home() {
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
+    setIsOngoingModalOpen(false);
   };
 
   const openOngoingModal = () => {
     setIsOngoingModalOpen(true);
+    setIsCartModalOpen(false);
   };
 
-  const closeModal = () => {
-    setIsOngoingModalOpen(false);
+  const closeCartModal = () => {
     setIsCartModalOpen(false);
+  };
+
+  const closeOngoingModal = () => {
+    setIsOngoingModalOpen(false);
   };
 
   return (
@@ -114,15 +119,16 @@ export default function Home() {
               </div>
               <div className='m-2 flex flex-row rounded'>
                 <p className='mb-1 hidden text-xs text-white sm:block'>
-                  {groups.length} Ongoing Purchases near me
+                  <span>{groups.length}</span> Ongoing Purchases near me
                 </p>
+
               </div>
             </div>
           </div>
         </div>
 
-        <CartModal onClose={closeModal} isOpen={isCartModalOpen} />
-        <OngoingModal onClose={closeModal} isOpen={isOngoingModalOpen} />
+        <CartModal onClose={closeCartModal} isOpen={isCartModalOpen} />
+        <OngoingModal onClose={closeOngoingModal} isOpen={isOngoingModalOpen} />
       </Container>
     </main>
   );

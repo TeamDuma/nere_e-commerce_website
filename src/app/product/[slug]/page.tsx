@@ -238,7 +238,11 @@ export default function ProductDetailPage({ params }: Props) {
                 </div>
 
                 <Link href='/products'>
-                  <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1>
+                  <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
+                    Continue Shopping
+                  </h1>
+
+                  {/* <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1> */}
                 </Link>
                 {product.min_quantity ? (
                   <h2>
