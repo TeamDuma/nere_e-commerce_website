@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://nere-server.herokuapp.com/api/',
+  baseUrl: process.env.NEXT_PUBLIC_API_URL,
   prepareHeaders: (headers: Headers, { getState }) => {
     return headers;
   },
