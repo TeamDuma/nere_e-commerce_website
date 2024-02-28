@@ -16,6 +16,7 @@ const customStylesLarge: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -29,6 +30,7 @@ const customStylesLarge: Styles = {
     height: '350px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 10001,
   },
 };
 const customStylesMedium: Styles = {
@@ -39,6 +41,7 @@ const customStylesMedium: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -52,6 +55,7 @@ const customStylesMedium: Styles = {
     borderRadius: '15px',
     border: 'none',
     height: '350px',
+    zIndex: 1001,
   },
 };
 
@@ -63,6 +67,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -70,12 +75,13 @@ const customStylesSmall: Styles = {
     top: '30%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%',
+    width: '88%',
     maxWidth: '400px',
     margin: 'auto',
     borderRadius: '15px',
     border: 'none',
     height: '40vh',
+    zIndex: 1001,
   },
 };
 
@@ -153,16 +159,15 @@ const OTPModal: React.FC<{
           <p className='text-sm'>
             Code is sent to{' '}
             <span className='mx-2 font-semibold'> {phoneNumber} </span>
-            <span className='cursor-pointer text-[#298592]'>
+            <span className='my-2 cursor-pointer text-[#298592]'>
               Change Number?
             </span>
           </p>
-
-          <div className='flex flex-row '>
+          <div className='flex flex-row'>
             {inputs.map((_, index) => (
-              <div className='w-35 h-30 m-2' key={index}>
+              <div className='mx-2 w-1/6' key={index}>
                 <input
-                  className='flex h-14 w-14 flex-col items-center justify-center rounded-xl border border-gray-200 bg-white px-5 text-center text-lg text-black outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1' // Added text-black class
+                  className='flex h-14 w-full flex-col items-center justify-center rounded-xl border border-gray-200 bg-white px-5 text-center text-lg text-black outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1'
                   type='text'
                   name={`input-${index}`}
                   id={`input-${index}`}
