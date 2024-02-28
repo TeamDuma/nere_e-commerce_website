@@ -161,12 +161,12 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
             <a
               href={`/groups/ongoingPurchases/${group?.uid}`}
-              className='hover:text-gray-600 hover:underline'
+              className='font-bold hover:text-gray-600 hover:underline'
             >
-              {group?.uid}
+              {group?.join_code} - {group?.product?.name}
             </a>
 
-            <span>
+            {/* <span>
               <svg
                 className='h-5 w-5 leading-none text-gray-300'
                 xmlns='http://www.w3.org/2000/svg'
@@ -184,7 +184,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             </span>
             <a className='font-bold hover:text-gray-600 hover:underline'>
               {product?.name}
-            </a>
+            </a> */}
           </div>
         </div>
         <div className='mb-8 md:flex md:items-center'>
