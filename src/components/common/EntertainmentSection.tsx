@@ -68,7 +68,7 @@ const EntertainmentSection = () => {
           </div>
           <div
             className='m-2  flex items-center rounded-lg border border-[#298592]  p-2 shadow'
-            onClick={openGameModal}
+            onClick={openLoyaltyModal}
           >
             <img
               className='mx-4 my-1'
