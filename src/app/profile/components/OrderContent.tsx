@@ -1,13 +1,19 @@
-import { Key, useEffect } from 'react';
+import { Key, useEffect, useState } from 'react';
 import Title from '@/components/Title';
 import OrderProgressBar from '@/components/common/OrderProgressBar';
 import ProgressBar from '@/components/common/ProgressBar';
 import OrderContentCard from './OrderContentCard';
 import { useLazyGetOrdersQuery } from '@/lib/redux/services/customers';
 import { Orders } from '@/types/orders';
+import { useSelector } from 'react-redux';
+import { selectShopping } from '@/lib/redux/slices/shopping';
 
 const OrderContent = () => {
-  const uid = 'fcCBb3H8GaKDcG5MBM2w1Q';
+  const { userInfo } = useSelector(selectShopping);
+
+  const uid = userInfo?.data?.customer?.uid || '';
+
+  // const uid = 'fcCBb3H8GaKDcG5MBM2w1Q';
 
   const [getOrders, { data, isLoading, isError }] = useLazyGetOrdersQuery();
   const orders = data?.data;

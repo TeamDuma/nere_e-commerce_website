@@ -108,7 +108,7 @@ const ShareModal = ({ isOpen, onClose, group }: ShareModalProps) => {
                   className='w-9/12	 bg-transparent text-sm outline-none'
                   type='text'
                   placeholder='link'
-                  defaultValue={`http://localhost:3000/groups/ongoingPurchases/${group.uid}`}
+                  defaultValue={`https://nere-e-commerce-website.vercel.app/groups/ongoingPurchases/${group.uid}`}
                 />
                 <button
                   onClick={handleCopyClick}
