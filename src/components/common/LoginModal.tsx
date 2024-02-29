@@ -6,6 +6,7 @@ import { addUser, deleteUser } from '@/lib/redux';
 import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 import Spinner from './Spinner';
+import ForgotpasswordModal from './ForgotpasswordModal';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -73,6 +74,8 @@ const LoginModal: React.FC<{
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [showForgetPasswodModal, setShowForgetPasswodModal] = useState(false);
+
 
   const [signIn, { isLoading, isError, isSuccess, error }] =
     useSignInMutation();
@@ -101,6 +104,23 @@ const LoginModal: React.FC<{
       handleLoginError(e);
     }
   };
+
+  const handleForgotPassword = () => {
+    setShowForgetPasswodModal(true)
+
+  }
+
+  const onLoginClick = () => {
+    setShowForgetPasswodModal(false)
+console.log(showForgetPasswodModal)
+
+  }
+
+  const handleCloseForgotPassword = () => {
+    setShowForgetPasswodModal(false)
+console.log(showForgetPasswodModal)
+
+  }
 
   const handleLoginError = (error: any) => {
     toast.error('Login failed. Please check your credentials.');
@@ -155,9 +175,9 @@ const LoginModal: React.FC<{
               </label>
               <div className='flex flex-row justify-end'>
                 <div>
-                  <a href='#' className='font-medium text-[#298592]'>
+                  <text href='#' className='font-medium text-[#298592]'  onClick={handleForgotPassword}>
                     Forgot Password?
-                  </a>
+                  </text>
                 </div>
               </div>
               <button
@@ -201,6 +221,10 @@ const LoginModal: React.FC<{
               </p>
             </div>
           </form>
+
+          <ForgotpasswordModal onClose={handleCloseForgotPassword} isOpen={showForgetPasswodModal} onLoginClick={
+          onLoginClick }          
+        />
         </>
       </Modal>
     </div>
@@ -208,3 +232,5 @@ const LoginModal: React.FC<{
 };
 
 export default LoginModal;
+
+
