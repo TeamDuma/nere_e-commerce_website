@@ -103,7 +103,7 @@ const OrderContentCard: React.FC<OrderContentCardProps> = ({ item }) => {
                   src={group.product?.plain_image}
                   alt={group.product?.name}
                   className='h-[83px] w-[83px] rounded-lg'
-                  style={{ width: '20px', height: '50px' }}
+                  style={{ width: '30px', height: '50px' }}
                 />
                 {group.product.hasMinQuantity ? (
                   <span className='absolute right-0 top-0 rounded border-2 border-solid bg-[#F58929] p-1 text-xs text-white'>

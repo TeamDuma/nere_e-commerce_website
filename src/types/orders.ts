@@ -57,10 +57,5 @@ export interface Orders {
 
 export type GetOrdersResponse = {
   status: string;
-  data: {
-    map(
-      arg0: (item: Orders) => import('react').JSX.Element
-    ): import('react').ReactNode;
-    orders: Orders[];
-  };
+  data: Orders[];
 };

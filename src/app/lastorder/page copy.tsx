@@ -2,12 +2,11 @@
 import ProgressBar from '@/components/common/ProgressBar';
 import { useLazyGetOrdersQuery } from '@/lib/redux/services/customers';
 import { selectShopping } from '@/lib/redux/slices/shopping';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { CiShare2 } from 'react-icons/ci';
 import { FiMapPin } from 'react-icons/fi';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { Group } from '@/types/group';
 
 const Orders = () => {
   const { userInfo } = useSelector(selectShopping);
@@ -29,34 +28,36 @@ const Orders = () => {
 
   return (
     <>
-      {/* component */}
       <div className='flex h-full w-screen flex-col px-14 py-7 md:flex-row'>
-        {/* My Cart */}
         <div className='flex h-fit w-full flex-col gap-4 p-4 '>
           <p className='text-xl font-extrabold text-[#298592]'>
             Congrats! 🎉 You Saved GHC 50 on your basket{' '}
           </p>
           {/* Product */}
-          {latestOrderItems.map((order) => (
-            <div className='flex flex-col rounded-sm border p-4 text-lg font-semibold shadow-md'>
-              <div className='flex flex-col justify-between gap-3 md:flex-row'>
-                {/* Product Information */}
-                <div className='flex flex-row items-center gap-6'>
+          <div className='flex flex-col rounded-sm border p-4 text-lg font-semibold shadow-md'>
+            <div className='flex flex-col justify-between gap-3 md:flex-row'>
+              {/* Product Information */}
+
+              {latestOrderItems.map((order) => (
+                <div
+                  key={order.id}
+                  className='flex flex-row items-center gap-6'
+                >
                   <div className='h-28 w-28'>
                     <img
-                      className='h-full w-3/4'
+                      className='h-full w-full'
                       src={order.product.plain_image}
                     />
                   </div>
                   <div className='flex flex-col gap-1'>
                     <p className='text-lg font-semibold text-[#298592]'>
-                      {order.product.name}
+                      Sunflower Oil (900ml)
                     </p>
                     <div>
                       <p className='text-sm font-normal text-[#F58929]  '>
-                        {order.product.sale_price}
+                        CH¢20.0
                         <span className='ml-2 text-[#C1C2C2] line-through'>
-                          {order.product.price}
+                          CH¢42.0
                         </span>
                       </p>
                     </div>
@@ -79,16 +80,16 @@ const Orders = () => {
                       </div>
                     </div>
 
-                    {/* <ProgressBar remaining={4} total={12} /> */}
+                    <ProgressBar remaining={4} total={12} />
                   </div>
                 </div>
+              ))}
 
-                <div className='self-center'>
-                  <CiShare2 className='text-[#F58929]' />{' '}
-                </div>
+              <div className='self-center'>
+                <CiShare2 className='text-[#F58929]' />
               </div>
             </div>
-          ))}
+          </div>
         </div>
         {/* Purchase Resume */}
         <div className='flex h-fit w-full flex-col gap-4 p-4 md:w-2/3'>
