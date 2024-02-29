@@ -107,7 +107,12 @@ const RegistrationModal: React.FC<{
       toast.error('Password and Confirm Password do not match');
       return;
     }
-    signUp({ email, name, phone, password })
+
+    const formattedPhone = phone.startsWith('0') ? '+233' + phone.slice(1) : phone;
+    console.log('formattedPhone',formattedPhone)
+
+    signUp({ email, name, phone:formattedPhone, password })
+    
       .then((response) => {
         if ('data' in response) {
           const data = response.data;
@@ -136,8 +141,9 @@ const RegistrationModal: React.FC<{
   };
 
   const isValidPhoneNumber = (phone: string): boolean => {
-    return /^\+\d{12}$/.test(phone);
-  };
+    return /^\d{10}$$/.test(phone);
+};
+
 
   return (
     <Modal
@@ -202,8 +208,8 @@ const RegistrationModal: React.FC<{
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='+233(XXX-XXX-XXX)'
-              />
+                placeholder="WhatsApp Number"
+                />
 
               <label
                 htmlFor='Password'
