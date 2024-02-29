@@ -76,7 +76,6 @@ const LoginModal: React.FC<{
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [showForgetPasswodModal, setShowForgetPasswodModal] = useState(false);
 
-
   const [signIn, { isLoading, isError, isSuccess, error }] =
     useSignInMutation();
 
@@ -106,21 +105,18 @@ const LoginModal: React.FC<{
   };
 
   const handleForgotPassword = () => {
-    setShowForgetPasswodModal(true)
-
-  }
+    setShowForgetPasswodModal(true);
+  };
 
   const onLoginClick = () => {
-    setShowForgetPasswodModal(false)
-console.log(showForgetPasswodModal)
-
-  }
+    setShowForgetPasswodModal(false);
+    console.log(showForgetPasswodModal);
+  };
 
   const handleCloseForgotPassword = () => {
-    setShowForgetPasswodModal(false)
-console.log(showForgetPasswodModal)
-
-  }
+    setShowForgetPasswodModal(false);
+    console.log(showForgetPasswodModal);
+  };
 
   const handleLoginError = (error: any) => {
     toast.error('Login failed. Please check your credentials.');
@@ -175,7 +171,11 @@ console.log(showForgetPasswodModal)
               </label>
               <div className='flex flex-row justify-end'>
                 <div>
-                  <text href='#' className='font-medium text-[#298592]'  onClick={handleForgotPassword}>
+                  <text
+                    href='#'
+                    className='font-medium text-[#298592]'
+                    onClick={handleForgotPassword}
+                  >
                     Forgot Password?
                   </text>
                 </div>
@@ -222,9 +222,11 @@ console.log(showForgetPasswodModal)
             </div>
           </form>
 
-          <ForgotpasswordModal onClose={handleCloseForgotPassword} isOpen={showForgetPasswodModal} onLoginClick={
-          onLoginClick }          
-        />
+          <ForgotpasswordModal
+            onClose={handleCloseForgotPassword}
+            isOpen={showForgetPasswodModal}
+            onLoginClick={onLoginClick}
+          />
         </>
       </Modal>
     </div>
@@ -232,5 +234,3 @@ console.log(showForgetPasswodModal)
 };
 
 export default LoginModal;
-
-
