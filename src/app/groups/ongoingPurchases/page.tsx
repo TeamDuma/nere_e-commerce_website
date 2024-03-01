@@ -44,7 +44,7 @@ const OngoingPurchases: React.FC = () => {
           </div>
           {/* Right arrow */}
           <div
-            className='absolute right-0 top-1/2 mx-2 -translate-y-1/2 transform cursor-pointer'
+            className='absolute right-10 top-1/2 z-10  -translate-y-1/2 transform cursor-pointer'
             onClick={goToNextPage}
           >
             <FaArrowCircleRight className='arrow-icon' />
@@ -53,7 +53,7 @@ const OngoingPurchases: React.FC = () => {
             {groups.slice(startIndex, endIndex).map((item: Group) => (
               <div
                 key={item.id}
-                className='m-4 flex-shrink-0 cursor-pointer rounded'
+                className='m-2 flex-shrink-0 cursor-pointer rounded'
               >
                 <GroupRowRenderItem item={item} />
               </div>

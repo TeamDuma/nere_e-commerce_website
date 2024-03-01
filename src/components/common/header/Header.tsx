@@ -164,7 +164,7 @@ const Header = () => {
                 >
                   <div className='mr-4 flex flex-row gap-2'>
                     <CartIconHeader />
-                    <p style={{ color: '#298592', fontSize: 12 }}>
+                    <p style={{ color: '#298592', fontSize: 14 }}>
                       {(cartItems ?? []).length}
                     </p>
                   </div>
@@ -335,7 +335,7 @@ const Header = () => {
               >
                 <div className='mr-4 flex flex-row gap-2'>
                   <CartIconHeader />
-                  <p style={{ color: '#298592', fontSize: 12 }}>
+                  <p style={{ color: '#298592', fontSize: 14 }}>
                     {(cartItems ?? []).length}
                   </p>
                 </div>
