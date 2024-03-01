@@ -29,14 +29,22 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
               <p className='p-text'>Ongoing Purchases near me</p>
             </div>
           </Link>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Groups</p>
-            <p className='p-text3'>{groups.length}</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Products</p>
+              <p className='p-text3'>{products?.length}+</p>
+            </div>
           </div>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Products</p>
-            <p className='p-text3'>{products?.length}+</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Products</p>
+              <p className='p-text3'>{products?.length}+</p>
+            </div>
           </div>
+          {/* <div className='md:ml-2'>
+          <p className='p-text2'>Groups</p>
+          <p className='p-text3'>{groups.length}</p>
+        </div> */}
         </div>
       </div>
 
@@ -48,32 +56,26 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
               <p className='p-text'>Launch a purchase</p>
             </div>
           </Link>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Delivery Time</p>
-            <p className='p-text4'>2 : 00 : 00</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Delivery Time</p>
+              <p className='p-text4'>2 : 00 : 00</p>
+            </div>
           </div>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Discounts</p>
-            <p className='p-text4'>20% off</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Discounts</p>
+              <p className='p-text4'>20% off</p>
+            </div>
           </div>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Delivery Fee</p>
-            <p className='p-text4'>GHS 99</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Delivery Fee</p>
+              <p className='p-text4'>GHS 99</p>
+            </div>
           </div>
         </div>
       </div>
-      <Link href={'/ongoingPage'}>
-        <div className='flex items-center gap-2 md:hidden'>
-          <MdGroups className='social-icon' />
-          <p className='p-text'>Ongoing Purchases near me</p>
-        </div>
-      </Link>
-      <Link href={'/products'}>
-        <div className='flex items-center gap-2 md:hidden'>
-          <HiOutlineRocketLaunch className='social-icon' />
-          <p className='p-text'>Launch a purchase</p>
-        </div>
-      </Link>
     </div>
   );
 };
