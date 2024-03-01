@@ -79,6 +79,7 @@ const Header = () => {
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
+    setIsDropdownOpen(false);
   };
   const handleLoginClick = () => {
     setLoginModalVisible(true);
