@@ -74,7 +74,6 @@ const FeaturedProducts = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius: '10px',
-
                       }}
                     >
                       <img
