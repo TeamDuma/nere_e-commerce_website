@@ -62,7 +62,7 @@ const FeaturedProducts = () => {
                       product.price - product.sale_price
                     )}`}</span>
                   </div>
-                  <div className='mt-2 flex items-center justify-center md:mt-4'>
+                  <div className='mt-2 flex items-center justify-center md:mt-4 '>
                     <div
                       style={{
                         position: 'relative',
@@ -74,6 +74,7 @@ const FeaturedProducts = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius: '10px',
+
                       }}
                     >
                       <img
@@ -134,7 +135,7 @@ const FeaturedProducts = () => {
                     </div>
                   </div>
 
-                  <div className='flex items-center'>
+                  <div className='flex items-center p-2'>
                     <div className='h-12'>
                       <h5
                         tabIndex={0}
@@ -145,7 +146,7 @@ const FeaturedProducts = () => {
                       </h5>
                     </div>
                   </div>
-                  <div className='ml-2 flex'>
+                  <div className='ml-2 flex px-2'>
                     <div
                       style={{ color: '#F31748' }}
                     >{`¢ ${product?.sale_price}`}</div>
