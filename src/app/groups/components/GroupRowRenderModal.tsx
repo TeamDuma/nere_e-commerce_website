@@ -28,12 +28,8 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
         />
         {item.product?.price && item.product.sale_price && (
           <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white'>
-            Save{' '}
-            {calculateSavingsPercentage(
-              item.product.price,
-              item.product.sale_price
-            )}
-            %
+            Save ¢
+            {`${Math.round(item.product.price - item.product.sale_price)}`}
           </span>
         )}
       </div>

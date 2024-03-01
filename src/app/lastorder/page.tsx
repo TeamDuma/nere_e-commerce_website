@@ -27,10 +27,18 @@ const Orders = () => {
   const latestOrderItems = latestOrder?.groups || [];
   console.log('orders', orders);
 
+  if (!userInfo || !userInfo.data) {
+    return (
+      <div className='text-center text-5xl text-black'>
+        Please log in to view this content
+      </div>
+    );
+  }
+
   return (
     <>
       {/* component */}
-      <div className='flex h-full w-screen flex-col px-14 py-7 md:flex-row'>
+      <div className='flex h-screen w-screen flex-col px-14 py-7 md:flex-row'>
         {/* My Cart */}
         <div className='flex h-fit w-full flex-col gap-4 p-4 '>
           <p className='text-xl font-extrabold text-[#298592]'>

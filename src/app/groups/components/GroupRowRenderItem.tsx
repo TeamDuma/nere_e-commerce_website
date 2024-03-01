@@ -12,11 +12,13 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
     return Math.round(savingsPercentage);
   };
 
+  console.log('item', item);
+
   return (
     <div
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-      className='mx-4 flex items-center  rounded-lg bg-gray-100  p-4 shadow-md'
+      className='m-4 flex items-center  rounded-lg bg-gray-100  shadow-md'
       style={{ width: '350px', height: '160px' }}
     >
       <div className='relative w-1/4 flex-shrink-0   '>
@@ -27,18 +29,21 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
           style={{ width: '60px', height: '105px' }}
         />
         {item.product?.price && item.product.sale_price && (
-          <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white'>
-            Save{' '}
-            {calculateSavingsPercentage(
+          <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white '>
+            Save ¢
+            <span className='ml-1'>{`${Math.round(
+              item.product.price - item.product.sale_price
+            )}`}</span>
+            {/* {(
               item.product.price,
               item.product.sale_price
-            )}
-            %
+            )} 
+             ¢ */}
           </span>
         )}
       </div>
 
-      <div className='ml-4 flex-1'>
+      <div className='ml-4 mt-2 flex-1'>
         <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
           {item?.product?.name}
         </h2>

@@ -204,7 +204,7 @@ export default function ProductDetailPage({ params }: Props) {
                   <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                     {product?.name}
                   </h3>
-                  {variantsArray.length > 0 && (
+                  {/* {variantsArray.length > 0 && (
                     <div className='ml-12'>
                       <div className='mt-1'>
                         <select
@@ -224,7 +224,7 @@ export default function ProductDetailPage({ params }: Props) {
                         </select>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <div className='star-icon my-4 flex  items-center'>
                   {' '}

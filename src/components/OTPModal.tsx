@@ -75,12 +75,12 @@ const customStylesSmall: Styles = {
     top: '30%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '88%',
-    maxWidth: '400px',
+
     margin: 'auto',
+    width: '340px',
+    height: '300px',
     borderRadius: '15px',
     border: 'none',
-    height: '40vh',
     zIndex: 1001,
   },
 };
@@ -165,9 +165,9 @@ const OTPModal: React.FC<{
           </p>
           <div className='flex flex-row'>
             {inputs.map((_, index) => (
-              <div className='mx-2 w-1/6' key={index}>
+              <div className='mx-2' key={index}>
                 <input
-                  className='flex h-14 w-full flex-col items-center justify-center rounded-xl border border-gray-200 bg-white px-5 text-center text-lg text-black outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1'
+                  className='flex h-10 w-10 flex-col items-center justify-center rounded-xl border border-gray-200 bg-white px-1 text-center text-lg text-black outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1'
                   type='text'
                   name={`input-${index}`}
                   id={`input-${index}`}

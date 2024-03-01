@@ -188,7 +188,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
           </div>
         </div>
         <div className='mb-8 md:flex md:items-center'>
-          <div className='h-387 w-387 bg-gray-100 md:w-1/2 lg:h-96 '>
+          <div className='w-387  h-64 bg-gray-100  md:h-80 md:w-1/2 lg:h-96 '>
             <img
               className='mx-auto h-full rounded-md object-cover md:max-w-lg '
               src={product?.plain_image}
@@ -201,7 +201,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                 {product?.name}
               </h3>
-              {variantsArray.length > 0 && (
+              {/* {variantsArray.length > 0 && (
                 <div className='ml-12'>
                   <div className='mt-1'>
                     <select
@@ -221,7 +221,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     </select>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
             <div className='star-icon my-4 flex  items-center'>
               {' '}
