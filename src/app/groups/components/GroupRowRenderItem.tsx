@@ -29,13 +29,16 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
           style={{ width: '60px', height: '105px' }}
         />
         {item.product?.price && item.product.sale_price && (
-          <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white'>
-            Save{' '}
-            {calculateSavingsPercentage(
+          <span className='absolute right-0 top-0 rounded bg-[#F58929] p-1 text-xs text-white '>
+            Save ¢
+            <span className='ml-1'>{`${Math.round(
+              item.product.price - item.product.sale_price
+            )}`}</span>
+            {/* {(
               item.product.price,
               item.product.sale_price
-            )}
-            %
+            )} 
+             ¢ */}
           </span>
         )}
       </div>

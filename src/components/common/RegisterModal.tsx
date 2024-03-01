@@ -255,11 +255,11 @@ const RegistrationModal: React.FC<{
               </div>
 
               <div className='inline-flex w-full items-center justify-center'>
-                <hr className='my-2 h-px w-32 border-0 bg-gray-200 dark:bg-gray-700' />
-                <span className='  bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                <hr className='my-2 h-px w-32 border-0 bg-gray-200 ' />
+                <span className='  bg-white px-3 font-medium text-gray-900 '>
                   or
                 </span>
-                <hr className='my-4 h-px w-32 border-0 bg-gray-200 dark:bg-gray-700' />
+                <hr className='my-4 h-px w-32 border-0 bg-gray-200 ' />
               </div>
               <p className='ml-8'>
                 Already have an account?{' '}

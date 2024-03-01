@@ -47,20 +47,20 @@ const FeaturedProducts = () => {
         <div className='container'>
           {isLoading && <div>Loading...</div>}
 
-          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>
+          <div className='grid grid-cols-2 sm:w-full sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.slug}`} key={product?.id}>
                 <div
                   key={product?.id}
                   onMouseEnter={() => setHoveredProductId(String(product.id))}
                   onMouseLeave={() => setHoveredProductId(null)}
-                  className='relative mx-8 rounded-md bg-gray-100 dark:bg-gray-800'
+                  className='relative mx-4 my-4 rounded-md bg-gray-100'
                 >
-                  <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
-                    {`${Math.round(
-                      ((product.price - product.sale_price) / product.price) *
-                        100
-                    )}%`}
+                  <div className='h-15 absolute right-2 top-2 flex w-16 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
+                    Save ¢
+                    <span className='ml-1'>{`${Math.round(
+                      product.price - product.sale_price
+                    )}`}</span>
                   </div>
                   <div className='mt-2 flex items-center justify-center md:mt-4'>
                     <div
