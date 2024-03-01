@@ -12,11 +12,13 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
     return Math.round(savingsPercentage);
   };
 
+  console.log('item', item);
+
   return (
     <div
       key={item.id}
       onClick={() => router.push(`/groups/ongoingPurchases/${item.uid}`)}
-      className='mx-4 flex items-center  rounded-lg bg-gray-100  p-4 shadow-md'
+      className='m-4 flex items-center  rounded-lg bg-gray-100  shadow-md'
       style={{ width: '350px', height: '160px' }}
     >
       <div className='relative w-1/4 flex-shrink-0   '>
@@ -38,7 +40,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
         )}
       </div>
 
-      <div className='ml-4 flex-1'>
+      <div className='ml-4 mt-2 flex-1'>
         <h2 className='text overflow-hidden overflow-ellipsis font-bold text-[#298592]'>
           {item?.product?.name}
         </h2>
