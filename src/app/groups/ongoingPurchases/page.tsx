@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import React, { useState } from 'react';
 import GroupRowRenderItem from '../components/GroupRowRenderItem';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
@@ -13,11 +13,17 @@ const OngoingPurchases: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const goToNextPage = () => {
-    setCurrentPage((prevPage) => (prevPage + 1) % Math.ceil(groups.length / itemsPerPage));
+    setCurrentPage(
+      (prevPage) => (prevPage + 1) % Math.ceil(groups.length / itemsPerPage)
+    );
   };
 
   const goToPreviousPage = () => {
-    setCurrentPage((prevPage) => (prevPage - 1 + Math.ceil(groups.length / itemsPerPage)) % Math.ceil(groups.length / itemsPerPage));
+    setCurrentPage(
+      (prevPage) =>
+        (prevPage - 1 + Math.ceil(groups.length / itemsPerPage)) %
+        Math.ceil(groups.length / itemsPerPage)
+    );
   };
 
   const startIndex = currentPage * itemsPerPage;
@@ -31,21 +37,19 @@ const OngoingPurchases: React.FC = () => {
         <div className='relative'>
           {/* Left arrow */}
           <div
-            className='absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer '
+            className='absolute left-0 top-1/2 -translate-y-1/2 transform cursor-pointer '
             onClick={goToPreviousPage}
           >
-           <FaArrowCircleLeft className='arrow-icon' />
-
-
+            <FaArrowCircleLeft className='arrow-icon' />
           </div>
           {/* Right arrow */}
           <div
-            className='absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer mx-2'
+            className='absolute right-0 top-1/2 mx-2 -translate-y-1/2 transform cursor-pointer'
             onClick={goToNextPage}
           >
-             <FaArrowCircleRight  className='arrow-icon' />
+            <FaArrowCircleRight className='arrow-icon' />
           </div>
-          <div className='overflow-x-auto flex flex-nowrap justify-start'>
+          <div className='flex flex-nowrap justify-start overflow-x-auto'>
             {groups.slice(startIndex, endIndex).map((item: Group) => (
               <div
                 key={item.id}
