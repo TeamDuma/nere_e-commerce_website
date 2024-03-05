@@ -5,6 +5,7 @@ import { MdGroups } from 'react-icons/md';
 import { HiOutlineRocketLaunch } from 'react-icons/hi2';
 import { FaRegUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import CountdownTimer from './CountdownTimer';
 
 interface OngoingRowProps {}
 
@@ -52,12 +53,7 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
               <p className='p-text'>Launch a purchase</p>
             </div>
           </Link>
-          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
-            <div className='md:ml-2'>
-              <p className='p-text2'>Delivery Time</p>
-              <p className='p-text4'>2 : 00 : 00</p>
-            </div>
-          </div>
+          <CountdownTimer />
           <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
             <div className='md:ml-2'>
               <p className='p-text2'>Discounts</p>
@@ -67,7 +63,7 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
           <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
             <div className='md:ml-2'>
               <p className='p-text2'>Delivery Fee</p>
-              <p className='p-text4'>GHS 99</p>
+              <p className='p-text4'>GH¢0.00</p>
             </div>
           </div>
         </div>
