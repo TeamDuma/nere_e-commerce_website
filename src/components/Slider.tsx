@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-const Slider = () => {
+const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
     './images/nere_sunflower.png',
@@ -70,4 +70,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default Banner;

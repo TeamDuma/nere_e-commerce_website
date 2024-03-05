@@ -54,7 +54,7 @@ const FeaturedProducts = () => {
                   key={product?.id}
                   onMouseEnter={() => setHoveredProductId(String(product.id))}
                   onMouseLeave={() => setHoveredProductId(null)}
-                  className='relative mx-4 my-4 rounded-md bg-gray-100'
+                  className='relative col-span-2 mx-8 rounded-md bg-gray-100  '
                 >
                   <div className='h-15 absolute right-2 top-2 flex w-16 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                     Save ¢
@@ -92,9 +92,9 @@ const FeaturedProducts = () => {
                   {hoveredProductId === String(product.id) && (
                     <div
                       style={{
-                        // position: 'absolute',
-                        top: 0,
-                        left: 0,
+                        position: 'absolute',
+                        // top: 0,
+                        // left: 0,
                         right: 0,
                         bottom: 0,
                         display: 'flex',
@@ -135,7 +135,34 @@ const FeaturedProducts = () => {
                     </div>
                   )}
                 </div>
-                <div className='flex items-center p-2'>
+                <div className='relative col-span-2 mx-8  my-2 rounded-md  '>
+                  <div className='flex items-center '>
+                    <div className='h-12'>
+                      <h5
+                        tabIndex={0}
+                        className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                        style={{ maxWidth: '12rem' }}
+                      >
+                        {product?.name}
+                      </h5>
+                    </div>
+                  </div>
+                  <div className='ml-2 flex'>
+                    <div
+                      style={{ color: '#F31748' }}
+                    >{`¢ ${product?.sale_price}`}</div>
+                    <div
+                      style={{
+                        marginLeft: '14px',
+                        color: '#B3B3B3',
+                        textDecoration: 'line-through',
+                      }}
+                    >
+                      {`¢ ${product?.price}`}
+                    </div>
+                  </div>
+                </div>
+                {/* <div className='flex items-center p-2'>
                   <div className='h-12'>
                     <h5
                       tabIndex={0}
@@ -159,7 +186,7 @@ const FeaturedProducts = () => {
                   >
                     {`¢ ${product?.price}`}
                   </div>
-                </div>
+                </div> */}
               </Link>
             ))}
           </div>
