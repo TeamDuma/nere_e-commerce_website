@@ -17,6 +17,7 @@ import ProgressBar from '@/components/common/ProgressBar';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
+import CountdownTimer from '@/components/CountdownTimer';
 
 type Props = {
   params: {
@@ -35,8 +36,6 @@ export default function ProductDetailPage({ params }: Props) {
   const product = data?.data?.product;
   const [getGroup, { data: groupData }] = useLazyGetGroupQuery();
   const group = groupData?.data?.group;
-
-  console.log('cartItems', cartItems[0].cartQuantity);
 
   const posthogClient = PostHogClient();
 
@@ -283,7 +282,7 @@ export default function ProductDetailPage({ params }: Props) {
                       className='text-[#F58929]'
                       style={{ paddingLeft: '0.5rem' }}
                     >
-                      00:00:00
+                      <CountdownTimer />
                     </span>
                   </div>
                 </div>
@@ -304,50 +303,22 @@ export default function ProductDetailPage({ params }: Props) {
                   </h2>
                 ) : null}
 
-                {product.min_quantity ? (
-                  <div>
-                    {cartItems.map((cartItem, index) => (
-                      <div key={index}>
-                        <ProgressBar
-                          remaining={cartItem.cartQuantity}
-                          total={cartItem?.min_quantity}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-                <div className='flex space-x-4 py-4'>
-                  <div className='flex items-center justify-center sm:justify-start'>
-                    <div className='flex flex-col items-center justify-center sm:justify-start'>
-                      <div className='mt-4 sm:mt-0 sm:flex'>
-                        {cartItems.map((cartItem, index) => (
-                          <button
-                            key={index}
-                            className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                            onClick={() => {
-                              handleAddToCart();
-                              console.log('Product added to cart');
-                              console.log(product);
-                              posthogClient.capture({
-                                distinctId: userInfo?.data?.customer.email,
-                                event: 'product_added_to_cart',
-                                properties: { ...product },
-                              });
-                            }}
-                            disabled={
-                              cartItem.min_quantity === cartItem.cartQuantity
-                            }
-                          >
-                            <span className='hidden sm:inline'>
-                              Add to Cart
-                            </span>
-                            <span className='sm:hidden'>Launch Purchase</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <button
+                  className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                  onClick={() => {
+                    handleAddToCart();
+                    console.log('Product added to cart');
+                    console.log(product);
+                    posthogClient.capture({
+                      distinctId: userInfo?.data?.customer.email,
+                      event: 'product_added_to_cart',
+                      properties: { ...product },
+                    });
+                  }}
+                >
+                  <span className='hidden sm:inline'>Add to Cart</span>
+                  <span className='sm:hidden'>Launch Purchase</span>
+                </button>
               </div>
             </div>
           </div>

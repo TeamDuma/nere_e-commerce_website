@@ -25,6 +25,7 @@ import { MdOutlineAccessAlarms } from 'react-icons/md';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
+import CountdownTimer from '@/components/CountdownTimer';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -166,26 +167,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             >
               {group?.join_code} - {group?.product?.name}
             </a>
-
-            {/* <span>
-              <svg
-                className='h-5 w-5 leading-none text-gray-300'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M9 5l7 7-7 7'
-                />
-              </svg>
-            </span>
-            <a className='font-bold hover:text-gray-600 hover:underline'>
-              {product?.name}
-            </a> */}
           </div>
         </div>
         <div className='mb-8 md:flex md:items-center'>
@@ -202,27 +183,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                 {product?.name}
               </h3>
-              {/* {variantsArray.length > 0 && (
-                <div className='ml-12'>
-                  <div className='mt-1'>
-                    <select
-                      id='variant'
-                      value={selectedVariant}
-                      onChange={(e) => handleVariantChange(e.target.value)}
-                      className='w-full rounded border border-gray-300 p-2'
-                    >
-                      <option value='' disabled>
-                        Select a variant
-                      </option>
-                      {variantsArray.map((variant, index) => (
-                        <option key={index} value={variant}>
-                          {variant}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )} */}
             </div>
             <div className='star-icon my-4 flex  items-center'>
               {' '}
@@ -268,26 +228,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   className='text-[#F58929]'
                   style={{ paddingLeft: '0.5rem' }}
                 >
-                  00:00:00
+                  <CountdownTimer />
                 </span>
               </div>
             </div>
-            {/* <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
-              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
-                <MdGroups className='mr-2 text-[#298592]' />
-                {group?.members?.length} participants
-              </div>
-              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
-                <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
-                <span>Ends in</span>
-                <span
-                  className='text-[#F58929]'
-                  style={{ paddingLeft: '0.5rem' }}
-                >
-                  00:00:00
-                </span>
-              </div>
-            </div> */}
 
             <Link href='/products'>
               <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
@@ -310,10 +254,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
             {product?.hasMinQuantity ? (
               <>
-                {/* <ProgressBar
+                <ProgressBar
                   remaining={remaining ?? 0}
                   total={product.min_quantity ?? 0}
-                /> */}
+                />
 
                 <div className='flex items-center'>
                   <button

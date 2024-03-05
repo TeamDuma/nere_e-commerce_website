@@ -47,15 +47,10 @@ const CountdownTimer = () => {
   }
 
   return (
-    <div className='hidden md:ml-2 md:hidden lg:ml-2 lg:flex lg:items-center'>
-      <div className='md:ml-2'>
-        <p className='p-text2'>Delivery Time</p>
-        <p className='p-text4'>
-          {timeLeft.days} : {timeLeft.hours} : {timeLeft.minutes} :{' '}
-          {timeLeft.seconds}
-        </p>
-      </div>
-    </div>
+    <p>
+      {timeLeft.days} : {timeLeft.hours} : {timeLeft.minutes} :{' '}
+      {timeLeft.seconds}
+    </p>
   );
 };
 

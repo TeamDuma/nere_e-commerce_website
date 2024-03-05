@@ -53,7 +53,14 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
               <p className='p-text'>Launch a purchase</p>
             </div>
           </Link>
-          <CountdownTimer />
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Delivery Time</p>
+              <div className='p-text4'>
+                <CountdownTimer />
+              </div>
+            </div>
+          </div>
           <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
             <div className='md:ml-2'>
               <p className='p-text2'>Discounts</p>
