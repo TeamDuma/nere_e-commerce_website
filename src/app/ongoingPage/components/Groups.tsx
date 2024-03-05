@@ -12,14 +12,16 @@ import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
 import { Group } from '@/types/group';
 
 const Groups = () => {
-  
-  const [getPublicGroups, { data, isLoading, isError }] = useLazyGetPublicOngoingGroupsQuery();
-  const [groups, setGroups] = useState<Group[]>([]); 
+  const [getPublicGroups, { data, isLoading, isError }] =
+    useLazyGetPublicOngoingGroupsQuery();
+  const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
-    const response = getPublicGroups().unwrap().then((response) => {
-      setGroups(response.data.groups);
-    });
+    const response = getPublicGroups()
+      .unwrap()
+      .then((response) => {
+        setGroups(response.data.groups);
+      });
   }, []);
 
   return (
