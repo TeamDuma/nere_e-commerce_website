@@ -35,4 +35,5 @@ export const {
   useLazyGetGroupQuery,
   useGetGroupsQuery,
   useGetPublicOngoingGroupsQuery,
+  useLazyGetPublicOngoingGroupsQuery
 } = groupApi;

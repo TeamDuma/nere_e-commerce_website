@@ -14,12 +14,15 @@ const OngoingPurchases: React.FC = () => {
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
 
   useEffect(() => {
-    axios.get('https://nere-dev-server-86a68e5e2d39.herokuapp.com/api/groups?type=Public&status=Open').then((res) => {
-      console.log('res', res);
-      setGroups(res.data.data.groups);
-    });
+    axios
+      .get(
+        'https://nere-dev-server-86a68e5e2d39.herokuapp.com/api/groups?type=Public&status=Open'
+      )
+      .then((res) => {
+        console.log('res', res);
+        setGroups(res.data.data.groups);
+      });
   }, []);
-
 
   return (
     <div>

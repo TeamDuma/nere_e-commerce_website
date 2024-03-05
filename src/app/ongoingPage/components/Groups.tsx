@@ -4,13 +4,15 @@ import Link from 'next/link';
 import {
   useGetGroupsQuery,
   useGetPublicOngoingGroupsQuery,
+  useLazyGetPublicOngoingGroupsQuery,
 } from '@/lib/redux/services/group';
 import OngoingRow from '@/components/OngoingRow';
 import GroupRowRenderModal from '@/app/groups/components/GroupRowRenderModal';
 import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
 
 const Groups = () => {
-  const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
+  // const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
+  const [getPublicGroups, { data, isLoading, isError }] = useLazyGetPublicOngoingGroupsQuery();
   const groups = data?.data?.groups ?? [];
 
   return (
