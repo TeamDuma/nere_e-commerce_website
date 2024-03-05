@@ -1,5 +1,4 @@
 'use client';
-import Banner from '@/components/Banner';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import PurchaseGuide from '@/components/common/PurchaseGuide';
 import ViewMore from '@/components/common/ViewMore';
@@ -17,6 +16,7 @@ import Stepper from '@/components/common/PurchaseGuide';
 import ProgressBar from '@/components/common/ProgressBar';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 import PostHogClient from '@/app/posthog';
+import Banner from '@/components/Slider';
 
 type Props = {
   params: {

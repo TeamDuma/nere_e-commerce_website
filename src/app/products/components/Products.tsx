@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import OngoingPurchases from '@/app/groups/ongoingPurchases/page';
-import Banner from '@/components/Banner';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import ThreeBannerLayout from '@/components/ThreeBannerLayout';
 import TwoBannerLayout from '@/components/TwoBannerLayout';
@@ -11,6 +10,7 @@ import Container from '@/components/common/Container';
 import ViewMore from '@/components/common/ViewMore';
 import CategoriesHeader from '@/components/categories/components/CategoriesHeader';
 import CategoriesRow from '@/components/categories/CategoriesRow';
+import Banner from '@/components/Slider';
 
 const Products = () => {
   const { data, isLoading } = useGetActiveProductsQuery();

@@ -9,7 +9,7 @@ import {
 } from '@/lib/redux';
 import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
 import FeaturedProducts from '@/components/FeaturedProducts';
-import Banner from '@/components/Banner';
+
 import ViewMore from '@/components/common/ViewMore';
 import { Product } from '@/types/product';
 import { GroupType } from '@/types/group';
@@ -24,6 +24,7 @@ import { MdGroups } from 'react-icons/md';
 import { MdOutlineAccessAlarms } from 'react-icons/md';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import PostHogClient from '@/app/posthog';
+import Banner from '@/components/Slider';
 
 interface OngoingDetailsProps {
   ongoingUid: string;

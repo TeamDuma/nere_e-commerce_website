@@ -217,21 +217,22 @@ const Header = () => {
                       fontWeight: 'bold',
                       fontSize: 12,
                     }}
+                    onClick={handLocation}
                   >
                     {selectedLocation
                       ? selectedLocation.name
                       : 'Select a location'}
                   </p>
-                  <p
+                  {/* <p
                     style={{
                       color: '#298592',
                       fontSize: 14,
                       fontWeight: 'bold',
                     }}
-                    onClick={handLocation}
+                   
                   >
                     Change
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

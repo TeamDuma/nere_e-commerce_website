@@ -134,7 +134,7 @@ const CartComponent = () => {
   };
 
   return (
-    <div className=' h-full py-8'>
+    <div className=' h-full '>
       <div className=' mx-auto px-4'>
         {/* <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '> */}
         <div className='h-20 gap-5 rounded-lg border bg-gray-50 p-2 py-2 shadow-xl md:mb-2 md:flex md:w-1/2 md:items-center'>
@@ -181,10 +181,10 @@ const CartComponent = () => {
                         </h6>
                       </div>
                     </div>
-                    <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
-                      <div className='flex items-center space-x-2 border-gray-100'>
+                    <div className='m-2 flex w-96 items-center justify-between px-2 md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100 px-2'>
                         {item.isGroupJoiner ? (
-                          <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
+                          <div className=' rounded-md border border-[#298592]  '>
                             <span className='text-xs text-[#298592]'>
                               Group Code : {item.groupCode}
                             </span>
@@ -192,6 +192,18 @@ const CartComponent = () => {
                         ) : null}
                       </div>
                     </div>
+
+                    {/* <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100 '>
+                        {item.isGroupJoiner ? (
+                          <div className=' rounded-md border border-[#298592]  '>
+                            <span className='text-xs text-[#298592]'>
+                              Group Code : {item.groupCode}
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
+                    </div> */}
                   </div>
 
                   <div className='grid grid-cols-1 md:grid-cols-4'>
@@ -227,6 +239,17 @@ const CartComponent = () => {
                             total={item.min_quantity}
                           />
                         ) : null}
+                        {item.isGroupJoiner ? (
+                          // <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
+                          <span className='text-xs text-[#298592]'>
+                            You Joined an ongoing Group
+                          </span>
+                        ) : (
+                          // </div>
+                          <span className='text-xs text-[#298592]'>
+                            You lunched a new purchase
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
