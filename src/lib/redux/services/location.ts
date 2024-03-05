@@ -8,6 +8,9 @@ const locationsApi = apiSlice.injectEndpoints({
       query: () => {
         return endpoints.activeLocations;
       },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg
+      },
     }),
   }),
 });
