@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-.body {
-  background-color: #cfcfcf;
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
 }
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
 /* Footer.css */
 .footer-container {
   display: flex;
