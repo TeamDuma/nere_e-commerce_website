@@ -1,19 +1,31 @@
 'use client';
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import GroupRowRenderItem from '../components/GroupRowRenderItem';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import { Group } from '@/types/group';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import axios from 'axios';
 
 const OngoingPurchases: React.FC = () => {
+  // const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
+  // const groups = data?.data?.groups ?? [];
+
+  const [groups, setGroups] = useState<Group[]>([]);
   const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
-  const groups = data?.data?.groups ?? [];
+
+  useEffect(() => {
+    axios.get('https://nere-dev-server-86a68e5e2d39.herokuapp.com/api/groups?type=Public&status=Open').then((res) => {
+      console.log('res', res);
+      setGroups(res.data.data.groups);
+    });
+  }, []);
+
 
   return (
     <div>
       {isLoading && <p>Loading...</p>}
       {isError && <p style={{ color: 'red' }}>Error</p>}
-      {data && (
+      {groups && (
         <div className='relative'>
           <div className='absolute left-0 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer '>
             <FaArrowCircleLeft className='arrow-icon' />

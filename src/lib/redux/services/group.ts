@@ -24,7 +24,7 @@ const groupApi = apiSlice.injectEndpoints({
           return endpoints.getPublicOngoingGroups;
         },
         forceRefetch({ currentArg, previousArg }) {
-          return currentArg !== previousArg
+          return currentArg !== previousArg;
         },
       }
     ),
