@@ -15,4 +15,4 @@ const locationsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetlocationsQuery } = locationsApi;
+export const { useGetlocationsQuery, useLazyGetlocationsQuery } = locationsApi;

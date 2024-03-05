@@ -12,7 +12,7 @@ const GroupRowRenderItem = ({ item }: { item: Group }) => {
     return Math.round(savingsPercentage);
   };
 
-  console.log('item', item);
+  // console.log('item', item);
 
   return (
     <div

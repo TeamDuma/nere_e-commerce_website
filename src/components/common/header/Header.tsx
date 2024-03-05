@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser, resetCart, selectShopping } from '@/lib/redux';
 import PickupLocation from '@/app/delivery/components/SelectPickupLocation';
-import { useGetlocationsQuery } from '@/lib/redux/services/location';
+import { useGetlocationsQuery, useLazyGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
@@ -23,7 +23,8 @@ import { usePostHog } from 'posthog-js/react';
 const Header = () => {
   const router = useRouter();
 
-  const { data, isLoading } = useGetlocationsQuery();
+  // const { data, isLoading } = useGetlocationsQuery();
+  const [getLocations, { data, isLoading }] = useLazyGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -48,7 +49,7 @@ const Header = () => {
     () => {
       return data
         ? locations.find((location) => location.id === selectedLocationId) ||
-            null
+        null
         : null;
     }
   );
@@ -101,7 +102,7 @@ const Header = () => {
     try {
       dispatch(deleteUser());
       posthog.reset();
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -158,9 +159,8 @@ const Header = () => {
                 )}
                 <Link
                   href='/cart'
-                  className={`block ${
-                    cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-                  }`}
+                  className={`block ${cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+                    }`}
                 >
                   <div className='mr-4 flex flex-row gap-2'>
                     <CartIconHeader />
@@ -330,9 +330,8 @@ const Header = () => {
               </div>
               <Link
                 href='/cart'
-                className={`mt-4 block rounded-md p-2 ${
-                  cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
-                }`}
+                className={`mt-4 block rounded-md p-2 ${cartItems && cartItems.length > 0 ? 'animate-bounce' : ''
+                  }`}
               >
                 <div className='mr-4 flex flex-row gap-2'>
                   <CartIconHeader />

@@ -1,27 +1,21 @@
 'use client';
 import React, { use, useEffect, useState } from 'react';
 import GroupRowRenderItem from '../components/GroupRowRenderItem';
-import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
+import { useGetPublicOngoingGroupsQuery, useLazyGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import { Group } from '@/types/group';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
-import axios from 'axios';
 
 const OngoingPurchases: React.FC = () => {
   // const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
   // const groups = data?.data?.groups ?? [];
 
   const [groups, setGroups] = useState<Group[]>([]);
-  const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
+  const [getPublicGroups, { data, isLoading, isError, error }] = useLazyGetPublicOngoingGroupsQuery();
 
   useEffect(() => {
-    axios
-      .get(
-        'https://nere-dev-server-86a68e5e2d39.herokuapp.com/api/groups?type=Public&status=Open'
-      )
-      .then((res) => {
-        console.log('res', res);
-        setGroups(res.data.data.groups);
-      });
+    const response = getPublicGroups().unwrap().then((response) => {
+      setGroups(response.data.groups);
+    });
   }, []);
 
   return (
