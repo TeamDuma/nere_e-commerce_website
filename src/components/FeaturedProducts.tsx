@@ -47,7 +47,7 @@ const FeaturedProducts = () => {
         <div className='container'>
           {isLoading && <div>Loading...</div>}
 
-          <div className='grid grid-cols-2 sm:w-full sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5'>
+          <div className='grid grid-cols-2 sm:w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-4 xl:gap-x-5'>
             {featureProducts.map((product) => (
               <Link href={`/product/${product.slug}`} key={product?.id}>
                 <div
@@ -87,77 +87,77 @@ const FeaturedProducts = () => {
                         }
                         alt='cerelac image'
                       />
-                      {hoveredProductId === String(product.id) && (
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                            borderRadius: '10px',
-                          }}
-                        >
-                          <button
-                            className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                            style={{ zIndex: 1 }}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              console.log(product.id);
-                              handleAddToCart(product);
-                              toast.success(`${product.name} added to cart!`, {
-                                autoClose: 500,
-                              });
-                              sendGTMEvent({
-                                event: 'featuredProductClicked',
-                                value: `${product.name}`,
-                              });
-                              sendGAEvent({
-                                event: 'featuredProductClicked',
-                                value: `${product.name}`,
-                              });
-                              postHogClient.capture({
-                                distinctId: userInfo?.data?.customer.email,
-                                event: 'featuredProductClicked',
-                                properties: { ...product },
-                              });
-                            }}
-                          >
-                            Quick Add
-                          </button>
-                        </div>
-                      )}
                     </div>
                   </div>
-
-                  <div className='flex items-center p-2'>
-                    <div className='h-12'>
-                      <h5
-                        tabIndex={0}
-                        className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
-                        style={{ maxWidth: '12rem' }}
-                      >
-                        {product?.name}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className='ml-2 flex px-2'>
-                    <div
-                      style={{ color: '#F31748' }}
-                    >{`¢ ${product?.sale_price}`}</div>
+                  {hoveredProductId === String(product.id) && (
                     <div
                       style={{
-                        marginLeft: '14px',
-                        color: '#B3B3B3',
-                        textDecoration: 'line-through',
+                        // position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        borderRadius: '10px',
                       }}
                     >
-                      {`¢ ${product?.price}`}
+                      <button
+                        className='  w-full rounded-md  px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                        style={{ zIndex: 1 }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log(product.id);
+                          handleAddToCart(product);
+                          toast.success(`${product.name} added to cart!`, {
+                            autoClose: 500,
+                          });
+                          sendGTMEvent({
+                            event: 'featuredProductClicked',
+                            value: `${product.name}`,
+                          });
+                          sendGAEvent({
+                            event: 'featuredProductClicked',
+                            value: `${product.name}`,
+                          });
+                          postHogClient.capture({
+                            distinctId: userInfo?.data?.customer.email,
+                            event: 'featuredProductClicked',
+                            properties: { ...product },
+                          });
+                        }}
+                      >
+                        Quick Add
+                      </button>
                     </div>
+                  )}
+                </div>
+                <div className='flex items-center p-2'>
+                  <div className='h-12'>
+                    <h5
+                      tabIndex={0}
+                      className='text ml-1  line-clamp-2 overflow-hidden overflow-ellipsis  text-[#298592]'
+                      style={{ maxWidth: '12rem' }}
+                    >
+                      {product?.name}
+                    </h5>
+                  </div>
+                </div>
+                <div className='ml-2 flex px-2'>
+                  <div
+                    style={{ color: '#F31748' }}
+                  >{`¢ ${product?.sale_price}`}</div>
+                  <div
+                    style={{
+                      marginLeft: '14px',
+                      color: '#B3B3B3',
+                      textDecoration: 'line-through',
+                    }}
+                  >
+                    {`¢ ${product?.price}`}
                   </div>
                 </div>
               </Link>

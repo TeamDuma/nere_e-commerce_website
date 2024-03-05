@@ -182,9 +182,9 @@ const CartComponent = () => {
                       </div>
                     </div>
                     <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
-                      <div className='flex items-center space-x-2 border-gray-100'>
+                      <div className='flex items-center space-x-2 border-gray-100 '>
                         {item.isGroupJoiner ? (
-                          <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
+                          <div className='h-max-h-[10px] rounded-md border border-[#298592] py-2   '>
                             <span className='text-xs text-[#298592]'>
                               Group Code : {item.groupCode}
                             </span>
@@ -227,6 +227,17 @@ const CartComponent = () => {
                             total={item.min_quantity}
                           />
                         ) : null}
+                        {item.isGroupJoiner ? (
+                          // <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
+                          <span className='text-xs text-[#298592]'>
+                            You Joined an ongoing Group
+                          </span>
+                        ) : (
+                          // </div>
+                          <span className='text-xs text-[#298592]'>
+                            You lunched a new purchase
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
