@@ -63,6 +63,7 @@ const GroupItem = ({ group, showModal }: GroupItemProps) => {
               <ProgressBar
                 remaining={group.total_quantity}
                 total={group.product?.min_quantity}
+                unit={group.product?.unit}
               />
             ) : null}
             {/* <ProgressBar 

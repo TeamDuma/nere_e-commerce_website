@@ -270,7 +270,7 @@ export default function ProductDetailPage({ params }: Props) {
                   </div>
                 </div>
 
-                <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
+                {/* <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
                   <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
                     <MdGroups className='mr-2 text-[#298592]' />
                     {group?.members?.length} participants
@@ -285,7 +285,7 @@ export default function ProductDetailPage({ params }: Props) {
                       <CountdownTimer />
                     </span>
                   </div>
-                </div>
+                </div> */}
 
                 <Link href='/products'>
                   <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
@@ -299,7 +299,7 @@ export default function ProductDetailPage({ params }: Props) {
                     <span style={{ color: 'orange' }}>
                       {product.min_quantity}{' '}
                     </span>{' '}
-                    people required for this group buy
+                    {product.unit} required for this group buy
                   </h2>
                 ) : null}
 

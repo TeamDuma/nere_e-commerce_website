@@ -163,7 +163,7 @@ const CartComponent = () => {
                       src={item?.plain_image}
                       width={
                         item.name === 'Frytol sunflower oil 0.9L' ||
-                        item.name === "Dr. Annie's honey 500ml"
+                          item.name === "Dr. Annie's honey 500ml"
                           ? '60px'
                           : '90px'
                       }
@@ -185,7 +185,7 @@ const CartComponent = () => {
                       <div className='flex items-center space-x-2 border-gray-100 px-2'>
                         {item.isGroupJoiner ? (
                           <div className=' rounded-md border border-[#298592]  '>
-                            <span className='text-xs text-[#298592]'>
+                            <span className='text-xs text-[#298592] p-2 font-semibold'>
                               Group Code : {item.groupCode}
                             </span>
                           </div>
@@ -237,17 +237,18 @@ const CartComponent = () => {
                                 : item.cartQuantity
                             }
                             total={item.min_quantity}
+                            unit={item.unit}
                           />
                         ) : null}
                         {item.isGroupJoiner ? (
                           // <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
-                          <span className='text-xs text-[#298592]'>
-                            You Joined an ongoing Group
+                          <span className='text-xs text-[#298592] font-medium'>
+                            You are joining an ongoing group
                           </span>
                         ) : (
                           // </div>
-                          <span className='text-xs text-[#298592]'>
-                            You lunched a new purchase
+                          <span className='text-xs text-[#298592] font-medium'>
+                            You are starting a new group
                           </span>
                         )}
                       </div>
@@ -255,7 +256,7 @@ const CartComponent = () => {
                     <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
                       <div className='flex items-center space-x-2 border-gray-100'>
                         <span
-                          className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50`}
+                          className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 font-bold`}
                           onClick={() =>
                             dispatch(
                               decreaseQuantity({
@@ -272,14 +273,13 @@ const CartComponent = () => {
                           {item.cartQuantity}
                         </div>
                         <span
-                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
-                            !item.min_quantity ||
-                            (item.isGroupJoiner
-                              ? item.cartQuantity + (item.totalQuantity || 0)
-                              : item.cartQuantity) < (item.min_quantity ?? 0)
+                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 font-bold ${!item.min_quantity ||
+                              (item.isGroupJoiner
+                                ? item.cartQuantity + (item.totalQuantity || 0)
+                                : item.cartQuantity) < (item.min_quantity ?? 0)
                               ? ''
                               : 'pointer-events-none opacity-50'
-                          }`}
+                            }`}
                           onClick={() =>
                             dispatch(
                               increaseQuantity({
@@ -445,7 +445,7 @@ const CartComponent = () => {
                               } else {
                               }
                             })
-                            .catch((e) => {});
+                            .catch((e) => { });
                           postHogClient.capture({
                             distinctId: userInfo.data.customer.email,
                             event: 'checkoutProductClicked',

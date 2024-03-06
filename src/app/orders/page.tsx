@@ -54,7 +54,7 @@ const Orders = () => {
                     </div>
                   </div>
 
-                  <ProgressBar remaining={4} total={12} />
+                  <ProgressBar remaining={4} total={12} unit='bottles'/>
                 </div>
               </div>
 

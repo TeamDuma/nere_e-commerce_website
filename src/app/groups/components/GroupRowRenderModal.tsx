@@ -63,6 +63,7 @@ const GroupRowRenderModal = ({ item }: { item: Group }) => {
               <ProgressBar
                 remaining={item.total_quantity}
                 total={item.product.min_quantity ?? 0}
+                unit={item.product.unit}
               />
             )}
           </div>

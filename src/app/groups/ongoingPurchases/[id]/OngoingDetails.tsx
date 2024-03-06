@@ -238,7 +238,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 Continue Shopping
               </h1>
             </Link>
-            {product?.hasMinQuantity ? (
+            {/* {product?.hasMinQuantity ? (
               <h2>
                 <span>
                   <span style={{ color: 'orange' }}>
@@ -250,13 +250,14 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   <span> remaining in this group</span>
                 </span>
               </h2>
-            ) : null}
+            ) : null} */}
 
             {product?.hasMinQuantity ? (
               <>
                 <ProgressBar
                   remaining={remaining ?? 0}
                   total={product.min_quantity ?? 0}
+                  unit={product.unit}
                 />
 
                 <div className='flex items-center'>
