@@ -32,12 +32,12 @@ export interface IRegisterRequest {
 }
 
 export interface IRegisterResponse {
-  success: string;
-  data: {
-    Customer: Customer[];
-  };
-  token: string;
+  success: boolean;
   message: string;
+  token: string;
+  customer: Customer[];
+  statusCode?: number;
+  error?: string;
 }
 
 export interface IphoneVerifyRequest {
@@ -53,6 +53,7 @@ export interface IphoneVerifyTokenRequest {
 }
 
 export interface IphoneVerifyTokenResponse {
+  success: boolean;
   message: string;
   status: string;
 }

@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import OTPModal from '../OTPModal';
 import { useDispatch } from 'react-redux';
 import { addUser, saveToken } from '@/lib/redux';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -73,10 +75,16 @@ const RegistrationModal: React.FC<{
   const [phone, setPhone] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [oTpModalVisible, setoTpModalVisible] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>(undefined);
+
   const dispatch = useDispatch();
 
   const handleOtpClick = () => {
     setoTpModalVisible(true);
+  };
+
+  const handlePhoneNumberChange = (value: string | undefined) => {
+    setPhoneNumber(value);
   };
 
   const [signUp, { isLoading, isError, isSuccess, error }] =
@@ -94,7 +102,7 @@ const RegistrationModal: React.FC<{
       return;
     }
 
-    if (!phone || !isValidPhoneNumber(phone)) {
+    if (!phoneNumber || !isValidPhoneNumber(phoneNumber)) {
       toast.error('Phone must be a valid phone number');
       return;
     }
@@ -108,28 +116,35 @@ const RegistrationModal: React.FC<{
       return;
     }
 
-    const formattedPhone = phone.startsWith('0')
-      ? '+233' + phone.slice(1)
-      : phone;
-    console.log('formattedPhone', formattedPhone);
+    console.log('formattedPhone', phoneNumber);
 
-    signUp({ email, name, phone: formattedPhone, password })
+    console.log(email, name, phoneNumber, password);
+
+    signUp({ email, name, phone: phoneNumber, password })
       .then((response) => {
         if ('data' in response) {
           const data = response.data;
-          const token = response.data.token;
-          if (data.message === 'success') {
+          const token = data.token;
+
+          if (data.success === true) {
             dispatch(addUser({ data }));
           }
-          dispatch(saveToken(token));
-          toast.success('Signed Up successfully', {
-            autoClose: 500,
-          });
-          phoneVerify({ token }).then((response) => {
-            handleOtpClick();
-          });
+
+          if (token !== undefined) {
+            dispatch(saveToken(token));
+            toast.success('Signed Up successfully', {
+              autoClose: 500,
+            });
+            phoneVerify({ token }).then((response) => {
+              handleOtpClick();
+            });
+          } else {
+            console.error('Token is undefined');
+            toast.error('Error signing up');
+          }
         } else {
-          console.log('response', response.error);
+          console.error(response.error);
+          toast.error('Error signing up');
         }
       })
       .catch((error) => {
@@ -141,8 +156,8 @@ const RegistrationModal: React.FC<{
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const isValidPhoneNumber = (phone: string): boolean => {
-    return /^\d{10}$$/.test(phone);
+  const isValidPhoneNumber = (phoneNumber: string): boolean => {
+    return /^\+\d+$/.test(phoneNumber);
   };
 
   return (
@@ -196,20 +211,29 @@ const RegistrationModal: React.FC<{
                 className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
                 placeholder='kojo@gmail.com'
               />
+
               <label
-                htmlFor='Phone'
-                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+                htmlFor='phoneNumber'
+                className='block text-sm font-bold text-gray-800'
               >
-                Phone
+                Phone (WhatsApp Number)
               </label>
-              <input
-                type='text'
-                id='phone'
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='WhatsApp Number'
-              />
+              <div className='relative mt-2'>
+                <PhoneInput
+                  international
+                  defaultCountry='GH'
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  containerStyle={{
+                    position: 'relative',
+                    width: '10%',
+                  }}
+                  inputStyle={{
+                    height: '100%',
+                    width: '100%',
+                  }}
+                />
+              </div>
 
               <label
                 htmlFor='Password'

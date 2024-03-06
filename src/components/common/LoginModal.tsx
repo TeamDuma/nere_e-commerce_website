@@ -119,6 +119,7 @@ const LoginModal: React.FC<{
   };
 
   const handleLoginError = (error: any) => {
+    console.log(error);
     toast.error('Login failed. Please check your credentials.');
   };
 
