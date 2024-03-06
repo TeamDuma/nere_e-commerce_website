@@ -17,6 +17,7 @@ import ProgressBar from '@/components/common/ProgressBar';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
+import CountdownTimer from '@/components/CountdownTimer';
 
 type Props = {
   params: {
@@ -99,6 +100,9 @@ export default function ProductDetailPage({ params }: Props) {
   const cartProduct = cartItems.find((item) => item.slug !== productSlug);
 
   const cartQuantity = cartProduct ? cartProduct.cartQuantity : 0;
+  console.log('cartProduct', cartProduct);
+
+  console.log('cartQuantity', cartQuantity);
 
   return (
     <>
@@ -278,7 +282,7 @@ export default function ProductDetailPage({ params }: Props) {
                       className='text-[#F58929]'
                       style={{ paddingLeft: '0.5rem' }}
                     >
-                      00:00:00
+                      <CountdownTimer />
                     </span>
                   </div>
                 </div>
@@ -291,44 +295,30 @@ export default function ProductDetailPage({ params }: Props) {
                   {/* <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1> */}
                 </Link>
                 {product.min_quantity ? (
-                  <h2>
-                    <span style={{ color: 'orange', marginLeft: 5 }}>
+                  <h2 className='my-2'>
+                    <span style={{ color: 'orange' }}>
                       {product.min_quantity}{' '}
                     </span>{' '}
                     people required for this group buy
                   </h2>
                 ) : null}
 
-                {/* {product.min_quantity ? (
-                  <ProgressBar
-                    remaining={cartQuantity}
-                    total={product.min_quantity}
-                  />
-                ) : null} */}
-                <div className='flex space-x-4 py-4'>
-                  <div className='flex items-center justify-center sm:justify-start'>
-                    <div className='flex flex-col items-center justify-center sm:justify-start'>
-                      <div className='mt-4 sm:mt-0 sm:flex'>
-                        <button
-                          className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                          onClick={() => {
-                            handleAddToCart();
-                            console.log('Product added to cart');
-                            console.log(product);
-                            posthogClient.capture({
-                              distinctId: userInfo?.data?.customer.email,
-                              event: 'product_added_to_cart',
-                              properties: { ...product },
-                            });
-                          }}
-                        >
-                          <span className='hidden sm:inline'>Add to Cart</span>
-                          <span className='sm:hidden'>Launch Purchase</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <button
+                  className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                  onClick={() => {
+                    handleAddToCart();
+                    console.log('Product added to cart');
+                    console.log(product);
+                    posthogClient.capture({
+                      distinctId: userInfo?.data?.customer.email,
+                      event: 'product_added_to_cart',
+                      properties: { ...product },
+                    });
+                  }}
+                >
+                  <span className='hidden sm:inline'>Add to Cart</span>
+                  <span className='sm:hidden'>Launch Purchase</span>
+                </button>
               </div>
             </div>
           </div>
