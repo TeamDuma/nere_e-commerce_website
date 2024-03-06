@@ -103,14 +103,14 @@ const OTPModal: React.FC<{
     modalStyles = customStylesMedium;
   }
 
-  const [inputs, setInputs] = useState(['', '', '', '', '', '']);
+  const [inputs, setInputs] = useState(['', '', '', '', '']);
 
   const handleChange = (index: number, value: string) => {
     const newInputs = [...inputs];
     newInputs[index] = value;
     setInputs(newInputs);
 
-    if (value.length === 1 && index < 5) {
+    if (value.length === 1 && index < 4) {
       const nextInput = document.getElementById(
         `input-${index + 1}`
       ) as HTMLInputElement | null;
