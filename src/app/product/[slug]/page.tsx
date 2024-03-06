@@ -316,7 +316,7 @@ export default function ProductDetailPage({ params }: Props) {
                     });
                   }}
                 >
-                  <span className='hidden sm:inline'>Add to Cart</span>
+                  <span className='hidden sm:inline'>Launch Purchase</span>
                   <span className='sm:hidden'>Launch Purchase</span>
                 </button>
               </div>
