@@ -10,6 +10,11 @@ body {
   min-height: 92vh;
 }
 
+.react-phone-number-input__icon {
+  height: 20px;
+  width: auto;
+}
+
 .wrapper {
   flex: 1;
   display: flex;

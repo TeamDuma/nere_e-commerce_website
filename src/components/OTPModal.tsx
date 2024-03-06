@@ -7,6 +7,7 @@ import { RootState } from '@reduxjs/toolkit/dist/query/core/apiState';
 import shopping, { selectShopping } from '@/lib/redux/slices/shopping';
 import { usePhoneVerifyTokenMutation } from '@/lib/redux/services/customers';
 import { toast } from 'react-toastify';
+import { error } from 'console';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -137,11 +138,20 @@ const OTPModal: React.FC<{
     const otpCode = inputs.join('');
     phoneVerifyToken({ token, code: otpCode })
       .then((response) => {
-        setSubmitted(true);
-        onClose();
+        if (response.data) {
+          if (response.data.success === true) {
+            setSubmitted(true);
+            toast.success('OTP verification successful');
+            onClose();
+          } else {
+            toast.error(response.data.message || 'Error verifying OTP');
+          }
+        } else {
+          toast.error('Error verifying OTP');
+        }
       })
       .catch((error) => {
-        toast.error(error.message || 'Error signing up');
+        toast.error(error.message || 'Error verifying OTP');
       });
   };
 
