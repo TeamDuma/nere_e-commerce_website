@@ -277,7 +277,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none`}
                   onClick={handleAddToCart}
                 >
-                  Add to Cart
+                  Join Group
                 </button>
               </div>
             )}
