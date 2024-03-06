@@ -267,7 +267,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     onClick={handleAddToCart}
                     disabled={remaining >= (product.min_quantity ?? 0)}
                   >
-                    Add to Cart
+                    Join Group
                   </button>
                 </div>
               </>
