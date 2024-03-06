@@ -133,12 +133,11 @@ const OTPModal: React.FC<{
     });
     setInputs(newInputs);
   };
-
   const handleSubmit = () => {
     const otpCode = inputs.join('');
     phoneVerifyToken({ token, code: otpCode })
       .then((response) => {
-        if (response.data) {
+        if ('data' in response && response.data) {
           if (response.data.success === true) {
             setSubmitted(true);
             toast.success('OTP verification successful');

@@ -75,12 +75,16 @@ const RegistrationModal: React.FC<{
   const [phone, setPhone] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [oTpModalVisible, setoTpModalVisible] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>(undefined);
 
   const dispatch = useDispatch();
 
   const handleOtpClick = () => {
     setoTpModalVisible(true);
+  };
+
+  const handlePhoneNumberChange = (value: string | undefined) => {
+    setPhoneNumber(value);
   };
 
   const [signUp, { isLoading, isError, isSuccess, error }] =
@@ -120,20 +124,27 @@ const RegistrationModal: React.FC<{
       .then((response) => {
         if ('data' in response) {
           const data = response.data;
-          const token = response.data.token;
-          if (data.message === 'success') {
+          const token = data.token;
+
+          if (data.success === true) {
             dispatch(addUser({ data }));
           }
-          dispatch(saveToken(token));
-          toast.success('Signed Up successfully', {
-            autoClose: 500,
-          });
-          phoneVerify({ token }).then((response) => {
-            handleOtpClick();
-          });
+
+          if (token !== undefined) {
+            dispatch(saveToken(token));
+            toast.success('Signed Up successfully', {
+              autoClose: 500,
+            });
+            phoneVerify({ token }).then((response) => {
+              handleOtpClick();
+            });
+          } else {
+            console.error('Token is undefined');
+            toast.error('Error signing up');
+          }
         } else {
-          console.log(response.error.data.message);
-          toast.error(response.error.data.message);
+          console.error(response.error);
+          toast.error('Error signing up');
         }
       })
       .catch((error) => {
@@ -212,7 +223,7 @@ const RegistrationModal: React.FC<{
                   international
                   defaultCountry='GH'
                   value={phoneNumber}
-                  onChange={setPhoneNumber}
+                  onChange={handlePhoneNumberChange}
                   containerStyle={{
                     position: 'relative',
                     width: '10%',
