@@ -6,7 +6,11 @@ interface ProgressBarProps {
   unit: string;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ remaining, total, unit}) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({
+  remaining,
+  total,
+  unit,
+}) => {
   const remainingPercentage = (remaining / total) * 100;
 
   return (
