@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { addUser, saveToken } from '@/lib/redux';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { useRouter } from 'next/navigation';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -78,6 +79,7 @@ const RegistrationModal: React.FC<{
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>(undefined);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleOtpClick = () => {
     setoTpModalVisible(true);
@@ -136,7 +138,8 @@ const RegistrationModal: React.FC<{
               autoClose: 500,
             });
             phoneVerify({ token }).then((response) => {
-              handleOtpClick();
+              router.push('/otp');
+              onClose();
             });
           } else {
             console.error('Token is undefined');
@@ -297,11 +300,11 @@ const RegistrationModal: React.FC<{
             </div>
           </div>
         </div>
-        <OTPModal
+        {/* <OTPModal
           onClose={onClose}
           isOpen={oTpModalVisible}
           phoneNumber={phone}
-        />
+        /> */}
       </div>
     </Modal>
   );
