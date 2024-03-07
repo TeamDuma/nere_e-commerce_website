@@ -1,4 +1,7 @@
 import {
+  ForgotPasswordRequest,
+  ForgotPasswordResponse,
+  ForgotaPsswordTokenResponse,
   ILoginRequest,
   ILoginResponse,
   IRegisterRequest,
@@ -7,6 +10,8 @@ import {
   IphoneVerifyResponse,
   IphoneVerifyTokenRequest,
   IphoneVerifyTokenResponse,
+  ResetPasswordRequest,
+  ResetPasswordResponse,
 } from '@/types/customer';
 import { apiSlice } from '.';
 import endpoints from '../../endpoints';
@@ -55,13 +60,42 @@ const customerApi = apiSlice.injectEndpoints({
         return endpoints.getOrders(uid);
       },
     }),
+    forgotpassword: builder.mutation<
+      ForgotPasswordResponse,
+      ForgotPasswordRequest
+    >({
+      query: (data) => ({
+        url: endpoints.forgotPassword,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    forgotpasswordToken: builder.query<ForgotaPsswordTokenResponse, string>({
+      query: (token) => ({
+        url: endpoints.getPasswordToken(token),
+        method: 'GET',
+      }),
+    }),
+    resetPassword: builder.mutation<
+      ResetPasswordResponse,
+      ResetPasswordRequest
+    >({
+      query: (data) => ({
+        url: endpoints.resetPassword,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
 export const {
   useSignInMutation,
   useSignUpMutation,
+  useForgotpasswordMutation,
   usePhoneVerifyMutation,
   usePhoneVerifyTokenMutation,
+  useLazyForgotpasswordTokenQuery,
   useLazyGetOrdersQuery,
+  useResetPasswordMutation,
 } = customerApi;

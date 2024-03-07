@@ -58,3 +58,28 @@ export interface IphoneVerifyTokenResponse {
   message: string;
   status: string;
 }
+
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ForgotPasswordResponse {
+  status: string;
+  message: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  password: string;
+  password_confirmation: string;
+}
+
+export interface ResetPasswordResponse {
+  status: string;
+  message: string;
+}
+
+export interface ForgotaPsswordTokenResponse {
+  status: string;
+  message: string;
+}
