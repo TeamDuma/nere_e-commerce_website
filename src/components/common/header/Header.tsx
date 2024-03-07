@@ -8,10 +8,7 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser, resetCart, selectShopping } from '@/lib/redux';
 import PickupLocation from '@/app/delivery/components/SelectPickupLocation';
-import {
-  useGetlocationsQuery,
-  useLazyGetlocationsQuery,
-} from '@/lib/redux/services/location';
+import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
 import { ILocation } from '@/types/location';
@@ -26,8 +23,7 @@ import { usePostHog } from 'posthog-js/react';
 const Header = () => {
   const router = useRouter();
 
-  // const { data, isLoading } = useGetlocationsQuery();
-  const [getLocations, { data, isLoading }] = useLazyGetlocationsQuery();
+  const { data, isLoading } = useGetlocationsQuery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -227,16 +223,6 @@ const Header = () => {
                       ? selectedLocation.name
                       : 'Select a location'}
                   </p>
-                  {/* <p
-                    style={{
-                      color: '#298592',
-                      fontSize: 14,
-                      fontWeight: 'bold',
-                    }}
-                   
-                  >
-                    Change
-                  </p> */}
                 </div>
               </div>
             </div>
