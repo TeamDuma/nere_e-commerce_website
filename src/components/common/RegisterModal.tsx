@@ -138,7 +138,7 @@ const RegistrationModal: React.FC<{
               autoClose: 500,
             });
             phoneVerify({ token }).then((response) => {
-              router.push('/otp');
+              router.push('/phoneVerify');
               onClose();
             });
           } else {

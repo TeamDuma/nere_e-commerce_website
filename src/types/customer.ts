@@ -44,6 +44,7 @@ export interface IphoneVerifyRequest {
   token: string;
 }
 export interface IphoneVerifyResponse {
+  message: string;
   status: string;
 }
 

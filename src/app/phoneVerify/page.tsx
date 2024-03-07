@@ -93,27 +93,25 @@ const customStylesSmall: Styles = {
   },
 };
 
-const OTP: React.FC<{
-  onClose: () => void;
-  isOpen: boolean;
-  phoneNumber: string;
-}> = ({ onClose, isOpen, phoneNumber }) => {
+const OTP = () => {
   const { token } = useSelector(selectShopping);
   const [phoneVerifyToken] = usePhoneVerifyTokenMutation();
   const [phoneVerify] = usePhoneVerifyMutation();
 
   const [submitted, setSubmitted] = useState(false);
-  const [timerRunning, setTimerRunning] = useState(false);
+  const [istimerRunning, setistimerRunning] = useState(true);
   const { userInfo } = useSelector(selectShopping);
   const router = useRouter();
-
   useEffect(() => {
-    if (!timerRunning) {
+    console.log('(istimerRunning before)', istimerRunning);
+    if (istimerRunning) {
+      console.log('(istimerRunning', istimerRunning);
       setTimeout(() => {
-        setTimerRunning(false);
-      }, 5000);
+        setistimerRunning(false);
+        console.log('(istimerRunning after)', istimerRunning);
+      }, 30000);
     }
-  }, [timerRunning]);
+  }, [istimerRunning]);
 
   const screenWidth = window.innerWidth;
   let modalStyles = customStylesSmall;
@@ -169,23 +167,21 @@ const OTP: React.FC<{
     });
     setInputs(newInputs);
   };
+
   const handleResendClick = () => {
-    if (timerRunning) {
-      setTimerRunning(true);
+    if (!istimerRunning) {
       if (token) {
-        phoneVerify({ token })
-          .then((response) => {
-            toast.success('OTP sent successfully', {
+        phoneVerify({ token }).then((response) => {
+          if ('data' in response && response.data.status === 'sucsees') {
+            toast.success('OTP sent successfully: ', {
               autoClose: 500,
             });
-          })
-          .catch((error) => {
-            toast.error('Error resending verification request');
-            console.error('Error resending verification request:', error);
-          });
-      } else {
-        console.error('Token is null. Unable to resend verification request.');
-        toast.error('Error resending verification request');
+          } else if ('data' in response && response.data.status === 'sucsees') {
+            toast.error(response.data.message, {
+              autoClose: 500,
+            });
+          }
+        });
       }
     }
   };
@@ -211,13 +207,13 @@ const OTP: React.FC<{
       });
   };
 
-  if (!userInfo || !userInfo.data) {
-    return (
-      <div className='text-center text-5xl text-black'>
-        Please SignUp to view this content
-      </div>
-    );
-  }
+  // if (!userInfo || !userInfo.data) {
+  //   return (
+  //     <div className='text-center text-5xl text-black'>
+  //       Please SignUp to view this content
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -252,15 +248,12 @@ const OTP: React.FC<{
           <div>
             <Timer />
           </div>
-          <button
-            className={`flex flex-row items-center text-[#B8B7B5] ${
-              timerRunning ? 'cursor-not-allowed opacity-50' : ''
-            }`}
-            onClick={handleResendClick}
-            disabled={timerRunning}
-          >
-            Resend
-          </button>
+
+          {!istimerRunning ? (
+            <div className='flex flex-row items-center justify-center space-x-1 text-center text-sm font-medium text-[#f58929] underline'>
+              <p onClick={handleResendClick}>Resend</p>
+            </div>
+          ) : null}
         </div>
         {!submitted && (
           <button
