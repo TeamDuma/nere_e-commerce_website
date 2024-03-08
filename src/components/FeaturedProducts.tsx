@@ -54,7 +54,7 @@ const FeaturedProducts = () => {
                   key={product?.id}
                   onMouseEnter={() => setHoveredProductId(String(product.id))}
                   onMouseLeave={() => setHoveredProductId(null)}
-                  className='relative col-span-2 mx-8 rounded-md bg-gray-100  '
+                  className='relative col-span-2 m-4 rounded-md bg-gray-100  '
                 >
                   <div className='h-15 absolute right-2 top-2 flex w-16 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
                     Save ¢
