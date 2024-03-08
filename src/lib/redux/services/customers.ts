@@ -1,7 +1,7 @@
 import {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  ForgotaPsswordTokenResponse,
+  ForgotPasswordTokenResponse,
   ILoginRequest,
   ILoginResponse,
   IRegisterRequest,
@@ -70,7 +70,7 @@ const customerApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    forgotpasswordToken: builder.query<ForgotaPsswordTokenResponse, string>({
+    forgotpasswordToken: builder.query<ForgotPasswordTokenResponse, string>({
       query: (token) => ({
         url: endpoints.getPasswordToken(token),
         method: 'GET',

@@ -79,7 +79,7 @@ export interface ResetPasswordResponse {
   message: string;
 }
 
-export interface ForgotaPsswordTokenResponse {
+export interface ForgotPasswordTokenResponse {
   status: string;
   message: string;
 }
