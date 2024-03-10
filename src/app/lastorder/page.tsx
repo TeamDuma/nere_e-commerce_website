@@ -102,7 +102,7 @@ const Orders = () => {
           {latestOrderItems.map((group) => (
             <GroupItem
               key={group.id}
-              group={group}
+              group={group as Group}
               showModal={handleShowModal}
             />
           ))}
