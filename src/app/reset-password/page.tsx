@@ -52,6 +52,11 @@ const Resetpassword = () => {
     verifyToken();
   }, []);
 
+  const handelExpired = async () => {
+    console.log('handelExpired');
+    router.push('/');
+  };
+
   const handleReset = async () => {
     if (!requestToken) {
       // Handle the case where token is null
@@ -137,12 +142,52 @@ const Resetpassword = () => {
       )}
 
       {isError && (
+        <div className='flex w-full items-center justify-center'>
+          <div className='relative flex  h-56 w-[800px] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md'>
+            <div className='rounded-xl p-4 '>
+              <div className=' flex items-center justify-center text-center  '>
+                <Logo />
+              </div>
+              <div className=' flex items-center justify-center text-center  '>
+                <p className='mb-4	text-3xl	 font-bold'>Link has expired. </p>
+              </div>
+              <div className=' flex items-center justify-center text-center  '>
+                <button
+                  className='flex select-none items-center gap-2 rounded-lg px-4 py-2 text-center align-middle font-sans text-xs font-bold uppercase text-red-500 underline transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
+                  onClick={handelExpired}
+                  type='button'
+                  data-ripple-dark='true'
+                >
+                  Please generate a new link.{' '}
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={2}
+                    stroke='currentColor'
+                    aria-hidden='true'
+                    className='h-4 w-4'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3'
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* {isError && (
         <div>
           <div className='text-center text-red-500'>
             <p>Link has expired. Please generate a new link.</p>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

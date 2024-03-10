@@ -50,7 +50,8 @@ const ForgotPasswordModal: React.FC<{
       const response = await forgotpassword({ email });
 
       if ('data' in response && response.data.status === 'success') {
-        toast.success(response.data.message, { autoClose: 500 });
+        toast.success(response.data.message, { autoClose: 5000 });
+        closeModal();
       } else {
         toast.error('Failed to send reset password email.');
       }
