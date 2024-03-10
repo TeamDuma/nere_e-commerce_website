@@ -1,11 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Modal, { Styles } from 'react-modal';
-
-import {
-  useLazyForgotpasswordTokenQuery,
-  useResetPasswordMutation,
-} from '@/lib/redux/services/customers';
 
 import { toast } from 'react-toastify';
 import Logo from '@/components/common/Logo';
@@ -35,7 +29,6 @@ const Resetpassword = () => {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/customers/reset-password/${token}`
         );
-        console.log('response', response);
         setIsValidToken(true);
         setRequestToken(token);
 
@@ -52,14 +45,12 @@ const Resetpassword = () => {
     verifyToken();
   }, []);
 
-  const handelExpired = async () => {
-    console.log('handelExpired');
+  const handleExpired = async () => {
     router.push('/');
   };
 
   const handleReset = async () => {
     if (!requestToken) {
-      // Handle the case where token is null
       return;
     }
 
@@ -82,11 +73,9 @@ const Resetpassword = () => {
           password_confirmation: confirmPassword,
         }
       );
-      console.log('Reset password response:', response);
       toast.success(`${response.data.message}`);
-      router.push('/login');
+      router.push('/');
     } catch (error) {
-      console.error('Error resetting password:', error);
       toast.error('Failed to reset password. Please try again.');
     }
   };
@@ -149,16 +138,16 @@ const Resetpassword = () => {
                 <Logo />
               </div>
               <div className=' flex items-center justify-center text-center  '>
-                <p className='mb-4	text-3xl	 font-bold'>Link has expired. </p>
+                <p className='mb-4	text-3xl	 font-bold'>Link has expired. Please generate a new link.</p>
               </div>
               <div className=' flex items-center justify-center text-center  '>
                 <button
                   className='flex select-none items-center gap-2 rounded-lg px-4 py-2 text-center align-middle font-sans text-xs font-bold uppercase text-red-500 underline transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
-                  onClick={handelExpired}
+                  onClick={handleExpired}
                   type='button'
                   data-ripple-dark='true'
                 >
-                  Please generate a new link.{' '}
+                  Go Home.{' '}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -180,14 +169,6 @@ const Resetpassword = () => {
           </div>
         </div>
       )}
-
-      {/* {isError && (
-        <div>
-          <div className='text-center text-red-500'>
-            <p>Link has expired. Please generate a new link.</p>
-          </div>
-        </div>
-      )} */}
     </>
   );
 };
