@@ -174,7 +174,7 @@ const LoginModal: React.FC<{
                 <div>
                   <text
                     href='#'
-                    className='font-medium text-[#298592]'
+                    className='font-medium text-[#298592] cursor-pointer hover:underline'
                     onClick={handleForgotPassword}
                   >
                     Forgot Password?
