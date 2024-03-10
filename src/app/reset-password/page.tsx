@@ -33,7 +33,7 @@ const Resetpassword = () => {
 
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_UR}/customers/reset-password/${token}`
+          `${process.env.NEXT_PUBLIC_API_URL}/customers/reset-password/${token}`
         );
         console.log('response', response);
         setIsValidToken(true);
@@ -70,7 +70,7 @@ const Resetpassword = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_UR}/customers/reset-password`,
+        `${process.env.NEXT_PUBLIC_API_URL}/customers/reset-password`,
         {
           token: requestToken,
           password: password,
