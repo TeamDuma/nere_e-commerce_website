@@ -139,7 +139,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               </svg>
             </span>
             <a
-              href='/groups/ongoingPurchases'
+              href='/ongoingPage'
               className='hover:text-gray-600 hover:underline'
             >
               Groups
