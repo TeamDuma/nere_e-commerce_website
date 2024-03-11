@@ -5,9 +5,9 @@ import React, { useEffect, useState } from 'react';
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
-    './images/nere_sunflower.png',
-    './images/nere_breakfast.png',
-    './images/nere_baby_tuesday.png',
+    '../images/nere_sunflower.png',
+    '../images/nere_breakfast.png',
+    '../images/nere_baby_tuesday.png',
   ];
 
   useEffect(() => {
