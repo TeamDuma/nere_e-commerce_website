@@ -26,6 +26,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
 import CountdownTimer from '@/components/CountdownTimer';
+import GroupSlider from '@/components/GroupSlider';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -286,7 +287,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
         </div>
         <PurchaseGuide />
         <div className='hidden sm:block'>
-          <Banner />
+          <GroupSlider />
           <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
             <h1>You might like</h1>
           </div>{' '}
