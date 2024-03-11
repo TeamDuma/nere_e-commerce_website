@@ -58,10 +58,11 @@ footer {
   margin: 15px;
 }
 .arrow-icon {
-  color: #298592;
+  color: gray;
+
   font-size: 20px;
   transition: color 0.3s ease;
-  margin-block: 1px;
+  margin-block: 4px;
 }
 
 .ongoing-icon {

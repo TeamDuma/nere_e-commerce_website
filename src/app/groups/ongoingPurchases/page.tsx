@@ -7,6 +7,7 @@ import {
 } from '@/lib/redux/services/group';
 import { Group } from '@/types/group';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 
 const OngoingPurchases: React.FC = () => {
   // const { data, isLoading, isError, error } = useGetPublicOngoingGroupsQuery();
@@ -31,7 +32,10 @@ const OngoingPurchases: React.FC = () => {
       {groups && (
         <div className='relative'>
           <div className='absolute left-0 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer '>
-            <FaArrowCircleLeft className='arrow-icon' />
+            <IoIosArrowDropleft
+              className='arrow-icon'
+              style={{ marginRight: '50%' }}
+            />
           </div>
           <div className='overflow-x-auto'>
             <div className='flex flex-nowrap justify-start'>
@@ -46,7 +50,10 @@ const OngoingPurchases: React.FC = () => {
             </div>
           </div>
           <div className='absolute right-0 top-1/2 z-10  -translate-y-1/2 transform cursor-pointer'>
-            <FaArrowCircleRight className='arrow-icon' />
+            <IoIosArrowDropright
+              className='arrow-icon'
+              style={{ marginLeft: '100%' }}
+            />
           </div>
         </div>
       )}
