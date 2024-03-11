@@ -187,18 +187,20 @@ export default function ProductDetailPage({ params }: Props) {
                   <div className='mb-4 h-64 rounded-lg  md:h-80'>
                     <div
                       x-show='image === 1'
-                      className='mb-4 flex h-64 items-center justify-center rounded-lg bg-gray-100 md:h-80 relative'
+                      className='relative mb-4 flex h-64 items-center justify-center rounded-lg bg-gray-100 md:h-80'
                     >
                       <img
                         className='mx-auto h-full rounded-md object-cover md:max-w-lg '
                         src={product?.plain_image}
                         alt='plain_image'
                       />
-                      {!product.in_stock && (<img
-                        className='absolute top-3 right-3 h-20 w-20 z-10'
-                        src='../images/sold_out.png'
-                        alt='stamp_image'
-                      />)}
+                      {!product.in_stock && (
+                        <img
+                          className='absolute right-3 top-3 z-10 h-20 w-20'
+                          src='../images/sold_out.png'
+                          alt='stamp_image'
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -261,7 +263,7 @@ export default function ProductDetailPage({ params }: Props) {
                     <p className='text-xl font-semibold text-green-500'>
                       <div className='w-25 h-21 ml-3 flex items-center justify-center rounded bg-[#8CCED7]'>
                         {product?.price && product.sale_price && (
-                          <span className=' text-sm text-white p-1'>
+                          <span className=' p-1 text-sm text-white'>
                             Save{' '}
                             {calculateSavingsPercentage(
                               product.price,
@@ -309,7 +311,7 @@ export default function ProductDetailPage({ params }: Props) {
                 ) : null}
 
                 <button
-                  className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none  disabled:bg-gray-400 disabled:cursor-not-allowed' 
+                  className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none  disabled:cursor-not-allowed disabled:bg-gray-400'
                   onClick={() => {
                     handleAddToCart();
                     console.log('Product added to cart');
@@ -326,7 +328,11 @@ export default function ProductDetailPage({ params }: Props) {
                   <span className='sm:hidden'>Launch Purchase</span>
                 </button>
 
-                {!product.in_stock && (<span className='font-semibold ml-4 text-red-600'>Out of Stock!</span>)}
+                {!product.in_stock && (
+                  <span className='ml-4 font-semibold text-red-600'>
+                    Out of Stock!
+                  </span>
+                )}
               </div>
             </div>
           </div>

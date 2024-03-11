@@ -107,7 +107,7 @@ const FeaturedProducts = () => {
                     >
                       <button
                         disabled={!product?.in_stock}
-                        className='  w-full rounded-md  px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:bg-gray-400 disabled:cursor-not-allowed'
+                        className='  w-full rounded-md  px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400'
                         style={{ zIndex: 1 }}
                         onClick={(e) => {
                           e.preventDefault();
