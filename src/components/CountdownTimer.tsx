@@ -48,8 +48,10 @@ const CountdownTimer = () => {
 
   return (
     <p>
-      {timeLeft.days} : {timeLeft.hours} : {timeLeft.minutes} :{' '}
-      {timeLeft.seconds}
+      {timeLeft.days.toString().padStart(2, '0')}:
+      {timeLeft.hours.toString().padStart(2, '0')}:
+      {timeLeft.minutes.toString().padStart(2, '0')}:
+      {timeLeft.seconds.toString().padStart(2, '0')}
     </p>
   );
 };

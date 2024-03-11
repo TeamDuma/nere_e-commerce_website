@@ -131,7 +131,8 @@ const CategoriesRow = ({ params }: Props) => {
                                 }}
                               >
                                 <button
-                                  className=' w-full rounded-md   py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                                  disabled={!product?.in_stock}
+                                  className=' w-full rounded-md   py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:bg-gray-400 disabled:cursor-not-allowed'
                                   style={{ zIndex: 1 }}
                                   onClick={(e) => {
                                     e.preventDefault();
