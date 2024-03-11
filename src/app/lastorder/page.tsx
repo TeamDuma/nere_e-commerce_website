@@ -1,13 +1,20 @@
 'use client';
-import ProgressBar from '@/components/common/ProgressBar';
+
+import { useLazyGetOrderConfirmationQuery } from '@/lib/redux/services/cart';
+import { Group } from '@/types/group';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState, useRef, use } from 'react';
+import { resetCart, selectShopping, useDispatch } from '@/lib/redux';
+import PostHogClient from '@/app/posthog';
+import { useSelector } from 'react-redux';
 import { useLazyGetOrdersQuery } from '@/lib/redux/services/customers';
-import { selectShopping } from '@/lib/redux/slices/shopping';
-import { useEffect, useState } from 'react';
+import ProgressBar from '@/components/common/ProgressBar';
 import { CiShare2 } from 'react-icons/ci';
 import { FiMapPin } from 'react-icons/fi';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
-import { useSelector } from 'react-redux';
-import { Group } from '@/types/group';
+import GroupItem from '../checkout/summary/components/GroupItem';
+import OrderSummary from '../checkout/summary/components/OrderSummary';
+import ShareModal from '../checkout/summary/components/ShareModal';
 
 const Orders = () => {
   const { userInfo } = useSelector(selectShopping);
@@ -27,6 +34,56 @@ const Orders = () => {
   const latestOrderItems = latestOrder?.groups || [];
   console.log('orders', orders);
 
+  const [status, setStatus] = useState<'pending' | 'success'>('pending');
+  const [groups, setGroups] = useState<Group[]>([]);
+
+  const [total, setTotal] = useState<number>(0);
+  const [totalItems, setTotalItems] = useState<number>(0);
+  const [totalSavings, setTotalSavings] = useState<number>(0);
+  const [groupModal, setGroupModal] = useState<Group>();
+
+  const searchParams = useSearchParams();
+  const reference = searchParams.get('reference');
+
+  const router = useRouter();
+
+  const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
+
+  const posthogClient = PostHogClient();
+  posthogClient.capture({
+    distinctId: userInfo?.data?.customer.email,
+    event: 'order_confirmation_page_viewed',
+    properties: { reference },
+  });
+
+  const handleShowModal = (group: Group) => {
+    setShowModal(true);
+    setGroupModal(group);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutsideModal = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setShowModal(false);
+      }
+    };
+
+    window.addEventListener('click', handleClickOutsideModal);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutsideModal);
+    };
+  }, []);
+
   if (!userInfo || !userInfo.data) {
     return (
       <div className='text-center text-5xl text-black'>
@@ -37,125 +94,33 @@ const Orders = () => {
 
   return (
     <>
-      {/* component */}
-      <div className='flex h-screen w-screen flex-col px-14 py-7 md:flex-row'>
-        {/* My Cart */}
-        <div className='flex h-fit w-full flex-col gap-4 p-4 '>
+      <div className='flex h-full w-screen flex-col px-8 py-7 md:flex-row'>
+        <div className='flex h-fit w-full flex-col gap-4'>
           <p className='text-xl font-extrabold text-[#298592]'>
-            Congrats! 🎉 You Saved GHC 50 on your basket{' '}
+            Congrats! 🎉 You Saved GHC {totalSavings.toFixed(2)} on your basket
           </p>
-          {/* Product */}
-          {latestOrderItems.map((order) => (
-            <div className='flex flex-col rounded-sm border p-4 text-lg font-semibold shadow-md'>
-              <div className='flex flex-col justify-between gap-3 md:flex-row'>
-                {/* Product Information */}
-                <div className='flex flex-row items-center gap-6'>
-                  <div className='h-28 w-28'>
-                    <img
-                      className='h-full w-3/4'
-                      src={order.product.plain_image}
-                    />
-                  </div>
-                  <div className='flex flex-col gap-1'>
-                    <p className='text-lg font-semibold text-[#298592]'>
-                      {order.product.name}
-                    </p>
-                    <div>
-                      <p className='text-sm font-normal text-[#F58929]  '>
-                        {order.product.sale_price}
-                        <span className='ml-2 text-[#C1C2C2] line-through'>
-                          {order.product.price}
-                        </span>
-                      </p>
-                    </div>
-
-                    <div className='flex items-center '>
-                      <div className='flex items-center'>
-                        <MdOutlineAccessAlarms className='my-2 text-[#298592]' />
-                        <p className='ml-2 text-sm font-normal text-[#828282]'>
-                          Ends in{' '}
-                          <span className='text-[#F58929]'>12:32:09</span>
-                        </p>
-                      </div>
-
-                      <div className='ml-4 flex items-center'>
-                        <FiMapPin className='my-2 text-[#298592]' />
-
-                        <p className='ml-2 text-sm font-normal text-[#828282]'>
-                          Oyarifa dropbar
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* <ProgressBar remaining={4} total={12} /> */}
-                  </div>
-                </div>
-
-                <div className='self-center'>
-                  <CiShare2 className='text-[#F58929]' />{' '}
-                </div>
-              </div>
-            </div>
+          {latestOrderItems.map((group) => (
+            <GroupItem
+              key={group.id}
+              group={group as Group}
+              showModal={handleShowModal}
+            />
           ))}
         </div>
-        {/* Purchase Resume */}
         <div className='flex h-fit w-full flex-col gap-4 p-4 md:w-2/3'>
-          <div className='flex flex-col gap-4 rounded-sm border p-4 text-lg font-semibold shadow-md'>
-            <div className='flex flex-row justify-between'>
-              <p className='font-meduim ml-2 text-sm text-black'>
-                {' '}
-                Your order summary
-              </p>
-            </div>
-            <hr className='h-0.5 bg-gray-200' />
-            <div className='flex flex-row justify-between'>
-              <p className='ml-2 text-sm font-normal text-[#828282]'>Total</p>
-              <div>
-                <p className='ml-2 text-sm font-normal text-[#828282]'>
-                  GH¢0.00
-                </p>
-              </div>
-            </div>
-            <div className='flex flex-row justify-between'>
-              <p className='ml-2 text-sm font-normal text-[#828282]'>
-                Delivery fee
-              </p>
-              <div>
-                <p className='ml-2 text-sm font-normal text-[#828282]'>
-                  GH¢0.00
-                </p>
-              </div>
-            </div>
-
-            <hr className='h-0.5 bg-gray-200' />
-
-            <div className='flex flex-row justify-between'>
-              <p className='font-meduim ml-2 text-sm text-black'>Total</p>
-              <div>
-                <p className='font-meduim ml-2 text-sm text-black'>GH¢0.00</p>
-              </div>
-            </div>
-          </div>
-          <div className='flex flex-col gap-3 rounded-sm border p-4 text-lg font-semibold shadow-md'>
-            <div className='flex flex-row justify-between'>
-              <p className='font-meduim ml-2 text-sm text-black'>
-                Pickup Location
-              </p>
-            </div>
-            <hr className='h-0.5 bg-gray-200' />
-            <div className='flex flex-row justify-between'>
-              <p className='ml-2 text-sm font-bold text-black'>
-                Nere Agent Pickup, East Legon
-              </p>
-            </div>
-
-            <div className='flex flex-row justify-between'>
-              <p className='ml-2 text-sm font-normal text-[#828282]'>
-                MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
-              </p>
-            </div>
-          </div>
+          <OrderSummary amount={total} totalItems={totalItems} />
         </div>
+
+        {/* Modal */}
+        {showModal && (
+          <div ref={modalRef}>
+            <ShareModal
+              onClose={handleCloseModal}
+              group={groupModal!}
+              isOpen={false}
+            />
+          </div>
+        )}
       </div>
     </>
   );
