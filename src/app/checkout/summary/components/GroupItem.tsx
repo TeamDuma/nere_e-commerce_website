@@ -58,7 +58,7 @@ const GroupItem = ({ group, showModal }: GroupItemProps) => {
               <div className='mt-4 flex items-center md:mt-0'>
                 <FiMapPin className='my-2 text-[#298592]' />
                 <p className='ml-2 text-sm font-normal text-[#828282]'>
-                  group.location?.name
+                  {group.location?.name}
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ const GroupItem = ({ group, showModal }: GroupItemProps) => {
               className=' mt-2 inline-flex w-full items-center justify-center space-x-2 rounded-lg border-[#298592] bg-[#298592] p-2 font-medium text-white hover:bg-[#298592] hover:shadow'
               onClick={openShareModal}
             >
-              <span>Invite to your purchase </span>
+              <span>Share with others </span>
             </button>
           </div>
         </div>
