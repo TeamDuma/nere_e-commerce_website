@@ -221,7 +221,7 @@ const RegistrationModal: React.FC<{
               >
                 Phone (WhatsApp Number)
               </label>
-              <div className='relative mt-2 border border-gray-300 rounded focus:border focus:border-indigo-700 focus:outline-none mb-5'>
+              <div className='relative mb-5 mt-2 rounded border border-gray-300 focus:border focus:border-indigo-700 focus:outline-none'>
                 <PhoneInput
                   international
                   defaultCountry='GH'
