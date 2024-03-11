@@ -138,7 +138,9 @@ const Resetpassword = () => {
                 <Logo />
               </div>
               <div className=' flex items-center justify-center text-center  '>
-                <p className='mb-4	text-3xl	 font-bold'>Link has expired. Please generate a new link.</p>
+                <p className='mb-4	text-3xl	 font-bold'>
+                  Link has expired. Please generate a new link.
+                </p>
               </div>
               <div className=' flex items-center justify-center text-center  '>
                 <button
