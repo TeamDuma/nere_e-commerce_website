@@ -20,7 +20,9 @@ const OrderSummary = ({ amount, totalItems }: OrderSummaryProps) => {
           <div className='flex flex-row justify-between'>
             <p className='ml-2 text-sm font-normal text-[#828282]'>Total</p>
             <div>
-              <p className='ml-2 text-sm font-normal text-[#828282]'>GH¢0.00</p>
+              <p className='ml-2 text-sm font-normal text-[#828282]'>
+                GH¢ {amount}
+              </p>
             </div>
           </div>
           <div className='flex flex-row justify-between'>
@@ -37,11 +39,13 @@ const OrderSummary = ({ amount, totalItems }: OrderSummaryProps) => {
           <div className='flex flex-row justify-between'>
             <p className='font-meduim ml-2 text-sm text-black'>Total</p>
             <div>
-              <p className='font-meduim ml-2 text-sm text-black'>GH¢0.00</p>
+              <p className='font-meduim ml-2 text-sm text-black'>
+                GH¢ {amount}
+              </p>
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-3 rounded-sm border p-4 text-lg font-semibold shadow-md'>
+        {/* <div className='flex flex-col gap-3 rounded-sm border p-4 text-lg font-semibold shadow-md'>
           <div className='flex flex-row justify-between'>
             <p className='font-meduim ml-2 text-sm text-black'>
               Pickup Location
@@ -59,7 +63,7 @@ const OrderSummary = ({ amount, totalItems }: OrderSummaryProps) => {
               MEST Ambassadorial Enclave, 20 Aluguntugui St, Accra
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
