@@ -13,8 +13,11 @@ import { PHProvider } from '@/lib/posthog/providers';
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Nere',
-  description: 'Nere Group Buying Platform',
+  title: {
+    template: '%s | Nere',
+    default: 'Nere',
+  },
+  description: "Ghana's #1 Group Buying Platform",
   keywords:
     'Nere, E-commerce, Shopping, Group Buying, Group Shopping, Nere Group Buying Platform, Deals, Discounts, Offers, Nere Offers, Nere Deals, Nere Discounts, Nere Baby Tuesday, Group Buying Sites',
 };
