@@ -20,7 +20,9 @@ const OrderSummary = ({ amount, totalItems }: OrderSummaryProps) => {
           <div className='flex flex-row justify-between'>
             <p className='ml-2 text-sm font-normal text-[#828282]'>Total</p>
             <div>
-              <p className='ml-2 text-sm font-normal text-[#828282]'>GH¢ {amount}</p>
+              <p className='ml-2 text-sm font-normal text-[#828282]'>
+                GH¢ {amount}
+              </p>
             </div>
           </div>
           <div className='flex flex-row justify-between'>
@@ -37,7 +39,9 @@ const OrderSummary = ({ amount, totalItems }: OrderSummaryProps) => {
           <div className='flex flex-row justify-between'>
             <p className='font-meduim ml-2 text-sm text-black'>Total</p>
             <div>
-              <p className='font-meduim ml-2 text-sm text-black'>GH¢ {amount}</p>
+              <p className='font-meduim ml-2 text-sm text-black'>
+                GH¢ {amount}
+              </p>
             </div>
           </div>
         </div>
