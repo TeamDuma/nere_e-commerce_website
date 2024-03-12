@@ -15,7 +15,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: {
     template: '%s | Nere',
-    default: 'Nere'
+    default: 'Nere',
   },
   description: "Ghana's #1 Group Buying Platform",
   keywords:
