@@ -107,7 +107,7 @@ const Orders = () => {
             />
           ))}
         </div>
-        <div className='flex h-fit w-full flex-col gap-4 p-4 md:w-2/3'>
+        <div className='flex h-fit w-full flex-col gap-4 p-4 '>
           <OrderSummary amount={total} totalItems={totalItems} />
         </div>
 

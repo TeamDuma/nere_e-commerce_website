@@ -7,8 +7,8 @@ interface OrderSummaryProps {
 
 const OrderSummary = ({ amount, totalItems }: OrderSummaryProps) => {
   return (
-    <div className='flex h-fit w-full flex-col gap-4 p-4 md:w-2/3'>
-      <div className='flex h-fit w-full flex-col gap-4 p-4 md:w-2/3'>
+    <div className='flex h-fit w-full flex-col gap-4 py-4 '>
+      <div className='flex h-fit w-full flex-col gap-4 py-4 '>
         <div className='flex flex-col gap-4 rounded-sm border p-4 text-lg font-semibold shadow-md'>
           <div className='flex flex-row justify-between'>
             <p className='font-meduim ml-2 text-sm text-black'>
