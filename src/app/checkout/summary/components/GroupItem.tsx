@@ -42,6 +42,14 @@ const GroupItem = ({ group, showModal }: GroupItemProps) => {
                   GH¢{group.product?.price}
                 </span>
               </p>
+
+              <div className='my-2 w-36 text-sm font-normal text-[#F58929] '>
+                <div className=' rounded-md border border-[#298592]  '>
+                  <span className='p-2 text-xs font-semibold text-[#298592]'>
+                    Group Code : {group.join_code}
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div className='flex flex-col md:flex-row '>
@@ -72,7 +80,7 @@ const GroupItem = ({ group, showModal }: GroupItemProps) => {
             ) : null}
 
             <button
-              className=' mt-2 inline-flex w-full items-center justify-center space-x-2 rounded-lg border-[#298592] bg-[#298592] p-2 font-medium text-white hover:bg-[#298592] hover:shadow'
+              className=' mt-2 inline-flex w-56 items-center justify-center space-x-2 rounded-lg border-[#298592] bg-[#298592] p-2 font-medium text-white hover:bg-[#298592] hover:shadow'
               onClick={openShareModal}
             >
               <span>Share with others </span>
