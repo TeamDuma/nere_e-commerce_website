@@ -32,7 +32,7 @@ const ThreeBannerLayout = () => {
               onClick={openLoyalty}
             >
               <img
-                src='/images/coupon2.svg'
+                src='/images/coupon.svg'
                 alt='Your Image'
                 className='h-auto w-full'
               />
