@@ -100,17 +100,19 @@ const MoreInformation: React.FC<MoreInformationProps> = ({
 
           <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
             <h5 className='text-sm	font-medium'>
-              Nere Pickup Station East Legon
+              Nere Pickup Station
             </h5>
             <p className='my-2 text-xs font-medium text-[#979797]'>
               {location?.name}
             </p>
-            <p className='my-2 cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'>
-              See on google maps
+            <p className='my-2 cursor-pointer text-xs font-medium text-[#298592]'>
+              <a href={location?.map_url} className='underline-none'>
+                See on google maps
+              </a>
             </p>
             <p className='text-xs font-medium'>Contact information</p>
             <p className='my-2 text-xs font-medium text-[#979797]'>
-              Mr. Stephen 0549829923{' '}
+              {location?.agent_name} {location?.agent_phone}{' '}
             </p>
             <p className='my-2 text-xs font-medium'>Opening hours:</p>
             <p className='my-2 text-xs font-medium text-[#979797]'>

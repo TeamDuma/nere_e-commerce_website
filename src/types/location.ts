@@ -5,6 +5,9 @@ export interface ILocation {
   radius: string;
   isActive: Boolean;
   name: string;
+  agent_name: string;
+  agent_phone: string;
+  map_url: string;
 }
 
 export type GetlocationsResponse = {

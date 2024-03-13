@@ -142,7 +142,7 @@ const SelectPickupLocation: React.FC<{
 
     return (
       <div className='mb-2 '>
-        <label className='mb-2 block text-gray-400'>Address</label>
+        {/* <label className='mb-2 block text-gray-400'>Address</label> */}
         {locations.map((location: ILocation) => (
           <div key={location.id}>
             <div className='flex justify-between p-2'>
