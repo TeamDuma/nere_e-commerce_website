@@ -99,9 +99,7 @@ const MoreInformation: React.FC<MoreInformationProps> = ({
           <h2 className='mb-4 text-xl text-[#1A464C]'>DELIVERY DETAILS</h2>
 
           <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
-            <h5 className='text-sm	font-medium'>
-              Nere Pickup Station
-            </h5>
+            <h5 className='text-sm	font-medium'>Nere Pickup Station</h5>
             <p className='my-2 text-xs font-medium text-[#979797]'>
               {location?.name}
             </p>
