@@ -1,14 +1,15 @@
 'use client';
-import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import { useLazyGetCategoryProductQuery } from '@/lib/redux/services/product';
+import LoadingSpinner from '@/app/groups/components/LoadingSpinner';
 import Title from '@/components/Title';
-import { useDispatch } from 'react-redux';
-import { Product } from '@/types/product';
+import { useLazyGetCategoryProductQuery } from '@/lib/redux/services/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
-import { toast } from 'react-toastify';
+import { Product } from '@/types/product';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 type Props = {
   params: {
@@ -44,9 +45,18 @@ const Category = ({ params }: Props) => {
 
   useEffect(() => {
     getCategoryProduct(slug)
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   }, [slug]);
+
+  if (isLoading) {
+    return (
+      <div>
+        {' '}
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <>
