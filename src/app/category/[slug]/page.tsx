@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import LoadingSpinner from '@/app/groups/components/LoadingSpinner';
 import Title from '@/components/Title';
+import ProductGridLoader from '@/components/common/ProductGridLoader';
 import { useLazyGetCategoryProductQuery } from '@/lib/redux/services/product';
 import { addToCart } from '@/lib/redux/slices/shopping';
 import { Product } from '@/types/product';
@@ -45,15 +45,15 @@ const Category = ({ params }: Props) => {
 
   useEffect(() => {
     getCategoryProduct(slug)
-      .then(() => { })
-      .catch(() => { });
+      .then(() => {})
+      .catch(() => {});
   }, [slug]);
 
   if (isLoading) {
     return (
       <div>
         {' '}
-        <LoadingSpinner />
+        <ProductGridLoader />
       </div>
     );
   }
