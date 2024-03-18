@@ -50,9 +50,9 @@ const OngoingModal: React.FC<{
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={onClose}>
       <h2
         style={{
-          fontSize: '24px',
+          fontSize: '20px',
           color: '#298592',
-          fontWeight: 'bold',
+          fontWeight: 'bolder',
           marginTop: '20px',
         }}
       >

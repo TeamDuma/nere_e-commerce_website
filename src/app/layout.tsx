@@ -10,11 +10,17 @@ import Footer from '@/components/common/footer/Footer';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { PHProvider } from '@/lib/posthog/providers';
 
-const Mnontserrat = Montserrat({ subsets: ['latin'] });
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Nere',
-  description: 'Nere E-commerce Website',
+  title: {
+    template: '%s | Nere',
+    default: 'Nere',
+  },
+  description:
+    "Ghana's #1 Group Buying Platform. Save up to 40% of your monthly food expenses with your friends and family! Experience the power of group buying, where the unbeatable power of community unlocks unbeatable deals.",
+  keywords:
+    'Nere, E-commerce, Shopping, Group Buying, Group Shopping, Nere Group Buying Platform, Deals, Discounts, Offers, Nere Offers, Nere Deals, Nere Discounts, Nere Baby Tuesday, Group Buying Sites',
 };
 
 export default function RootLayout(props: React.PropsWithChildren) {
@@ -22,7 +28,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
     <html lang='en'>
       <PHProvider>
         <body
-          className={`${Mnontserrat.className}`}
+          className={`${montserrat.className}`}
           style={{ backgroundColor: '#FAFAFA' }}
         >
           <Providers>

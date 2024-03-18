@@ -1,34 +1,55 @@
+import { useState } from 'react';
+import LoyaltyModal from './common/LoyaltyModal';
+
 const ThreeBannerLayout = () => {
+  const [LoyaltyVisible, setLoyaltyVisible] = useState(false);
+
+  const openLoyalty = () => {
+    setLoyaltyVisible(true);
+  };
+
+  const closeModal = () => {
+    setLoyaltyVisible(false);
+  };
+
   return (
     <>
-      <section className='m-3 rounded'>
-        <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3'>
-          <div className='m-4 flex items-center justify-between rounded-md border border-[#D9D9D9] bg-[#D9D9D9] p-16 shadow'></div>
-          <div className='m-4 flex items-center justify-between rounded-md border border-[#D9D9D9] bg-[#D9D9D9] p-16 shadow'></div>
-          <div className='m-4 flex items-center justify-between rounded-md border border-[#D9D9D9] bg-[#D9D9D9] p-16 shadow'></div>
-        </div>
-        {/* <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row lg:justify-between'>
-          <div className='m-3 flex h-36 w-80 rounded-lg border border-[#D9D9D9] bg-[#D9D9D9] lg:w-1/3'></div>
-
-          <div className='m-3 flex h-36 w-80 rounded-lg border border-[#D9D9D9] bg-[#D9D9D9] lg:w-1/3'></div>
-
-          <div className='m-3 flex h-36 w-80 rounded-lg border border-[#D9D9D9] bg-[#D9D9D9] lg:w-1/3'></div>
-        </div> */}
-      </section>
-
-      {/* <section className='m-3 rounded '>
-        <div className='mt-5 flex flex-col items-center gap-3 lg:flex-row'>
-          <div className='m-3 flex h-36 w-80 rounded-lg border  border-[#D9D9D9] bg-[#D9D9D9] lg:w-1/3'></div>
-
-          <div className='m-3 flex h-36 w-80 rounded-lg border  border-[#D9D9D9] bg-[#D9D9D9] lg:w-1/3'>
-            <div className='text-center'></div>
+      <div className='overflow-x-auto'>
+        <div className='ml-8 flex justify-start'>
+          <div className='flex-shrink-0 cursor-pointer rounded'>
+            <div className='m-2' style={{ width: '460px', height: '170px' }}>
+              <img
+                src='/images/coupon1.svg'
+                alt='Your Image'
+                className='h-auto w-full'
+              />
+            </div>
           </div>
-
-          <div className='m-3 flex h-36 w-80 rounded-lg border  border-[#D9D9D9] bg-[#D9D9D9] lg:w-1/3'>
-            <div className='text-center'></div>
+          <div className='flex-shrink-0 cursor-pointer rounded'>
+            <div
+              className='m-2'
+              style={{ width: '460px', height: '170px' }}
+              onClick={openLoyalty}
+            >
+              <img
+                src='/images/coupon.svg'
+                alt='Your Image'
+                className='h-auto w-full'
+              />
+            </div>
+          </div>
+          <div className='flex-shrink-0 cursor-pointer rounded'>
+            <div className='m-2' style={{ width: '460px', height: '170px' }}>
+              <img
+                src='/images/coupon3.svg'
+                alt='Your Image'
+                className='h-auto w-full'
+              />
+            </div>
           </div>
         </div>
-      </section> */}
+        <LoyaltyModal onClose={closeModal} isOpen={LoyaltyVisible} />
+      </div>
     </>
   );
 };

@@ -18,6 +18,7 @@ const customStylesLarge: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -31,6 +32,7 @@ const customStylesLarge: Styles = {
     height: '600px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 const customStylesSmall: Styles = {
@@ -41,6 +43,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -53,6 +56,7 @@ const customStylesSmall: Styles = {
     borderRadius: '15px',
     border: 'none',
     height: '650px',
+    zIndex: 1001,
   },
 };
 
@@ -138,7 +142,7 @@ const SelectPickupLocation: React.FC<{
 
     return (
       <div className='mb-2 '>
-        <label className='mb-2 block text-gray-400'>Address</label>
+        {/* <label className='mb-2 block text-gray-400'>Address</label> */}
         {locations.map((location: ILocation) => (
           <div key={location.id}>
             <div className='flex justify-between p-2'>

@@ -134,7 +134,7 @@ const CartComponent = () => {
   };
 
   return (
-    <div className=' h-full py-8'>
+    <div className=' h-full '>
       <div className=' mx-auto px-4'>
         {/* <div className='flex h-20 items-center rounded-lg bg-gray-100 md:w-1/2 '> */}
         <div className='h-20 gap-5 rounded-lg border bg-gray-50 p-2 py-2 shadow-xl md:mb-2 md:flex md:w-1/2 md:items-center'>
@@ -181,17 +181,29 @@ const CartComponent = () => {
                         </h6>
                       </div>
                     </div>
-                    <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
-                      <div className='flex items-center space-x-2 border-gray-100'>
+                    <div className='m-2 flex w-96 items-center justify-between px-2 md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100 px-2'>
                         {item.isGroupJoiner ? (
-                          <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
-                            <span className='text-xs text-[#298592]'>
+                          <div className=' rounded-md border border-[#298592]  '>
+                            <span className='p-2 text-xs font-semibold text-[#298592]'>
                               Group Code : {item.groupCode}
                             </span>
                           </div>
                         ) : null}
                       </div>
                     </div>
+
+                    {/* <div className='mt-2 flex items-center justify-between md:mt-0 md:flex md:space-x-6'>
+                      <div className='flex items-center space-x-2 border-gray-100 '>
+                        {item.isGroupJoiner ? (
+                          <div className=' rounded-md border border-[#298592]  '>
+                            <span className='text-xs text-[#298592]'>
+                              Group Code : {item.groupCode}
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
+                    </div> */}
                   </div>
 
                   <div className='grid grid-cols-1 md:grid-cols-4'>
@@ -225,14 +237,26 @@ const CartComponent = () => {
                                 : item.cartQuantity
                             }
                             total={item.min_quantity}
+                            unit={item.unit}
                           />
                         ) : null}
+                        {item.isGroupJoiner ? (
+                          // <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
+                          <span className='text-xs font-medium text-[#298592]'>
+                            You are joining an ongoing group
+                          </span>
+                        ) : (
+                          // </div>
+                          <span className='text-xs font-medium text-[#298592]'>
+                            You are starting a new group
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className='mt-2 flex items-center justify-between md:flex md:space-x-6'>
                       <div className='flex items-center space-x-2 border-gray-100'>
                         <span
-                          className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50`}
+                          className={`cursor-pointer rounded-l bg-orange-400 px-3.5 py-1 font-bold duration-100 hover:bg-orange-500 hover:text-orange-50`}
                           onClick={() =>
                             dispatch(
                               decreaseQuantity({
@@ -249,7 +273,7 @@ const CartComponent = () => {
                           {item.cartQuantity}
                         </div>
                         <span
-                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 duration-100 hover:bg-orange-500 hover:text-orange-50 ${
+                          className={`cursor-pointer rounded-r bg-orange-400 px-3.5 py-1 font-bold duration-100 hover:bg-orange-500 hover:text-orange-50 ${
                             !item.min_quantity ||
                             (item.isGroupJoiner
                               ? item.cartQuantity + (item.totalQuantity || 0)

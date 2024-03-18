@@ -67,10 +67,16 @@ const EditProfile: React.FC<{
   console.log('userInfo', userInfo);
 
   const [formData, setFormData] = useState({
-    name: userInfo.data.customer.name || '',
-    email: userInfo.data.customer.email || '',
-    phone: userInfo.data.customer.phone || '',
+    name: userInfo?.data?.customer?.name || '',
+    email: userInfo?.data?.customer?.email || '',
+    phone: userInfo?.data?.customer?.phone || '',
   });
+
+  // const [formData, setFormData] = useState({
+  //   name: userInfo.data.customer.name || '',
+  //   email: userInfo.data.customer.email || '',
+  //   phone: userInfo.data.customer.phone || '',
+  // });
 
   return (
     <Modal

@@ -30,67 +30,77 @@ const EntertainmentSection = () => {
   };
 
   return (
-    <>
-      <section
-        id='content'
-        className='right-0 w-[100wh-60px]  p-5 transition-all duration-500 ease-in-out lg:w-[100wh-250px]'
-      >
-        <div className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3'>
-          <div
-            className='m-2  flex items-center rounded-lg border  border-[#298592]  p-2 shadow'
-            onClick={openNereCoinModal}
-          >
-            <img className='mx-4 my-1' src='/images/coinSmall.svg' alt='Coin' />
-            <div>
-              <h2>Nere Coins</h2>
-              <p className='text-md inline font-semibold text-[#298592]'>
-                {' '}
-                Earn more
-              </p>
-            </div>
-          </div>
-          <div
-            className='m-2  flex items-center rounded-lg border border-[#298592]  p-2 shadow'
-            onClick={openGameModal}
-          >
-            <img
-              className='mx-4 my-1'
-              src='/images/loyaltySmall.svg'
-              alt='Coin'
-            />
-            <div>
-              <h2> Game and win coins</h2>
-              <p className='text-md inline font-semibold text-[#298592]'>
-                {' '}
-                Play Now
-              </p>
-            </div>
-          </div>
-          <div
-            className='m-2  flex items-center rounded-lg border border-[#298592]  p-2 shadow'
-            onClick={openGameModal}
-          >
-            <img
-              className='mx-4 my-1'
-              src='/images/joystickSmall.svg'
-              alt='Coin'
-            />
-
-            <div>
-              <h2>Loyalty offers?</h2>
-              <p className='text-md inline font-semibold text-[#298592]'>
-                {' '}
-                Buy Again
-              </p>
+    <div className='overflow-x-auto'>
+      <div className='flex justify-start'>
+        <div className='flex-shrink-0 cursor-pointer rounded'>
+          <div className='m-4  ' style={{ width: '450px', height: '80px' }}>
+            <div
+              className='  flex items-center rounded-lg border  border-[#298592]  p-2 '
+              onClick={openNereCoinModal}
+            >
+              <img
+                className='mx-4 my-1'
+                src='/images/coinSmall.svg'
+                alt='Coin'
+              />
+              <div>
+                <h2 className='font-light		'>Nere Coins</h2>
+                <p className='text-md inline font-semibold text-[#298592]'>
+                  {' '}
+                  Earn more
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <NereCoinModal onClose={closeModal} isOpen={NereCoinModalVisible} />
-        <LoyaltyModal onClose={closeModal} isOpen={LoyaltyModalVisible} />
-        <GameModal onClose={closeModal} isOpen={GameModalVisible} />
-      </section>
-    </>
+        <div className='flex-shrink-0 cursor-pointer rounded'>
+          <div className='m-4  ' style={{ width: '450px', height: '80px' }}>
+            <div
+              className='  flex items-center rounded-lg border  border-[#298592]  p-2 '
+              onClick={openGameModal}
+            >
+              <img
+                className='mx-4 my-1'
+                src='/images/joystickSmall.svg'
+                alt='Coin'
+              />
+              <div>
+                <h2 className='font-light		'> Game and win coins</h2>
+                <p className='text-md inline font-semibold text-[#298592]'>
+                  {' '}
+                  Play Now
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='flex-shrink-0 cursor-pointer rounded'>
+          <div className='m-4  ' style={{ width: '450px', height: '80px' }}>
+            <div
+              className='  flex items-center rounded-lg border  border-[#298592]  p-2 '
+              onClick={openLoyaltyModal}
+            >
+              <img
+                className='mx-4 my-1'
+                src='/images/loyaltySmall.svg'
+                alt='Coin'
+              />
+              <div>
+                <h2 className='font-light		'>Loyalty offers?</h2>
+                <p className='text-md inline font-semibold text-[#298592]'>
+                  {' '}
+                  Buy Again
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <NereCoinModal onClose={closeModal} isOpen={NereCoinModalVisible} />
+      <LoyaltyModal onClose={closeModal} isOpen={LoyaltyModalVisible} />
+      <GameModal onClose={closeModal} isOpen={GameModalVisible} />
+    </div>
   );
 };
 

@@ -6,6 +6,7 @@ import { addUser, deleteUser } from '@/lib/redux';
 import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 import Spinner from './Spinner';
+import ForgotpasswordModal from './ForgotpasswordModal';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -15,6 +16,7 @@ const customStylesLarge: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -26,6 +28,7 @@ const customStylesLarge: Styles = {
     height: '600px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 const customStylesSmall: Styles = {
@@ -36,6 +39,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -48,7 +52,7 @@ const customStylesSmall: Styles = {
     width: '350px',
     height: '600px',
     borderRadius: '15px',
-    border: 'none',
+    zIndex: 1001,
   },
 };
 
@@ -70,6 +74,7 @@ const LoginModal: React.FC<{
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [showForgetPasswodModal, setShowForgetPasswodModal] = useState(false);
 
   const [signIn, { isLoading, isError, isSuccess, error }] =
     useSignInMutation();
@@ -99,7 +104,22 @@ const LoginModal: React.FC<{
     }
   };
 
+  const handleForgotPassword = () => {
+    setShowForgetPasswodModal(true);
+  };
+
+  const onLoginClick = () => {
+    setShowForgetPasswodModal(false);
+    console.log(showForgetPasswodModal);
+  };
+
+  const handleCloseForgotPassword = () => {
+    setShowForgetPasswodModal(false);
+    console.log(showForgetPasswodModal);
+  };
+
   const handleLoginError = (error: any) => {
+    console.log(error);
     toast.error('Login failed. Please check your credentials.');
   };
 
@@ -152,9 +172,13 @@ const LoginModal: React.FC<{
               </label>
               <div className='flex flex-row justify-end'>
                 <div>
-                  <a href='#' className='font-medium text-[#298592]'>
+                  <text
+                    href='#'
+                    className='cursor-pointer font-medium text-[#298592] hover:underline'
+                    onClick={handleForgotPassword}
+                  >
                     Forgot Password?
-                  </a>
+                  </text>
                 </div>
               </div>
               <button
@@ -165,8 +189,8 @@ const LoginModal: React.FC<{
                 <span> {isLoading ? <Spinner /> : 'Login'}</span>
               </button>
               <div className='inline-flex w-full items-center justify-center'>
-                <hr className='my-4 h-px w-64 border-0 bg-gray-200 dark:bg-gray-700' />
-                <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                <hr className='my-4 h-px w-64 border-0 bg-gray-200 ' />
+                <span className='absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-gray-900  '>
                   or
                 </span>
               </div>
@@ -198,6 +222,12 @@ const LoginModal: React.FC<{
               </p>
             </div>
           </form>
+
+          <ForgotpasswordModal
+            onClose={handleCloseForgotPassword}
+            isOpen={showForgetPasswodModal}
+            onLoginClick={onLoginClick}
+          />
         </>
       </Modal>
     </div>

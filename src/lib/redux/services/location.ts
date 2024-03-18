@@ -8,8 +8,11 @@ const locationsApi = apiSlice.injectEndpoints({
       query: () => {
         return endpoints.activeLocations;
       },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
     }),
   }),
 });
 
-export const { useGetlocationsQuery } = locationsApi;
+export const { useGetlocationsQuery, useLazyGetlocationsQuery } = locationsApi;

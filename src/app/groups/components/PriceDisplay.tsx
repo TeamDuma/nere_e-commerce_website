@@ -7,7 +7,7 @@ interface PriceDisplayProps {
 
 const PriceDisplay: React.FC<PriceDisplayProps> = ({ newPrice, oldPrice }) => {
   const savedAmount = oldPrice - newPrice;
-  const savedPercentage = ((savedAmount / oldPrice) * 100).toFixed(2);
+  // const savedPercentage = ((savedAmount / oldPrice) * 100).toFixed(2);
 
   return (
     <div className='mt-8 flex items-center '>
@@ -16,7 +16,7 @@ const PriceDisplay: React.FC<PriceDisplayProps> = ({ newPrice, oldPrice }) => {
         ¢{oldPrice}
       </span>
       <div className='rounded-xl bg-[#8CCED7] text-white'>
-        Save {savedPercentage}%
+        Save {savedAmount}%
       </div>
     </div>
   );

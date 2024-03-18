@@ -25,6 +25,9 @@ const endpoints = {
   signIn: 'customers/signIn',
   phoneVerify: 'customers/phone/verify',
   phoneVerifyToken: 'customers/phone/verify/token',
+  forgotPassword: 'customers/forgot-password',
+  getPasswordToken: (token: string) => `/customers/reset-password/${token}`,
+  resetPassword: '/customers/reset-password',
   getOrders: (uid: string) => `/orders/customer/${uid}`,
 
   // Location

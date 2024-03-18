@@ -81,14 +81,13 @@ const CategoriesRow = ({ params }: Props) => {
                           setHoveredProductId(String(product.id))
                         }
                         onMouseLeave={() => setHoveredProductId(null)}
-                        className='relative mx-4 rounded-md bg-gray-100 dark:bg-gray-800'
+                        className='relative col-span-2 mx-8 rounded-md bg-gray-100  '
                       >
-                        <div className='h-15 absolute right-2 top-2 flex w-10 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
-                          {`${Math.round(
-                            ((product.price - product.sale_price) /
-                              product.price) *
-                              100
-                          )}%`}
+                        <div className='h-15 absolute right-2 top-2 flex w-16 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
+                          Save ¢
+                          <span className='ml-1'>{`${Math.round(
+                            product.price - product.sale_price
+                          )}`}</span>
                         </div>
                         <div className='mt-2 flex items-center justify-center md:mt-4'>
                           <div
@@ -119,10 +118,11 @@ const CategoriesRow = ({ params }: Props) => {
                               <div
                                 style={{
                                   position: 'absolute',
-                                  top: 0,
-                                  left: 0,
+                                  // top: 0,
+                                  // left: 0,
                                   right: 0,
                                   bottom: 0,
+                                  width: '100%',
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
@@ -131,7 +131,8 @@ const CategoriesRow = ({ params }: Props) => {
                                 }}
                               >
                                 <button
-                                  className=' mx-6 my-4 rounded-md px-8  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
+                                  disabled={!product?.in_stock}
+                                  className=' w-full rounded-md   py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400'
                                   style={{ zIndex: 1 }}
                                   onClick={(e) => {
                                     e.preventDefault();
@@ -151,8 +152,9 @@ const CategoriesRow = ({ params }: Props) => {
                             )}
                           </div>
                         </div>
-
-                        <div className='flex items-center'>
+                      </div>
+                      <div className='relative col-span-2 mx-8  my-2 rounded-md  '>
+                        <div className='flex items-center '>
                           <div className='h-12'>
                             <h5
                               tabIndex={0}

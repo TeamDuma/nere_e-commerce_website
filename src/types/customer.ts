@@ -32,18 +32,19 @@ export interface IRegisterRequest {
 }
 
 export interface IRegisterResponse {
-  success: string;
-  data: {
-    Customer: Customer[];
-  };
-  token: string;
+  success: boolean;
   message: string;
+  token: string;
+  customer: Customer[];
+  statusCode?: number;
+  error?: string;
 }
 
 export interface IphoneVerifyRequest {
   token: string;
 }
 export interface IphoneVerifyResponse {
+  message: string;
   status: string;
 }
 
@@ -53,6 +54,32 @@ export interface IphoneVerifyTokenRequest {
 }
 
 export interface IphoneVerifyTokenResponse {
+  success: boolean;
   message: string;
   status: string;
+}
+
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ForgotPasswordResponse {
+  status: string;
+  message: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  password: string;
+  password_confirmation: string;
+}
+
+export interface ResetPasswordResponse {
+  status: string;
+  message: string;
+}
+
+export interface ForgotPasswordTokenResponse {
+  status: string;
+  message: string;
 }

@@ -23,6 +23,9 @@ const groupApi = apiSlice.injectEndpoints({
         query: () => {
           return endpoints.getPublicOngoingGroups;
         },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg;
+        },
       }
     ),
   }),
@@ -32,4 +35,5 @@ export const {
   useLazyGetGroupQuery,
   useGetGroupsQuery,
   useGetPublicOngoingGroupsQuery,
+  useLazyGetPublicOngoingGroupsQuery,
 } = groupApi;

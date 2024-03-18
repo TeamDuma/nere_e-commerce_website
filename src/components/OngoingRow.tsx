@@ -5,6 +5,7 @@ import { MdGroups } from 'react-icons/md';
 import { HiOutlineRocketLaunch } from 'react-icons/hi2';
 import { FaRegUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import CountdownTimer from './CountdownTimer';
 
 interface OngoingRowProps {}
 
@@ -20,22 +21,26 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
   return (
-    <div className='mb-4 flex flex-col justify-between rounded-xl	 bg-[#F0F4F5] p-2 md:flex-row md:p-3'>
+    <div className='mb-8 flex flex-col justify-between rounded-xl	 bg-[#F0F4F5] p-2 md:flex-row md:p-3'>
       <div className="box-border hidden w-full rounded-xl	 bg-['#b4c8ca'] p-3 md:block md:w-1/2">
-        <div className='flex flex-col items-center justify-between gap-1 md:flex-row'>
+        <div className='flex flex-col items-center justify-between gap-1 md:flex-row '>
           <Link href={'/ongoingPage'}>
-            <div className='flex items-center md:gap-2'>
+            <div className='flex items-center md:gap-2 '>
               <MdGroups className='social-icon' />
               <p className='p-text'>Ongoing Purchases near me</p>
             </div>
           </Link>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Groups</p>
-            <p className='p-text3'>{groups.length}</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Groups</p>
+              <p className='p-text3'>{groups?.length}</p>
+            </div>
           </div>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Products</p>
-            <p className='p-text3'>{products?.length}+</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Products</p>
+              <p className='p-text3'>{products?.length}+</p>
+            </div>
           </div>
         </div>
       </div>
@@ -48,28 +53,36 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
               <p className='p-text'>Launch a purchase</p>
             </div>
           </Link>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Delivery Time</p>
-            <p className='p-text4'>2 : 00 : 00</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Delivery Time</p>
+              <div className='p-text4'>
+                <CountdownTimer />
+              </div>
+            </div>
           </div>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Discounts</p>
-            <p className='p-text4'>20% off</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Discounts</p>
+              <p className='p-text4'>20% off</p>
+            </div>
           </div>
-          <div className='md:ml-2'>
-            <p className='p-text2'>Delivery Fee</p>
-            <p className='p-text4'>GHS 99</p>
+          <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
+            <div className='md:ml-2'>
+              <p className='p-text2'>Delivery Fee</p>
+              <p className='p-text4'>GH¢0.00</p>
+            </div>
           </div>
         </div>
       </div>
       <Link href={'/ongoingPage'}>
-        <div className='flex items-center gap-2 md:hidden'>
+        <div className='flex cursor-pointer items-center gap-2 rounded-lg bg-[#b4c8ca] md:hidden'>
           <MdGroups className='social-icon' />
           <p className='p-text'>Ongoing Purchases near me</p>
         </div>
       </Link>
       <Link href={'/products'}>
-        <div className='flex items-center gap-2 md:hidden'>
+        <div className='flex cursor-pointer items-center gap-2 md:hidden'>
           <HiOutlineRocketLaunch className='social-icon' />
           <p className='p-text'>Launch a purchase</p>
         </div>

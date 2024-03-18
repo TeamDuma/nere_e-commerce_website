@@ -20,8 +20,8 @@ const customStylesLarge: Styles = {
     top: '53%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '400px',
-    height: '350px',
+    width: '500px',
+    height: '400px',
     borderRadius: '15px',
     border: 'none',
   },
@@ -58,6 +58,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1001,
   },
   content: {
     display: 'flex',

@@ -9,7 +9,7 @@ import {
 } from '@/lib/redux';
 import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
 import FeaturedProducts from '@/components/FeaturedProducts';
-import Banner from '@/components/Banner';
+
 import ViewMore from '@/components/common/ViewMore';
 import { Product } from '@/types/product';
 import { GroupType } from '@/types/group';
@@ -24,6 +24,9 @@ import { MdGroups } from 'react-icons/md';
 import { MdOutlineAccessAlarms } from 'react-icons/md';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import PostHogClient from '@/app/posthog';
+import Banner from '@/components/Slider';
+import CountdownTimer from '@/components/CountdownTimer';
+import GroupSlider from '@/components/GroupSlider';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -115,8 +118,60 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   return (
     <div className='my-8'>
       <div className='container mx-auto px-6'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='my-2 flex flex-wrap items-center text-sm text-gray-400'>
+            <a href='/' className='hover:text-gray-600 hover:underline'>
+              Home
+            </a>
+            <span>
+              <svg
+                className='h-5 w-5 leading-none text-gray-300'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </span>
+            <a
+              href='/ongoingPage'
+              className='hover:text-gray-600 hover:underline'
+            >
+              Groups
+            </a>
+            <span>
+              <svg
+                className='h-5 w-5 leading-none text-gray-300'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </span>
+
+            <a
+              href={`/groups/ongoingPurchases/${group?.uid}`}
+              className='font-bold hover:text-gray-600 hover:underline'
+            >
+              {group?.join_code} - {group?.product?.name}
+            </a>
+          </div>
+        </div>
         <div className='mb-8 md:flex md:items-center'>
-          <div className='h-387 w-387 bg-gray-100 md:w-1/2 lg:h-96 '>
+          <div className='w-387  h-64 bg-gray-100  md:h-80 md:w-1/2 lg:h-96 '>
             <img
               className='mx-auto h-full rounded-md object-cover md:max-w-lg '
               src={product?.plain_image}
@@ -129,27 +184,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                 {product?.name}
               </h3>
-              {variantsArray.length > 0 && (
-                <div className='ml-12'>
-                  <div className='mt-1'>
-                    <select
-                      id='variant'
-                      value={selectedVariant}
-                      onChange={(e) => handleVariantChange(e.target.value)}
-                      className='w-full rounded border border-gray-300 p-2'
-                    >
-                      <option value='' disabled>
-                        Select a variant
-                      </option>
-                      {variantsArray.map((variant, index) => (
-                        <option key={index} value={variant}>
-                          {variant}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )}
             </div>
             <div className='star-icon my-4 flex  items-center'>
               {' '}
@@ -186,7 +220,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
               <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
                 <MdGroups className='mr-2 text-[#298592]' />
-                {group?.members?.length} participants
+                {group?.members?.length ?? 0} participants
               </div>
               <div className='flex items-center border-b border-t border-blue-200 p-2'>
                 <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
@@ -195,33 +229,17 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   className='text-[#F58929]'
                   style={{ paddingLeft: '0.5rem' }}
                 >
-                  00:00:00
+                  <CountdownTimer />
                 </span>
               </div>
             </div>
-            {/* <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
-              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
-                <MdGroups className='mr-2 text-[#298592]' />
-                {group?.members?.length} participants
-              </div>
-              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
-                <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
-                <span>Ends in</span>
-                <span
-                  className='text-[#F58929]'
-                  style={{ paddingLeft: '0.5rem' }}
-                >
-                  00:00:00
-                </span>
-              </div>
-            </div> */}
 
             <Link href='/products'>
               <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
                 Continue Shopping
               </h1>
             </Link>
-            {product?.hasMinQuantity ? (
+            {/* {product?.hasMinQuantity ? (
               <h2>
                 <span>
                   <span style={{ color: 'orange' }}>
@@ -233,14 +251,15 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   <span> remaining in this group</span>
                 </span>
               </h2>
-            ) : null}
+            ) : null} */}
 
             {product?.hasMinQuantity ? (
               <>
-                {/* <ProgressBar
+                <ProgressBar
                   remaining={remaining ?? 0}
                   total={product.min_quantity ?? 0}
-                /> */}
+                  unit={product.unit}
+                />
 
                 <div className='flex items-center'>
                   <button
@@ -250,7 +269,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     onClick={handleAddToCart}
                     disabled={remaining >= (product.min_quantity ?? 0)}
                   >
-                    Add to Cart
+                    Join Group
                   </button>
                 </div>
               </>
@@ -260,7 +279,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none`}
                   onClick={handleAddToCart}
                 >
-                  Add to Cart
+                  Join Group
                 </button>
               </div>
             )}
@@ -268,7 +287,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
         </div>
         <PurchaseGuide />
         <div className='hidden sm:block'>
-          <Banner />
+          <GroupSlider />
           <div className='mt-12 flex items-center justify-center text-3xl font-bold		'>
             <h1>You might like</h1>
           </div>{' '}

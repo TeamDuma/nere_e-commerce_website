@@ -10,6 +10,9 @@ import { toast } from 'react-toastify';
 import OTPModal from '../OTPModal';
 import { useDispatch } from 'react-redux';
 import { addUser, saveToken } from '@/lib/redux';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { useRouter } from 'next/navigation';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -19,6 +22,7 @@ const customStylesLarge: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -32,6 +36,7 @@ const customStylesLarge: Styles = {
     height: '750px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 const customStylesSmall: Styles = {
@@ -42,6 +47,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -55,6 +61,7 @@ const customStylesSmall: Styles = {
     height: '700px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 
@@ -69,10 +76,17 @@ const RegistrationModal: React.FC<{
   const [phone, setPhone] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [oTpModalVisible, setoTpModalVisible] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>(undefined);
+
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleOtpClick = () => {
     setoTpModalVisible(true);
+  };
+
+  const handlePhoneNumberChange = (value: string | undefined) => {
+    setPhoneNumber(value);
   };
 
   const [signUp, { isLoading, isError, isSuccess, error }] =
@@ -90,7 +104,7 @@ const RegistrationModal: React.FC<{
       return;
     }
 
-    if (!phone || !isValidPhoneNumber(phone)) {
+    if (!phoneNumber || !isValidPhoneNumber(phoneNumber)) {
       toast.error('Phone must be a valid phone number');
       return;
     }
@@ -103,23 +117,37 @@ const RegistrationModal: React.FC<{
       toast.error('Password and Confirm Password do not match');
       return;
     }
-    signUp({ email, name, phone, password })
+
+    console.log('formattedPhone', phoneNumber);
+
+    console.log(email, name, phoneNumber, password);
+
+    signUp({ email, name, phone: phoneNumber, password })
       .then((response) => {
         if ('data' in response) {
           const data = response.data;
-          const token = response.data.token;
-          if (data.message === 'success') {
+          const token = data.token;
+
+          if (data.success === true) {
             dispatch(addUser({ data }));
           }
-          dispatch(saveToken(token));
-          toast.success('Signed Up successfully', {
-            autoClose: 500,
-          });
-          phoneVerify({ token }).then((response) => {
-            handleOtpClick();
-          });
+
+          if (token !== undefined) {
+            dispatch(saveToken(token));
+            toast.success('Signed Up successfully', {
+              autoClose: 500,
+            });
+            phoneVerify({ token }).then((response) => {
+              router.push('/phoneVerify');
+              onClose();
+            });
+          } else {
+            console.error('Token is undefined');
+            toast.error('Error signing up');
+          }
         } else {
-          console.log('response', response.error);
+          console.error(response.error);
+          toast.error('Error signing up');
         }
       })
       .catch((error) => {
@@ -131,8 +159,8 @@ const RegistrationModal: React.FC<{
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const isValidPhoneNumber = (phone: string): boolean => {
-    return /^\+\d{12}$/.test(phone);
+  const isValidPhoneNumber = (phoneNumber: string): boolean => {
+    return /^\+\d+$/.test(phoneNumber);
   };
 
   return (
@@ -186,20 +214,29 @@ const RegistrationModal: React.FC<{
                 className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
                 placeholder='kojo@gmail.com'
               />
+
               <label
-                htmlFor='Phone'
-                className='text-sm font-bold leading-tight tracking-normal text-gray-800'
+                htmlFor='phoneNumber'
+                className='block text-sm font-bold text-gray-800'
               >
-                Phone
+                Phone (WhatsApp Number)
               </label>
-              <input
-                type='text'
-                id='phone'
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='+233(XXX-XXX-XXX)'
-              />
+              <div className='relative mb-5 mt-2 rounded border border-gray-300 focus:border focus:border-indigo-700 focus:outline-none'>
+                <PhoneInput
+                  international
+                  defaultCountry='GH'
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  containerStyle={{
+                    position: 'relative',
+                    width: '10%',
+                  }}
+                  inputStyle={{
+                    height: '100%',
+                    width: '100%',
+                  }}
+                />
+              </div>
 
               <label
                 htmlFor='Password'
@@ -245,11 +282,11 @@ const RegistrationModal: React.FC<{
               </div>
 
               <div className='inline-flex w-full items-center justify-center'>
-                <hr className='my-2 h-px w-32 border-0 bg-gray-200 dark:bg-gray-700' />
-                <span className='  bg-white px-3 font-medium text-gray-900 dark:bg-gray-900 dark:text-white'>
+                <hr className='my-2 h-px w-32 border-0 bg-gray-200 ' />
+                <span className='  bg-white px-3 font-medium text-gray-900 '>
                   or
                 </span>
-                <hr className='my-4 h-px w-32 border-0 bg-gray-200 dark:bg-gray-700' />
+                <hr className='my-4 h-px w-32 border-0 bg-gray-200 ' />
               </div>
               <p className='ml-8'>
                 Already have an account?{' '}
@@ -263,11 +300,11 @@ const RegistrationModal: React.FC<{
             </div>
           </div>
         </div>
-        <OTPModal
+        {/* <OTPModal
           onClose={onClose}
           isOpen={oTpModalVisible}
           phoneNumber={phone}
-        />
+        /> */}
       </div>
     </Modal>
   );

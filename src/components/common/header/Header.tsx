@@ -48,7 +48,7 @@ const Header = () => {
     () => {
       return data
         ? locations.find((location) => location.id === selectedLocationId) ||
-                null
+            null
         : null;
     }
   );
@@ -79,6 +79,7 @@ const Header = () => {
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
+    setIsDropdownOpen(false);
   };
   const handleLoginClick = () => {
     setLoginModalVisible(true);
@@ -106,7 +107,7 @@ const Header = () => {
   return (
     <div className='sticky top-0 z-50'>
       <div className='mb-5 flex flex-wrap'>
-        <div className='mb-6  w-full rounded-xl bg-[#fff] px-3'>
+        <div className='mb-6  w-full rounded-b-xl bg-[#fff] px-3'>
           <div className=' flex flex-col  justify-between sm:flex-row '>
             <div className='flex  items-center justify-between '>
               <div className='ml-4 text-4xl font-bold text-blackish sm:mr-20 sm:pb-0 '>
@@ -163,7 +164,7 @@ const Header = () => {
                 >
                   <div className='mr-4 flex flex-row gap-2'>
                     <CartIconHeader />
-                    <p style={{ color: '#298592', fontSize: 12 }}>
+                    <p style={{ color: '#298592', fontSize: 14 }}>
                       {(cartItems ?? []).length}
                     </p>
                   </div>
@@ -216,20 +217,11 @@ const Header = () => {
                       fontWeight: 'bold',
                       fontSize: 12,
                     }}
+                    onClick={handLocation}
                   >
                     {selectedLocation
                       ? selectedLocation.name
                       : 'Select a location'}
-                  </p>
-                  <p
-                    style={{
-                      color: '#298592',
-                      fontSize: 14,
-                      fontWeight: 'bold',
-                    }}
-                    onClick={handLocation}
-                  >
-                    Change
                   </p>
                 </div>
               </div>
@@ -334,7 +326,7 @@ const Header = () => {
               >
                 <div className='mr-4 flex flex-row gap-2'>
                   <CartIconHeader />
-                  <p style={{ color: '#298592', fontSize: 12 }}>
+                  <p style={{ color: '#298592', fontSize: 14 }}>
                     {(cartItems ?? []).length}
                   </p>
                 </div>

@@ -1,5 +1,4 @@
 'use client';
-import Banner from '@/components/Banner';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import PurchaseGuide from '@/components/common/PurchaseGuide';
 import ViewMore from '@/components/common/ViewMore';
@@ -17,6 +16,8 @@ import Stepper from '@/components/common/PurchaseGuide';
 import ProgressBar from '@/components/common/ProgressBar';
 import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 import PostHogClient from '@/app/posthog';
+import Banner from '@/components/Slider';
+import CountdownTimer from '@/components/CountdownTimer';
 
 type Props = {
   params: {
@@ -99,13 +100,16 @@ export default function ProductDetailPage({ params }: Props) {
   const cartProduct = cartItems.find((item) => item.slug !== productSlug);
 
   const cartQuantity = cartProduct ? cartProduct.cartQuantity : 0;
+  console.log('cartProduct', cartProduct);
+
+  console.log('cartQuantity', cartQuantity);
 
   return (
     <>
       <div>
         <div className='px-2 py-2'>
           <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-            <div className='flex items-center space-x-2 text-sm text-gray-400'>
+            <div className='my-2 flex flex-wrap items-center text-sm text-gray-400'>
               <a href='/' className='hover:text-gray-600 hover:underline'>
                 Home
               </a>
@@ -126,10 +130,53 @@ export default function ProductDetailPage({ params }: Props) {
                 </svg>
               </span>
               <a
+                href='/products'
+                className='hover:text-gray-600 hover:underline'
+              >
+                Products
+              </a>
+              <span>
+                <svg
+                  className='h-5 w-5 leading-none text-gray-300'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
+              </span>
+
+              <a
                 href={`/category/${product.categories?.slug}`}
                 className='hover:text-gray-600 hover:underline'
               >
                 {product.categories?.name}
+              </a>
+
+              <span>
+                <svg
+                  className='h-5 w-5 leading-none text-gray-300'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
+              </span>
+              <a className='font-bold hover:text-gray-600 hover:underline'>
+                {product?.name}
               </a>
             </div>
           </div>
@@ -140,13 +187,20 @@ export default function ProductDetailPage({ params }: Props) {
                   <div className='mb-4 h-64 rounded-lg  md:h-80'>
                     <div
                       x-show='image === 1'
-                      className='mb-4 flex h-64 items-center justify-center rounded-lg  bg-gray-100 md:h-80'
+                      className='relative mb-4 flex h-64 items-center justify-center rounded-lg bg-gray-100 md:h-80'
                     >
                       <img
                         className='mx-auto h-full rounded-md object-cover md:max-w-lg '
                         src={product?.plain_image}
                         alt='plain_image'
                       />
+                      {!product.in_stock && (
+                        <img
+                          className='absolute right-3 top-3 z-10 h-20 w-20'
+                          src='../images/sold_out.png'
+                          alt='stamp_image'
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -161,7 +215,7 @@ export default function ProductDetailPage({ params }: Props) {
                   <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                     {product?.name}
                   </h3>
-                  {variantsArray.length > 0 && (
+                  {/* {variantsArray.length > 0 && (
                     <div className='ml-12'>
                       <div className='mt-1'>
                         <select
@@ -181,7 +235,7 @@ export default function ProductDetailPage({ params }: Props) {
                         </select>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <div className='star-icon my-4 flex  items-center'>
                   {' '}
@@ -209,7 +263,7 @@ export default function ProductDetailPage({ params }: Props) {
                     <p className='text-xl font-semibold text-green-500'>
                       <div className='w-25 h-21 ml-3 flex items-center justify-center rounded bg-[#8CCED7]'>
                         {product?.price && product.sale_price && (
-                          <span className=' text-sm text-white '>
+                          <span className=' p-1 text-sm text-white'>
                             Save{' '}
                             {calculateSavingsPercentage(
                               product.price,
@@ -226,7 +280,7 @@ export default function ProductDetailPage({ params }: Props) {
                 <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
                   <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
                     <MdGroups className='mr-2 text-[#298592]' />
-                    {group?.members?.length} participants
+                    {group?.members?.length ?? 0} participants
                   </div>
                   <div className='flex items-center border-b border-t border-blue-200 p-2'>
                     <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
@@ -235,7 +289,7 @@ export default function ProductDetailPage({ params }: Props) {
                       className='text-[#F58929]'
                       style={{ paddingLeft: '0.5rem' }}
                     >
-                      00:00:00
+                      <CountdownTimer />
                     </span>
                   </div>
                 </div>
@@ -248,44 +302,37 @@ export default function ProductDetailPage({ params }: Props) {
                   {/* <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1> */}
                 </Link>
                 {product.min_quantity ? (
-                  <h2>
-                    <span style={{ color: 'orange', marginLeft: 5 }}>
+                  <h2 className='my-2'>
+                    <span style={{ color: 'orange' }}>
                       {product.min_quantity}{' '}
                     </span>{' '}
-                    people required for this group buy
+                    {product.unit} required for this group buy
                   </h2>
                 ) : null}
 
-                {/* {product.min_quantity ? (
-                  <ProgressBar
-                    remaining={cartQuantity}
-                    total={product.min_quantity}
-                  />
-                ) : null} */}
-                <div className='flex space-x-4 py-4'>
-                  <div className='flex items-center justify-center sm:justify-start'>
-                    <div className='flex flex-col items-center justify-center sm:justify-start'>
-                      <div className='mt-4 sm:mt-0 sm:flex'>
-                        <button
-                          className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none'
-                          onClick={() => {
-                            handleAddToCart();
-                            console.log('Product added to cart');
-                            console.log(product);
-                            posthogClient.capture({
-                              distinctId: userInfo?.data?.customer.email,
-                              event: 'product_added_to_cart',
-                              properties: { ...product },
-                            });
-                          }}
-                        >
-                          <span className='hidden sm:inline'>Add to Cart</span>
-                          <span className='sm:hidden'>Launch Purchase</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <button
+                  className='my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none  disabled:cursor-not-allowed disabled:bg-gray-400'
+                  onClick={() => {
+                    handleAddToCart();
+                    console.log('Product added to cart');
+                    console.log(product);
+                    posthogClient.capture({
+                      distinctId: userInfo?.data?.customer.email,
+                      event: 'product_added_to_cart',
+                      properties: { ...product },
+                    });
+                  }}
+                  disabled={!product.in_stock}
+                >
+                  <span className='hidden sm:inline'>Launch Purchase</span>
+                  <span className='sm:hidden'>Launch Purchase</span>
+                </button>
+
+                {!product.in_stock && (
+                  <span className='ml-4 font-semibold text-red-600'>
+                    Out of Stock!
+                  </span>
+                )}
               </div>
             </div>
           </div>

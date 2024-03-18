@@ -20,8 +20,8 @@ const customStylesLarge: Styles = {
     top: '53%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '400px',
-    height: '350px',
+    width: '500px',
+    height: '400px',
     borderRadius: '15px',
     border: 'none',
   },
@@ -58,6 +58,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1001,
   },
   content: {
     display: 'flex',
@@ -99,21 +100,18 @@ const LoyaltyModal: React.FC<{
         contentLabel='Example Modal'
       >
         <div className='flex h-full flex-col items-center justify-center'>
-          <h2 className='mb-4 text-2xl	font-semibold	 text-[#298592]'>
-            Coming Soon !!
-          </h2>
+          <h2 className='mb-4 text-2xl	font-bold	 text-[#298592]'>Grab Now!!</h2>
           <div className='w-156 h-156  mb-4 text-xl'>
             <img
               className='w-156 h-156 mx-1 my-1'
-              src='/images/loyalty.svg'
+              src='/images/coupon.svg'
               alt='Coin'
             />
           </div>
-          <h2 className='mb-4 text-xl font-medium	'>Loyalty Offers</h2>
+          <h2 className='mb-4 text-xl font-medium	'>Welcome to Nere</h2>
           <div className='... flex items-stretch'>
             <p className='mb-4 text-center text-sm font-normal			'>
-              Enjoy exciting games while you shop, and win Nere coins that can
-              be redeemed as Discount!{' '}
+              Enjoy 20 cedi off your first purchase above 100 cedi!{' '}
             </p>
           </div>
         </div>

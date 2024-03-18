@@ -18,6 +18,7 @@ const customStylesLarge: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -29,6 +30,7 @@ const customStylesLarge: Styles = {
     height: '300px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 const customStylesSmall: Styles = {
@@ -39,6 +41,7 @@ const customStylesSmall: Styles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
   },
   content: {
     display: 'flex',
@@ -52,6 +55,7 @@ const customStylesSmall: Styles = {
     height: '300px',
     borderRadius: '15px',
     border: 'none',
+    zIndex: 1001,
   },
 };
 
@@ -95,18 +99,18 @@ const MoreInformation: React.FC<MoreInformationProps> = ({
           <h2 className='mb-4 text-xl text-[#1A464C]'>DELIVERY DETAILS</h2>
 
           <div className='rounded-md bg-white p-2' style={{ width: '100%' }}>
-            <h5 className='text-sm	font-medium'>
-              Nere Pickup Station East Legon
-            </h5>
+            <h5 className='text-sm	font-medium'>Nere Pickup Station</h5>
             <p className='my-2 text-xs font-medium text-[#979797]'>
               {location?.name}
             </p>
-            <p className='my-2 cursor-pointer text-xs font-medium text-[#298592] underline underline-offset-1'>
-              See on google maps
+            <p className='my-2 cursor-pointer text-xs font-medium text-[#298592]'>
+              <a href={location?.map_url} className='underline-none'>
+                See on google maps
+              </a>
             </p>
             <p className='text-xs font-medium'>Contact information</p>
             <p className='my-2 text-xs font-medium text-[#979797]'>
-              Mr. Stephen 0549829923{' '}
+              {location?.agent_name} {location?.agent_phone}{' '}
             </p>
             <p className='my-2 text-xs font-medium'>Opening hours:</p>
             <p className='my-2 text-xs font-medium text-[#979797]'>

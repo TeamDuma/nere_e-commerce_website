@@ -26,10 +26,16 @@ const UserContent = () => {
   );
 
   const [formData, setFormData] = useState({
-    name: userInfo.data.customer.name || '',
-    email: userInfo.data.customer.email || '',
-    phone: userInfo.data.customer.phone || '',
+    name: userInfo?.data?.customer?.name || '',
+    email: userInfo?.data?.customer?.email || '',
+    phone: userInfo?.data?.customer?.phone || '',
   });
+
+  // const [formData, setFormData] = useState({
+  //   name: userInfo.data.customer.name || '',
+  //   email: userInfo.data.customer.email || '',
+  //   phone: userInfo.data.customer.phone || '',
+  // });
 
   useEffect(() => {
     if (data && selectedLocationId) {
@@ -54,6 +60,10 @@ const UserContent = () => {
   const closeEditModal = () => {
     setProfileEditVisible(false);
   };
+
+  if (!userInfo || !userInfo.data) {
+    return <div>Please log in to view this content</div>;
+  }
 
   return (
     <>

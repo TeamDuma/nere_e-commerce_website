@@ -5,9 +5,9 @@ import Logo from '../Logo';
 
 const Footer = () => {
   return (
-    <footer className='bg-theme-light dark:bg-darkmode-theme-light'>
+    <footer className='bg-theme-light '>
       <div className='absolute  w-full'>
-        <div className='text-light dark:text-darkmode-light text-center'>
+        <div className='text-light '>
           <div className='bg-gray-100'>
             <div className='container mx-auto flex flex-col flex-wrap px-5 py-4 sm:flex-row'>
               <p className='text-center text-sm text-gray-500 sm:text-left'>

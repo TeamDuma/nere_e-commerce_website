@@ -34,10 +34,10 @@ export default function Home() {
   } = useGetPublicOngoingGroupsQuery();
   const { data: productsData, isLoading: productsLoading } =
     useGetActiveProductsQuery();
-  
+
   const posthog = usePostHog();
   posthog.identify(userInfo?.data?.customer.email);
-  
+
   const products = productsData?.data?.products ?? [];
   const groups = ongoingGroupsData?.data?.groups ?? [];
 
@@ -60,7 +60,7 @@ export default function Home() {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
-  
+
   const closeOngoingModal = () => {
     setIsOngoingModalOpen(false);
   };
@@ -126,7 +126,6 @@ export default function Home() {
                 <p className='mb-1 hidden text-xs text-white sm:block'>
                   <span>{groups.length}</span> Ongoing Purchases near me
                 </p>
-
               </div>
             </div>
           </div>
