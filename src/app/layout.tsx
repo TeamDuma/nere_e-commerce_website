@@ -17,7 +17,8 @@ export const metadata: Metadata = {
     template: '%s | Nere',
     default: 'Nere',
   },
-  description: "Ghana's #1 Group Buying Platform. Save up to 40% of your monthly food expenses with your friends and family! Experience the power of group buying, where the unbeatable power of community unlocks unbeatable deals.",
+  description:
+    "Ghana's #1 Group Buying Platform. Save up to 40% of your monthly food expenses with your friends and family! Experience the power of group buying, where the unbeatable power of community unlocks unbeatable deals.",
   keywords:
     'Nere, E-commerce, Shopping, Group Buying, Group Shopping, Nere Group Buying Platform, Deals, Discounts, Offers, Nere Offers, Nere Deals, Nere Discounts, Nere Baby Tuesday, Group Buying Sites',
 };
