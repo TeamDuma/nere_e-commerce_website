@@ -46,13 +46,15 @@ const Banner = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`duration-700 ease-in-out ${index === currentIndex ? '' : ' hidden'}`}
+            className={`duration-700 ease-in-out ${
+              index === currentIndex ? '' : ' hidden'
+            }`}
             data-carousel-item=''
           >
             <img
               src={image}
               alt={`Slide ${index + 1}`}
-              className='absolute w-full h-full object-cover'
+              className='absolute h-full w-full object-cover'
             />
           </div>
         ))}
