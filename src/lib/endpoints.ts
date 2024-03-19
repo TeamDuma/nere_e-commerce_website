@@ -32,6 +32,9 @@ const endpoints = {
 
   // Location
   activeLocations: 'locations/active',
+
+  // Vouchers
+  getUsersVouchers: (id: string) => `vouchers/user_voucher/customer/${id}`
 };
 
 export default endpoints;
