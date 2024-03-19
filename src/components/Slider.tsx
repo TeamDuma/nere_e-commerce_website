@@ -24,9 +24,9 @@ const Banner = () => {
     <div className='relative  mx-auto w-full'>
       <div
         id='default-carousel'
-        className='relative h-32 overflow-hidden rounded-lg sm:h-72 xl:h-96 2xl:h-96 '
+        className='relative h-32 overflow-hidden rounded-xl sm:h-72 xl:h-96 2xl:h-96 '
       >
-        {images.map((image, index) => (
+        {/* {images.map((image, index) => (
           <div
             key={index}
             className={`duration-700 ease-in-out${
@@ -40,6 +40,19 @@ const Banner = () => {
               src={image}
               className='absolute left-1/2 top-1/2 block w-fit  -translate-x-1/2 -translate-y-1/2 '
               alt={`Slide ${index + 1}`}
+            />
+          </div>
+        ))} */}
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`duration-700 ease-in-out ${index === currentIndex ? '' : ' hidden'}`}
+            data-carousel-item=''
+          >
+            <img
+              src={image}
+              alt={`Slide ${index + 1}`}
+              className='absolute w-full h-full object-cover'
             />
           </div>
         ))}
