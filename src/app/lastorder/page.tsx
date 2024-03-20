@@ -97,10 +97,10 @@ const Orders = () => {
     <>
       <div className='flex h-full w-screen flex-col px-8 py-7 md:flex-row'>
         {latestOrderItems.length === 0 ? (
-          <div className='flex w-full flex-col items-center justify-center font-bold text-5xl'>
+          <div className='flex w-full flex-col items-center justify-center text-5xl font-bold'>
             No Orders Yet!
             <Link href='/products'>
-              <h1 className='my-5 cursor-pointer text-[#F58929] mt-4 font-normal text-xl hover:text-[#F58929] hover:underline hover:underline-offset-2'>
+              <h1 className='my-5 mt-4 cursor-pointer text-xl font-normal text-[#F58929] hover:text-[#F58929] hover:underline hover:underline-offset-2'>
                 Go to the Shop
               </h1>
             </Link>
@@ -109,7 +109,8 @@ const Orders = () => {
           <>
             <div className='flex h-fit w-full flex-col gap-4'>
               <p className='text-xl font-extrabold text-[#298592]'>
-                Congrats! 🎉 You Saved GHC {totalSavings.toFixed(2)} on your basket
+                Congrats! 🎉 You Saved GHC {totalSavings.toFixed(2)} on your
+                basket
               </p>
               {latestOrderItems.map((group) => (
                 <GroupItem
