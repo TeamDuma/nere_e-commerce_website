@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Modal, { Styles } from 'react-modal';
-import LoginModal from './LoginModal';
 import {
-  useSignUpMutation,
-  usePhoneVerifyMutation,
+  useUpdateCustomerMutation
 } from '@/lib/redux/services/customers';
 import Logo from './Logo';
 import { toast } from 'react-toastify';
 import OTPModal from '../OTPModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, saveToken, selectShopping } from '@/lib/redux';
+import { selectShopping } from '@/lib/redux';
+import { CustomerTitle } from '@/types/customer';
+import Spinner from './Spinner';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -60,23 +60,28 @@ const EditProfile: React.FC<{
   onClose: () => void;
   isOpen: boolean;
 }> = ({ onClose, isOpen }) => {
-  const dispatch = useDispatch();
+  const { userInfo, token } = useSelector(selectShopping);
 
-  const { userInfo } = useSelector(selectShopping);
+  const uid = userInfo?.data?.customer?.uid as string;
+  const jwt_token = token as string;
 
-  console.log('userInfo', userInfo);
-
+  const [updateCustomer, { isLoading, isSuccess, isError, error, data }] = useUpdateCustomerMutation();
   const [formData, setFormData] = useState({
-    name: userInfo?.data?.customer?.name || '',
-    email: userInfo?.data?.customer?.email || '',
-    phone: userInfo?.data?.customer?.phone || '',
+    name: userInfo?.data?.customer?.name as string || '' as string,
+    title: userInfo?.data?.customer?.title as CustomerTitle || '' as string,
   });
 
-  // const [formData, setFormData] = useState({
-  //   name: userInfo.data.customer.name || '',
-  //   email: userInfo.data.customer.email || '',
-  //   phone: userInfo.data.customer.phone || '',
-  // });
+  const handleSubmit = async () => {
+    try {
+      const response = await updateCustomer({ uid, token: jwt_token, ...formData }).unwrap();
+
+      setFormData({ ...formData, name: response.customer.name, title: response.customer.title })
+      toast.success('Profile Updated Successfully', { autoClose: 1000 });
+    } catch (error) {
+
+      toast.error('An error occurred', { autoClose: 1000 });
+    }
+  }
 
   return (
     <Modal
@@ -103,8 +108,10 @@ const EditProfile: React.FC<{
                 <input
                   type='radio'
                   name='gender'
-                  value='Mr'
+                  value={CustomerTitle.MR}
                   className='form-radio text-[#298592] focus:ring-[#07454d]'
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value as CustomerTitle })}
+                  checked={formData.title === 'Mr'}
                 />
                 <span>Mr</span>
               </label>
@@ -112,8 +119,10 @@ const EditProfile: React.FC<{
                 <input
                   type='radio'
                   name='gender'
-                  value='Mrs'
+                  value={CustomerTitle.MRS}
                   className='form-radio text-[#298592] focus:ring-[#07454d]'
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value as CustomerTitle })}
+                  checked={formData.title === 'Mrs'}
                 />
                 <span>Mrs</span>
               </label>
@@ -121,8 +130,10 @@ const EditProfile: React.FC<{
                 <input
                   type='radio'
                   name='gender'
-                  value='Mrs'
+                  value={CustomerTitle.MS}
                   className='form-radio text-[#298592] focus:ring-[#07454d]'
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value as CustomerTitle })}
+                  checked={formData.title === 'Ms'}
                 />
                 <span>Ms</span>
               </label>
@@ -141,10 +152,10 @@ const EditProfile: React.FC<{
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-            placeholder='kojo'
+            placeholder='Kojo'
           />
 
-          <label
+          {/* <label
             htmlFor='Email'
             className='text-sm font-bold leading-tight tracking-normal text-gray-800'
           >
@@ -175,14 +186,14 @@ const EditProfile: React.FC<{
             }
             className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
             placeholder='kojo@gmail.com'
-          />
+          /> */}
 
           <div className='space-y-4'>
             <button
               className='w-full rounded-full bg-[#298592] p-3 font-semibold text-white'
-              onClick={() => console.log('newdata', formData)}
+              onClick={handleSubmit}
             >
-              Save
+              {isLoading ? <Spinner /> : 'Save'}
             </button>
           </div>
         </div>

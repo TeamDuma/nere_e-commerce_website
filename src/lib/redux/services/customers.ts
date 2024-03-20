@@ -6,6 +6,8 @@ import {
   ILoginResponse,
   IRegisterRequest,
   IRegisterResponse,
+  IUpdateCustomerRequest,
+  IUpdateCustomerResponse,
   IphoneVerifyRequest,
   IphoneVerifyResponse,
   IphoneVerifyTokenRequest,
@@ -86,6 +88,16 @@ const customerApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    updateCustomer: builder.mutation<IUpdateCustomerResponse, IUpdateCustomerRequest>({
+      query: ({uid, token, ...data}) => ({
+        url: endpoints.updateCutomer(uid),
+        method: 'PATCH',
+        body: { ...data },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -98,4 +110,5 @@ export const {
   useLazyForgotpasswordTokenQuery,
   useLazyGetOrdersQuery,
   useResetPasswordMutation,
+  useUpdateCustomerMutation,
 } = customerApi;
