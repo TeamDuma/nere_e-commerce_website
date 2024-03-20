@@ -5,10 +5,17 @@ export interface Customer {
   name: string;
   phone: string;
   avatar: null | string;
+  title: CustomerTitle;
   isActive: boolean;
   numberVerified: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export enum CustomerTitle {
+  MR = 'Mr',
+  MRS = 'Mrs',
+  MS = 'Ms',
 }
 
 export interface ILoginRequest {
@@ -16,12 +23,19 @@ export interface ILoginRequest {
   password: string;
 }
 
+// export interface ILoginResponse {
+//   message: string;
+//   status: string;
+//   data: {
+//     Customer: Customer[];
+//   };
+// }
+
 export interface ILoginResponse {
+  success: boolean;
   message: string;
-  status: string;
-  data: {
-    Customer: Customer[];
-  };
+  token: string;
+  customer: Customer[];
 }
 
 export interface IRegisterRequest {
@@ -82,4 +96,17 @@ export interface ResetPasswordResponse {
 export interface ForgotPasswordTokenResponse {
   status: string;
   message: string;
+}
+
+export interface IUpdateCustomerRequest {
+  uid: string;
+  token: string;
+  name: string;
+  title: CustomerTitle;
+}
+
+export interface IUpdateCustomerResponse {
+  success: boolean;
+  message: string;
+  customer: Customer;
 }
