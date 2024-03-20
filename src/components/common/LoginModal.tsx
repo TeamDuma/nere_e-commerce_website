@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Logo from './Logo';
 import { useSignInMutation } from '@/lib/redux/services/customers';
-import { addUser, deleteUser } from '@/lib/redux';
+import { addUser, saveToken } from '@/lib/redux';
 import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 import Spinner from './Spinner';
@@ -89,7 +89,10 @@ const LoginModal: React.FC<{
 
       if ('data' in response) {
         const data = response.data;
-        if (data.message === 'success') dispatch(addUser({ data }));
+        if (data.message === 'success') {
+          dispatch(addUser({ data }));
+          dispatch(saveToken(data.token));
+        }
         toast.success('Logged In successfully', {
           autoClose: 500,
         });
