@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Modal, { Styles } from 'react-modal';
-import {
-  useUpdateCustomerMutation
-} from '@/lib/redux/services/customers';
+import { useUpdateCustomerMutation } from '@/lib/redux/services/customers';
 import Logo from './Logo';
 import { toast } from 'react-toastify';
 import OTPModal from '../OTPModal';
@@ -65,23 +63,31 @@ const EditProfile: React.FC<{
   const uid = userInfo?.data?.customer?.uid as string;
   const jwt_token = token as string;
 
-  const [updateCustomer, { isLoading, isSuccess, isError, error, data }] = useUpdateCustomerMutation();
+  const [updateCustomer, { isLoading, isSuccess, isError, error, data }] =
+    useUpdateCustomerMutation();
   const [formData, setFormData] = useState({
-    name: userInfo?.data?.customer?.name as string || '' as string,
-    title: userInfo?.data?.customer?.title as CustomerTitle || '' as string,
+    name: (userInfo?.data?.customer?.name as string) || ('' as string),
+    title: (userInfo?.data?.customer?.title as CustomerTitle) || ('' as string),
   });
 
   const handleSubmit = async () => {
     try {
-      const response = await updateCustomer({ uid, token: jwt_token, ...formData }).unwrap();
+      const response = await updateCustomer({
+        uid,
+        token: jwt_token,
+        ...formData,
+      }).unwrap();
 
-      setFormData({ ...formData, name: response.customer.name, title: response.customer.title })
+      setFormData({
+        ...formData,
+        name: response.customer.name,
+        title: response.customer.title,
+      });
       toast.success('Profile Updated Successfully', { autoClose: 1000 });
     } catch (error) {
-
       toast.error('An error occurred', { autoClose: 1000 });
     }
-  }
+  };
 
   return (
     <Modal
@@ -110,7 +116,12 @@ const EditProfile: React.FC<{
                   name='gender'
                   value={CustomerTitle.MR}
                   className='form-radio text-[#298592] focus:ring-[#07454d]'
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value as CustomerTitle })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      title: e.target.value as CustomerTitle,
+                    })
+                  }
                   checked={formData.title === 'Mr'}
                 />
                 <span>Mr</span>
@@ -121,7 +132,12 @@ const EditProfile: React.FC<{
                   name='gender'
                   value={CustomerTitle.MRS}
                   className='form-radio text-[#298592] focus:ring-[#07454d]'
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value as CustomerTitle })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      title: e.target.value as CustomerTitle,
+                    })
+                  }
                   checked={formData.title === 'Mrs'}
                 />
                 <span>Mrs</span>
@@ -132,7 +148,12 @@ const EditProfile: React.FC<{
                   name='gender'
                   value={CustomerTitle.MS}
                   className='form-radio text-[#298592] focus:ring-[#07454d]'
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value as CustomerTitle })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      title: e.target.value as CustomerTitle,
+                    })
+                  }
                   checked={formData.title === 'Ms'}
                 />
                 <span>Ms</span>

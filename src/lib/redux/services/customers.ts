@@ -88,8 +88,11 @@ const customerApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    updateCustomer: builder.mutation<IUpdateCustomerResponse, IUpdateCustomerRequest>({
-      query: ({uid, token, ...data}) => ({
+    updateCustomer: builder.mutation<
+      IUpdateCustomerResponse,
+      IUpdateCustomerRequest
+    >({
+      query: ({ uid, token, ...data }) => ({
         url: endpoints.updateCutomer(uid),
         method: 'PATCH',
         body: { ...data },
