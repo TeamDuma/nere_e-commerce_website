@@ -29,6 +29,7 @@ const UserContent = () => {
     name: userInfo?.data?.customer?.name || '',
     email: userInfo?.data?.customer?.email || '',
     phone: userInfo?.data?.customer?.phone || '',
+    title: userInfo?.data?.customer?.title || '',
   });
 
   // const [formData, setFormData] = useState({
@@ -91,7 +92,7 @@ const UserContent = () => {
                 </div>
                 <div className='w-full border-l-2 p-1 md:w-auto md:flex-1 md:border-l-0'>
                   <p className='text-xs font-medium text-[#979797]'>Title</p>
-                  <p className='font-medium text-[#1A464C]'>MR</p>
+                  <p className='font-medium text-[#1A464C]'>{formData.title}</p>
                 </div>
                 <div className='w-full border-l-2 p-1 md:w-auto md:flex-1 md:border-l-0'>
                   <p className='text-xs font-medium text-[#979797]'>
