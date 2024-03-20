@@ -7,6 +7,7 @@ import { useLazyGetOrdersQuery } from '@/lib/redux/services/customers';
 import { Orders } from '@/types/orders';
 import { useSelector } from 'react-redux';
 import { selectShopping } from '@/lib/redux/slices/shopping';
+import Link from 'next/link';
 
 const OrderContent = () => {
   const { userInfo } = useSelector(selectShopping);
@@ -28,13 +29,22 @@ const OrderContent = () => {
       <div>
         {isLoading && <p>Loading...</p>}
         {isError && <p style={{ color: 'red' }}>Error</p>}
-        {orders && (
+        {orders && orders.length > 0 ? (
           <div>
             {orders.map((item: Orders) => (
               <div key={item.id}>
                 <OrderContentCard item={item} />
               </div>
             ))}
+          </div>
+        ) : (
+          <div className='text-center text-5xl font-semibold text-black'>
+            No Orders Yet!
+            <Link href='/products'>
+              <h1 className='my-5 mt-4 cursor-pointer text-xl font-normal text-[#F58929] hover:text-[#F58929] hover:underline hover:underline-offset-2'>
+                Go to the Shop
+              </h1>
+            </Link>
           </div>
         )}
       </div>
