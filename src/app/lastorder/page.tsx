@@ -94,12 +94,12 @@ const Orders = () => {
     );
   }
 
-  if(isLoading) {
+  if (isLoading) {
     return (
       <div>
         <FullWidthLoader />
       </div>
-    )
+    );
   }
 
   return (
