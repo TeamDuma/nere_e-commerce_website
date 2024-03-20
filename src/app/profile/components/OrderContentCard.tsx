@@ -92,12 +92,13 @@ const OrderContentCard: React.FC<OrderContentCardProps> = ({ item }) => {
             <div key={index}>
               <div
                 className='relative m-2 rounded border-2 border-solid border-[#F58929] p-8'
-                style={{
-                  borderRadius:
-                    group.total_quantity === group.product.min_quantity
-                      ? '10px'
-                      : '0',
-                }}
+                // Commented this out because not sure what you wanted to do here.
+                // style={{
+                //   borderRadius:
+                //     group.total_quantity === group.product.min_quantity
+                //       ? '10px'
+                //       : '0',
+                // }}
               >
                 <img
                   src={group.product?.plain_image}

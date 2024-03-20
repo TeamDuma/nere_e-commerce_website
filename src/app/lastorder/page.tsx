@@ -16,6 +16,7 @@ import GroupItem from '../checkout/summary/components/GroupItem';
 import OrderSummary from '../checkout/summary/components/OrderSummary';
 import ShareModal from '../checkout/summary/components/ShareModal';
 import Link from 'next/link';
+import FullWidthLoader from '@/components/common/FullWidthLoader';
 
 const Orders = () => {
   const { userInfo } = useSelector(selectShopping);
@@ -89,6 +90,14 @@ const Orders = () => {
     return (
       <div className='text-center text-5xl text-black'>
         Please log in to view this content
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div>
+        <FullWidthLoader />
       </div>
     );
   }
