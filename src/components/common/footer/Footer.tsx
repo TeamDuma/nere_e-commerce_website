@@ -11,7 +11,7 @@ const Footer = () => {
           <div className='bg-gray-100'>
             <div className='container mx-auto flex flex-col flex-wrap px-5 py-4 sm:flex-row'>
               <p className='text-center text-sm text-gray-500 sm:text-left'>
-                Product of Duma
+                Product of Nere LTD
                 <a
                   rel='noopener noreferrer'
                   className='ml-4 text-gray-600'
