@@ -24,7 +24,7 @@ const Banner = () => {
     <div className='relative  mx-auto w-full'>
       <div
         id='default-carousel'
-        className='relative h-32 overflow-hidden rounded-xl sm:h-72 xl:h-96 2xl:h-96 mb-6'
+        className='relative mb-6 h-32 overflow-hidden rounded-xl sm:h-72 xl:h-96 2xl:h-96'
       >
         {/* {images.map((image, index) => (
           <div
