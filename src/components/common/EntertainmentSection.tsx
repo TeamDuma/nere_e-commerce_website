@@ -33,7 +33,7 @@ const EntertainmentSection = () => {
     <div className='overflow-x-auto'>
       <div className='flex justify-start'>
         <div className='flex-shrink-0 cursor-pointer rounded'>
-          <div className='m-4  ' style={{ width: '450px', height: '80px' }}>
+          <div className='m-4  ' style={{ width: '385px', height: '80px' }}>
             <div
               className='  flex items-center rounded-lg border  border-[#298592]  p-2 '
               onClick={openNereCoinModal}
@@ -55,7 +55,7 @@ const EntertainmentSection = () => {
         </div>
 
         <div className='flex-shrink-0 cursor-pointer rounded'>
-          <div className='m-4  ' style={{ width: '450px', height: '80px' }}>
+          <div className='m-4  ' style={{ width: '385px', height: '80px' }}>
             <div
               className='  flex items-center rounded-lg border  border-[#298592]  p-2 '
               onClick={openGameModal}
@@ -76,7 +76,7 @@ const EntertainmentSection = () => {
           </div>
         </div>
         <div className='flex-shrink-0 cursor-pointer rounded'>
-          <div className='m-4  ' style={{ width: '450px', height: '80px' }}>
+          <div className='m-4  ' style={{ width: '385px', height: '80px' }}>
             <div
               className='  flex items-center rounded-lg border  border-[#298592]  p-2 '
               onClick={openLoyaltyModal}
