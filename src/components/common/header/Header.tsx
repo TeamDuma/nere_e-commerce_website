@@ -7,7 +7,7 @@ import UserIcon from '../User';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser, resetCart, selectShopping } from '@/lib/redux';
-import PickupLocation from '@/app/delivery/components/SelectPickupLocation';
+import PickupLocation from '@/app/(shop)/delivery/components/SelectPickupLocation';
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import LoginModal from '../LoginModal';
 import RegistrationModal from '../RegisterModal';
@@ -16,7 +16,7 @@ import { ILocation } from '@/types/location';
 import { BsSearch } from 'react-icons/bs';
 import CartIconHeader from '../CartIconHeader';
 import { useRouter } from 'next/navigation';
-import DeliveryModal from '../../../app/delivery/components/DeliveryModal';
+import DeliveryModal from '@/app/(shop)/delivery/components/DeliveryModal';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 import { usePostHog } from 'posthog-js/react';
 

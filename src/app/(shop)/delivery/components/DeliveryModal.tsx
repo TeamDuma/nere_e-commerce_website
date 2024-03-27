@@ -10,7 +10,7 @@ import {
 import { useGetlocationsQuery } from '@/lib/redux/services/location';
 import { ILocation } from '@/types/location';
 import { IoIosArrowDown } from 'react-icons/io';
-import PickupLocation from '@/app/delivery/components/SelectPickupLocation';
+import PickupLocation from '@/app/(shop)/delivery/components/SelectPickupLocation';
 
 const customStylesLarge: Styles = {
   overlay: {
