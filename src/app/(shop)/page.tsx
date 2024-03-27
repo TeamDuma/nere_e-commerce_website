@@ -5,7 +5,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import OngoingRow from '@/components/OngoingRow';
 import Title from '@/components/Title';
 import TwoBannerLayout from '@/components/TwoBannerLayout';
-import OngoingPurchases from '@/app/groups/ongoingPurchases/page';
+import OngoingPurchases from '@/app/(shop)/groups/ongoingPurchases/page';
 import Link from 'next/link';
 import Container from '@/components/common/Container';
 import EntertainmentSection from '@/components/common/EntertainmentSection';
