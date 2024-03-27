@@ -1,7 +1,7 @@
-import GroupRowModalItem from '@/app/groups/components/GroupRowRenderItem';
-import GroupRowModaltem from '@/app/groups/components/GroupRowRenderItem';
-import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
-import GroupRowRenderModal from '@/app/groups/components/GroupRowRenderModal';
+import GroupRowModalItem from '@/app/(shop)/groups/components/GroupRowRenderItem';
+import GroupRowModaltem from '@/app/(shop)/groups/components/GroupRowRenderItem';
+import GroupRowRenderItem from '@/app/(shop)/groups/components/GroupRowRenderItem';
+import GroupRowRenderModal from '@/app/(shop)/groups/components/GroupRowRenderModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import { Group } from 'next/dist/shared/lib/router/utils/route-regex';
 import Link from 'next/link';

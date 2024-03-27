@@ -1,4 +1,4 @@
-import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
+import GroupRowRenderItem from '@/app/(shop)/groups/components/GroupRowRenderItem';
 import {
   useCheckoutCartMutation,
   useUpdateCartMutation,

@@ -32,7 +32,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
           style={{ backgroundColor: '#FAFAFA' }}
         >
           <Providers>
-            <Header />
+            {/* <Header /> */}
             {props.children}
             <ToastContainer
               position='top-center'

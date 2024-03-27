@@ -7,8 +7,8 @@ import {
   useLazyGetPublicOngoingGroupsQuery,
 } from '@/lib/redux/services/group';
 import OngoingRow from '@/components/OngoingRow';
-import GroupRowRenderModal from '@/app/groups/components/GroupRowRenderModal';
-import GroupRowRenderItem from '@/app/groups/components/GroupRowRenderItem';
+import GroupRowRenderModal from '@/app/(shop)/groups/components/GroupRowRenderModal';
+import GroupRowRenderItem from '@/app/(shop)/groups/components/GroupRowRenderItem';
 import { Group } from '@/types/group';
 
 const Groups = () => {
