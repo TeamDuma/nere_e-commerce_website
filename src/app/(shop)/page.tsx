@@ -15,7 +15,11 @@ import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import OngoingModal from '@/components/common/OngoingModal';
 import ViewMore from '@/components/common/ViewMore';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, saveToken, selectShopping } from '@/lib/redux/slices/shopping';
+import {
+  addUser,
+  saveToken,
+  selectShopping,
+} from '@/lib/redux/slices/shopping';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
@@ -85,10 +89,11 @@ export default function Home() {
           const response = await axios.get<ILoginResponse>(
             `${process.env.NEXT_PUBLIC_API_URL}/auth/google/user`,
             {
-              headers: { Authorization: `Bearer ${token}` }
-            });
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
 
-          const { data } = response
+          const { data } = response;
           dispatch(addUser({ data }));
           dispatch(saveToken(data.token));
           toast.success('Logged In successfully', {
@@ -104,16 +109,12 @@ export default function Home() {
             className: 'w-80',
           });
         }
-
       } catch (error) {
-        toast.error(
-          'Failed to verify token: ',
-          { autoClose: 5000 }
-        );
+        toast.error('Failed to verify token: ', { autoClose: 5000 });
       }
     }
 
-    setUser()
+    setUser();
   }, []);
 
   return (
@@ -132,10 +133,11 @@ export default function Home() {
 
         <ViewMore />
         <div
-          className={`hidden sm:block ${isCartModalOpen
-            ? 'hidden'
-            : 'fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
-            }`}
+          className={`hidden sm:block ${
+            isCartModalOpen
+              ? 'hidden'
+              : 'fixed right-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
+          }`}
         >
           <div
             onClick={openCartModal}
@@ -158,10 +160,11 @@ export default function Home() {
         </div>
 
         <div
-          className={`hidden sm:block ${isOngoingModalOpen
-            ? 'hidden'
-            : 'fixed left-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
-            }`}
+          className={`hidden sm:block ${
+            isOngoingModalOpen
+              ? 'hidden'
+              : 'fixed left-0 top-1/2 z-50 flex -translate-y-1/2 transform items-center justify-center'
+          }`}
         >
           <div
             onClick={openOngoingModal}
