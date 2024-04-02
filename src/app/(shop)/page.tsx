@@ -9,19 +9,27 @@ import OngoingPurchases from '@/app/(shop)/groups/ongoingPurchases/page';
 import Link from 'next/link';
 import Container from '@/components/common/Container';
 import EntertainmentSection from '@/components/common/EntertainmentSection';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartModal from '@/components/common/CartModal';
 import { useGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
 import OngoingModal from '@/components/common/OngoingModal';
 import ViewMore from '@/components/common/ViewMore';
-import { useSelector } from 'react-redux';
-import { selectShopping } from '@/lib/redux/slices/shopping';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addUser,
+  saveToken,
+  selectShopping,
+} from '@/lib/redux/slices/shopping';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import { MdGroups } from 'react-icons/md';
 import ThreeBannerLayout from '@/components/ThreeBannerLayout';
 import { usePostHog } from 'posthog-js/react';
+import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
+import { ILoginResponse } from '@/types/customer';
+import { toast } from 'react-toastify';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -40,6 +48,11 @@ export default function Home() {
 
   const products = productsData?.data?.products ?? [];
   const groups = ongoingGroupsData?.data?.groups ?? [];
+
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+  const error = searchParams.get('error');
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -64,6 +77,45 @@ export default function Home() {
   const closeOngoingModal = () => {
     setIsOngoingModalOpen(false);
   };
+
+  useEffect(() => {
+    async function setUser() {
+      if (!token && !error) {
+        return;
+      }
+
+      try {
+        if (token) {
+          const response = await axios.get<ILoginResponse>(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/google/user`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+
+          const { data } = response;
+          dispatch(addUser({ data }));
+          dispatch(saveToken(data.token));
+          toast.success('Logged In successfully', {
+            autoClose: 500,
+          });
+
+          posthog.identify(data.customer.email);
+        }
+
+        if (error) {
+          toast.error('Sign in error! Login with username and password!', {
+            autoClose: 3000,
+            className: 'w-80',
+          });
+        }
+      } catch (error) {
+        toast.error('Failed to verify token: ', { autoClose: 5000 });
+      }
+    }
+
+    setUser();
+  }, []);
 
   return (
     <main>

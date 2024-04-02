@@ -35,7 +35,7 @@ export interface ILoginResponse {
   success: boolean;
   message: string;
   token: string;
-  customer: Customer[];
+  customer: Customer;
 }
 
 export interface IRegisterRequest {
