@@ -13,6 +13,7 @@ import { addUser, saveToken } from '@/lib/redux';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { useRouter } from 'next/navigation';
+import Spinner from './Spinner';
 
 const customStylesLarge: Styles = {
   overlay: {
@@ -33,7 +34,7 @@ const customStylesLarge: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '500px',
-    height: '750px',
+    height: '800px',
     borderRadius: '15px',
     border: 'none',
     zIndex: 1001,
@@ -58,7 +59,7 @@ const customStylesSmall: Styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '350px',
-    height: '700px',
+    height: '770px',
     borderRadius: '15px',
     border: 'none',
     zIndex: 1001,
@@ -118,10 +119,6 @@ const RegistrationModal: React.FC<{
       return;
     }
 
-    console.log('formattedPhone', phoneNumber);
-
-    console.log(email, name, phoneNumber, password);
-
     signUp({ email, name, phone: phoneNumber, password })
       .then((response) => {
         if ('data' in response) {
@@ -163,6 +160,15 @@ const RegistrationModal: React.FC<{
     return /^\+\d+$/.test(phoneNumber);
   };
 
+  const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (isLoading) {
+      return;
+    }
+
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`;
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -171,16 +177,16 @@ const RegistrationModal: React.FC<{
       style={window.innerWidth > 600 ? customStylesLarge : customStylesSmall}
     >
       <div className='rounded-4xl fixed left-0 top-0 flex h-full w-full items-center justify-center bg-opacity-50'>
-        <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white sm:max-h-screen'>
+        <div className='sm:rounded-4xl max-h-full w-full max-w-xl overflow-y-auto bg-white sm:max-h-screen p-4'>
           <div className='flex w-full items-center justify-center'>
             <div className=' mx-auto max-w-[400px]'>
-              <div className='rounded-xl p-4 '>
+              <div className='rounded-xl'>
                 <div className=' flex items-center justify-center text-center  '>
                   <Logo />
                 </div>
                 <div className=' flex items-center justify-center text-center  '>
                   <p className='text-sm	font-bold	'>
-                    Register with your email & Password
+                    Register with your email & password
                   </p>
                 </div>
               </div>
@@ -197,7 +203,7 @@ const RegistrationModal: React.FC<{
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className='mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none'
-                placeholder='kojo'
+                placeholder='Kojo'
               />
 
               <label
@@ -226,15 +232,12 @@ const RegistrationModal: React.FC<{
                   international
                   defaultCountry='GH'
                   value={phoneNumber}
+                  style={{
+                    outline: 'none',
+                    border: '1px solid #ffffff',
+                    margin: '10px',
+                  }}
                   onChange={handlePhoneNumberChange}
-                  containerStyle={{
-                    position: 'relative',
-                    width: '10%',
-                  }}
-                  inputStyle={{
-                    height: '100%',
-                    width: '100%',
-                  }}
                 />
               </div>
 
@@ -281,14 +284,7 @@ const RegistrationModal: React.FC<{
                 </button>
               </div>
 
-              <div className='inline-flex w-full items-center justify-center'>
-                <hr className='my-2 h-px w-32 border-0 bg-gray-200 ' />
-                <span className='  bg-white px-3 font-medium text-gray-900 '>
-                  or
-                </span>
-                <hr className='my-4 h-px w-32 border-0 bg-gray-200 ' />
-              </div>
-              <p className='ml-8'>
+              <p className='ml-8 mt-4'>
                 Already have an account?{' '}
                 <span
                   onClick={onLoginClick}
@@ -297,6 +293,37 @@ const RegistrationModal: React.FC<{
                   Login
                 </span>
               </p>
+
+              <div className='inline-flex w-full items-center justify-center'>
+                <hr className='my-2 h-px w-32 border-0 bg-gray-200 ' />
+                <span className='  bg-white px-3 font-medium text-gray-900 '>
+                  or
+                </span>
+                <hr className='my-4 h-px w-32 border-0 bg-gray-200 ' />
+              </div>
+
+              <button
+                className='inline-flex w-full items-center justify-center space-x-2 rounded-lg border-[#298592] border-solid border-2 bg-white py-2 font-medium text-[#298592]'
+                onClick={handleGoogleLogin}
+                disabled={isLoading}
+              >
+                <span>
+                  {isLoading ?
+                    <Spinner /> :
+                    <span className='flex flex-row gap-6'>
+                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="block h-6 w-6">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                        <path fill="none" d="M0 0h48v48H0z"></path>
+                      </svg>
+
+                      Sign up with Google
+                    </span>
+                  }
+                </span>
+              </button>
             </div>
           </div>
         </div>
