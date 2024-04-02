@@ -83,8 +83,6 @@ const CartComponent = () => {
     return Math.round(savingsPercentage);
   };
 
-  console.log('cartItems', cartItems);
-
   const handleApplyPromoCode = async () => {
     try {
       const customer_uid = userInfo.data.customer.uid;
@@ -100,7 +98,7 @@ const CartComponent = () => {
       const { data } = response;
       const discountAmount = data.discount.discount_amount;
       setIsPromoCodeApplied(true);
-      setDiscountAmount(discountAmount);
+      setDiscountAmount(Number(discountAmount));
       setLoading(false);
       // toast.success('Promo code Applied!');
       toast.success('Promo code Applied!', {
