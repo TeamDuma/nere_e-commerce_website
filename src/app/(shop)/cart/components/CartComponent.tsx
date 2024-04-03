@@ -208,7 +208,7 @@ const CartComponent = () => {
                     <div className='md:col-span-2'>
                       <div className='flex max-w-[500px] flex-col gap-3'>
                         <div className='flex items-center pt-5'>
-                          <p className='cursor-pointer text-base font-medium leading-3 text-[1A464C] dark:text-white'>
+                          <p className='cursor-pointer text-base font-medium leading-3 text-[#1A464C] dark:text-white'>
                             ¢{item.sale_price}
                           </p>
                           <p className='cursor-pointer pl-2 text-sm leading-3 text-red-500 line-through'>
