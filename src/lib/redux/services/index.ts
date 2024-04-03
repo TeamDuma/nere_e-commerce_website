@@ -9,6 +9,10 @@ import {
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
   prepareHeaders: (headers: Headers, { getState }) => {
+    headers.set('Accept', 'application/json');
+    headers.set('Cache-Control', 'no-cache');
+    headers.set('Pragma', 'no-cache');
+    headers.set('Expires', '0');
     return headers;
   },
 });
