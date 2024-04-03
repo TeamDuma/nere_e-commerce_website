@@ -176,7 +176,7 @@ const DeliveryModal: React.FC<{
               Pick-up location
             </label>
             <h5 className='mb-4 ml-4 text-sm text-[#979797]'>
-{/*               Delivery between 05 December and 07 December */}
+              {/*               Delivery between 05 December and 07 December */}
             </h5>
           </div>
 
