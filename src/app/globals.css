@@ -358,15 +358,19 @@ footer {
   margin-right: 8px;
   max-width: 100%;
   display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
+  /* white-space: nowrap;
+  overflow: hidden; */
   text-overflow: ellipsis;
   max-width: 15ch;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
 }
 
 @media (min-width: 1024px) {
   .product-name {
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
   }
 }
 

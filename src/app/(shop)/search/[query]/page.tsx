@@ -83,13 +83,14 @@ const Search = ({ params }: Props) => {
                         </div>
                       </div>
                       <div className='flex items-center'>
-                        <h2
-                          tabIndex={0}
-                          className='product-name text-lg font-semibold focus:outline-none lg:text-lg lg:font-semibold'
-                        >
-                          {product?.name}
-                        </h2>
-                      </div>
+  <h5
+    tabIndex={0}
+    className='product-name text-sm font-light focus:outline-none lg:text-sm lg:font-light h-10 overflow-hidden line-clamp-3'
+  >
+    {product?.name}
+  </h5>
+</div>
+
                       <div className='ml-2 flex'>
                         <div
                           style={{ color: '#F31748' }}
