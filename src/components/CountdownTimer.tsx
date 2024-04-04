@@ -21,8 +21,8 @@ const CountdownTimer = () => {
   function calculateTimeLeft(): TimeLeft {
     const targetDate = new Date(); // Current date
     targetDate.setDate(
-      targetDate.getDate() + ((4 + 7 - targetDate.getDay()) % 7)
-    ); // Next Thursday
+      targetDate.getDate() + ((5 + 7 - targetDate.getDay()) % 7)
+    ); // Next Friday
     targetDate.setHours(0, 0, 0, 0); // 12 AM
 
     const difference = targetDate.getTime() - new Date().getTime();
