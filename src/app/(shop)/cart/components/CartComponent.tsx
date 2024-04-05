@@ -85,8 +85,7 @@ const CartComponent = () => {
 
   const handleApplyPromoCode = async () => {
     try {
-  
-      if(!promoCode){
+      if (!promoCode) {
         toast.error('Please enter a promo code!');
         return;
       }
