@@ -363,7 +363,9 @@ const CartComponent = () => {
                       type='text'
                       placeholder='Enter promo code'
                       value={promoCode}
-                      onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                      onChange={(e) =>
+                        setPromoCode(e.target.value.toUpperCase())
+                      }
                       className='w-full rounded-md border-none pl-2 outline-none'
                     />
                     <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
@@ -373,9 +375,7 @@ const CartComponent = () => {
                   {userInfo ? (
                     <button
                       onClick={handleApplyPromoCode}
-                      disabled={
-                        isPromoCodeApplied || Loading
-                      }
+                      disabled={isPromoCodeApplied || Loading}
                       className='relative ml-8 rounded-md px-4 py-2 text-[#1A464C]'
                     >
                       {isLoading && (
