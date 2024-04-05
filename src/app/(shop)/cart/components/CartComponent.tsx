@@ -85,6 +85,12 @@ const CartComponent = () => {
 
   const handleApplyPromoCode = async () => {
     try {
+  
+      if(!promoCode){
+        toast.error('Please enter a promo code!');
+        return;
+      }
+
       const customer_uid = userInfo.data.customer.uid;
       const total_amount = calculateTotal();
       setLoading(true);
