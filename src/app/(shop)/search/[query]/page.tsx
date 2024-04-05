@@ -85,7 +85,7 @@ const Search = ({ params }: Props) => {
                       <div className='flex items-center'>
                         <h5
                           tabIndex={0}
-                          className='product-name line-clamp-3 h-10 overflow-hidden text-sm font-light focus:outline-none lg:text-sm lg:font-light'
+                          className='product-name line-clamp-3 h-10 overflow-hidden text-sm font-semibold focus:outline-none lg:text-sm lg:font-semibold'
                         >
                           {product?.name}
                         </h5>
