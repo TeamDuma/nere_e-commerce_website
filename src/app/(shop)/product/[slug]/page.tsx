@@ -278,16 +278,20 @@ export default function ProductDetailPage({ params }: Props) {
                 </div>
 
                 <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
-                  <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
-                    <MdGroups className='mr-2 text-[#298592]' />
-                    {group?.members?.length ?? 0} participants
+                  <div className='flex border-b border-t border-[#D9D9D9] p-2'>
+                    <MdGroups className='mr-2 text-[#298592] sm:text-xs md:text-base' />
+                    <span className='text-xs sm:text-base md:text-base'>
+                      {group?.members?.length ?? 0} participants
+                    </span>
                   </div>
-                  <div className='flex items-center border-b border-t border-blue-200 p-2'>
-                    <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
-                    <span>Ends in</span>
+                  <div className='flex border-b border-t border-blue-200 p-2'>
+                    <MdOutlineAccessAlarms className='mr-2 text-[#298592] sm:text-xs md:text-base' />
+                    <span className='text-xs sm:text-base md:text-base'>
+                      Ends in
+                    </span>
                     <span
-                      className='text-[#F58929]'
-                      style={{ paddingLeft: '0.5rem' }}
+                      className='text-xs text-[#F58929] sm:text-base md:text-base'
+                      style={{ paddingLeft: '2px' }}
                     >
                       <CountdownTimer />
                     </span>
