@@ -361,7 +361,7 @@ footer {
   /* white-space: nowrap;
   overflow: hidden; */
   text-overflow: ellipsis;
-  max-width: 15ch;
+  max-width: 25ch;
   -webkit-line-clamp: 3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
