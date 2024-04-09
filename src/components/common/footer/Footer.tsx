@@ -140,9 +140,9 @@ const Footer = () => {
               <div>
                 <p className='font-bold'>Contact</p>
                 <nav className='mt-4 flex flex-col space-y-2 text-sm text-[#1A464C]'>
-                  <a className='hover:opacity-75' href='tel:+233549230728'>
+                  <a className='hover:opacity-75' href='tel:+233532686733'>
                     {' '}
-                    +233 54 923 0728{' '}
+                    +233 53 268 6733{' '}
                   </a>
                   <a
                     className='hover:opacity-75'
