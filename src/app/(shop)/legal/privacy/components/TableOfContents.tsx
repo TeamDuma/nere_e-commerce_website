@@ -275,9 +275,9 @@ const TableOfContents: React.FC = () => {
                   }
                 >
                   info@nerecommunity.com
-                </span> <br />{' '}
-                You can close your account through the web application, or by
-                sending an email to
+                </span>{' '}
+                <br /> You can close your account through the web application,
+                or by sending an email to
                 <span
                   style={{
                     color: '#F58929',
