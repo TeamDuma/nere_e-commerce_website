@@ -218,7 +218,6 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               </div>
             </div>
 
-         
             <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
               <div className='flex items-center border-b border-t border-blue-200 p-1'>
                 <MdGroups className='mr-2 text-[#298592]' />

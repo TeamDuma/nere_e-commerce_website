@@ -215,7 +215,6 @@ export default function ProductDetailPage({ params }: Props) {
                   <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                     {product?.name}
                   </h3>
-               
                 </div>
                 <div className='star-icon my-4 flex  items-center'>
                   {' '}
@@ -258,27 +257,26 @@ export default function ProductDetailPage({ params }: Props) {
                 </div>
 
                 <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
-              <div className='flex items-center border-b border-t border-blue-200 p-1'>
-                <MdGroups className='mr-2 text-[#298592]' />
-                <span className='mr-1 text-base'>
-                  {group?.members?.length ?? 0}
-                </span>
-                <span className='text-sm'>participants</span>
-              </div>
-              <div className='flex items-center border-b border-t border-blue-200 p-1'>
-                <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
-                <span className='mr-1 text-sm'>Ends in</span>
-                <span className='text-sm text-[#F58929] md:text-base'>
-                  <CountdownTimer />
-                </span>
-              </div>
-            </div>
+                  <div className='flex items-center border-b border-t border-blue-200 p-1'>
+                    <MdGroups className='mr-2 text-[#298592]' />
+                    <span className='mr-1 text-base'>
+                      {group?.members?.length ?? 0}
+                    </span>
+                    <span className='text-sm'>participants</span>
+                  </div>
+                  <div className='flex items-center border-b border-t border-blue-200 p-1'>
+                    <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
+                    <span className='mr-1 text-sm'>Ends in</span>
+                    <span className='text-sm text-[#F58929] md:text-base'>
+                      <CountdownTimer />
+                    </span>
+                  </div>
+                </div>
 
                 <Link href='/products'>
                   <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
                     Continue Shopping
                   </h1>
-
                 </Link>
                 {product.min_quantity ? (
                   <h2 className='my-2'>
