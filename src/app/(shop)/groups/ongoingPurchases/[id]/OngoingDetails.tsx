@@ -117,7 +117,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
   return (
     <div className='my-8'>
-      <div className='container mx-auto px-6'>
+      <div className='container mx-auto px-2'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='my-2 flex flex-wrap items-center text-sm text-gray-400'>
             <a href='/' className='hover:text-gray-600 hover:underline'>
@@ -217,18 +217,19 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                 )}
               </div>
             </div>
+
             <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
-              <div className='flex items-center border-b border-t border-[#D9D9D9] p-2'>
+              <div className='flex items-center border-b border-t border-blue-200 p-1'>
                 <MdGroups className='mr-2 text-[#298592]' />
-                {group?.members?.length ?? 0} participants
+                <span className='mr-1 text-base'>
+                  {group?.members?.length ?? 0}
+                </span>
+                <span className='text-sm'>participants</span>
               </div>
-              <div className='flex items-center border-b border-t border-blue-200 p-2'>
+              <div className='flex items-center border-b border-t border-blue-200 p-1'>
                 <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
-                <span>Ends in</span>
-                <span
-                  className='text-[#F58929]'
-                  style={{ paddingLeft: '0.5rem' }}
-                >
+                <span className='mr-1 text-sm'>Ends in</span>
+                <span className='text-sm text-[#F58929] md:text-base'>
                   <CountdownTimer />
                 </span>
               </div>

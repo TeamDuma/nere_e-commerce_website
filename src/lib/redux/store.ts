@@ -23,6 +23,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 const persistConfig = {
   key: 'root',
   storage,
@@ -40,6 +41,9 @@ export const reduxStore = configureStore({
     }).concat(middleware);
   },
 });
+
+setupListeners(reduxStore.dispatch);
+
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;
 export const persistor = persistStore(reduxStore);
