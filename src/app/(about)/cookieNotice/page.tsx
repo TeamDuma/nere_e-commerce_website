@@ -9,7 +9,7 @@ const Page = () => {
           <div className='grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible'>
             <div className='flex flex-col gap-8 text-left'>
               <h1 className='text-4xl	font-bold	text-[#298592]'>
-              NERE COMMUNITY COOKIE NOTICE
+                NERE COMMUNITY COOKIE NOTICE
               </h1>
             </div>
           </div>

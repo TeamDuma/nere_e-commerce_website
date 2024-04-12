@@ -112,13 +112,13 @@ const TableOfContents: React.FC = () => {
             Platform and also capture session recordings which allow us to see
             where visitors are getting stuck, find solutions to these obstacles
             and as a result create a better user experience for them. For more
-            information about PostHog, please visit 
+            information about PostHog, please visit
             <span
               style={{
                 color: 'blue',
                 textDecoration: 'underline',
                 cursor: 'pointer',
-                padding:'5px'
+                padding: '5px',
               }}
               onClick={() =>
                 (window.location.href =
