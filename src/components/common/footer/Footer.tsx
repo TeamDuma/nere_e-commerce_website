@@ -109,11 +109,19 @@ const Footer = () => {
                     {' '}
                     WhatsApp Community{' '}
                   </a>
-                  <a className='hover:opacity-75' href='https://forms.gle/V2gyKYt9xdD6EL4JA' target='_blank'>
+                  <a
+                    className='hover:opacity-75'
+                    href='https://forms.gle/V2gyKYt9xdD6EL4JA'
+                    target='_blank'
+                  >
                     {' '}
                     Become an Agent{' '}
                   </a>
-                  <a className='hover:opacity-75' href='https://forms.gle/LLoZ5uqj8wBnRo8FA' target='_blank'>
+                  <a
+                    className='hover:opacity-75'
+                    href='https://forms.gle/LLoZ5uqj8wBnRo8FA'
+                    target='_blank'
+                  >
                     {' '}
                     Become a Supplier{' '}
                   </a>
