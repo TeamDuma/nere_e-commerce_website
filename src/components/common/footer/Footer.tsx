@@ -127,7 +127,7 @@ const Footer = () => {
                     Privacy Policy{' '}
                   </a>
 
-                  <a className='hover:opacity-75' href=''>
+                  <a className='hover:opacity-75' href='/cookieNotice'>
                     {' '}
                     Cookie Statement
                   </a>

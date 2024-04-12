@@ -262,9 +262,35 @@ const TableOfContents: React.FC = () => {
                 Personal Data. If you decide that you no longer wish to
                 participate on the Platform, you can opt-out or adjust your
                 preferences at any time by closing your account or by sending an
-                email to info@nerecommunity.com You can close your account
+                email to    <span
+              style={{
+                color: 'blue',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                padding:'5px'
+
+              }}
+              onClick={() =>
+                (window.location.href = 'mailto:info@nerecommunity.com')
+              }
+            >
+              info@nerecommunity.com
+            </span> You can close your account
                 through the web application, or by sending an email to
-                info@nerecommunity.com . Once your account is closed, all
+                <span
+              style={{
+                color: 'blue',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                padding:'5px'
+
+              }}
+              onClick={() =>
+                (window.location.href = 'mailto:info@nerecommunity.com')
+              }
+            >
+              info@nerecommunity.com
+            </span> . Once your account is closed, all
                 products and services that you access through your account will
                 no longer be available.
               </p>
