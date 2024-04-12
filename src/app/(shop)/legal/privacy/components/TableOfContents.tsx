@@ -265,7 +265,7 @@ const TableOfContents: React.FC = () => {
                 email to{' '}
                 <span
                   style={{
-                    color: 'blue',
+                    color: '#F58929',
                     textDecoration: 'underline',
                     cursor: 'pointer',
                     padding: '5px',
@@ -275,12 +275,12 @@ const TableOfContents: React.FC = () => {
                   }
                 >
                   info@nerecommunity.com
-                </span>{' '}
+                </span> <br />{' '}
                 You can close your account through the web application, or by
                 sending an email to
                 <span
                   style={{
-                    color: 'blue',
+                    color: '#F58929',
                     textDecoration: 'underline',
                     cursor: 'pointer',
                     padding: '5px',
@@ -620,7 +620,7 @@ const TableOfContents: React.FC = () => {
             of your personal data, please contact us via email at{' '}
             <span
               style={{
-                color: 'blue',
+                color: '#F58929',
                 textDecoration: 'underline',
                 cursor: 'pointer',
               }}

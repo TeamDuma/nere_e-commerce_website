@@ -115,7 +115,7 @@ const TableOfContents: React.FC = () => {
             information about PostHog, please visit
             <span
               style={{
-                color: 'blue',
+                color: '#F58929',
                 textDecoration: 'underline',
                 cursor: 'pointer',
                 padding: '5px',
@@ -186,7 +186,7 @@ const TableOfContents: React.FC = () => {
             of your personal data, please send us an email at{' '}
             <span
               style={{
-                color: 'blue',
+                color: '#F58929',
                 textDecoration: 'underline',
                 cursor: 'pointer',
               }}
