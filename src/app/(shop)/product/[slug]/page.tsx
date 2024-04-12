@@ -108,7 +108,7 @@ export default function ProductDetailPage({ params }: Props) {
     <>
       <div>
         <div className='px-2 py-2'>
-          <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='mx-auto max-w-7xl px-4 sm:px-2 lg:px-8'>
             <div className='my-2 flex flex-wrap items-center text-sm text-gray-400'>
               <a href='/' className='hover:text-gray-600 hover:underline'>
                 Home
@@ -180,9 +180,9 @@ export default function ProductDetailPage({ params }: Props) {
               </a>
             </div>
           </div>
-          <div className='mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='mx-auto mt-6 max-w-7xl px-4 sm:px-2 lg:px-8'>
             <div className='-mx-4 flex flex-col md:flex-row'>
-              <div className='px-4 md:flex-1'>
+              <div className='px-2 md:flex-1'>
                 <div x-data='{ image: 1 }' x-cloak=''>
                   <div className='mb-4 h-64 rounded-lg  md:h-80'>
                     <div
@@ -215,27 +215,6 @@ export default function ProductDetailPage({ params }: Props) {
                   <h3 className='text-20 text-lg font-medium uppercase text-[#1A464C]'>
                     {product?.name}
                   </h3>
-                  {/* {variantsArray.length > 0 && (
-                    <div className='ml-12'>
-                      <div className='mt-1'>
-                        <select
-                          id='variant'
-                          value={selectedVariant}
-                          onChange={(e) => handleVariantChange(e.target.value)}
-                          className='w-full rounded border border-gray-300 p-2'
-                        >
-                          <option value='' disabled>
-                            Select a variant
-                          </option>
-                          {variantsArray.map((variant, index) => (
-                            <option key={index} value={variant}>
-                              {variant}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  )} */}
                 </div>
                 <div className='star-icon my-4 flex  items-center'>
                   {' '}
@@ -278,21 +257,17 @@ export default function ProductDetailPage({ params }: Props) {
                 </div>
 
                 <div className='grid grid-cols-2 divide-x divide-[#D9D9D9]'>
-                  <div className='flex border-b border-t border-[#D9D9D9] p-2'>
-                    <MdGroups className='mr-2 text-[#298592] sm:text-xs md:text-base' />
-                    <span className='text-xs sm:text-base md:text-base'>
-                      {group?.members?.length ?? 0} participants
+                  <div className='flex items-center border-b border-t border-blue-200 p-1'>
+                    <MdGroups className='mr-2 text-[#298592]' />
+                    <span className='mr-1 text-base'>
+                      {group?.members?.length ?? 0}
                     </span>
+                    <span className='text-sm'>participants</span>
                   </div>
-                  <div className='flex border-b border-t border-blue-200 p-2'>
-                    <MdOutlineAccessAlarms className='mr-2 text-[#298592] sm:text-xs md:text-base' />
-                    <span className='text-xs sm:text-base md:text-base'>
-                      Ends in
-                    </span>
-                    <span
-                      className='text-xs text-[#F58929] sm:text-base md:text-base'
-                      style={{ paddingLeft: '2px' }}
-                    >
+                  <div className='flex items-center border-b border-t border-blue-200 p-1'>
+                    <MdOutlineAccessAlarms className='mr-2 text-[#298592]' />
+                    <span className='mr-1 text-sm'>Ends in</span>
+                    <span className='text-sm text-[#F58929] md:text-base'>
                       <CountdownTimer />
                     </span>
                   </div>
@@ -302,8 +277,6 @@ export default function ProductDetailPage({ params }: Props) {
                   <h1 className=' text-hover my-2 w-1/2 cursor-pointer  text-[#F58929] underline'>
                     Continue Shopping
                   </h1>
-
-                  {/* <h1 className='mt-5 text-[#F58929]'>Continue Shopping</h1> */}
                 </Link>
                 {product.min_quantity ? (
                   <h2 className='my-2'>
