@@ -29,8 +29,8 @@ export const baseQueryWithAuth: BaseQueryFn<
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithAuth,
-  refetchOnFocus: true,
-  refetchOnReconnect: true,
+  // refetchOnFocus: true,
+  // refetchOnReconnect: true,
   refetchOnMountOrArgChange: true,
   endpoints: () => ({}),
   tagTypes: ['Products'],
