@@ -109,11 +109,11 @@ const Footer = () => {
                     {' '}
                     WhatsApp Community{' '}
                   </a>
-                  <a className='hover:opacity-75' href=''>
+                  <a className='hover:opacity-75' href='https://forms.gle/V2gyKYt9xdD6EL4JA' target='_blank'>
                     {' '}
                     Become an Agent{' '}
                   </a>
-                  <a className='hover:opacity-75' href=''>
+                  <a className='hover:opacity-75' href='https://forms.gle/LLoZ5uqj8wBnRo8FA' target='_blank'>
                     {' '}
                     Become a Supplier{' '}
                   </a>
@@ -122,14 +122,14 @@ const Footer = () => {
               <div>
                 <p className='font-bold'>Legal</p>
                 <nav className='mt-4 flex flex-col space-y-2 text-sm text-[#1A464C]'>
-                  <a className='hover:opacity-75' href='/privacy'>
+                  <a className='hover:opacity-75' href='/legal/privacy'>
                     {' '}
-                    Privacy Policy{' '}
+                    Privacy Notice{' '}
                   </a>
 
-                  <a className='hover:opacity-75' href='/cookieNotice'>
+                  <a className='hover:opacity-75' href='/legal/cookies'>
                     {' '}
-                    Cookie Statement
+                    Cookie Policy
                   </a>
                   <a className='hover:opacity-75' href=''>
                     {' '}
