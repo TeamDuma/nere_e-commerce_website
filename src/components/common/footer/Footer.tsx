@@ -139,7 +139,10 @@ const Footer = () => {
                     {' '}
                     Cookie Policy
                   </a>
-                  <a className='hover:opacity-75' href=''>
+                  <a
+                    className='hover:opacity-75'
+                    href='/legal/terms-of-service'
+                  >
                     {' '}
                     Terms of service
                   </a>
