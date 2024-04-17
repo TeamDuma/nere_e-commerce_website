@@ -782,7 +782,20 @@ const TableOfContents: React.FC = () => {
               <p>
                 <span className='font-bold'>a.</span>
                 By using this Platform, you agree to notify Nere Ltd fortwith by
-                emailing info@nerecommunity.com or contacting the phone number
+                emailing{' '}
+                <span
+                  style={{
+                    color: '#F58929',
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() =>
+                    (window.location.href = 'mailto:info@nerecommunity.com')
+                  }
+                >
+                  info@nerecommunity.com
+                </span>{' '}
+                or contacting the phone number
                 provided on the Nere Community website of any grievances,
                 challenges or issues encountered in using Platform or Services
                 (“Complaints”), and undergoing Nere Ltd’s internal complaints
@@ -963,19 +976,17 @@ const TableOfContents: React.FC = () => {
             19.CONTACT INFORMATION
           </h2>
           <p>
-            Questions about the Terms of Service should be sent to us at
+            Questions about the Terms of Service should be sent to us at{' '}
             <span
               style={{
-                color: 'blue',
+                color: '#F58929',
                 textDecoration: 'underline',
                 cursor: 'pointer',
               }}
               onClick={() =>
                 (window.location.href = 'mailto:info@nerecommunity.com')
               }
-            >
-              info@nerecommunity.com
-            </span>
+            >info@nerecommunity.com</span>
             .
           </p>
         </section>
