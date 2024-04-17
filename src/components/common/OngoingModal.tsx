@@ -67,7 +67,7 @@ const OngoingModal: React.FC<{
               {groups.map((item) => (
                 <div
                   key={item.id}
-                  className='my-4 flex-shrink-0 rounded border'
+                  className='my-4 flex-shrink-0 rounded border cursor-pointer'
                 >
                   <GroupRowRenderModal item={item} />
                 </div>
