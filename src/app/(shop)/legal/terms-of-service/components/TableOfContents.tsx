@@ -795,11 +795,10 @@ const TableOfContents: React.FC = () => {
                 >
                   info@nerecommunity.com
                 </span>{' '}
-                or contacting the phone number
-                provided on the Nere Community website of any grievances,
-                challenges or issues encountered in using Platform or Services
-                (“Complaints”), and undergoing Nere Ltd’s internal complaints
-                handling process.
+                or contacting the phone number provided on the Nere Community
+                website of any grievances, challenges or issues encountered in
+                using Platform or Services (“Complaints”), and undergoing Nere
+                Ltd’s internal complaints handling process.
               </p>{' '}
             </li>
             <li className='mb-2'>
@@ -986,7 +985,9 @@ const TableOfContents: React.FC = () => {
               onClick={() =>
                 (window.location.href = 'mailto:info@nerecommunity.com')
               }
-            >info@nerecommunity.com</span>
+            >
+              info@nerecommunity.com
+            </span>
             .
           </p>
         </section>
