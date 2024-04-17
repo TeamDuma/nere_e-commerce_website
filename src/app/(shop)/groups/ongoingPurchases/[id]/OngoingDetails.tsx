@@ -50,6 +50,15 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
 
+  const [joined, setJoined] = useState(false);
+
+  useEffect(() => {
+    const joinedState = localStorage.getItem(`joined_${group?.id}`);
+    if (joinedState === 'true') {
+      setJoined(true);
+    }
+  }, [group?.id]);
+
   if (isLoading) {
     return (
       <div>
@@ -93,6 +102,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     toast.success('Item added to cart!', {
       autoClose: 500,
     });
+
+    setJoined(true); 
+    localStorage.setItem(`joined_${group?.id}`, 'true'); 
+
 
     posthogClient.capture({
       distinctId: userInfo?.data?.customer.email,
@@ -270,7 +283,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                     onClick={handleAddToCart}
                     disabled={remaining >= (product.min_quantity ?? 0)}
                   >
-                    Join Group
+                {joined ? 'Joined' : 'Join Group'}
                   </button>
                 </div>
               </>
@@ -280,7 +293,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
                   className={`my-4 rounded bg-[#F58929] px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none`}
                   onClick={handleAddToCart}
                 >
-                  Join Group
+                {joined ? 'Joined' : 'Join Group'}
                 </button>
               </div>
             )}
