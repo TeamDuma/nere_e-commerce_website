@@ -106,14 +106,12 @@ const Category = ({ params }: Props) => {
                         }}
                       >
                         <img
-                          style={{ borderRadius: '10px' }}
+                          style={{
+                            borderRadius: '10px',
+                            width: '40px',
+                            height: '60px',
+                          }}
                           src={product?.plain_image}
-                          width={
-                            product.name === 'Frytol sunflower oil 0.9L' ||
-                            product.name === "Dr. Annie's honey 500ml"
-                              ? '60px'
-                              : '60px'
-                          }
                           alt='cerelac image'
                         />
                         {hoveredProductId === String(product.id) && (

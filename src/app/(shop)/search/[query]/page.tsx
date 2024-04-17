@@ -70,14 +70,12 @@ const Search = ({ params }: Props) => {
                           }}
                         >
                           <img
-                            style={{ borderRadius: '10px' }}
+                            style={{
+                              borderRadius: '10px',
+                              width: '40px',
+                              height: '60px',
+                            }}
                             src={product?.plain_image}
-                            width={
-                              product.name === 'Frytol sunflower oil 0.9L' ||
-                              product.name === "Dr. Annie's honey 500ml"
-                                ? '60px'
-                                : '90px'
-                            }
                             alt='cerelac image'
                           />
                         </div>
