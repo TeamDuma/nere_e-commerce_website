@@ -31,7 +31,7 @@ export const apiSlice = createApi({
   baseQuery: baseQueryWithAuth,
   // refetchOnFocus: true,
   // refetchOnReconnect: true,
-  refetchOnMountOrArgChange: true,
+  refetchOnMountOrArgChange: 10,
   endpoints: () => ({}),
   tagTypes: ['Products'],
 });
