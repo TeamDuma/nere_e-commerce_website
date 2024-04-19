@@ -12,6 +12,9 @@ const Categories = () => {
       <div className='flex flex-nowrap justify-start'>
         {categories.length > 0 ? (
           categories.map((category: any) => (
+
+
+
             <div
               key={category.id}
               className='w-full p-4 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5'
@@ -35,8 +38,23 @@ const Categories = () => {
             </div>
           ))
         ) : (
-          <p>Loading...</p>
-        )}
+          <div role="status" className="space-y-2.5 animate-pulse max-w-lg">
+
+
+
+
+
+          <div className="mt-4 ">
+          <svg className="w-8 h-8 text-gray-200 dark:text-gray-700 me-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#808080" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        
+                <div className="flex items-center w-full max-w-[360px] my-4">
+                <div className="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-48"></div>
+            </div>
+            </div>
+          <span className="sr-only">Loading...</span>
+        </div>        )}
       </div>
     </div>
   );
