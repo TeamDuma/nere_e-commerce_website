@@ -1,10 +1,10 @@
 'use client';
 
-import { useLazyGetPublicOngoingGroupsQuery } from "@/lib/redux/services/group";
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
-import GroupRowRenderItem from "../components/GroupRowRenderItem";
-import { useEffect, useState } from "react";
-import { Group } from "@/types/group";
+import { useLazyGetPublicOngoingGroupsQuery } from '@/lib/redux/services/group';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import GroupRowRenderItem from '../components/GroupRowRenderItem';
+import { useEffect, useState } from 'react';
+import { Group } from '@/types/group';
 
 const OngoingPurchases: React.FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
@@ -24,7 +24,7 @@ const OngoingPurchases: React.FC = () => {
       {isLoading && (
         <div
           role='status'
-          className='max-w-sm animate-pulse rounded border border-gray-200 p-4 shadow dark:border-gray-700 md:p-6 mx-4'
+          className='mx-4 max-w-sm animate-pulse rounded border border-gray-200 p-4 shadow dark:border-gray-700 md:p-6'
         >
           <div className='mt-4 flex items-center'>
             <svg
