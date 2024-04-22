@@ -105,7 +105,7 @@ const Category = ({ params }: Props) => {
                           borderRadius: '10px',
                         }}
                       >
-                          <img
+                        <img
                           style={{ borderRadius: '10px' }}
                           src={product?.plain_image}
                           width={

@@ -69,17 +69,17 @@ const Search = ({ params }: Props) => {
                             borderRadius: '10px',
                           }}
                         >
-                            <img
-                          style={{ borderRadius: '10px' }}
-                          src={product?.plain_image}
-                          width={
-                            product.name === 'Frytol sunflower oil 0.9L' ||
-                            product.name === "Dr. Annie's honey 500ml"
-                              ? '60px'
-                              : '60px'
-                          }
-                          alt='cerelac image'
-                        />
+                          <img
+                            style={{ borderRadius: '10px' }}
+                            src={product?.plain_image}
+                            width={
+                              product.name === 'Frytol sunflower oil 0.9L' ||
+                              product.name === "Dr. Annie's honey 500ml"
+                                ? '60px'
+                                : '60px'
+                            }
+                            alt='cerelac image'
+                          />
                           {/* <img
                             style={{
                               borderRadius: '10px',
