@@ -18,10 +18,9 @@ const Page = () => {
                   Nere Community Terms of Service
                 </h1>
                 <p>
-                  Welcome to Nere Community! We’re happy to
-                  have you on board. We hope that you enjoy your experience!
-                  Please be sure to familiarize yourself with our terms stated
-                  below.
+                  Welcome to Nere Community! We’re happy to have you on board.
+                  We hope that you enjoy your experience! Please be sure to
+                  familiarize yourself with our terms stated below.
                 </p>
               </div>
             </div>
