@@ -11,7 +11,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#introduction'
             >
-              1. Introduction
+              Introduction
             </a>
           </li>
           <li>
@@ -19,7 +19,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#general-conditions'
             >
-              2. General Conditions
+              General Conditions
             </a>
           </li>
           <li>
@@ -27,7 +27,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#user-representations--obligations'
             >
-              3. User Representations & Obligations
+              User Representations & Obligations
             </a>
           </li>
           <li>
@@ -35,7 +35,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#accuracy-completeness-and-timeliness-of-information'
             >
-              4. Accuracy, Completeness and Timeliness of Information
+              Accuracy, Completeness and Timeliness of Information
             </a>
           </li>
           <li>
@@ -43,7 +43,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#modifications-to-service-and-prices'
             >
-              5. Modifications to Service and Prices
+              Modifications to Service and Prices
             </a>
           </li>
           <li>
@@ -51,7 +51,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#products-or-services'
             >
-              6. Products or Services
+              Products or Services
             </a>
           </li>
           <li>
@@ -59,7 +59,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#accuracy-of-account-information'
             >
-              7. Accuracy of Account Information
+              Accuracy of Account Information
             </a>
           </li>
           <li>
@@ -67,7 +67,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#optional-tools'
             >
-              8. Optional Tools
+              Optional Tools
             </a>
           </li>
           <li>
@@ -75,7 +75,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#third-party-links'
             >
-              9. Third-Party Links
+              Third-Party Links
             </a>
           </li>
           <li>
@@ -83,7 +83,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#user-comments-feedback-and-other-submissions'
             >
-              10. User Comments, Feedback and Other Submissions
+              User Comments, Feedback and Other Submissions
             </a>
           </li>
           <li>
@@ -91,7 +91,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#personal-information'
             >
-              11. Personal Information
+              Personal Information
             </a>
           </li>
           <li>
@@ -99,7 +99,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#errors-inaccuracies-and-omissions'
             >
-              12. Errors, Inaccuracies and Omissions
+              Errors, Inaccuracies and Omissions
             </a>
           </li>
           <li>
@@ -107,7 +107,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#disclaimer-of-warranties-limitation-of-liability'
             >
-              13. Disclaimer of Warranties; Limitation of Liability
+              Disclaimer of Warranties; Limitation of Liability
             </a>
           </li>
           <li>
@@ -115,7 +115,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#dispute-resolution'
             >
-              14. Dispute Resolution
+              Dispute Resolution
             </a>
           </li>
           <li>
@@ -131,7 +131,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#termination'
             >
-              16. Termination
+              Termination
             </a>
           </li>
           <li>
@@ -139,7 +139,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#entire-agreement'
             >
-              17. Entire Agreement
+              Entire Agreement
             </a>
           </li>
           <li>
@@ -147,7 +147,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#governing-law'
             >
-              18. Governing Law
+              Governing Law
             </a>
           </li>
           <li>
@@ -155,7 +155,7 @@ const TableOfContents: React.FC = () => {
               className='block rounded px-2 py-1 hover:bg-gray-200'
               href='#contact-information'
             >
-              19. Contact Information
+              Contact Information
             </a>
           </li>
         </ol>
