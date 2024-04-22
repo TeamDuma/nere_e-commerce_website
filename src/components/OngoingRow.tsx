@@ -31,11 +31,11 @@ const OngoingRow: React.FC<OngoingRowProps> = ({}) => {
             </div>
           </Link>
           <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
-          <Link href={'/ongoingPage'}>
-            <div className='md:ml-2'>
-              <p className='p-text2'>Groups</p>
-              <p className='p-text3'>{groups?.length}</p>
-            </div>
+            <Link href={'/ongoingPage'}>
+              <div className='md:ml-2'>
+                <p className='p-text2'>Groups</p>
+                <p className='p-text3'>{groups?.length}</p>
+              </div>
             </Link>
           </div>
           <div className='hidden md:ml-2  md:hidden lg:ml-2 lg:flex lg:items-center'>
