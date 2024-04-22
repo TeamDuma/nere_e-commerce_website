@@ -19,7 +19,7 @@ import PurchaseGuide from '@/components/common/PurchaseGuide';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
-import { FaStar } from 'react-icons/fa';
+import { FaMapPin, FaStar } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
 import { MdOutlineAccessAlarms } from 'react-icons/md';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -83,6 +83,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
       isGroupJoiner: true,
       groupID: group?.id!,
       locationID: undefined,
+      locationName: group?.location?.name!,
       type: GroupType.PUBLIC,
       totalQuantity: group?.total_quantity!,
       groupCode: group?.join_code,
@@ -192,6 +193,14 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <FaStar />
               <FaStar />
               <FaStar />
+            </div>
+
+            <div className=' my-4 flex  items-center'>
+              {' '}
+              <FaMapPin />
+              <span className='text-lg font-medium text-[#1A464C]	'>
+                {group?.location?.name}
+              </span>
             </div>
 
             <div className='mt-3 flex items-center md:flex-row md:items-start'>
