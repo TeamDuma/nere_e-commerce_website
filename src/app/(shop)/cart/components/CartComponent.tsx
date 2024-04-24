@@ -20,13 +20,14 @@ import ViewMore from '@/components/common/ViewMore';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaSpinner, FaTags } from 'react-icons/fa';
+import { FaMapPin, FaSpinner, FaTags } from 'react-icons/fa';
 import LoginModal from '@/components/common/LoginModal';
 import CartIcon from '@/components/common/CartIcon';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
 import RegistrationModal from '@/components/common/RegisterModal';
 import PostHogClient from '@/app/posthog';
+import Location from '@/components/common/Location';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -212,8 +213,18 @@ const CartComponent = () => {
 
                   <div className='grid grid-cols-1 md:grid-cols-4'>
                     <div className='md:col-span-2'>
-                      <div className='flex max-w-[500px] flex-col gap-3'>
-                        <div className='flex items-center pt-5'>
+                      <div className='flex max-w-[500px] flex-col '>
+                        {item.isGroupJoiner && (
+                          // <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
+                          <div className=' my-1 flex  items-center'>
+                            {' '}
+                            <Location />
+                            <span className='ml-2 text-lg font-medium text-[#1A464C]	'>
+                              {item.locationName}
+                            </span>
+                          </div>
+                        )}
+                        <div className='flex items-center pt-2'>
                           <p className='cursor-pointer text-base font-medium leading-3 text-[#1A464C]'>
                             ¢{item.sale_price}
                           </p>

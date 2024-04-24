@@ -116,6 +116,15 @@ const Category = ({ params }: Props) => {
                           }
                           alt='cerelac image'
                         />
+                        {/* <img
+                          style={{
+                            borderRadius: '10px',
+                            width: '40px',
+                            height: '60px',
+                          }}
+                          src={product?.plain_image}
+                          alt='cerelac image'
+                        /> */}
                         {hoveredProductId === String(product.id) && (
                           <div
                             style={{

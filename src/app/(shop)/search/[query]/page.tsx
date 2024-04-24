@@ -76,10 +76,19 @@ const Search = ({ params }: Props) => {
                               product.name === 'Frytol sunflower oil 0.9L' ||
                               product.name === "Dr. Annie's honey 500ml"
                                 ? '60px'
-                                : '90px'
+                                : '60px'
                             }
                             alt='cerelac image'
                           />
+                          {/* <img
+                            style={{
+                              borderRadius: '10px',
+                              width: '40px',
+                              height: '60px',
+                            }}
+                            src={product?.plain_image}
+                            alt='cerelac image'
+                          /> */}
                         </div>
                       </div>
                       <div className='flex items-center'>
