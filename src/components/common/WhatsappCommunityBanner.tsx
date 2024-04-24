@@ -14,9 +14,9 @@ const WhatsappCommunityBanner = () => {
               href='https://chat.whatsapp.com/GPWialGrINjHtW4tJyzqEt'
               target='_blank'
             >
-              <div className=' flex items-center justify-center rounded-2xl bg-[#FCF5E8] p-3 text-center md:mr-8 flex-row'>
+              <div className=' flex flex-row items-center justify-center rounded-2xl bg-[#FCF5E8] p-3 text-center md:mr-8'>
                 <BsWhatsapp className='mr-2' color='#25D366' fontSize={22} />
-                <span className='text-xs md:text-lg font-bold text-[#0E464E]'>
+                <span className='text-xs font-bold text-[#0E464E] md:text-lg'>
                   Join our WhatsApp Community 🥳
                 </span>
               </div>
