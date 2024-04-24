@@ -30,6 +30,7 @@ import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { ILoginResponse } from '@/types/customer';
 import { toast } from 'react-toastify';
+import WhatsappCommunityBanner from '@/components/common/WhatsappCommunityBanner';
 
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -120,6 +121,7 @@ export default function Home() {
   return (
     <main>
       <Container>
+        <WhatsappCommunityBanner />
         <OngoingRow />
         <Banner />
         <EntertainmentSection />
