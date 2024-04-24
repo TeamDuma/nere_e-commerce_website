@@ -90,10 +90,10 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
       groupCode: group?.join_code,
     };
 
-    // dispatch(addToCart({ item: itemToAdd }));
-    // console.log("itemToAdd",itemToAdd)
-    toast.success('Item added to cart!', {
-      autoClose: 500,
+    dispatch(addToCart({ item: itemToAdd }));
+
+    toast.success('Group item added to cart!', {
+      autoClose: 2000,
     });
 
     posthogClient.capture({
