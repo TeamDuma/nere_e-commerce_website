@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BsWhatsapp } from 'react-icons/bs';
 import ArrowIcon from './ArrowIcon';
 
@@ -6,7 +5,7 @@ const WhatsappCommunityBanner = () => {
   return (
     <>
       <div className='overflow-x-auto'>
-        <div className=' flex justify-center pb-1 '>
+        <div className=' flex justify-center pb-1'>
           <ArrowIcon />
 
           <div className='flex items-center '>
