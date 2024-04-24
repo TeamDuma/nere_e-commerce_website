@@ -19,7 +19,7 @@ import PurchaseGuide from '@/components/common/PurchaseGuide';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
-import { FaStar } from 'react-icons/fa';
+import { FaMapPin, FaStar } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
 import { MdOutlineAccessAlarms } from 'react-icons/md';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -27,6 +27,7 @@ import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
 import CountdownTimer from '@/components/CountdownTimer';
 import GroupSlider from '@/components/GroupSlider';
+import Location from '@/components/common/Location';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -83,13 +84,14 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
       isGroupJoiner: true,
       groupID: group?.id!,
       locationID: undefined,
+      locationName: group?.location?.name!,
       type: GroupType.PUBLIC,
       totalQuantity: group?.total_quantity!,
       groupCode: group?.join_code,
     };
 
-    dispatch(addToCart({ item: itemToAdd }));
-
+    // dispatch(addToCart({ item: itemToAdd }));
+    // console.log("itemToAdd",itemToAdd)
     toast.success('Item added to cart!', {
       autoClose: 500,
     });
@@ -192,6 +194,14 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
               <FaStar />
               <FaStar />
               <FaStar />
+            </div>
+
+            <div className=' my-4 flex  items-center'>
+              {' '}
+              <Location />
+              <span className='ml-2 text-lg font-medium text-[#1A464C]	'>
+                {group?.location?.name}
+              </span>
             </div>
 
             <div className='mt-3 flex items-center md:flex-row md:items-start'>
