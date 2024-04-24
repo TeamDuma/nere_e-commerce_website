@@ -219,11 +219,11 @@ const CartComponent = () => {
                           <div className=' my-1 flex  items-center'>
                             {' '}
                             <Location />
-                            <span className='text-lg font-medium text-[#1A464C] ml-2	'>
+                            <span className='ml-2 text-lg font-medium text-[#1A464C]	'>
                               {item.locationName}
                             </span>
                           </div>
-                        ) }
+                        )}
                         <div className='flex items-center pt-2'>
                           <p className='cursor-pointer text-base font-medium leading-3 text-[#1A464C]'>
                             ¢{item.sale_price}

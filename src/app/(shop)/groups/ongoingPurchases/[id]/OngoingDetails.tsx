@@ -91,7 +91,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
     };
 
     // dispatch(addToCart({ item: itemToAdd }));
-// console.log("itemToAdd",itemToAdd)
+    // console.log("itemToAdd",itemToAdd)
     toast.success('Item added to cart!', {
       autoClose: 500,
     });
@@ -199,7 +199,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
             <div className=' my-4 flex  items-center'>
               {' '}
               <Location />
-              <span className='text-lg font-medium text-[#1A464C] ml-2	'>
+              <span className='ml-2 text-lg font-medium text-[#1A464C]	'>
                 {group?.location?.name}
               </span>
             </div>
