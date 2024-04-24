@@ -27,6 +27,7 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
 import RegistrationModal from '@/components/common/RegisterModal';
 import PostHogClient from '@/app/posthog';
+import Location from '@/components/common/Location';
 
 export type GetDiscountAmountBody = {
   customer_uid: number;
@@ -212,23 +213,18 @@ const CartComponent = () => {
 
                   <div className='grid grid-cols-1 md:grid-cols-4'>
                     <div className='md:col-span-2'>
-                      <div className='flex max-w-[500px] flex-col gap-3'>
-                        {item.isGroupJoiner ? (
+                      <div className='flex max-w-[500px] flex-col '>
+                        {item.isGroupJoiner && (
                           // <div className='h-max-h-[10px] rounded-md border border-[#298592] py-1  '>
-                          <div className=' my-4 flex  items-center'>
+                          <div className=' my-1 flex  items-center'>
                             {' '}
-                            <FaMapPin />
-                            <span className='text-lg font-medium text-[#1A464C]	'>
+                            <Location />
+                            <span className='text-lg font-medium text-[#1A464C] ml-2	'>
                               {item.locationName}
                             </span>
                           </div>
-                        ) : (
-                          // </div>
-                          <span className='text-xs font-medium text-[#298592]'>
-                            {/* You are starting a new group */}
-                          </span>
-                        )}
-                        <div className='flex items-center pt-5'>
+                        ) }
+                        <div className='flex items-center pt-2'>
                           <p className='cursor-pointer text-base font-medium leading-3 text-[#1A464C]'>
                             ¢{item.sale_price}
                           </p>

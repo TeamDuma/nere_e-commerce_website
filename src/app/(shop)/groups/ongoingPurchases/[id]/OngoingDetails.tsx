@@ -27,6 +27,7 @@ import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
 import CountdownTimer from '@/components/CountdownTimer';
 import GroupSlider from '@/components/GroupSlider';
+import Location from '@/components/common/Location';
 
 interface OngoingDetailsProps {
   ongoingUid: string;
@@ -89,8 +90,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
       groupCode: group?.join_code,
     };
 
-    dispatch(addToCart({ item: itemToAdd }));
-
+    // dispatch(addToCart({ item: itemToAdd }));
+// console.log("itemToAdd",itemToAdd)
     toast.success('Item added to cart!', {
       autoClose: 500,
     });
@@ -197,8 +198,8 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
 
             <div className=' my-4 flex  items-center'>
               {' '}
-              <FaMapPin />
-              <span className='text-lg font-medium text-[#1A464C]	'>
+              <Location />
+              <span className='text-lg font-medium text-[#1A464C] ml-2	'>
                 {group?.location?.name}
               </span>
             </div>

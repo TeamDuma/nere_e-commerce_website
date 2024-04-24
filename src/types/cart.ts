@@ -24,7 +24,7 @@ export interface CartCheckoutItem {
   isGroupJoiner: boolean;
   groupID?: number;
   groupCode?: string;
-
+  locationName?:string;
   locationID?: number;
   type?: GroupType;
 }
