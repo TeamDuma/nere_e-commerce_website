@@ -6,7 +6,7 @@ const WhatsappCommunityBanner = () => {
     <>
       <div className='overflow-x-auto'>
         <div className=' flex justify-center pb-1'>
-          <ArrowIcon />
+        <ArrowIcon className=' sm:w-24 sm:h-24 w-12 h-12' />
 
           <div className='flex items-center '>
             <a
