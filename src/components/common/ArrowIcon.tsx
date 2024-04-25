@@ -1,22 +1,19 @@
 import React from 'react';
 
-
 interface ArrowIconProps {
   className?: string;
-
 }
-
 
 function ArrowIcon({ className }: ArrowIconProps) {
   return (
     <svg
-    className={className}
-    width='83'
-    height='74'
-    viewBox='0 0 83 74'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
+      className={className}
+      width='83'
+      height='74'
+      viewBox='0 0 83 74'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <mask
         id='mask0_11450_5376'
         maskUnits='userSpaceOnUse'
@@ -76,5 +73,3 @@ function ArrowIcon({ className }: ArrowIconProps) {
 }
 
 export default ArrowIcon;
-
-
