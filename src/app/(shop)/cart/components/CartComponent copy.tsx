@@ -198,8 +198,6 @@ const CartComponent = () => {
                         ) : null}
                       </div>
                     </div>
-
-                  
                   </div>
 
                   <div className='grid grid-cols-1 md:grid-cols-4'>
@@ -317,9 +315,7 @@ const CartComponent = () => {
             ))}
           </div>
           <div className='md:w-2/5'>
-          
-
- <OrderSummarySection
+            <OrderSummarySection
               cartItems={cartItems}
               calculateTotal={calculateTotal}
               calculateTotalAfterDiscount={calculateTotalAfterDiscount}
@@ -329,9 +325,9 @@ const CartComponent = () => {
               setPromoCode={setPromoCode}
               handleApplyPromoCode={handleApplyPromoCode}
               isLoading={isLoading}
-              openLoginModal={openLoginModal}        
-               userInfo={userInfo}
-              /> 
+              openLoginModal={openLoginModal}
+              userInfo={userInfo}
+            />
           </div>
         </div>
       </div>
