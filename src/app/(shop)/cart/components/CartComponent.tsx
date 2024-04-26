@@ -38,7 +38,6 @@ const CartComponent = () => {
         <div className='flex flex-col gap-4 md:flex-row'>
           <CartItemsList />
           <OrderSummarySection />
-          
         </div>
       </div>
     </div>

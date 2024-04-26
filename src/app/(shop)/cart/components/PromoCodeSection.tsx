@@ -51,7 +51,6 @@ const PromoCodeSection = () => {
     }, 0);
   };
 
-
   const handleApplyPromoCode = async () => {
     try {
       if (!promoCode) {
@@ -101,9 +100,8 @@ const PromoCodeSection = () => {
   };
 
   return (
-        
     <div>
-     <div>
+      <div>
         {isPromoCodeApplied ? (
           <div className='mb-2 flex justify-between'>
             <p className='text-sm font-normal text-[#979797]'>
@@ -123,9 +121,7 @@ const PromoCodeSection = () => {
               type='text'
               placeholder='Enter promo code'
               value={promoCode}
-              onChange={(e) =>
-                setPromoCode(e.target.value.toUpperCase())
-              }
+              onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
               className='w-full rounded-md border-none pl-2 outline-none'
             />
             <div className='absolute inset-y-0 right-0 flex items-center pr-2'>
@@ -195,10 +191,7 @@ const PromoCodeSection = () => {
                     voucherCode,
                   })
                     .then((data) => {
-                      if (
-                        'data' in data &&
-                        'authorization_url' in data.data
-                      ) {
+                      if ('data' in data && 'authorization_url' in data.data) {
                         const paymentAuthorizationUrl =
                           data.data.authorization_url;
                         window.location.href = paymentAuthorizationUrl;
@@ -273,7 +266,6 @@ const PromoCodeSection = () => {
         </div>
       )}
     </div>
-
   );
 };
 
