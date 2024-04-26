@@ -96,7 +96,7 @@ const ThreeBannerLayout = () => {
                     src={image}
                     alt={`Slide ${index + 1}`}
                     className='h-full w-full object-cover'
-                    onClick={index === 1 ? openLoyalty : undefined} 
+                    onClick={index === 1 ? openLoyalty : undefined}
                   />
                 </div>
               ))}
