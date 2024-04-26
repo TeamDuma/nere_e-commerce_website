@@ -121,8 +121,7 @@ const OngoingDetails: React.FC<OngoingDetailsProps> = ({ ongoingUid }) => {
   return (
     <div className='my-8'>
       <div className='container mx-auto px-2'>
-     
-    <OngoingDetailsComponent ongoingUid={ongoingUid}/>
+        <OngoingDetailsComponent ongoingUid={ongoingUid} />
         <PurchaseGuide />
         <div className='hidden sm:block'>
           <GroupSlider />

@@ -32,7 +32,9 @@ interface OngoingDetailsComponentProps {
   ongoingUid: string;
 }
 
-const OngoingDetailsComponent: React.FC<OngoingDetailsComponentProps> = ({ ongoingUid }) => {
+const OngoingDetailsComponent: React.FC<OngoingDetailsComponentProps> = ({
+  ongoingUid,
+}) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectShopping);
   const [selectedVariant, setSelectedVariant] = useState('');
@@ -49,8 +51,6 @@ const OngoingDetailsComponent: React.FC<OngoingDetailsComponentProps> = ({ ongoi
   useEffect(() => {
     getGroup(ongoingUid);
   }, [ongoingUid]);
-
-
 
   if (isError) {
     return <div>Error</div>;
@@ -242,7 +242,6 @@ const OngoingDetailsComponent: React.FC<OngoingDetailsComponentProps> = ({ ongoi
                 Continue Shopping
               </h1>
             </Link>
-          
 
             {product?.hasMinQuantity ? (
               <>
@@ -276,7 +275,6 @@ const OngoingDetailsComponent: React.FC<OngoingDetailsComponentProps> = ({ ongoi
             )}
           </div>
         </div>
-        
       </div>
     </div>
   );
