@@ -48,8 +48,8 @@ const ThreeBannerLayout = () => {
     <div className='overflow-x-auto'>
       {/* Display original code on large screens */}
       <div className='hidden sm:block'>
-        <div className='ml-8 flex justify-start space-x-24'>
-          <div className='flex-shrink-0 cursor-pointer rounded md:mr-8'>
+        <div className=' flex justify-between '>
+          <div className='flex-shrink-0 cursor-pointer rounded md:mr-2'>
             <div className='m-2 sm:w-1/2 md:w-full '>
               <img
                 src='/images/coupon1.svg'
@@ -58,7 +58,7 @@ const ThreeBannerLayout = () => {
               />
             </div>
           </div>
-          <div className='flex-shrink-0 cursor-pointer rounded md:mr-8'>
+          <div className='flex-shrink-0 cursor-pointer rounded md:mr-2'>
             <div className='m-2 sm:w-1/2 md:w-full ' onClick={openLoyalty}>
               <img
                 src='/images/coupon.svg'
@@ -67,7 +67,7 @@ const ThreeBannerLayout = () => {
               />
             </div>
           </div>
-          <div className='flex-shrink-0 cursor-pointer rounded md:mr-8'>
+          <div className='flex-shrink-0 cursor-pointer rounded md:mr-2'>
             <div className='m-2 sm:w-1/2 md:w-full '>
               <img
                 src='/images/coupon3.svg'
@@ -81,9 +81,9 @@ const ThreeBannerLayout = () => {
 
       {/* Display modified carousel on small screens */}
       <div className='sm:hidden'>
-        <div className='ml-8 flex justify-start space-x-24'>
+        <div className='flex justify-start '>
           <div className='flex-shrink-0 cursor-pointer rounded md:mr-8'>
-            <div className='m-2 sm:w-1/2 md:w-full '>
+            <div className='m-2 sm:w-1/6 md:w-full '>
               {images.map((image, index) => (
                 <div
                   key={index}
