@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Logo from '../Logo';
+import FooterLogo from '../FooterLogo';
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
         <div className='md:flex-no-wrap container mx-auto flex flex-col flex-wrap p-1 md:flex-row md:items-center lg:items-start'>
           <div className='mb grid grid-cols-1 lg:grid-cols-3'>
             <div className='mb-5'>
-              <Logo />
+              <FooterLogo />
 
               <p className='mt-2 max-w-xs text-sm text-[#1A464C]'>
                 Follow us on
