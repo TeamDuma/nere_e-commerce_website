@@ -8,8 +8,8 @@ const Footer = () => {
     <>
       <footer className='bg-[#F0F4F5]'>
         <div className='md:flex-no-wrap container mx-auto flex flex-col flex-wrap p-1 md:flex-row md:items-center lg:items-start'>
-          <div className='grid grid-cols-1 lg:grid-cols-3'>
-            <div>
+          <div className='mb grid grid-cols-1 lg:grid-cols-3'>
+            <div className='mb-5'>
               <Logo />
 
               <p className='mt-2 max-w-xs text-sm text-[#1A464C]'>
