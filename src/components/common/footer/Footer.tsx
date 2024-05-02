@@ -141,13 +141,13 @@ const Footer = () => {
                     Privacy Notice{' '}
                   </a>
 
-                  <a className='hover:opacity-75' 
-                  onClick={openModal}
-                  // href='/legal/cookies'
+                  <a
+                    className='hover:opacity-75'
+                    onClick={openModal}
+                    // href='/legal/cookies'
                   >
                     {' '}
                     Cookie Policy
-                    
                   </a>
                   <a
                     className='hover:opacity-75'
@@ -180,7 +180,6 @@ const Footer = () => {
             Product of Nere LTD © All rights reserved
           </p>
           <CookieModal isOpen={isModalOpen} onClose={closeModal} />
-
         </div>
       </footer>
     </>
