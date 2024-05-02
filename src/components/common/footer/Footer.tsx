@@ -2,8 +2,14 @@
 
 import Link from 'next/link';
 import Logo from '../Logo';
+import CookieModal from '../CookieModal';
+import { useState } from 'react';
 
 const Footer = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   return (
     <>
       {/* component */}
@@ -135,9 +141,13 @@ const Footer = () => {
                     Privacy Notice{' '}
                   </a>
 
-                  <a className='hover:opacity-75' href='/legal/cookies'>
+                  <a className='hover:opacity-75' 
+                  onClick={openModal}
+                  // href='/legal/cookies'
+                  >
                     {' '}
                     Cookie Policy
+                    
                   </a>
                   <a
                     className='hover:opacity-75'
@@ -169,6 +179,8 @@ const Footer = () => {
           <p className='mt-8 text-xs text-gray-800'>
             Product of Nere LTD © All rights reserved
           </p>
+          <CookieModal isOpen={isModalOpen} onClose={closeModal} />
+
         </div>
       </footer>
     </>
