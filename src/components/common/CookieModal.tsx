@@ -67,7 +67,7 @@ const CookieModal: React.FC<{
         contentLabel='Login Modal'
       >
         <>
-          <div className='rounded-xl '>
+          <div className='rounded-xl p-4 '>
             <div className=' flex '>
               <Logo />
             </div>
@@ -76,23 +76,26 @@ const CookieModal: React.FC<{
                 Privacy & Cookie Notices{' '}
               </p>
             </div>
-            <p className='text-sm '>
-              {' '}
-              We use cookies and various functionality, analysis and marketing
-              tools in order to be able to offer our pages safely and reliably.
-              They help us to optimize the website and improve your personal
-              user experience. This data is also used to check website
-              performance, to analyze results, and to adjust and personalize
-              content.
-            </p>
-            <div className='my-4'></div>
+            <div className='w-11/12	'>
+              <p className='text-sm '>
+                {' '}
+                We use cookies and various functionality, analysis and marketing
+                tools in order to be able to offer our pages safely and
+                reliably. They help us to optimize the website and improve your
+                personal user experience. This data is also used to check
+                website performance, to analyze results, and to adjust and
+                personalize content.
+              </p>
+              <div className='my-4'></div>
 
-            <p className='text-sm '>
-              Since we value your privacy, we ask for your permission to use
-              these tools. You can change or revoke your consent at any time in
-              the privacy settings.
-            </p>
-            <div className='my-2'></div>
+              <p className='text-sm '>
+                Since we value your privacy, we ask for your permission to use
+                these tools. You can change or revoke your consent at any time
+                in the privacy settings.
+              </p>
+            </div>
+
+            <div className='my-6'></div>
 
             <div className='flex '>
               <a href='/legal/privacy' className='text-[#298592] underline'>

@@ -143,8 +143,8 @@ const Footer = () => {
 
                   <a
                     className='hover:opacity-75'
-                    onClick={openModal}
-                    // href='/legal/cookies'
+                    // onClick={openModal}
+                    href='/legal/cookies'
                   >
                     {' '}
                     Cookie Policy
