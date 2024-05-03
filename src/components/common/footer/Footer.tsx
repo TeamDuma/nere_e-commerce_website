@@ -143,8 +143,8 @@ const Footer = () => {
 
                   <a
                     className='hover:opacity-75'
-                    // onClick={openModal}
-                    href='/legal/cookies'
+                    onClick={openModal}
+                    // href='/legal/cookies'
                   >
                     {' '}
                     Cookie Policy
@@ -179,7 +179,7 @@ const Footer = () => {
           <p className='mt-8 text-xs text-gray-800'>
             Product of Nere LTD © All rights reserved
           </p>
-          {/* <CookieModal isOpen={isModalOpen} onClose={closeModal} /> */}
+          <CookieModal isOpen={isModalOpen} onClose={closeModal} />
         </div>
       </footer>
     </>
@@ -187,3 +187,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

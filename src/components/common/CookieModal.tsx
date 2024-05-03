@@ -51,21 +51,13 @@ const customStylesSmall: Styles = {
   },
 };
 
-interface ISession {
-  user?: {
-    name?: string;
-    email?: string;
-    image?: string;
-  };
-}
 
 const CookieModal: React.FC<{
-  session: ISession | null;
   onClose: () => void;
   isOpen: boolean;
-  onRegistrationClick: () => void;
-}> = ({ onClose, onRegistrationClick, isOpen }) => {
-  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  // CookieModalClick: () => void;
+}> = ({ onClose, isOpen }) => {
+  const [showCookieModal, setshowCookieModal] = useState(false);
 
   return (
     <div>
