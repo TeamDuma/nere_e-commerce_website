@@ -51,7 +51,6 @@ const customStylesSmall: Styles = {
   },
 };
 
-
 const CookieModal: React.FC<{
   onClose: () => void;
   isOpen: boolean;
