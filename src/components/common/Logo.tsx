@@ -6,20 +6,8 @@ function Logo() {
       xmlns='http://www.w3.org/2000/svg'
       width='100'
       height='80'
-      viewBox='0 0 1080 1080'
+      viewBox='150 0 1080 1080' // Adjusted viewBox values here
     >
-      <rect
-        width='1080'
-        height='1080'
-        x='-540'
-        y='-540'
-        fill='#FFF'
-        rx='0'
-        ry='0'
-        transform='translate(540 540)'
-        vectorEffect='non-scaling-stroke'
-        visibility='hidden'
-      ></rect>
       <path
         fill='#298592'
         d='M-11.146-13.789v28.333h7.011V-.398c0-5.23 3.391-7.184 7.069-7.184 2.299 0 3.62.632 5.057 1.84l3.161-6.093c-1.552-1.551-4.368-2.7-7.298-2.7-2.874 0-5.805.517-7.989 4.022l-.517-3.276h-6.494z'
