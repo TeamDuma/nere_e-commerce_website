@@ -1,77 +1,70 @@
-import React, { useEffect, useRef, useState } from 'react';
-const Banner = () => {
-  const currentIndexRef = useRef(0);
-  const [, setTick] = useState(0); // Dummy state for triggering re-renders
-  const images = [
-    '../images/nere_sunflower.png',
-    '../images/nere_breakfast.png',
-    '../images/nere_baby_tuesday.png',
-  ];
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-  useEffect(() => {
-    const moveSlideInterval = setInterval(() => {
-      currentIndexRef.current = (currentIndexRef.current + 1) % images.length;
-      setTick((tick) => tick + 1);
-    }, 7000);
+const items = [
+  {
+    id: 'sunflower',
+    imageUrl: '../images/nere_sunflower.png',
+  },
+  {
+    id: 'breakfast',
+    imageUrl: '../images/nere_breakfast.png',
+  },
+  {
+    id: 'babytuesday',
+    imageUrl: '../images/nere_baby_tuesday.png',
+  },
+];
 
-    return () => {
-      clearInterval(moveSlideInterval);
-    };
-  }, []);
-
-  const handlePrevButtonClick = () => {
-    currentIndexRef.current =
-      currentIndexRef.current === 0
-        ? images.length - 1
-        : currentIndexRef.current - 1;
-    setTick((tick) => tick + 1);
-  };
-
-  const handleNextButtonClick = () => {
-    currentIndexRef.current = (currentIndexRef.current + 1) % images.length;
-    setTick((tick) => tick + 1);
-  };
-
+export default function Banner() {
   return (
-    <div className='relative mx-auto w-full'>
-      <div
-        id='default-carousel'
-        className='relative mb-6 h-32 overflow-hidden rounded-xl sm:h-72 xl:h-96 2xl:h-96'
-      >
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`duration-700 ease-in-out ${
-              index === currentIndexRef.current ? '' : 'hidden'
-            }`}
-            data-carousel-item=''
-          >
-            <img
-              src={image}
-              alt={`Slide ${index + 1}`}
-              className='absolute h-full w-full object-cover'
-            />
-          </div>
-        ))}
+    <>
+      <style jsx>{`
+        .container {
+          width: 100%;
+          margin: auto;
+        }
+
+        .mySwiper {
+          position: relative;
+          width: 100%;
+          height: auto;
+        }
+
+        .swipItem {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+
+        .imgBox {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          margin-bottom: 10px;
+        }
+      `}</style>
+      <div className='container'>
+        <Carousel
+          showArrows={true}
+          showIndicators={true}
+          infiniteLoop={true}
+          autoPlay={true}
+          interval={3000}
+          dynamicHeight={false}
+          className='mySwiper'
+        >
+          {items.map((item) => (
+            <div key={item.id} className='swipItem'>
+              <div className='imgBox'>
+                <img src={item.imageUrl} alt='slides' />
+              </div>
+            </div>
+          ))}
+        </Carousel>
       </div>
-
-      <button
-        type='button'
-        className='group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none '
-        data-carousel-prev=''
-        onClick={handlePrevButtonClick}
-      ></button>
-
-      <button
-        type='button'
-        className='group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none'
-        data-carousel-next=''
-        onClick={handleNextButtonClick}
-      >
-        {/* Next button content */}
-      </button>
-    </div>
+    </>
   );
-};
-
-export default Banner;
+}
