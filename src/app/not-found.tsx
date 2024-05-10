@@ -24,7 +24,7 @@ const Page = () => {
         <div></div>
       </div>
       <div>
-        <Image src='/images/404.svg' width={400} height={300} alt={'404.'} />
+        <Image src='/images/404.svg' width={400} height={300} alt={'Page not found'} />
       </div>
     </div>
   );
