@@ -15,8 +15,8 @@ const Page = () => {
               Uh oh. Looks like you've taken a wrong turn.
             </p>
             <a href='/'>
-              <button className='my-4 w-full rounded border bg-[#298592] px-8 py-4 text-center text-white hover:bg-[#298592] focus:outline-none focus:ring-2 focus:ring-[#298592] focus:ring-opacity-50 sm:w-auto '>
-                Go back home{' '}
+              <button className='my-4 w-full rounded-md border bg-[#298592] px-24 py-3 text-center font-bold text-white text-sm hover:bg-[#298592] focus:outline-none focus:ring-2 focus:ring-[#298592] focus:ring-opacity-50 sm:w-auto '>
+                Continue shopping{' '}
               </button>
             </a>
           </div>
