@@ -15,7 +15,7 @@ const Page = () => {
               This page is currently under maintenance and will be back soon.{' '}
             </p>
             <a href='/'>
-            <button className='my-4 w-full rounded-md border bg-[#298592] px-24 py-3 text-center text-sm font-bold text-white hover:bg-[#298592] focus:outline-none focus:ring-2 focus:ring-[#298592] focus:ring-opacity-50 sm:w-auto '>
+              <button className='my-4 w-full rounded-md border bg-[#298592] px-24 py-3 text-center text-sm font-bold text-white hover:bg-[#298592] focus:outline-none focus:ring-2 focus:ring-[#298592] focus:ring-opacity-50 sm:w-auto '>
                 Continue shopping{' '}
               </button>
             </a>
