@@ -62,15 +62,15 @@ const Footer = () => {
               <div>
                 <p className='font-bold text-[#1A464C]'>About</p>
                 <nav className='mt-2 flex flex-col  text-sm text-[#1A464C]'>
-                  <a className='hover:opacity-75' href=''>
+                  <a className='hover:opacity-75' href='/maintenance-page'>
                     {' '}
                     What we do{' '}
                   </a>
-                  <a className='hover:opacity-75' href=''>
+                  <a className='hover:opacity-75' href='/maintenance-page'>
                     {' '}
                     Agent Locations{' '}
                   </a>
-                  <a className='hover:opacity-75' href=''>
+                  <a className='hover:opacity-75' href='/maintenance-page'>
                     {' '}
                     Careers{' '}
                   </a>
