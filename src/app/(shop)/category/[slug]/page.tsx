@@ -97,34 +97,25 @@ const Category = ({ params }: Props) => {
                           position: 'relative',
                           backgroundSize: 'cover',
                           backgroundColor: 'gray-100',
-                          width: '200px',
-                          height: '200px',
+                          width: '250px',
+                          height: '250px',
                           display: 'flex',
                           justifyContent: 'center',
                           alignItems: 'center',
                           borderRadius: '10px',
                         }}
                       >
-                        <img
-                          style={{ borderRadius: '10px' }}
-                          src={product?.plain_image}
-                          width={
-                            product.name === 'Frytol sunflower oil 0.9L' ||
-                            product.name === "Dr. Annie's honey 500ml"
-                              ? '60px'
-                              : '60px'
-                          }
-                          alt='cerelac image'
-                        />
-                        {/* <img
-                          style={{
-                            borderRadius: '10px',
-                            width: '40px',
-                            height: '60px',
-                          }}
-                          src={product?.plain_image}
-                          alt='cerelac image'
-                        /> */}
+                        <div className='relative overflow-x-hidden rounded-2xl'>
+                          <img
+                            className='h-40 w-full rounded-2xl object-cover'
+                            src={product?.plain_image}
+                          />
+                        </div>
+
+                        {/* <img src={product?.plain_image} 
+                               style={{ width: '80px', height: '150px', objectFit: 'cover' }}
+                               /> */}
+
                         {hoveredProductId === String(product.id) && (
                           <div
                             style={{
