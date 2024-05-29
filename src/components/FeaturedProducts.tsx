@@ -50,13 +50,13 @@ const FeaturedProducts = () => {
 
           <div className='grid grid-cols-2 sm:w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-4 xl:gap-x-5'>
             {featureProducts.map((product) => (
-          <ProductCard
-          key={product.id}
-          product={product}
-          handleAddToCart={handleAddToCart}
-          sendGTMEvent={sendGTMEvent}
-          sendGAEvent={sendGAEvent}
-        />
+              <ProductCard
+                key={product.id}
+                product={product}
+                handleAddToCart={handleAddToCart}
+                sendGTMEvent={sendGTMEvent}
+                sendGAEvent={sendGAEvent}
+              />
             ))}
           </div>
         </div>
