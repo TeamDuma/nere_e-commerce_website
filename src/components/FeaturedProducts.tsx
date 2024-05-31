@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 import PostHogClient from '@/app/posthog';
-import ProductCard from './common/ProductCardMain';
+import ProductCardMain from './common/ProductCardMain';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
@@ -50,7 +50,7 @@ const FeaturedProducts = () => {
 
           <div className='grid grid-cols-2 sm:w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-4 xl:gap-x-5'>
             {featureProducts.map((product) => (
-              <ProductCard
+              <ProductCardMain
                 key={product.id}
                 product={product}
                 handleAddToCart={handleAddToCart}

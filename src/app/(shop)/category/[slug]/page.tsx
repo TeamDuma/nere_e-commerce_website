@@ -10,7 +10,7 @@ import { Product } from '@/types/product';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { ProductCard } from '@/components/common/ProductCardMain';
+import ProductCardMain from '@/components/common/ProductCardMain';
 
 type Props = {
   params: {
@@ -79,7 +79,7 @@ const Category = ({ params }: Props) => {
           ) : (
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>
               {products.map((product) => (
-                <ProductCard
+                <ProductCardMain
                   key={product.id}
                   product={product}
                   handleAddToCart={handleAddToCart}

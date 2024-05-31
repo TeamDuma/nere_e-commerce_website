@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Product } from '@/types/product';
 import { toast } from 'react-toastify';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
-import { ProductCard } from '../common/ProductCardMain';
+import ProductCardMain from '../common/ProductCardMain';
 
 type Props = {
   params: {
@@ -76,7 +76,7 @@ const CategoriesRow = ({ params }: Props) => {
               <div className='overflow-x-auto'>
                 <div className='flex flex-nowrap justify-start'>
                   {products.map((product) => (
-                    <ProductCard
+                    <ProductCardMain
                       key={product.id}
                       product={product}
                       handleAddToCart={handleAddToCart}

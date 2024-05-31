@@ -10,7 +10,7 @@ interface ProductCardProps {
   sendGAEvent: (event: { event: string; value: string }) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const ProductCardMain: React.FC<ProductCardProps> = ({
   product,
   handleAddToCart,
   sendGTMEvent,
@@ -130,4 +130,4 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-export default ProductCard;
+export default ProductCardMain;
