@@ -10,7 +10,7 @@ import { Product } from '@/types/product';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import ProductCard from '@/components/common/ProductCardMain';
+import { ProductCard } from '@/components/common/ProductCardMain';
 
 type Props = {
   params: {

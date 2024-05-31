@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { CartItem, transformToCartCheckoutItem } from '@/types/cart';
 import ProgressBar from '@/components/common/ProgressBar';
-import FeaturedProducts from '@/components/FeaturedProducts';
 import ViewMore from '@/components/common/ViewMore';
 import Link from 'next/link';
 import { toast } from 'react-toastify';

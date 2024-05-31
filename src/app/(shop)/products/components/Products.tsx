@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useGetActiveProductsQuery } from '@/lib/redux/services/product';
 import OngoingPurchases from '@/app/(shop)/groups/ongoingPurchases/page';
-import FeaturedProducts from '@/components/FeaturedProducts';
 import ThreeBannerLayout from '@/components/ThreeBannerLayout';
 import TwoBannerLayout from '@/components/TwoBannerLayout';
 import Container from '@/components/common/Container';

@@ -10,8 +10,8 @@ import { addToCart } from '@/lib/redux/slices/shopping';
 import { useDispatch, useSelector } from 'react-redux';
 import { Product } from '@/types/product';
 import { toast } from 'react-toastify';
-import ProductCard from '../common/ProductCardMain';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
+import { ProductCard } from '../common/ProductCardMain';
 
 type Props = {
   params: {
