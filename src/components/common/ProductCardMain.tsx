@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { Product } from '@/types/product';
+import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 
 interface ProductCardProps {
   product: Product;
   handleAddToCart: (product: Product) => void;
-  sendGTMEvent: (event: { event: string; value: string }) => void;
-  sendGAEvent: (event: { event: string; value: string }) => void;
+  GTMEvent: string;
+  GAEvent: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   handleAddToCart,
-  sendGTMEvent,
-  sendGAEvent,
+  GTMEvent,
+  GAEvent,
 }) => {
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
 
@@ -85,11 +86,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
                       autoClose: 500,
                     });
                     sendGTMEvent({
-                      event: 'categoryProductClicked',
+                      event: GTMEvent,
                       value: `${product.name}`,
                     });
                     sendGAEvent({
-                      event: 'categoryProductClicked',
+                      event: GAEvent,
                       value: `${product.name}`,
                     });
                   }}
@@ -130,4 +131,3 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-export default ProductCard;

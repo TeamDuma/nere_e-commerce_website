@@ -7,9 +7,8 @@ import { Product } from '@/types/product';
 import { addToCart, selectShopping } from '@/lib/redux/slices/shopping';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 import PostHogClient from '@/app/posthog';
-import ProductCard from './common/ProductCardMain';
+import { ProductCard } from './common/ProductCardMain';
 
 const FeaturedProducts = () => {
   const { data, isLoading } = useGetActiveProductsQuery();
@@ -54,8 +53,8 @@ const FeaturedProducts = () => {
                 key={product.id}
                 product={product}
                 handleAddToCart={handleAddToCart}
-                sendGTMEvent={sendGTMEvent}
-                sendGAEvent={sendGAEvent}
+                GAEvent='featureProductClicked'
+                GTMEvent='featureProductClicked'
               />
             ))}
           </div>

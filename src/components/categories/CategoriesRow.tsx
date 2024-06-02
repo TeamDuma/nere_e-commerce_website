@@ -10,8 +10,7 @@ import { addToCart } from '@/lib/redux/slices/shopping';
 import { useDispatch, useSelector } from 'react-redux';
 import { Product } from '@/types/product';
 import { toast } from 'react-toastify';
-import ProductCard from '../common/ProductCardMain';
-import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
+import { ProductCard } from '../common/ProductCardMain';
 
 type Props = {
   params: {
@@ -43,8 +42,8 @@ const CategoriesRow = ({ params }: Props) => {
 
   useEffect(() => {
     getCategoryProduct(slug)
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   }, [slug]);
 
   const handleAddToCart = (product: Product) => {
@@ -80,8 +79,8 @@ const CategoriesRow = ({ params }: Props) => {
                       key={product.id}
                       product={product}
                       handleAddToCart={handleAddToCart}
-                      sendGTMEvent={sendGTMEvent}
-                      sendGAEvent={sendGAEvent}
+                      GAEvent='categoryProductClicked'
+                      GTMEvent='categoryProductClicked'
                     />
                   ))}
                 </div>
