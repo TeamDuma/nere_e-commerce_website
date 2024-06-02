@@ -63,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 style={{
                   position: 'absolute',
                   // top: 0,
-                  // left: 0,
+                  left: 0,
                   right: 0,
                   bottom: 0,
                   display: 'flex',
@@ -76,7 +76,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               >
                 <button
                   disabled={!product?.in_stock}
-                  className=' w-full rounded-md   py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400'
+                  className=' w-full rounded-md  py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400'
                   style={{ zIndex: 1 }}
                   onClick={(e) => {
                     e.preventDefault();
