@@ -64,8 +64,8 @@ const Search = ({ params }: Props) => {
               key={product.id}
               product={product}
               handleAddToCart={handleAddToCart}
-              GAEvent='Product in Search Clicked'
-              GTMEvent='Product in Search Clicked'
+              GAEvent='searchProductCllicked'
+              GTMEvent='searchProductCllicked'
             />
           ))}
         </div>
