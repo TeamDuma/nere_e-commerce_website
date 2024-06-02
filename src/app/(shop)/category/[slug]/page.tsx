@@ -46,8 +46,8 @@ const Category = ({ params }: Props) => {
 
   useEffect(() => {
     getCategoryProduct(slug)
-      .then(() => { })
-      .catch(() => { });
+      .then(() => {})
+      .catch(() => {});
   }, [slug]);
 
   if (isLoading) {
