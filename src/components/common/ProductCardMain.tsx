@@ -2,21 +2,28 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { Product } from '@/types/product';
+import PostHogClient from '@/app/posthog';
 
-interface ProductCardProps {
+interface ProductCardMainProps {
   product: Product;
   handleAddToCart: (product: Product) => void;
   sendGTMEvent: (event: { event: string; value: string }) => void;
   sendGAEvent: (event: { event: string; value: string }) => void;
+  userInfo: { data: { customer: { email: string } } } | null;
+  eventName: string;
 }
 
-const ProductCardMain: React.FC<ProductCardProps> = ({
+const ProductCardMain: React.FC<ProductCardMainProps> = ({
   product,
   handleAddToCart,
   sendGTMEvent,
   sendGAEvent,
+  userInfo,
+  eventName,
 }) => {
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+
+  const postHogClient = PostHogClient();
 
   return (
     <Link href={`/product/${product.slug}`} key={product.id}>
@@ -53,16 +60,10 @@ const ProductCardMain: React.FC<ProductCardProps> = ({
               />
             </div>
 
-            {/* <img src={product?.plain_image} 
-                               style={{ width: '80px', height: '150px', objectFit: 'cover' }}
-                               /> */}
-
             {hoveredProductId === String(product.id) && (
               <div
                 style={{
                   position: 'absolute',
-                  // top: 0,
-                  // left: 0,
                   right: 0,
                   bottom: 0,
                   display: 'flex',
@@ -75,7 +76,7 @@ const ProductCardMain: React.FC<ProductCardProps> = ({
               >
                 <button
                   disabled={!product?.in_stock}
-                  className=' w-full rounded-md   py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400'
+                  className='w-full rounded-md px-8 py-2 text-sm font-medium text-white hover:bg-[#D47826] focus:bg-[#D47826] focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400'
                   style={{ zIndex: 1 }}
                   onClick={(e) => {
                     e.preventDefault();
@@ -85,13 +86,20 @@ const ProductCardMain: React.FC<ProductCardProps> = ({
                       autoClose: 500,
                     });
                     sendGTMEvent({
-                      event: 'categoryProductClicked',
+                      event: eventName,
                       value: `${product.name}`,
                     });
                     sendGAEvent({
-                      event: 'categoryProductClicked',
+                      event: eventName,
                       value: `${product.name}`,
                     });
+                    if (userInfo?.data?.customer.email) {
+                      postHogClient.capture({
+                        distinctId: userInfo.data.customer.email,
+                        event: eventName,
+                        properties: { ...product },
+                      });
+                    }
                   }}
                 >
                   Quick Add

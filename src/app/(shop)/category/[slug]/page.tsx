@@ -85,6 +85,8 @@ const Category = ({ params }: Props) => {
                   handleAddToCart={handleAddToCart}
                   sendGTMEvent={sendGTMEvent}
                   sendGAEvent={sendGAEvent}
+                  userInfo={null}
+                  eventName='categoryProductClicked'
                 />
               ))}
             </div>

@@ -56,6 +56,8 @@ const FeaturedProducts = () => {
                 handleAddToCart={handleAddToCart}
                 sendGTMEvent={sendGTMEvent}
                 sendGAEvent={sendGAEvent}
+                userInfo={userInfo}
+                eventName='featuredProductClicked'
               />
             ))}
           </div>
