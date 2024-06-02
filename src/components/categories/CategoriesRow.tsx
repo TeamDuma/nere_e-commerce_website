@@ -42,8 +42,8 @@ const CategoriesRow = ({ params }: Props) => {
 
   useEffect(() => {
     getCategoryProduct(slug)
-      .then(() => { })
-      .catch(() => { });
+      .then(() => {})
+      .catch(() => {});
   }, [slug]);
 
   const handleAddToCart = (product: Product) => {
