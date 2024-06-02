@@ -79,8 +79,8 @@ const CategoriesRow = ({ params }: Props) => {
                       key={product.id}
                       product={product}
                       handleAddToCart={handleAddToCart}
-                      GAEvent='categoryProductClicked'
-                      GTMEvent='categoryProductClicked'
+                      GAEvent='productPageProductClicked'
+                      GTMEvent='productPageProductClicked'
                     />
                   ))}
                 </div>

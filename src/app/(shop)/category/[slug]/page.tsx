@@ -10,7 +10,7 @@ import { Product } from '@/types/product';
 import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import ProductCard from '@/components/common/ProductCardMain';
+import { ProductCard } from '@/components/common/ProductCardMain';
 
 type Props = {
   params: {
@@ -46,8 +46,8 @@ const Category = ({ params }: Props) => {
 
   useEffect(() => {
     getCategoryProduct(slug)
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   }, [slug]);
 
   if (isLoading) {
@@ -83,8 +83,8 @@ const Category = ({ params }: Props) => {
                   key={product.id}
                   product={product}
                   handleAddToCart={handleAddToCart}
-                  sendGTMEvent={sendGTMEvent}
-                  sendGAEvent={sendGAEvent}
+                  GAEvent='categoryProductClicked'
+                  GTMEvent='categoryProductClicked'
                 />
               ))}
             </div>
