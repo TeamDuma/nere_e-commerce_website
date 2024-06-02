@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { Product } from '@/types/product';
 import { useEffect, useState } from 'react';
 import Title from '@/components/Title';
+import { ProductCard } from '@/components/common/ProductCardMain';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/lib/redux/slices/shopping';
 
 type Props = {
   params: {
@@ -20,6 +23,18 @@ const Search = ({ params }: Props) => {
   const [getSearchProducts, { data, isLoading }] =
     useLazyGetSearchProductsQuery();
   const products = data?.data ?? [];
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product: Product) => {
+    const itemToAdd = {
+      ...product,
+      cartQuantity: 0,
+      productID: product.id,
+      isGroupJoiner: false,
+    };
+
+    dispatch(addToCart({ item: itemToAdd }));
+  };
 
   useEffect(() => {
     getSearchProducts(query)
@@ -42,83 +57,16 @@ const Search = ({ params }: Props) => {
           </div>
         )}
         <div className='px-4 md:px-4 lg:px-4'></div>
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-5 '>
+
+        <div className='grid grid-cols-2 sm:w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-4 xl:gap-x-5'>
           {products.map((product) => (
-            <Link href={`/product/${product.slug}`} key={product?.id}>
-              <div key={product?.id}>
-                <>
-                  <div className='px-4 md:px-4 lg:px-4'>
-                    <div className='relative rounded-md bg-gray-100'>
-                      <div className='h-15 absolute right-2 top-2 flex w-16 items-center justify-center rounded-md bg-[#F58929] text-xs font-bold text-white'>
-                        Save ¢
-                        <span className='ml-1'>{`${Math.round(
-                          product.price - product.sale_price
-                        )}`}</span>
-                      </div>
-
-                      <div className='mt-8 flex items-center justify-center md:mt-8'>
-                        <div
-                          style={{
-                            backgroundSize: 'cover',
-                            backgroundColor: 'gray-100',
-                            width: '200px',
-                            height: '200px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: '10px',
-                          }}
-                        >
-                          <img
-                            style={{ borderRadius: '10px' }}
-                            src={product?.plain_image}
-                            width={
-                              product.name === 'Frytol sunflower oil 0.9L' ||
-                              product.name === "Dr. Annie's honey 500ml"
-                                ? '60px'
-                                : '60px'
-                            }
-                            alt='cerelac image'
-                          />
-                          {/* <img
-                            style={{
-                              borderRadius: '10px',
-                              width: '40px',
-                              height: '60px',
-                            }}
-                            src={product?.plain_image}
-                            alt='cerelac image'
-                          /> */}
-                        </div>
-                      </div>
-                      <div className='flex items-center'>
-                        <h5
-                          tabIndex={0}
-                          className='product-name line-clamp-3 h-10 overflow-hidden text-sm font-semibold focus:outline-none lg:text-sm lg:font-semibold'
-                        >
-                          {product?.name}
-                        </h5>
-                      </div>
-
-                      <div className='ml-2 flex'>
-                        <div
-                          style={{ color: '#F31748' }}
-                        >{`¢ ${product?.sale_price}`}</div>
-                        <div
-                          style={{
-                            marginLeft: '14px',
-                            color: '#B3B3B3',
-                            textDecoration: 'line-through',
-                          }}
-                        >
-                          {`¢ ${product?.price}`}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              </div>
-            </Link>
+            <ProductCard
+              key={product.id}
+              product={product}
+              handleAddToCart={handleAddToCart}
+              GAEvent='searchProductClicked'
+              GTMEvent='searchProductClicked'
+            />
           ))}
         </div>
       </div>
