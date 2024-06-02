@@ -1,7 +1,6 @@
 'use client';
 import Categories from '@/components/categories/page';
 import Banner from '@/components/Slider';
-import FeaturedProducts from '@/components/FeaturedProducts';
 import OngoingRow from '@/components/OngoingRow';
 import Title from '@/components/Title';
 import TwoBannerLayout from '@/components/TwoBannerLayout';
@@ -31,7 +30,7 @@ import axios from 'axios';
 import { ILoginResponse } from '@/types/customer';
 import { toast } from 'react-toastify';
 import WhatsappCommunityBanner from '@/components/common/WhatsappCommunityBanner';
-
+import { FeaturedProducts } from '@/components/FeaturedProducts';
 export default function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isOngoingModalOpen, setIsOngoingModalOpen] = useState(false);

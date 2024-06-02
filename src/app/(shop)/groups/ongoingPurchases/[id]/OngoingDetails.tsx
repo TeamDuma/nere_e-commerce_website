@@ -8,8 +8,6 @@ import {
   selectShopping,
 } from '@/lib/redux';
 import { useLazyGetGroupQuery } from '@/lib/redux/services/group';
-import FeaturedProducts from '@/components/FeaturedProducts';
-
 import ViewMore from '@/components/common/ViewMore';
 import { Product } from '@/types/product';
 import { GroupType } from '@/types/group';
@@ -28,6 +26,7 @@ import Banner from '@/components/Slider';
 import CountdownTimer from '@/components/CountdownTimer';
 import GroupSlider from '@/components/GroupSlider';
 import Location from '@/components/common/Location';
+import { FeaturedProducts } from '@/components/FeaturedProducts';
 
 interface OngoingDetailsProps {
   ongoingUid: string;

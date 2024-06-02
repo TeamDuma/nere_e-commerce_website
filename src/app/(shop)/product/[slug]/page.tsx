@@ -1,5 +1,4 @@
 'use client';
-import FeaturedProducts from '@/components/FeaturedProducts';
 import PurchaseGuide from '@/components/common/PurchaseGuide';
 import ViewMore from '@/components/common/ViewMore';
 import { addToCart, selectShopping } from '@/lib/redux';
@@ -18,6 +17,7 @@ import { MdGroups, MdOutlineAccessAlarms } from 'react-icons/md';
 import PostHogClient from '@/app/posthog';
 import Banner from '@/components/Slider';
 import CountdownTimer from '@/components/CountdownTimer';
+import { FeaturedProducts } from '@/components/FeaturedProducts';
 
 type Props = {
   params: {
