@@ -10,6 +10,10 @@ body {
   min-height: 92vh;
 }
 
+.nere-container {
+  @apply mx-auto w-full max-w-[1261px] px-4 sm:px-6 lg:px-8;
+}
+
 .react-phone-number-input__icon {
   height: 20px;
   width: auto;

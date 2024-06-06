@@ -2,6 +2,7 @@ import './globals.css';
 import { Providers } from '@/lib/providers';
 import type { Metadata } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
+import localFont from 'next/font/local';
 import Header from '@/components/common/header/Header';
 import Container from '@/components/common/Container';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +12,26 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { PHProvider } from '@/lib/posthog/providers';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const ttnorms = localFont({
+  variable: '--font-tt-norms',
+  src: [
+    {
+      path: '../../public/fonts/tt-norms/TTNorms-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/tt-norms/TTNorms-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/tt-norms/TTNorms-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -27,13 +48,15 @@ export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <html lang='en'>
       <PHProvider>
-        <body
-          className={`${montserrat.className}`}
-          style={{ backgroundColor: '#FAFAFA' }}
-        >
+        <body>
           <Providers>
-            {/* <Header /> */}
-            {props.children}
+            <main
+              className={`${montserrat.className} ${ttnorms.variable} flex min-h-screen flex-col justify-between`}
+              style={{ backgroundColor: '#FAFAFA' }}
+            >
+              {props.children}
+              <Footer />
+            </main>
             <ToastContainer
               position='top-center'
               autoClose={5000}
@@ -46,8 +69,6 @@ export default function RootLayout(props: React.PropsWithChildren) {
               pauseOnHover
               theme='light'
             />
-            <Footer />
-            {/* <GoogleTagManager gtmId='GTM-T76G6F9Q' /> */}
             <GoogleAnalytics gaId='G-2NJ28203XK' />
           </Providers>
         </body>

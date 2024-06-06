@@ -4,7 +4,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <>
       <AboutNavbar />
-      <main>{props.children}</main>
+      <main className='font-ttnorms text-nere-black'>{props.children}</main>
     </>
   );
 }

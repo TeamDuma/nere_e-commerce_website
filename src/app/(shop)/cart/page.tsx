@@ -23,7 +23,7 @@ const Cart = () => {
     useSelector(selectShopping);
 
   return (
-    <div className='bg-[#FFFFFF]-100 my-4 ml-5 min-h-screen '>
+    <div className='bg-[#FFFFFF]-100 my-4 ml-5 h-full '>
       {cartItems.length === 0 ? (
         <div className='text-center text-5xl text-black'>
           Your cart is empty
