@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        ttnorms: ['var(--font-tt-norms)'],
+      },
       container: {
         center: true,
       },
@@ -14,6 +17,10 @@ module.exports = {
       colors: {
         accent: '#FF8F9C',
         blackish: '#1b1b1b',
+        primary: 'rgba(26, 70, 76, 1)',
+        'nere-black': 'rgba(62, 62, 62, 1)',
+        'nere-orange': 'rgba(245, 137, 41, 1)',
+        'nere-green': 'rgba(4, 72, 77, 1)',
       },
     },
   },
