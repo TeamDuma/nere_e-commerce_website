@@ -20,7 +20,7 @@ const Groups = () => {
     const response = getPublicGroups()
       .unwrap()
       .then((response) => {
-        setGroups(response.data.groups);
+        setGroups(response?.data?.groups);
       });
   }, []);
 
