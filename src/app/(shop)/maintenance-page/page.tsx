@@ -4,26 +4,30 @@ import Image from 'next/image';
 
 const Page = () => {
   return (
-    <div className='flex flex-col-reverse items-center justify-center gap-16 px-4 py-24 md:gap-28 md:px-44 md:py-20 lg:flex-row lg:px-24 lg:py-24'>
-      <div className='relative w-full pb-12 text-center lg:pb-0 xl:w-1/2 xl:pb-24'>
-        <div className='relative'>
-          <div className='mb-8'>
-            <h1 className='my-2 text-lg	 font-extrabold text-[#1A464C] md:text-4xl'>
+    <>
+    <div className="lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 pb-12  flex justify-center flex-col-reverse lg:flex-row md:gap-28 ">
+      <div className="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
+        <div className="relative">
+          <div className="absolute">
+            <div className="">
+            <h1 className='my-2 text-lg	 font-bold text-[#1A464C] md:text-4xl text-center'>
               Page under maintenance...
-            </h1>
-            <p className='my-2 text-sm text-gray-800 md:text-base'>
+              </h1>
+              <p className='my-2 text-sm text-gray-800 md:text-base  text-center '>
               This page is currently under maintenance and will be back soon.
-            </p>
-            <a href='/'>
-              <button className='my-4 w-full rounded-md border bg-[#298592] px-8 py-3 text-center text-sm font-bold text-white hover:bg-[#1A464C] focus:outline-none focus:ring-2 focus:ring-[#298592] focus:ring-opacity-50 sm:w-auto md:px-24'>
-                Continue shopping
+
+              </p>
+              <button className='my-4 w-full rounded-full	 border bg-[#1A464C] px-8 py-3 text-center text-sm font-bold text-white hover:bg-[#1A464C] focus:outline-none focus:ring-2 focus:ring-[#298592] focus:ring-opacity-50 sm:w-auto md:px-24'>
+              Continue shopping
               </button>
-            </a>
+            </div>
+          </div>
+          <div className="pb-32	">
           </div>
         </div>
       </div>
       <div>
-        <Image
+      <Image
           src='/images/maintenance.svg'
           width={400}
           height={300}
@@ -31,6 +35,9 @@ const Page = () => {
         />
       </div>
     </div>
+  </>
+  
+  
   );
 };
 
