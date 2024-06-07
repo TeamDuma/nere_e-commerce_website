@@ -120,7 +120,7 @@ export const HowItWorks = () => {
   };
 
   return (
-    <section className='pt-[110px]'>
+    <section className='pt-[110px] bg-[#FEFDFB]'>
       <div className='nere-container'>
         <div className='mx-auto flex max-w-[767px] flex-col items-center justify-center'>
           <h2 className='mb-3 text-2xl font-bold leading-[27.36px] text-nere-green md:text-[40px] md:leading-[45.6px]'>
