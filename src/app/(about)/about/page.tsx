@@ -1,9 +1,14 @@
+import { Metadata } from 'next';
 import { CollaborateWithUs } from './components/CollaborateWithUs';
 import { CollectiveBuying } from './components/CollectiveBuying';
 import { HeroSection } from './components/HeroSection';
 import { HowItWorks } from './components/HowItWorks';
 import { RealStories } from './components/RealStories';
 import { TrustedBrands } from './components/TrustedBrands';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+};
 
 const Page = () => {
   return (
