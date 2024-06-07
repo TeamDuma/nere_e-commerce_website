@@ -23,7 +23,7 @@ export const OngoingPurchases = () => {
           </div>
         </Link>
       </div>
-      <div className='grid grid-cols-4 gap-x-6'>
+      <div className='flex space-x-5 overflow-x-auto'>
         {isLoading &&
           Array.from({ length: 4 }).map((_, i) => (
             <ProductCardSkeleton key={i} />

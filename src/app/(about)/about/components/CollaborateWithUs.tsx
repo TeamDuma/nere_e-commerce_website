@@ -54,7 +54,7 @@ const TestImage = () => (
 );
 export const CollaborateWithUs = () => {
   return (
-    <section className='bg-white pb-[120px] pt-[110px] text-nere-black'>
+    <section className='bg-[#FEFDFB] pb-[120px] pt-[110px] text-nere-black'>
       <div className='nere-container'>
         <h3 className='mb-[60px] text-center text-[32px] font-bold leading-[38.4px]'>
           Collaborate with us!

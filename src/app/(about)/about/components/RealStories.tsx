@@ -29,7 +29,7 @@ export const RealStories = () => {
         <h2 className='mb-[51px] pt-[197px] text-center text-[32px] font-bold leading-[38.4px] text-white'>
           Real stories, Real impact
         </h2>
-        <div className='mb-[51px] grid grid-cols-2 gap-10'>
+        <div className='mb-[51px] grid md:grid-cols-2 gap-10'>
           {Array.from({ length: 2 }).map((_, index) => (
             <div
               key={index}

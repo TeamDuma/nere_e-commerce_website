@@ -21,7 +21,7 @@ export const ProductCard = ({ product }: IProductCard) => {
 
   return (
     <Link href={`/product/${product.slug}`} key={product.id}>
-      <div className='rounded-lg bg-white p-2 pb-[14px]'>
+      <div className='rounded-lg bg-white p-2 pb-[14px] shrink-0 w-[268px]'>
         <div className='relative mb-3 h-[145px] bg-[#F8F8F8] pt-3'>
           <GroupBuyIcon className='absolute left-0 top-0' />
           <Image
