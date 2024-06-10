@@ -3,7 +3,7 @@ import React from 'react';
 interface ProgressBarProps {
   remaining: number;
   total: number;
-  unit: string;
+  unit?: string;
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({

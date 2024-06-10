@@ -401,3 +401,7 @@ footer {
   background-color: #298592;
   color: white;
 }
+
+.testimonial .slick-slide > div {
+  margin: 0 10px;
+}

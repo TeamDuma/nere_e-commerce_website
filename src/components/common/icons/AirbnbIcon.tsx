@@ -7,9 +7,9 @@ export const AirbnbIcon = (props: React.SVGProps<SVGSVGElement>) => (
     xmlns='http://www.w3.org/2000/svg'
     {...props}
   >
-    <g clip-path='url(#clip0_12555_20878)'>
-      <g clip-path='url(#clip1_12555_20878)'>
-        <g clip-path='url(#clip2_12555_20878)'>
+    <g clipPath='url(#clip0_12555_20878)'>
+      <g clipPath='url(#clip1_12555_20878)'>
+        <g clipPath='url(#clip2_12555_20878)'>
           <mask
             id='mask0_12555_20878'
             style={{ maskType: 'luminance' }}

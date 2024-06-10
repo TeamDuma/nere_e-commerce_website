@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export const HeroSection = () => {
   return (
-    <div className="bg-[url('/images/about/hero-background.svg')] bg-contain pb-[120px] pt-20">
+    <div className="bg-[url('/images/about/hero-background.svg')] bg-contain pb-0 pt-0 md:pb-[120px] md:pt-[72px]">
       <div className='nere-container relative'>
         <div className='flex w-full justify-center'>
           <Image
@@ -21,7 +21,7 @@ export const HeroSection = () => {
             width={232.18}
             className='absolute -bottom-12 right-10 hidden object-contain lg:block'
           />
-          <div className='flex flex-col items-center justify-center pb-6 pt-24 lg:ml-16 lg:max-w-[780px]'>
+          <div className='flex flex-col items-center justify-center pb-6 pt-20 md:pt-24 lg:ml-16 lg:max-w-[780px]'>
             <h1 className='text-2xl font-bold leading-[28.32px] md:text-[60px] md:leading-[70.81px]'>
               <span>Empowering Communities Through </span>
               <span className='inline-flex flex-col'>
@@ -34,7 +34,7 @@ export const HeroSection = () => {
               Nere makes it possible. Join our story of empowering communities
               through affordable goods and sustainable practices.
             </p>
-            <Button>Join the community</Button>
+            <Button className='w-full md:w-[334px]'>Join the community</Button>
           </div>
         </div>
       </div>
