@@ -60,7 +60,7 @@ export const RealStories = () => {
 
 const Card = () => (
   <div>
-    <div className='flex flex-col items-center justify-center gap-x-[30px] gap-y-[19px] rounded-[20px] bg-white px-5 py-4 lg:flex-row md:px-10 md:py-10'>
+    <div className='flex flex-col items-center justify-center gap-x-[30px] gap-y-[19px] rounded-[20px] bg-white px-5 py-4 md:px-10 md:py-10 lg:flex-row'>
       <div className='flex flex-col items-center px-[21px] md:px-[30px]'>
         <div className='mb-1 w-[38px] md:mb-4 md:w-[120px]'>
           <Image
@@ -75,7 +75,7 @@ const Card = () => (
           Ama A.
         </p>
       </div>
-      <p className='text-nere-black'>
+      <p className='text-center text-nere-black md:text-left'>
         Since using Nere, I've been able to save almost half on my monthly
         grocery bill. It's a huge weight lifted off my shoulders, and my kids
         are eating healthier than ever before

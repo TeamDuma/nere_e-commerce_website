@@ -122,7 +122,7 @@ export const HowItWorks = () => {
   return (
     <section className='relative bg-[#FEFDFB] pt-[75px] md:pt-[110px]'>
       <div className='nere-container '>
-        <div className='mx-auto flex max-w-[767px] flex-col items-center justify-center'>
+        <div className='mx-auto flex w-full max-w-[767px] flex-col items-center justify-center'>
           <h2 className='mb-3 text-2xl font-bold leading-[27.36px] text-nere-green md:text-[40px] md:leading-[45.6px]'>
             How Nere Works
           </h2>
@@ -130,13 +130,14 @@ export const HowItWorks = () => {
             Unleashing Savings for Customers, Empowering Agents, and Growing
             Businesses for Suppliers
           </p>
-          <div className='flex w-fit items-center gap-4 rounded-3xl bg-neutral-100'>
+          <div className='flex w-fit items-center overflow-hidden rounded-full bg-neutral-100'>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => handleActiveTab(tab.id)}
                 className={classNames(
-                  'duration-2000 transform rounded-full px-[33.67px] py-3 leading-relaxed transition-colors ease-in-out lg:px-[69.5px] lg:py-4',
+                  'duration-2000 w-[113px] transform rounded-full py-3 leading-relaxed transition-colors ease-in-out md:w-[200px] lg:py-4',
+                  'text-xs font-medium leading-[14.16px] md:text-base md:leading-[18.88px]',
                   activeTab === tab.id
                     ? 'rounded-2xl bg-nere-green px-3 font-bold text-white'
                     : 'font-normal text-nere-black'
