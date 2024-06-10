@@ -71,7 +71,7 @@ const socialMediaLinks = [
 const Footer = () => {
   return (
     <>
-      <footer className="bg-[url('/images/styled-green-background.png')] bg-cover bg-center bg-no-repeat p-0">
+      <footer className="bg-[url('/images/styled-green-background.png')] bg-cover bg-center bg-no-repeat p-0 font-ttnorms">
         <div className='nere-container pb-[101px] pt-[84px]'>
           <div className='flex flex-wrap gap-y-8 md:flex-nowrap'>
             <MainLogo
