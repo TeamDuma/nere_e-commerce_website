@@ -54,16 +54,16 @@ const TestImage = () => (
 );
 export const CollaborateWithUs = () => {
   return (
-    <section className='bg-[#FEFDFB] pb-[120px] pt-[110px] text-nere-black'>
+    <section className='bg-[#FEFDFB] pb-[120px] pt-20 text-nere-black md:pt-[110px]'>
       <div className='nere-container'>
-        <h3 className='mb-[60px] text-center text-[32px] font-bold leading-[38.4px]'>
+        <h2 className='mb-3 text-center text-[20px] font-bold leading-6 tracking-[-0.32px] text-nere-green md:mb-[60px] md:text-[40px] md:leading-[64px]'>
           Collaborate with us!
-        </h3>
+        </h2>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}
-              className='flex h-[376px] flex-col justify-between bg-white'
+              className='flex h-[376px] w-full flex-col justify-between bg-white md:w-[382px]'
             >
               <div>
                 <h5 className='mb-5 text-[18px] font-bold leading-[32px] text-[#3B3B3B]'>
