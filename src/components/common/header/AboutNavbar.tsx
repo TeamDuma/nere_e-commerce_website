@@ -5,7 +5,7 @@ import { MainLogo } from '../icons/MainLogo';
 import { HumbugerIcon } from '../icons/HumbugerIcon';
 
 const navLinks = [
-  { name: 'About us', link: '' },
+  { name: 'About us', link: '/about' },
   { name: 'Impact', link: '' },
   { name: 'Sustainability', link: '' },
   { name: 'Contact us', link: '' },
@@ -15,10 +15,10 @@ const AboutNavbar = () => {
   return (
     <div className='fixed top-0 z-30 w-full backdrop-blur-3xl'>
       <nav className='font-ttnorms text-nere-black'>
-        <div className='nere-container flex h-[72px] items-center justify-between'>
+        <div className='nere-container flex h-14 items-center justify-between md:h-[72px]'>
           <div className='flex items-center'>
             <Link href='/'>
-              <MainLogo className='mb-3 mr-16 text-[#298592] lg:mr-[88px]' />
+              <MainLogo className='mb-3 mr-16 h-[22.56px] w-[59px] text-[#298592] md:h-[48px] md:w-[125.53px] lg:mr-[88px]' />
             </Link>
             <div className='hidden items-center gap-x-4 md:flex lg:gap-x-9'>
               {navLinks.map(({ name, link }) => (

@@ -18,7 +18,7 @@ export const ListNumber = ({
       </span>
       {!isLast && <div className='w-1 flex-1 bg-[#FAEFDB]'></div>}
     </div>
-    <div className='max-w-[564px] pb-[28px]'>
+    <div className={`max-w-[564px] ${!isLast ? 'pb-[28px]' : ''}`}>
       <h4 className='mb-1 text-base font-bold leading-[19.2px] text-primary md:text-[24px] md:leading-[28.8px]'>
         {title}
       </h4>
