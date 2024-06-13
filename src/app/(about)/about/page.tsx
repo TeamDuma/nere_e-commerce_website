@@ -8,7 +8,7 @@ import { TrustedBrands } from './components/TrustedBrands';
 import { FAQ } from './components/FAQ';
 
 export const metadata: Metadata = {
-  title: 'About Us',
+  title: 'Home',
 };
 
 const Page = () => {

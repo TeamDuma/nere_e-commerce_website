@@ -21,6 +21,7 @@ module.exports = {
         'nere-black': 'rgba(62, 62, 62, 1)',
         'nere-orange': 'rgba(245, 137, 41, 1)',
         'nere-green': 'rgba(4, 72, 77, 1)',
+        'nere-grey': '#757373',
       },
     },
   },

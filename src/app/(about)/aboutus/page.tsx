@@ -5,7 +5,7 @@ import { MakeAdifference } from './components/MakeAdifference';
 import { Mission } from './components/Mission';
 import { OurNumbers } from './components/OurNumbers';
 import { Team } from './components/Team';
-import { Vision } from './components/Vision';
+import { Vision } from './components/Vission';
 
 export const metadata: Metadata = {
   title: 'About Us',
