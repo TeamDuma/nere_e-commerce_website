@@ -41,7 +41,7 @@ const Card = ({
   title: string;
   image: string;
 }) => (
-  <div className='w-full px-6 sm:px-6 md:w-6/12 lg:w-3/12 lg:px-4'>
+  <div className='w-full sm:px-2 md:w-6/12 lg:w-3/12'>
     <div className='flex flex-col'>
       <a href='#' className=''>
         <img
