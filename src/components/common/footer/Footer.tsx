@@ -9,38 +9,48 @@ const footerLinks = [
   {
     title: 'Company',
     links: [
-      { name: 'About us', href: '/about' },
-      { name: 'Agent Locations', href: '/agent-locations' },
-      { name: 'Careers', href: '/careers' },
+      { name: 'About us', href: '/home', isExternal: false },
+      { name: 'Agent Locations', href: '/agent-locations', isExternal: false },
+      { name: 'Careers', href: '/careers', isExternal: false },
     ],
   },
   {
     title: 'Join our community',
     links: [
-      { name: 'Become an Agent', href: 'https://forms.gle/V2gyKYt9xdD6EL4JA' },
+      {
+        name: 'Become an Agent',
+        href: 'https://forms.gle/V2gyKYt9xdD6EL4JA',
+        isExternal: true,
+      },
       {
         name: 'Become a Supplier',
         href: 'https://forms.gle/LLoZ5uqj8wBnRo8FA',
+        isExternal: true,
       },
       {
         name: 'WhatsApp Community',
         href: 'https://chat.whatsapp.com/GPWialGrINjHtW4tJyzqEt',
+        isExternal: true,
       },
     ],
   },
   {
     title: 'Contact Us',
     links: [
-      { name: '+233 54 923 0728', href: 'tel:+233549230728' },
-      { name: 'info@nerecommunity', href: 'mailto:' },
+      { name: '+233 54 923 0728', href: 'tel:+233549230728', isExternal: true },
+      { name: 'info@nerecommunity', href: 'mailto:', isExternal: true },
     ],
   },
   {
     title: 'Legal',
     links: [
-      { name: 'Privacy Notice', href: '/legal/privacy' },
-      { name: 'Cookie Statement', href: '/legal/cookies' },
-      { name: 'Terms of service', href: '/legal/terms-of-service' },
+      { name: 'Privacy Notice', href: '/legal/privacy', isExternal: false },
+      { name: 'Cookie Statement', href: '/legal/cookies', isExternal: false },
+      {
+        name: 'Terms of service',
+        href: '/legal/terms-of-service',
+        isExternal: false,
+      },
     ],
   },
 ];
@@ -91,8 +101,9 @@ const Footer = () => {
                         key={index}
                         className='text-sm leading-[16.52px] text-white/80 hover:opacity-75'
                         href={item.href}
-                        target='_blank'
-                        rel='noreferrer'
+                        {...(item.isExternal
+                          ? { target: '_blank', rel: 'noreferrer' }
+                          : {})}
                       >
                         {item.name}
                       </Link>

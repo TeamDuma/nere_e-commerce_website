@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const Page = () => {
   return (
-    <>
+    <div className='bg-[#FEFDFB]'>
       <HeroSection />
       <MakeAdifference />
       <Mission />
@@ -21,7 +21,7 @@ const Page = () => {
       <Vision />
       <Sustainability />
       <Team />
-    </>
+    </div>
   );
 };
 

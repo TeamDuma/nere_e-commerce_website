@@ -1,4 +1,4 @@
-import { AffordableIcon } from '@/components/common/icons/AffordableIcon';
+import { CurvedLine } from '@/components/common/icons/CurvedLine';
 
 export const HeroSection = () => {
   return (
@@ -9,7 +9,7 @@ export const HeroSection = () => {
             <span>What if everyone had access to affordable </span>
             <span className='inline-flex flex-col'>
               <span>essentials?</span>
-              <AffordableIcon className='-mt-2 ml-2 w-28 md:ml-0 md:mt-0 md:w-full' />
+              <CurvedLine className='-mt-3.5 w-28 md:-mt-2 md:w-full' />
             </span>
           </h1>
           <p className='text-center text-sm md:w-[776px] md:text-[20px] md:leading-8'>

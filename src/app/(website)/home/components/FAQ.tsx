@@ -21,7 +21,7 @@ export const FAQ = () => {
           {faqs.map(({ question, answer }, index) => (
             <Disclosure key={index} as='div' defaultOpen={true}>
               <DisclosureButton className='flex w-full items-center justify-between rounded-md border-[0.5px] border-[#04484D33] bg-white px-4 py-[15px] md:py-6'>
-                <span className='text-sm leading-[29.26px] text-[18px] md:leading-[29.26px]'>
+                <span className='text-[18px] text-sm leading-[29.26px] md:leading-[29.26px]'>
                   {question}
                 </span>
                 <PlusIcon />

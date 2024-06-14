@@ -10,8 +10,8 @@ import { ToastContainer } from 'react-toastify';
 import Footer from '@/components/common/footer/Footer';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { PHProvider } from '@/lib/posthog/providers';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 const ttnorms = localFont({
