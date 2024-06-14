@@ -38,7 +38,7 @@ const footerLinks = [
     title: 'Contact Us',
     links: [
       { name: '+233 54 923 0728', href: 'tel:+233549230728', isExternal: true },
-      { name: 'info@nerecommunity', href: 'mailto:', isExternal: true },
+      { name: 'info@nerecommunity.com', href: 'mailto:info@nerecommunity.com', isExternal: true },
     ],
   },
   {
