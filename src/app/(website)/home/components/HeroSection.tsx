@@ -1,4 +1,4 @@
-import { Button } from '@/components/common/Button';
+import Button from '@/components/common/Button';
 import { AffordableIcon } from '@/components/common/icons/AffordableIcon';
 import Image from 'next/image';
 
@@ -22,7 +22,7 @@ export const HeroSection = () => {
             className='absolute -bottom-12 right-10 hidden object-contain lg:block'
           />
           <div className='flex flex-col items-center justify-center pb-6 pt-20 md:pt-24 lg:ml-16 lg:max-w-[780px]'>
-            <h1 className='text-2xl font-bold leading-[28.32px] md:text-[60px] md:leading-[70.81px] text-center'>
+            <h1 className='text-center text-2xl font-bold leading-[28.32px] md:text-[60px] md:leading-[70.81px]'>
               <span>Empowering Communities Through </span>
               <span className='inline-flex flex-col'>
                 <span className='text-nere-orange'>Affordable</span>
