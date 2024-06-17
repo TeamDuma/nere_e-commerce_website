@@ -1,4 +1,3 @@
-import { Button } from '@/components/common/Button';
 import { CheckedIcon } from '@/components/common/icons/CheckedIcon';
 import Image from 'next/image';
 
