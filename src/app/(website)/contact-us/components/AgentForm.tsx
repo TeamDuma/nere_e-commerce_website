@@ -28,7 +28,6 @@ export const AgentForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.fullName?.message}
             label='Full Name'
             placeholder='Kojo'
@@ -41,7 +40,6 @@ export const AgentForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.phoneNumber?.message}
             label='Phone Number'
             placeholder='enter number'
@@ -54,7 +52,6 @@ export const AgentForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.email?.message}
             label='Email address'
             placeholder='enter email'
@@ -67,7 +64,6 @@ export const AgentForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.businessName?.message}
             label='Business name'
             placeholder='enter name'
@@ -80,7 +76,6 @@ export const AgentForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.location?.message}
             label='Location'
             placeholder='enter location'

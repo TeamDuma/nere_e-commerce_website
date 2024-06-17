@@ -1,26 +1,21 @@
-import cn from 'classnames';
+import { classNames } from '@/lib/classNames';
 import React, { ButtonHTMLAttributes } from 'react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  variant?: 'normal' | 'outline' | 'custom';
+  variant?: 'normal';
   size?: 'big' | 'medium' | 'small';
   active?: boolean;
   loading?: boolean;
   disabled?: boolean;
 }
 const classes = {
-  root: 'inline-flex items-center justify-center shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700',
+  root: 'inline-flex items-center justify-center shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:ring-1',
   normal:
     'border-primary bg-primary text-white font-medium rounded-full hover:bg-[#298592] hover:shadow flex gap-x-2',
-  custom: 'border border-transparent',
-  outline:
-    'border border-border-400 bg-transparent text-body hover:text-light hover:bg-accent hover:border-accent',
   loading:
     'h-4 w-4 ltr:ml-2 rtl:mr-2 rounded-full border-2 border-transparent border-t-2 animate-spin',
-  disabled:
-    'border border-border-base bg-gray-300 hover:bg-gray-300 border-border-400 text-body cursor-not-allowed',
-  disabledOutline: 'border border-border-base text-muted cursor-not-allowed',
+  disabled: 'cursor-not-allowed',
   small: 'px-3 py-0 h-9 text-sm h-10',
   medium: 'px-5 py-0 h-12',
   big: 'px-20 py-0 h-14',
@@ -38,17 +33,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled = false,
       ...rest
     } = props;
-    const classesName = cn(
+    const classesName = classNames(
       classes.root,
-      {
-        [classes.normal]: !disabled && variant === 'normal',
-        [classes.disabled]: disabled && variant === 'normal',
-        [classes.outline]: !disabled && variant === 'outline',
-        [classes.disabledOutline]: disabled && variant === 'outline',
-        [classes.small]: size === 'small',
-        [classes.medium]: size === 'medium',
-        [classes.big]: size === 'big',
-      },
+      !disabled && variant === 'normal' && classes.normal,
+      disabled && variant === 'normal' && classes.disabled,
+      size === 'small' && classes.small,
+      size === 'medium' && classes.medium,
+      size === 'big' && classes.big,
       className
     );
 
@@ -66,8 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <span
             className={classes.loading}
             style={{
-              borderTopColor:
-                variant === 'outline' ? 'currentColor' : '#ffffff',
+              borderTopColor: '#ffffff',
             }}
           />
         )}

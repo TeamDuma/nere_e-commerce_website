@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import { classNames } from '@/lib/classNames';
 import React, { InputHTMLAttributes } from 'react';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,18 +8,12 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   error?: string;
   type?: string;
-  shadow?: boolean;
-  variant?: 'normal' | 'solid' | 'outline' | 'line';
+  variant?: 'normal';
   dimension?: 'small' | 'medium' | 'big';
 }
 
 const variantClasses = {
-  normal:
-    'bg-gray-100 border border-border-base rounded focus:shadow focus:bg-light focus:border-accent',
-  solid:
-    'bg-gray-100 border border-border-100 rounded focus:bg-light focus:border-accent',
-  outline: 'border border-border-base rounded focus:border-accent',
-  line: 'ltr:pl-0 rtl:pr-0 border-b border-border-base rounded-none focus:border-accent',
+  normal: 'bg-gray-100 border border-border-base rounded',
 };
 
 const sizeClasses = {
@@ -38,7 +32,6 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
       children,
       variant = 'normal',
       dimension = 'medium',
-      shadow = false,
       disabled = false,
       type = 'text',
       inputClassName,
@@ -61,12 +54,12 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           name={name}
           type={type}
           ref={ref}
-          className={cn(
-            'text-heading borer-[#298592] flex w-full appearance-none items-center border px-4 text-sm',
+          className={classNames(
+            'flex w-full items-center border border-[#298592] px-4 text-sm',
             'transition duration-300 ease-in-out focus:outline-none focus:ring-0',
-            shadow && 'focus:shadow',
             variantClasses[variant],
             sizeClasses[dimension],
+            error && 'border-red-500',
             disabled && 'cursor-not-allowed bg-gray-100',
             inputClassName
           )}

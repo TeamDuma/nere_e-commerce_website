@@ -1,5 +1,5 @@
+import { classNames } from '@/lib/classNames';
 import React, { TextareaHTMLAttributes } from 'react';
-import cn from 'classnames';
 
 export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
@@ -7,16 +7,11 @@ export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   name: string;
   error?: string;
-  shadow?: boolean;
-  variant?: 'normal' | 'solid' | 'outline';
+  variant?: 'normal';
 }
 
 const variantClasses = {
-  normal:
-    'bg-gray-100 border border-border-base focus:shadow focus:bg-light focus:border-accent',
-  solid:
-    'bg-gray-100 border border-border-100 focus:bg-light focus:border-accent',
-  outline: 'border border-border-base focus:border-accent',
+  normal: 'bg-gray-100 border border-border-base',
 };
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
@@ -26,7 +21,6 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
     name,
     error,
     variant = 'normal',
-    shadow = false,
     inputClassName,
     ...rest
   } = props;
@@ -43,9 +37,9 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
       <textarea
         id={name}
         name={name}
-        className={cn(
-          'text-heading flex w-full appearance-none items-center rounded px-4 py-3 text-sm transition duration-300 ease-in-out focus:outline-none focus:ring-0',
-          shadow && 'focus:shadow',
+        className={classNames(
+          'flex w-full appearance-none items-center rounded px-4 py-3 text-sm transition duration-300 ease-in-out focus:outline-none focus:ring-0',
+          error && 'border-red-500',
           variantClasses[variant],
           inputClassName
         )}

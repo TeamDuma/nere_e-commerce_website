@@ -29,7 +29,6 @@ export const PartnerForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.fullName?.message}
             label='Full Name'
             placeholder='Kojo'
@@ -42,7 +41,6 @@ export const PartnerForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.phoneNumber?.message}
             label='Phone Number'
             placeholder='enter number'
@@ -55,7 +53,6 @@ export const PartnerForm = () => {
         control={control}
         render={({ field }: any) => (
           <Input
-            size='md'
             error={errors.email?.message}
             label='Email address'
             placeholder='enter email'
@@ -68,7 +65,6 @@ export const PartnerForm = () => {
         control={control}
         render={({ field }: any) => (
           <TextArea
-            size='md'
             error={errors.message?.message}
             label='Message'
             placeholder='enter message'
