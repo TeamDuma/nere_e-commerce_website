@@ -8,7 +8,7 @@ const navLinks = [
   { name: 'About us', link: '/about-us' },
   { name: 'Impact', link: '' },
   { name: 'Sustainability', link: '' },
-  { name: 'Contact us', link: '' },
+  { name: 'Contact us', link: '/contact-us' },
 ];
 
 const AboutNavbar = () => {
