@@ -27,6 +27,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: [],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
