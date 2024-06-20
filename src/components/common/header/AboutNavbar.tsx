@@ -23,8 +23,8 @@ const AboutNavbar = () => {
               <MainLogo className='mb-3 mr-16 h-[22.56px] w-[59px] text-[#298592] md:h-[48px] md:w-[125.53px] lg:mr-[88px]' />
             </Link>
             <div className='hidden items-center gap-x-4 md:flex lg:gap-x-9'>
-              {navLinks.map(({ name, link }) => (
-                <Link href={link}>
+              {navLinks.map(({ name, link }, index) => (
+                <Link href={link} key={index}>
                   <p
                     className={classNames(
                       'font-medium leading-[14px]',

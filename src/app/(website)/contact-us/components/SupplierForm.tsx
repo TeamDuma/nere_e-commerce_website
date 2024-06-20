@@ -5,30 +5,54 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import Input from '@/components/common/form/Input';
 import Button from '@/components/common/Button';
+import { useCreateContactMutation } from '@/lib/redux/services/customers';
+import { ContactType } from '@/types/customer';
+import { toast } from 'react-toastify';
+
+const defaultValues = {
+  name: '',
+  phone: '',
+  email: '',
+  business_name: '',
+  location: '',
+  products: '',
+};
 
 export const SupplierForm = () => {
+  const [createContact, { isLoading }] = useCreateContactMutation();
+
   const form = useForm<CreateSupplierValues>({
+    defaultValues,
     resolver: zodResolver(createSupplierSchema),
   });
 
   const {
     handleSubmit,
     control,
+    reset,
     formState: { isSubmitting, errors },
   } = form;
 
   async function onSubmit(values: CreateSupplierValues) {
-    console.log(values);
+    try {
+      await createContact({ ...values, type: ContactType.SUPPLIER }).unwrap();
+      reset(defaultValues);
+      toast.success('Form submitted successfully', {
+        autoClose: 500,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <form className='space-y-6' noValidate onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name='fullName'
+        name='name'
         control={control}
         render={({ field }: any) => (
           <Input
-            error={errors.fullName?.message}
+            error={errors.name?.message}
             label='Full Name'
             placeholder='Kojo'
             {...field}
@@ -36,11 +60,11 @@ export const SupplierForm = () => {
         )}
       />
       <Controller
-        name='phoneNumber'
+        name='phone'
         control={control}
         render={({ field }: any) => (
           <Input
-            error={errors.phoneNumber?.message}
+            error={errors.phone?.message}
             label='Phone Number'
             placeholder='enter number'
             {...field}
@@ -60,11 +84,11 @@ export const SupplierForm = () => {
         )}
       />
       <Controller
-        name='businessName'
+        name='business_name'
         control={control}
         render={({ field }: any) => (
           <Input
-            error={errors.businessName?.message}
+            error={errors.business_name?.message}
             label='Business name'
             placeholder='enter name'
             {...field}
@@ -84,20 +108,20 @@ export const SupplierForm = () => {
         )}
       />
       <Controller
-        name='product'
+        name='products'
         control={control}
         render={({ field }: any) => (
           <Input
-            error={errors.product?.message}
+            error={errors.products?.message}
             label='Products you sell'
-            placeholder='enter product'
+            placeholder='enter products'
             {...field}
           />
         )}
       />
       <Button
-        loading={isSubmitting}
-        disabled={isSubmitting}
+        loading={isLoading || isSubmitting}
+        disabled={isLoading || isSubmitting}
         className='rounder-full !mt-8 w-full'
       >
         Submit
