@@ -120,7 +120,7 @@ export const HowItWorks = () => {
   };
 
   return (
-    <section className='relative bg-[#FEFDFB] pt-[75px] md:pt-[110px]'>
+    <section className='relative bg-[#FEFDFB] pb-20 pt-[75px] md:pb-[160px] md:pt-[110px]'>
       <div className='nere-container '>
         <div className='mx-auto flex w-full max-w-[767px] flex-col items-center justify-center'>
           <h2 className='mb-3 text-2xl font-bold leading-[27.36px] text-nere-green md:text-[40px] md:leading-[45.6px]'>
@@ -148,7 +148,7 @@ export const HowItWorks = () => {
             ))}
           </div>
         </div>
-        <div className='gap grid-col-1 grid gap-x-4 pb-[84px] pt-8 md:grid-cols-2 md:pb-[499px] md:pt-20'>
+        <div className='gap grid-col-1 grid gap-x-4 pt-8 md:grid-cols-2 md:pt-20'>
           <div className='order-2 mt-8 pr-6 md:order-1 md:mt-0 lg:pr-[89px]'>
             {activeTabInfo.info.map((info, index) => (
               <ListNumber
@@ -171,9 +171,9 @@ export const HowItWorks = () => {
           </div>
         </div>
       </div>
-      <div className='-bottom-[100px] left-0 right-0 mx-auto w-full md:absolute md:max-w-[1261px] md:px-8 '>
+      {/* <div className='-bottom-[100px] left-0 right-0 mx-auto w-full md:absolute md:max-w-[1261px] md:px-8 '>
         <OngoingPurchases />
-      </div>
+      </div> */}
     </section>
   );
 };
