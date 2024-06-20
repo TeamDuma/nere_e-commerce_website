@@ -64,7 +64,6 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             inputClassName
           )}
           disabled={disabled}
-          autoComplete='off'
           autoCorrect='off'
           autoCapitalize='off'
           spellCheck='false'

@@ -7,6 +7,7 @@ import Input from '@/components/common/form/Input';
 import Button from '@/components/common/Button';
 import { useCreateContactMutation } from '@/lib/redux/services/customers';
 import { ContactType } from '@/types/customer';
+import { toast } from 'react-toastify';
 
 const defaultValues = {
   name: '',
@@ -34,8 +35,11 @@ export const SupplierForm = () => {
 
   async function onSubmit(values: CreateSupplierValues) {
     try {
-      await createContact({ ...values, type: ContactType.SUPPLIER });
+      await createContact({ ...values, type: ContactType.SUPPLIER }).unwrap();
       reset(defaultValues);
+      toast.success('Form submitted successfully', {
+        autoClose: 500,
+      });
     } catch (error) {
       console.log(error);
     }
