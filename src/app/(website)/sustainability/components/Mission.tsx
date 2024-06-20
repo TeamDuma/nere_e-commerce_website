@@ -22,7 +22,7 @@ export const Mission = () => {
           <div className='flex flex-col items-center gap-y-6 md:py-[41px] md:pl-[96px]'>
             <VissionIcon />
             <h4 className='font-medium md:text-[40px] md:leading-[47.21px]'>
-              Vission
+              Vision
             </h4>
             <p className='text-center'>
               Crowdfunding is a method of raising capital through the collective

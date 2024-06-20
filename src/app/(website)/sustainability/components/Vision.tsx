@@ -6,8 +6,8 @@ export const Vision = () => {
       <div className='grid-col-1 mb-12 grid gap-x-4 md:grid-cols-2'>
         <div className='order-2 md:order-1'>
           <Image
-            src='/images/about/vission-1.png'
-            alt='Vission Image'
+            src='/images/about/vision-1.png'
+            alt='Vision Image'
             width={584}
             height={390}
             className='object-contain md:w-[584px]'
@@ -39,8 +39,8 @@ export const Vision = () => {
         </div>
         <div>
           <Image
-            src='/images/about/vission-2.png'
-            alt='Vission Image'
+            src='/images/about/vision-2.png'
+            alt='Vision Image'
             width={590}
             height={395}
             className='object-contain md:w-[590px]'
