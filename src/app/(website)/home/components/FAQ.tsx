@@ -61,7 +61,7 @@ export const FAQ = () => {
                       open && 'rounded-b-none border-b-0'
                     )}
                   >
-                    <p className='text-left text-sm leading-[29.26px] md:max-w-[351px] md:text-[18px] md:leading-[29.26px]'>
+                    <p className='font-medium text-left text-sm leading-[29.26px] md:max-w-[351px] md:text-[18px] md:leading-[29.26px]'>
                       {question}
                     </p>
                     <div className='relative h-6 w-6'>
