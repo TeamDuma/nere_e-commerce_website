@@ -51,13 +51,13 @@ export const FormTabs = () => {
     <section className='relative pb-[120px] pt-[22px] md:pt-[34px]'>
       <div className='nere-container '>
         <div className='mx-auto flex w-full max-w-[767px] flex-col items-center justify-center pb-8 md:pb-[60px]'>
-          <div className='flex w-fit items-center overflow-hidden rounded-full bg-neutral-100'>
+          <div className='flex w-full items-center overflow-hidden rounded-full bg-neutral-100 md:w-fit'>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => handleActiveTab(tab.id)}
                 className={classNames(
-                  'duration-2000 w-[113px] transform rounded-full py-3 leading-relaxed transition-colors ease-in-out md:w-[200px] lg:py-4',
+                  'duration-2000 w-full transform rounded-full py-3 leading-relaxed transition-colors ease-in-out md:w-[200px] lg:py-4',
                   'text-xs font-medium leading-[14.16px] md:text-base md:leading-[18.88px]',
                   activeTab === tab.id
                     ? 'rounded-2xl bg-nere-green px-3 font-bold text-white'
@@ -73,7 +73,7 @@ export const FormTabs = () => {
           <div className='gap grid-col-1 grid gap-x-[57px] md:grid-cols-2'>
             <div className=''>
               <div className='mb-6 pr-8'>
-                <p className='text-[18px] font-medium leading-6 text-nere-green'>
+                <p className='text-[14px] md:text-[18px] leading-[20px] font-medium md:leading-6 text-nere-green'>
                   {activeTabInfo.description}
                 </p>
               </div>
@@ -82,7 +82,7 @@ export const FormTabs = () => {
                 alt={`${activeTabInfo.name} image`}
                 width={580}
                 height={507}
-                className='rounded-[18px] object-fill'
+                className='hidden rounded-[18px] object-fill md:block'
               />
             </div>
             <div className=''>
