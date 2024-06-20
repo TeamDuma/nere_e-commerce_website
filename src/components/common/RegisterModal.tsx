@@ -231,7 +231,7 @@ const RegistrationModal: React.FC<{
                 <PhoneInput
                   international
                   defaultCountry='GH'
-                  value={phoneNumber}
+                  value={phoneNumber as any}
                   style={{
                     outline: 'none',
                     border: '1px solid #ffffff',
