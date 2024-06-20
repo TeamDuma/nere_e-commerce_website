@@ -110,3 +110,25 @@ export interface IUpdateCustomerResponse {
   message: string;
   customer: Customer;
 }
+
+export enum ContactType {
+  SUPPLIER = 'supplier',
+  AGENT = 'agent',
+  PARTNER = 'partner',
+}
+
+export interface ICreateContactRequest {
+  name: string;
+  email: string;
+  phone: string;
+  business_name?: string;
+  location?: string;
+  products?: string;
+  message?: string;
+  type: ContactType;
+}
+
+export interface ICreateContactResponse {
+  status: string;
+  message: string;
+}

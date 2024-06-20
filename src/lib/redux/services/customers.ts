@@ -2,6 +2,8 @@ import {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
   ForgotPasswordTokenResponse,
+  ICreateContactRequest,
+  ICreateContactResponse,
   ILoginRequest,
   ILoginResponse,
   IRegisterRequest,
@@ -101,6 +103,16 @@ const customerApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+    createContact: builder.mutation<
+      ICreateContactResponse,
+      ICreateContactRequest
+    >({
+      query: (data) => ({
+        url: endpoints.createContact,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -114,4 +126,5 @@ export const {
   useLazyGetOrdersQuery,
   useResetPasswordMutation,
   useUpdateCustomerMutation,
+  useCreateContactMutation
 } = customerApi;
