@@ -30,6 +30,7 @@ const endpoints = {
   getPasswordToken: (token: string) => `/customers/reset-password/${token}`,
   resetPassword: '/customers/reset-password',
   getOrders: (uid: string) => `/orders/customer/${uid}`,
+  createContact: 'contact',
 
   // Location
   activeLocations: 'locations/active',

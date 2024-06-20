@@ -5,16 +5,11 @@ import { useState } from 'react';
 import { SupplierForm } from './SupplierForm';
 import { AgentForm } from './AgentForm';
 import { PartnerForm } from './PartnerForm';
-
-enum TabEnum {
-  SUPPLIER = 'Supplier',
-  AGENT = 'Agent',
-  PARTNER = 'Partner',
-}
+import { ContactType } from '@/types/customer';
 
 const tabs = [
   {
-    id: TabEnum.SUPPLIER,
+    id: ContactType.SUPPLIER,
     name: 'Become a supplier',
     description:
       'Join the nere community and sell your goods directly to a robust customer base. Please leave your details below and we will be in touch with you within 48 hours.',
@@ -22,7 +17,7 @@ const tabs = [
     Component: SupplierForm,
   },
   {
-    id: TabEnum.AGENT,
+    id: ContactType.AGENT,
     name: 'Become an agent',
     description:
       'As a Nere agent, you will help us package orders and interact with our community members as they pick up their orders from your location. Please leave your details and we will be in touch with you within 48 hours.',
@@ -30,7 +25,7 @@ const tabs = [
     Component: AgentForm,
   },
   {
-    id: TabEnum.PARTNER,
+    id: ContactType.PARTNER,
     name: 'Partner with us',
     description:
       "Support Nere's mission with grant funding. Contact Us to discuss how your support can help us create lasting change",
@@ -40,10 +35,10 @@ const tabs = [
 ];
 
 export const FormTabs = () => {
-  const [activeTab, setActiveTab] = useState<TabEnum>(TabEnum.SUPPLIER);
+  const [activeTab, setActiveTab] = useState<ContactType>(ContactType.SUPPLIER);
   const activeTabInfo = tabs.find((tab) => tab.id === activeTab)!;
 
-  const handleActiveTab = (tab: TabEnum) => {
+  const handleActiveTab = (tab: ContactType) => {
     setActiveTab(tab);
   };
 
@@ -73,7 +68,7 @@ export const FormTabs = () => {
           <div className='gap grid-col-1 grid gap-x-[57px] md:grid-cols-2'>
             <div className=''>
               <div className='mb-6 pr-8'>
-                <p className='text-[14px] md:text-[18px] leading-[20px] font-medium md:leading-6 text-nere-green'>
+                <p className='text-[14px] font-medium leading-[20px] text-nere-green md:text-[18px] md:leading-6'>
                   {activeTabInfo.description}
                 </p>
               </div>

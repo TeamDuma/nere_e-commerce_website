@@ -14,8 +14,8 @@ const classes = {
   normal:
     'border-primary bg-primary text-white font-medium rounded-full hover:bg-[#298592] hover:shadow flex gap-x-2',
   loading:
-    'h-4 w-4 ltr:ml-2 rtl:mr-2 rounded-full border-2 border-transparent border-t-2 animate-spin',
-  disabled: 'cursor-not-allowed',
+    'h-4 w-4 rounded-full border-2 border-transparent border-t-2 animate-spin',
+  disabled: 'cursor-not-allowed !bg-[#298592]',
   small: 'px-3 py-0 h-9 text-sm h-10',
   medium: 'px-5 py-0 h-12',
   big: 'px-20 py-0 h-14',
@@ -35,7 +35,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     } = props;
     const classesName = classNames(
       classes.root,
-      !disabled && variant === 'normal' && classes.normal,
+      variant === 'normal' && classes.normal,
       disabled && variant === 'normal' && classes.disabled,
       size === 'small' && classes.small,
       size === 'medium' && classes.medium,

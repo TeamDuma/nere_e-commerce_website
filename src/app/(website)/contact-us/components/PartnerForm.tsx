@@ -6,30 +6,48 @@ import { Controller, useForm } from 'react-hook-form';
 import Input from '@/components/common/form/Input';
 import Button from '@/components/common/Button';
 import TextArea from '@/components/common/form/TextArea';
+import { useCreateContactMutation } from '@/lib/redux/services/customers';
+import { ContactType } from '@/types/customer';
+
+const defaultValues = {
+  name: '',
+  phone: '',
+  email: '',
+  message: '',
+};
 
 export const PartnerForm = () => {
+  const [createContact, { isLoading }] = useCreateContactMutation();
   const form = useForm<CreatePartnerValues>({
+    defaultValues,
     resolver: zodResolver(createPartnerSchema),
   });
 
   const {
     handleSubmit,
     control,
+    reset,
     formState: { isSubmitting, errors },
   } = form;
 
   async function onSubmit(values: CreatePartnerValues) {
-    console.log(values);
+    try {
+      await createContact({ ...values, type: ContactType.PARTNER });
+      reset(defaultValues);
+      console.log('Partner form submitted');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <form className='space-y-6' noValidate onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name='fullName'
+        name='name'
         control={control}
         render={({ field }: any) => (
           <Input
-            error={errors.fullName?.message}
+            error={errors.name?.message}
             label='Full Name'
             placeholder='Kojo'
             {...field}
@@ -37,11 +55,11 @@ export const PartnerForm = () => {
         )}
       />
       <Controller
-        name='phoneNumber'
+        name='phone'
         control={control}
         render={({ field }: any) => (
           <Input
-            error={errors.phoneNumber?.message}
+            error={errors.phone?.message}
             label='Phone Number'
             placeholder='enter number'
             {...field}
@@ -73,8 +91,8 @@ export const PartnerForm = () => {
         )}
       />
       <Button
-        loading={isSubmitting}
-        disabled={isSubmitting}
+        loading={isLoading || isSubmitting}
+        disabled={isLoading || isSubmitting}
         className='rounder-full !mt-8 w-full'
       >
         Submit
