@@ -73,7 +73,7 @@ export const GroupBuyCard = ({ group }: IGroupBuyCard) => {
 };
 
 export const GroupBuyCardSkeleton = () => (
-  <div className='animate-pulse rounded-lg bg-white p-2 pb-[14px]'>
+  <div className='w-[268px] shrink-0 animate-pulse rounded-lg bg-white p-2 pb-[14px]'>
     <div className='relative mb-3 h-[145px] bg-[#F8F8F8] pt-3'>
       <div className='absolute left-0 top-0 h-4 w-14 rounded bg-gray-200'></div>
       <div className='mx-auto h-[105px] w-[60px] rounded-lg bg-gray-200'></div>

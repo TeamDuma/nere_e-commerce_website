@@ -6,6 +6,7 @@ import { HowItWorks } from './components/HowItWorks';
 import { RealStories } from './components/RealStories';
 import { TrustedBrands } from './components/TrustedBrands';
 import { FAQ } from './components/FAQ';
+import { OngoingPurchases } from './components/OngoingPurchases';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -18,6 +19,7 @@ const Page = () => {
       <TrustedBrands />
       <CollectiveBuying />
       <HowItWorks />
+      <OngoingPurchases />
       <RealStories />
       <CollaborateWithUs />
       <FAQ />
