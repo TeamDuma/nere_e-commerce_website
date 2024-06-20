@@ -1,12 +1,14 @@
 'use client';
 import { MinusIcon } from '@/components/common/icons/MinusIcon';
 import { PlusIcon } from '@/components/common/icons/PlusIcon';
+import { nereContacts, socialMediaLinks } from '@/constants/contactDetails';
 import { classNames } from '@/lib/classNames';
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/react';
+import Link from 'next/link';
 
 const faqs = [
   {
@@ -17,7 +19,7 @@ const faqs = [
   {
     question: 'How do I become an agent or supplier?',
     answer:
-      "Let's chat! Please fill in the form on our website and we'll get back to you.",
+      "Let's chat! Please fill in the form on our [website](/contact-us) and we'll get back to you.",
   },
   {
     question: 'After purchasing, how can I pick my order?',
@@ -32,8 +34,7 @@ const faqs = [
   },
   {
     question: 'Is there delivery?',
-    answer:
-      'You may request for delivery at your cost via our email or Whatsapp.',
+    answer: `You may request for delivery at your cost via our [email](${nereContacts.email.href}) or [Whatsapp](${socialMediaLinks.whatsapp.href}).`,
   },
   {
     question: 'Can I pay on delivery?',
@@ -80,7 +81,29 @@ export const FAQ = () => {
                     </div>
                   </DisclosureButton>
                   <DisclosurePanel className='rounded-b-xl border-[0.5px] border-t-0 border-[#04484D33] bg-white px-4 pb-5'>
-                    <p className='text-nere-black'>{answer}</p>
+                    <p className='text-nere-black'>
+                      {answer.split(/(\[.*?\]\(.*?\))/g).map((part, i) => {
+                        if (part.match(/\[.*?\]\(.*?\)/)) {
+                          const match = part.match(/\[(.*?)\]\((.*?)\)/);
+                          return (
+                            <Link
+                              key={i}
+                              href={match![2]}
+                              className='text-blue-500 underline'
+                              {...(match![2].includes('https:')
+                                ? {
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer',
+                                  }
+                                : {})}
+                            >
+                              {match![1]}
+                            </Link>
+                          );
+                        }
+                        return part;
+                      })}
+                    </p>
                   </DisclosurePanel>
                 </>
               )}

@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import InstagramIcon from '../InstagramIcon';
-import WhatsappIcon from '../WhatsappIcon';
-import FaceBookIcon from '../FaceBookIcon';
 import { MainLogo } from '../icons/MainLogo';
 import { WecareIcon } from '../icons/WeCareIcon';
+import { nereContacts, socialMediaLinks } from '@/constants/contactDetails';
 
 const footerLinks = [
   {
@@ -36,14 +34,7 @@ const footerLinks = [
   },
   {
     title: 'Contact Us',
-    links: [
-      { name: '+233 54 923 0728', href: 'tel:+233549230728', isExternal: true },
-      {
-        name: 'info@nerecommunity.com',
-        href: 'mailto:info@nerecommunity.com',
-        isExternal: true,
-      },
-    ],
+    links: Object.values(nereContacts),
   },
   {
     title: 'Legal',
@@ -56,29 +47,6 @@ const footerLinks = [
         isExternal: false,
       },
     ],
-  },
-];
-
-const socialMediaLinks = [
-  {
-    name: 'Facebook',
-    href: 'https://www.facebook.com/nerecommunity',
-    icon: FaceBookIcon,
-  },
-  {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/nerecommunity/',
-    icon: InstagramIcon,
-  },
-  {
-    name: 'Whatsapp',
-    href: 'https://chat.whatsapp.com/GPWialGrINjHtW4tJyzqEt',
-    icon: WhatsappIcon,
-  },
-  {
-    name: 'Youtube',
-    href: 'https://youtube.com/nerecommunity',
-    icon: WhatsappIcon,
   },
 ];
 
@@ -118,13 +86,13 @@ const Footer = () => {
               <div>
                 <p className='mb-6 font-bold text-white'>Social</p>
                 <div className='flex gap-x-5'>
-                  {socialMediaLinks.map((social, index) => (
+                  {Object.values(socialMediaLinks).map((social, index) => (
                     <Link
                       key={index}
                       className='rounded-full hover:opacity-75'
                       href={social.href}
                       target='_blank'
-                      rel='noreferrer'
+                      rel='noreferrer noopener'
                     >
                       <span className='sr-only'>{social.name}</span>
                       <social.icon />
