@@ -55,8 +55,8 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           type={type}
           ref={ref}
           className={classNames(
-            'flex w-full items-center border border-[#298592] px-4 text-sm',
-            'transition duration-300 ease-in-out focus:outline-none focus:ring-0',
+            'flex w-full items-center rounded-lg border px-4 text-sm focus:border-[#298592]',
+            'transition duration-300 ease-in-out placeholder:text-[#B5B5B5] focus:outline-none focus:ring-0',
             variantClasses[variant],
             sizeClasses[dimension],
             error && 'border-red-500',
