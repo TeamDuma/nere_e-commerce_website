@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import { AffordableIcon } from '@/components/common/icons/AffordableIcon';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const HeroSection = () => {
   return (
@@ -34,7 +35,11 @@ export const HeroSection = () => {
               Nere makes it possible. Join our story of empowering communities
               through affordable goods and sustainable practices.
             </p>
-            <Button className='w-full md:w-[334px]'>Join the community</Button>
+            <Link href='#collaborate-with-us'>
+              <Button className='w-full md:w-[334px]'>
+                Join the community
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -26,7 +26,10 @@ const cardsData = [
 
 export const CollaborateWithUs = () => {
   return (
-    <section className='bg-[#FEFDFB] pb-[120px] pt-20 text-nere-black md:pt-[110px]'>
+    <section
+      id='collaborate-with-us'
+      className='bg-[#FEFDFB] pb-[120px] pt-20 text-nere-black md:pt-[110px]'
+    >
       <div className='nere-container'>
         <h2 className='mb-3 text-center text-[20px] font-bold leading-6 tracking-[-0.32px] text-nere-green md:mb-[60px] md:text-[40px] md:leading-[64px]'>
           Collaborate with us!
