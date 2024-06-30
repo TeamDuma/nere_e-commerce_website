@@ -54,9 +54,8 @@ export const FormTabs = () => {
                 className={classNames(
                   'duration-2000 w-full transform rounded-full py-3 leading-relaxed transition-colors ease-in-out md:w-[200px] lg:py-4',
                   'text-xs font-medium leading-[14.16px] md:text-base md:leading-[18.88px]',
-                  activeTab === tab.id
-                    ? 'rounded-2xl bg-nere-green px-3 font-bold text-white'
-                    : 'font-normal text-nere-black'
+                  activeTab === tab.id &&
+                    'rounded-2xl bg-nere-green px-3 text-white'
                 )}
               >
                 {tab.name}
