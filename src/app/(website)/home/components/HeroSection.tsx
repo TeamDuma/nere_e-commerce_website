@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const HeroSection = () => {
   return (
-    <div className="bg-[url('/images/about/hero-background.svg')] bg-contain pb-0 pt-0 md:pb-[120px] md:pt-[72px]">
+    <div className="bg-[url('/images/about/hero-background.svg')] bg-cover pb-0 pt-0 md:pb-[120px] md:pt-[72px] lg:bg-contain">
       <div className='nere-container relative'>
         <div className='flex w-full justify-center'>
           <Image
