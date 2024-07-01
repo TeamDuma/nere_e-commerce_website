@@ -2,7 +2,6 @@
 import { classNames } from '@/lib/classNames';
 import Image from 'next/image';
 import { useState } from 'react';
-import { OngoingPurchases } from './OngoingPurchases';
 import { ListNumber } from './ListNumber';
 
 enum TabEnum {
@@ -171,9 +170,6 @@ export const HowItWorks = () => {
           </div>
         </div>
       </div>
-      {/* <div className='-bottom-[100px] left-0 right-0 mx-auto w-full md:absolute md:max-w-[1261px] md:px-8 '>
-        <OngoingPurchases />
-      </div> */}
     </section>
   );
 };

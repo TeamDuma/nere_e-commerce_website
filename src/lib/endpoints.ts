@@ -37,6 +37,9 @@ const endpoints = {
 
   // Vouchers
   getUsersVouchers: (id: string) => `vouchers/user_voucher/customer/${id}`,
+
+  // Referrals
+  clickReferral: 'referrals/click',
 };
 
 export default endpoints;

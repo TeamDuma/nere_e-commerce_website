@@ -31,11 +31,14 @@ const customerApi = apiSlice.injectEndpoints({
       }),
     }),
     signUp: builder.mutation<IRegisterResponse, IRegisterRequest>({
-      query: (data) => ({
-        url: endpoints.signup,
-        method: 'POST',
-        body: data,
-      }),
+      query: (data) => {
+        const referral_code = localStorage.getItem('agt_code');
+        return {
+          url: endpoints.signup,
+          method: 'POST',
+          body: { ...data, referral_code },
+        };
+      },
     }),
     phoneVerify: builder.mutation<IphoneVerifyResponse, IphoneVerifyRequest>({
       query: ({ token }) => ({
@@ -126,5 +129,5 @@ export const {
   useLazyGetOrdersQuery,
   useResetPasswordMutation,
   useUpdateCustomerMutation,
-  useCreateContactMutation
+  useCreateContactMutation,
 } = customerApi;

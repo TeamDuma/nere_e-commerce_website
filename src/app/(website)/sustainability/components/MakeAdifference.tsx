@@ -9,7 +9,7 @@ export const MakeAdifference = () => {
           <h1 className='mb-3 text-[24px] font-bold capitalize leading-[28.8px] tracking-[-0.32px] text-nere-green md:w-[438.66px] md:text-[60px] md:leading-[64px]'>
             How we make a difference
           </h1>
-          <p className='mb-6 text-[14px] leading-[20px] text-nere-grey md:text-[18px] md:leading-[32px]'>
+          <p className='mb-6 text-[14px] font-medium leading-[20px] text-nere-grey md:text-[18px] md:leading-[32px]'>
             At Nere, we believe in the power of collective action to drive
             positive change. Our journey began with a simple idea: to
             democratize access to affordable goods for all.
@@ -24,7 +24,7 @@ export const MakeAdifference = () => {
               ].map((item, index) => (
                 <li key={index} className='flex items-center gap-x-3'>
                   <CheckedIcon />
-                  <span className='text-[14px]F font-bold leading-[20px] md:text-[18px] md:leading-[32.04px]'>
+                  <span className='text-[14px] font-bold leading-[20px] md:text-[18px] md:leading-[32.04px]'>
                     {item}
                   </span>
                 </li>
