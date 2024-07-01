@@ -1,5 +1,6 @@
 import Button from '@/components/common/Button';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const CollectiveBuying = () => {
   return (
@@ -16,7 +17,11 @@ export const CollectiveBuying = () => {
               our network, you can access essential goods at discounted prices
               through our innovative group buying model.
             </p>
-            <Button className='w-full md:w-[334px]'>Join the community</Button>
+            <Link href='#collaborate-with-us'>
+              <Button className='w-full md:w-[334px]'>
+                Join the community
+              </Button>
+            </Link>
           </div>
           <div>
             <Image
