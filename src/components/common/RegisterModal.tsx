@@ -166,7 +166,10 @@ const RegistrationModal: React.FC<{
       return;
     }
 
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`;
+    const agt_code = localStorage.getItem('agt_code');
+    window.location.href = `${
+      process.env.NEXT_PUBLIC_API_URL
+    }/auth/google/login ${agt_code ? `?agt_code=${agt_code}` : ''}`;
   };
 
   return (
