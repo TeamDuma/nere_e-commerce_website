@@ -61,7 +61,7 @@ export const FAQ = () => {
                       open && 'rounded-b-none border-b-0'
                     )}
                   >
-                    <p className='font-medium text-left text-sm leading-[29.26px] md:max-w-[351px] md:text-[18px] md:leading-[29.26px]'>
+                    <p className='text-left text-sm font-medium leading-[29.26px] md:max-w-[351px] md:text-[18px] md:leading-[29.26px]'>
                       {question}
                     </p>
                     <div className='relative h-6 w-6'>
@@ -80,7 +80,9 @@ export const FAQ = () => {
                     </div>
                   </DisclosureButton>
                   <DisclosurePanel className='rounded-b-xl border-[0.5px] border-t-0 border-[#04484D33] bg-white px-4 pb-5'>
-                    <p className='text-nere-black'>{answer}</p>
+                    <p className='text-sm text-nere-black md:text-[18px] md:leading-[29.26px]'>
+                      {answer}
+                    </p>
                   </DisclosurePanel>
                 </>
               )}
