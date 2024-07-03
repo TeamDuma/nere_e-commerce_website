@@ -1,7 +1,10 @@
-import { headers } from 'next/headers';
-
-export const getIPAddress = () => {
-  const header = headers();
-  const ip = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
-  return ip;
+export const fetchIPAddress = async () => {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    return data.ip;
+  } catch (error) {
+    console.error('Failed to fetch IP address:', error);
+    return '127.0.0.1';
+  }
 };
