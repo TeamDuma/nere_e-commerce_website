@@ -169,7 +169,7 @@ const RegistrationModal: React.FC<{
     const agt_code = localStorage.getItem('agt_code');
     window.location.href = `${
       process.env.NEXT_PUBLIC_API_URL
-    }/auth/google/login ${agt_code ? `?agt_code=${agt_code}` : ''}`;
+    }/auth/google/login${agt_code ? `?agt_code=${agt_code}` : ''}`;
   };
 
   return (
