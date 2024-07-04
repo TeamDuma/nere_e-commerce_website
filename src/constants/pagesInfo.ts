@@ -6,6 +6,7 @@ interface IPagesInfo {
 }
 
 export const PAGES_INFO: Record<string, IPagesInfo> = {
+  '/': { title: 'Landing Page', clickType: ClickType.LANDING_PAGE },
   '/home': { title: 'Landing Page', clickType: ClickType.LANDING_PAGE },
   '/sustainability': {
     title: 'Landing Page',
