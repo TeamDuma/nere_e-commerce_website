@@ -13,7 +13,13 @@ import { PHProvider } from '@/lib/posthog/providers';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+const montserrat = Montserrat({
+  weight: ['500', '700', '900'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+});
 const ttnorms = localFont({
   variable: '--font-tt-norms',
   src: [
@@ -53,7 +59,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
         <body>
           <Providers>
             <main
-              className={`${montserrat.className} ${ttnorms.variable} flex min-h-screen flex-col justify-between`}
+              className={`${montserrat.variable} ${ttnorms.variable} flex min-h-screen flex-col justify-between`}
               style={{ backgroundColor: '#FAFAFA' }}
             >
               {props.children}
