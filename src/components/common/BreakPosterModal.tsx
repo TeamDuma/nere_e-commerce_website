@@ -68,23 +68,23 @@ export const BreakPosterModal = () => (
   <Dialog.Root open={true}>
     <Dialog.Portal>
       <Dialog.Overlay className='fixed inset-0 z-50 bg-black/50' />
-      <Dialog.Content className='fixed left-1/2 top-1/2 z-50 w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-[20px] p-0 text-[#FCF5E8] md:w-full'>
+      <Dialog.Content className='fixed left-1/2 top-1/2 z-50 w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-[20px] px-0 font-montserrat text-[#FCF5E8] md:w-fit'>
         <Dialog.Title />
         <Dialog.Description />
-        <div className='rounded-[20px] bg-nere-green p-5'>
-          <section className="w-full bg-[url('/images/styled-green-background.png')] bg-cover bg-center bg-no-repeat md:h-[842px]">
-            <div className='flex h-full flex-col justify-center md:items-center lg:flex-row'>
+        <div className="rounded-[20px] bg-nere-green bg-[url('/images/styled-green-background.png')] bg-cover bg-center bg-no-repeat">
+          <section className='w-full md:pb-[65px] md:pl-[65px] md:pr-[37px] md:pt-6'>
+            <div className='flex flex-col justify-center md:items-center lg:flex-row p-5 md:p-0'>
               <AlertIconSmall className='-rotate-[17.01deg] md:hidden' />
-              <h1 className='w-full text-center text-[32px] font-black uppercase leading-[39.01px] md:w-[925px] md:text-left md:text-[132px] md:leading-[160.91px]'>
+              <h1 className='mx-auto w-[247px] text-center text-[32px] font-black uppercase leading-[39.01px] md:mx-0 md:w-[467px] md:text-left md:text-[60px] md:leading-[73.14px]'>
                 WE’RE TEMPORARY NOT TAKING ORDERS!
               </h1>
-              <div className='relative w-full md:w-[773px]'>
+              <div className='relative w-full md:w-[496px]'>
                 <div className='hidden w-full justify-between md:flex'>
-                  <AlertIcon className='mt-20 -rotate-[15deg] ' />
+                  <AlertIcon className='mt-10 -rotate-[15deg] ' />
                   <WhiteLogo className='' />
                 </div>
-                <p className='mb-6 mt-4 text-center text-[12px] font-medium leading-[14.63px] md:mb-[39px] md:mt-[50px] md:text-left md:text-[32px] md:leading-[39.01px]'>
-                  We regret to inform you that Nere Community will be
+                <p className='mx-auto mb-6 mt-4 w-[247px] text-center text-[12px] font-medium leading-[14.63px] md:mx-0 md:mb-[39px] md:mt-[50px] md:w-full md:text-left md:text-[18px] md:leading-[21.94px]'>
+                  We are sorry to inform you that Nere Community will
                   temporarily not be acccepting orders as we readjust to market
                   fluctuations. Our mission is to bring you quality goods at the
                   best prices!
