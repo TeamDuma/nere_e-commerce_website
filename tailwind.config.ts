@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         ttnorms: ['var(--font-tt-norms)'],
+        montserrat: ['var(--font-montserrat)'],
       },
       container: {
         center: true,
