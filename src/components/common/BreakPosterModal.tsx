@@ -115,7 +115,7 @@ export const BreakPosterModal = () => (
                   <AlertIconSmall className='absolute right-0 top-8 rotate-[17.01deg] md:hidden' />
                 </div>
                 <Link href='/home'>
-                  <Button className='mt-[37px] mb-4 md:mb-0 w-full !border-none !bg-nere-orange ring-0 md:mt-[43px] hover:!bg-nere-orange/70'>
+                  <Button className='mt-[37px] mb-4 md:mb-0 w-full !bg-nere-orange !ring-0 md:mt-[43px] hover:!bg-nere-orange/70'>
                     Learn more
                   </Button>
                 </Link>
