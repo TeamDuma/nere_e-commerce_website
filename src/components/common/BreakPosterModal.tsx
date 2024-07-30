@@ -50,18 +50,18 @@ export const socialMediaLinks = [
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/nerecommunity/',
+    href: 'https://www.instagram.com/nere_community/',
     icon: InstagramIconYellow,
   },
   {
     name: 'Whatsapp',
     href: 'https://chat.whatsapp.com/GPWialGrINjHtW4tJyzqEt',
-    icon: LinkedInIcon,
+    icon: LinkedInIcon, //replace this with Whatsapp icon
   },
   {
-    name: 'Youtube',
-    href: 'https://youtube.com/nerecommunity',
-    icon: TwitterIcon,
+    name: 'Tiktok',
+    href: 'https://www.tiktok.com/@nere_community',
+    icon: TwitterIcon, //replace this with Tiktok icon
   },
 ];
 

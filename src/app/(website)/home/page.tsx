@@ -19,7 +19,7 @@ const Page = () => {
       <TrustedBrands />
       <CollectiveBuying />
       <HowItWorks />
-      <OngoingPurchases />
+      {/* <OngoingPurchases /> */}
       <RealStories />
       <CollaborateWithUs />
       <FAQ />
