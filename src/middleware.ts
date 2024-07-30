@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const allowedPaths = ['/', '/contact-us', '/home', '/sustainability'];
+const allowedPaths = ['/', '/contact-us', '/home', '/sustainability', '/legal/privacy', '/legal/terms-of-service', '/legal/cookies'];
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
