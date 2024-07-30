@@ -6,6 +6,7 @@ import { WeCareIconWhite } from './icons/WeCareIconWhite';
 import Link from 'next/link';
 import { FacebookIconYellow } from './icons/FacebookIconYellow';
 import { InstagramIconYellow } from './icons/InstagramIconYellow';
+import Button from './Button';
 
 const LinkedInIcon = () => (
   <svg
@@ -73,7 +74,7 @@ export const BreakPosterModal = () => (
         <Dialog.Description />
         <div className="rounded-[20px] bg-nere-green bg-[url('/images/styled-green-background.png')] bg-cover bg-center bg-no-repeat">
           <section className='w-full md:pb-[65px] md:pl-[65px] md:pr-[37px] md:pt-6'>
-            <div className='flex flex-col justify-center md:items-center lg:flex-row p-5 md:p-0'>
+            <div className='flex flex-col justify-center p-5 md:items-center md:p-0 lg:flex-row'>
               <AlertIconSmall className='-rotate-[17.01deg] md:hidden' />
               <h1 className='mx-auto w-[247px] text-center text-[32px] font-black uppercase leading-[39.01px] md:mx-0 md:w-[467px] md:text-left md:text-[60px] md:leading-[73.14px]'>
                 WE’RE TEMPORARY NOT TAKING ORDERS!
@@ -113,6 +114,11 @@ export const BreakPosterModal = () => (
                   <AlertIcon className='mt-8 hidden rotate-[15deg] md:block' />
                   <AlertIconSmall className='absolute right-0 top-8 rotate-[17.01deg] md:hidden' />
                 </div>
+                <Link href='/home'>
+                  <Button className='mt-[37px] mb-4 md:mb-0 w-full !border-none !bg-nere-orange ring-0 md:mt-[43px] hover:!bg-nere-orange/70'>
+                    Learn more
+                  </Button>
+                </Link>
               </div>
             </div>
           </section>
