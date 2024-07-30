@@ -77,7 +77,7 @@ export const BreakPosterModal = () => (
             <div className='flex flex-col justify-center p-5 md:items-center md:p-0 lg:flex-row'>
               <AlertIconSmall className='-rotate-[17.01deg] md:hidden' />
               <h1 className='mx-auto w-[247px] text-center text-[32px] font-black uppercase leading-[39.01px] md:mx-0 md:w-[467px] md:text-left md:text-[60px] md:leading-[73.14px]'>
-                WE’RE TEMPORARY NOT TAKING ORDERS!
+                WE’RE TEMPORARILY NOT TAKING ORDERS!
               </h1>
               <div className='relative w-full md:w-[496px]'>
                 <div className='hidden w-full justify-between md:flex'>
