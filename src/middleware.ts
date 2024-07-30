@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const allowedPaths = ['/', '/contact-us', '/home', '/sustainability'];
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  if (pathname === '/') {
+  if (allowedPaths.includes(pathname)) {
     return NextResponse.next();
   }
 
