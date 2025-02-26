@@ -16,7 +16,7 @@ const AboutNavbar = () => {
   const pathname = usePathname();
   return (
     <div className='fixed top-0 z-30 w-full backdrop-blur-3xl'>
-      <nav className='font-ttnorms text-nere-black'>
+      <nav className='font-montserrat text-nere-black'>
         <div className='nere-container flex h-14 items-center justify-between md:h-[72px]'>
           <div className='flex items-center'>
             <Link href='/'>
