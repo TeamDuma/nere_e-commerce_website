@@ -20,26 +20,6 @@ const montserrat = Montserrat({
   display: 'swap',
   variable: '--font-montserrat',
 });
-const ttnorms = localFont({
-  variable: '--font-tt-norms',
-  src: [
-    {
-      path: '../../public/fonts/tt-norms/TTNorms-Regular.otf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/tt-norms/TTNorms-Medium.otf',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/tt-norms/TTNorms-Bold.otf',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -59,7 +39,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
         <body>
           <Providers>
             <main
-              className={`${montserrat.variable} ${ttnorms.variable} flex min-h-screen flex-col justify-between`}
+              className={`${montserrat.variable} flex min-h-screen flex-col justify-between`}
               style={{ backgroundColor: '#FAFAFA' }}
             >
               {props.children}
