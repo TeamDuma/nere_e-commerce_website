@@ -136,6 +136,7 @@ const CartComponent = () => {
 
   const handleRemoveItem = (productId: number, groupId?: number) => {
     dispatch(deleteProduct({ productId, groupId }));
+    localStorage.setItem(`joined_${groupId}`, 'false');
   };
 
   return (
